@@ -1,6 +1,8 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import Header from "./Header";
+import { Menu } from "antd";
+import { Wrapper } from "../styles/PageStyle";
 const categories = [
   {
     name: "schoolRanking",
@@ -19,16 +21,31 @@ const categories = [
 const Categories = () => {
   return (
     <div>
-      <Header />
-      <header>
-        <div>
-          {categories.map((c) => (
-            <NavLink key={c.name} to={c.name === "home" ? "/" : `/${c.name}`}>
-              {c.text}
-            </NavLink>
-          ))}
-        </div>
+      <Wrapper>
+        <Header />
+      </Wrapper>
+      <header
+        style={{
+          borderTop: "1px solid #c2c2c2",
+          borderBottom: "1px solid #c2c2c2",
+        }}
+      >
+        <Wrapper>
+          <Menu mode="horizontal">
+            {categories.map((c) => (
+              <Menu.Item>
+                <NavLink
+                  key={c.name}
+                  to={c.name === "home" ? "/" : `/${c.name}`}
+                >
+                  {c.text}
+                </NavLink>
+              </Menu.Item>
+            ))}
+          </Menu>
+        </Wrapper>
       </header>
+
       <main>
         <Outlet />
       </main>
