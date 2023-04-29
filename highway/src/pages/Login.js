@@ -1,55 +1,80 @@
-import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import useInput from "../hooks/useInput";
+import React from "react";
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import { Checkbox, Form, message } from "antd";
+import {
+  LoginBtn,
+  LoginWrapper,
+  LoginMenuItem,
+  LoginInput,
+  LoginMenu,
+} from "../styles/LoginStyle";
 
 const Login = () => {
-  const navigate = useNavigate();
-  const toHome = () => {
-    navigate("/");
+  const onFinish = (values) => {
+    console.log("로그인 값: ", values);
   };
-  const [id, onChangeId] = useInput("");
-  const [pw, onChangePw] = useInput("");
-
   return (
-    <div className="loginPage">
-      <div className="loginWrap">
-        <div className="login-header">
-          <h1>웹 이름</h1>
-          <div>서비스를 이용하려면 로그인이 필요합니다.</div>
-        </div>
-        <form className="login-form">
-          <div className="form-id">
-            <input
-              type="text"
-              value={id}
-              onChange={onChangeId}
-              placeholder="아이디"
-              maxLength="12"
-            />
-          </div>
-          <div className="form-password">
-            <input
-              type="password"
-              value={pw}
-              onChange={onChangePw}
-              placeholder="비밀번호"
-            />
-          </div>
-          <div className="form-check">
-            <div className="checkbox">
-              <input type="checkbox" id="rememberMeCheckbox" />
-              <label htmlFor="rememberMeCheckbox">이 계정 기억하기</label>
-            </div>
-          </div>
-          <button type="button" className="loginBtn">
-            로그인
-          </button>
-        </form>
-        <div className="login-footer">
-          <a href="#">비밀번호 찾기</a>|<Link to="/signup">신규회원 가입</Link>
-        </div>
-      </div>
-    </div>
+    <LoginWrapper>
+      <h1 style={{ textAlign: "center" }}>로그인</h1>
+      <Form
+        name="normal_login"
+        className="login-form"
+        initialValues={{
+          remember: true,
+        }}
+        onFinish={onFinish}
+      >
+        <Form.Item
+          name="id"
+          rules={[
+            {
+              required: true,
+              message: "아이디를 입력해주세요",
+            },
+          ]}
+        >
+          <LoginInput
+            prefix={<UserOutlined className="site-form-item-icon" />}
+            placeholder="아이디 또는 이메일"
+          />
+        </Form.Item>
+        <Form.Item
+          name="password"
+          rules={[
+            {
+              required: true,
+              message: "비밀번호를 입력해주세요",
+            },
+          ]}
+        >
+          <LoginInput
+            prefix={<LockOutlined className="site-form-item-icon" />}
+            type="password"
+            placeholder="Password"
+          />
+        </Form.Item>
+        <Form.Item
+          name="remember"
+          valuePropName="checked"
+          style={{ textAlign: "left", fontSize: "0.75rem" }}
+        >
+          <Checkbox>로그인 상태 유지</Checkbox>
+        </Form.Item>
+        <Form.Item>
+          <LoginBtn
+            type="primary"
+            htmlType="submit"
+            className="login-form-button"
+          >
+            Log in
+          </LoginBtn>
+        </Form.Item>
+      </Form>
+      <LoginMenu>
+        <LoginMenuItem to="/signup">회원가입</LoginMenuItem>
+        <LoginMenuItem to="/findpw">비밀번호를 까먹었나요?</LoginMenuItem>
+      </LoginMenu>
+    </LoginWrapper>
   );
 };
 
