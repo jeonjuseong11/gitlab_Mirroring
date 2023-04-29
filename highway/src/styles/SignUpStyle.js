@@ -2,14 +2,14 @@ import styled from "styled-components";
 import { Button, Form, Input } from "antd";
 
 export const SignUpWrapper = styled.div`
-  margin: 0;
-  height: 100vh;
+  height: 100%;
   background-color: #fbfbfb;
+  height: 100vh;
 `;
 export const SignUpStudentWrapper = styled.div`
   background-color: #fbfbfb;
-  padding-top: 5rem;
-  height: 95vh;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
 `;
 export const SignUpForm = styled(Form)`
   background-color: white;
