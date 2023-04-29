@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export const LoginWrapper = styled.div`
   margin: 0 auto;
   width: 30%;
-  padding-top: 15rem;
+  padding-top: 15%;
   text-align: left;
 `;
 export const LoginInput = styled(Input)`
