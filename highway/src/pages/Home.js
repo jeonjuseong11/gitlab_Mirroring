@@ -1,6 +1,6 @@
 import React from "react";
+import Slider from "../components/Slider/AdSlider";
 import AppLayout from "../components/AppLayout";
-import Slider from "../components/Slider/Slider";
 const Home = () => {
   return (
     <AppLayout>

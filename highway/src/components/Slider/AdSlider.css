@@ -1,0 +1,15 @@
+.slick-slide {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  height: 20rem;
+  transition: all ease-in-out 0.3s;
+  background-color: lightgray;
+  border-radius: 5px;
+}
+
+.slick-center {
+  height: 20rem;
+  width: 90%; /* 가운데 슬라이드의 너비를 80%로 늘림 */
+  background-color: gray;
+  transform: scale(1.1);
+}

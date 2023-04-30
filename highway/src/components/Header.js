@@ -24,7 +24,7 @@ const ProfileWrapper = styled.div`
 `;
 
 const Header = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true); //임시로 로그인 여부 상태 생성
+  const [isLoggedIn, setIsLoggedIn] = useState(false); //임시로 로그인 여부 상태 생성
   return (
     <HeaderWrapper>
       <Title to="/">HIGHWAY</Title>

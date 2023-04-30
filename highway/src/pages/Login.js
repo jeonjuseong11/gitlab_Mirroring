@@ -1,6 +1,6 @@
 import React from "react";
-import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Checkbox, Form, message } from "antd";
+import { LeftOutlined, LockOutlined, UserOutlined } from "@ant-design/icons";
+import { Checkbox, Form } from "antd";
 import {
   LoginBtn,
   LoginWrapper,
@@ -8,13 +8,20 @@ import {
   LoginInput,
   LoginMenu,
 } from "../styles/LoginStyle";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
   const onFinish = (values) => {
     console.log("로그인 값: ", values);
   };
   return (
     <LoginWrapper>
+      <LeftOutlined
+        onClick={() => {
+          navigate("/");
+        }}
+      />
       <h1 style={{ textAlign: "center" }}>로그인</h1>
       <Form
         name="normal_login"

@@ -33,11 +33,8 @@ const Categories = () => {
         <Wrapper>
           <Menu mode="horizontal">
             {categories.map((c) => (
-              <Menu.Item>
-                <NavLink
-                  key={c.name}
-                  to={c.name === "home" ? "/" : `/${c.name}`}
-                >
+              <Menu.Item key={c.name}>
+                <NavLink to={c.name === "home" ? "/" : `/${c.name}`}>
                   {c.text}
                 </NavLink>
               </Menu.Item>
