@@ -1,3 +1,4 @@
+import { ConfigProvider } from "antd";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Categories from "./components/Categories";
@@ -13,21 +14,23 @@ import UserProfile from "./pages/UserProfile";
 
 function App() {
   return (
-    <div className="App">
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/profile" element={<UserProfile />} />
-        <Route path="/signup/student" element={<StudentSignUp />} />
-        <Route path="/signup/other" element={<OtherSignUp />} />
-        <Route element={<Categories />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/promotion" element={<Promotion />} />
-          <Route path="/schoolranking" element={<SchoolRanking />} />
-        </Route>
-      </Routes>
-    </div>
+    <ConfigProvider theme={{ token: { colorPrimary: "#8282ff" } }}>
+      <div className="App">
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/profile" element={<UserProfile />} />
+          <Route path="/signup/student" element={<StudentSignUp />} />
+          <Route path="/signup/other" element={<OtherSignUp />} />
+          <Route element={<Categories />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/promotion" element={<Promotion />} />
+            <Route path="/schoolranking" element={<SchoolRanking />} />
+          </Route>
+        </Routes>
+      </div>
+    </ConfigProvider>
   );
 }
 
