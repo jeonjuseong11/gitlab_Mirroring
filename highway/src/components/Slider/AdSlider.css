@@ -1,15 +1,14 @@
 .slick-slide {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
   height: 25rem;
 }
+.slick-slider .slick-slide {
+  margin-top: 4rem;
+  border-radius: 5px;
+}
 .slick-slide div {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
   transition: all ease-in-out 0.3s;
   background-color: lightgray;
   height: 20rem;
-  border-radius: 5px;
 }
 
 /* .slick-center div {
@@ -17,13 +16,15 @@
   background-color: gray;
   transform: scale(1.1);
 } */
-.slick-active {
-  margin-left: -4vw;
-}
+/* .slick-active {
+} */
 .slick-active div {
-  width: 50vw;
+  border-radius: 5px;
 }
 .slick-slide.slick-active.slick-center.slick-current div {
   background-color: gray;
+  width: 50vw;
+  margin-left: -5vw;
+
   transform: scale(1.1);
 }
