@@ -23,7 +23,7 @@ export const validatePassword = (_, value) => {
   if (!regExp.test(value)) {
     return Promise.reject(
       new Error(
-        "비밀번호는 8~50자이며 영문 소문자, 영문 대문자, 숫자, 특수문자를 모두 포함해야 합니다."
+        "영문 소문자, 영문 대문자, 숫자, 특수문자를 모두 포함해야 합니다."
       )
     );
   }

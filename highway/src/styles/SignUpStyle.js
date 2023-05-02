@@ -14,6 +14,7 @@ export const SignUpStudentWrapper = styled.div`
 export const SignUpForm = styled(Form)`
   background-color: white;
   width: 30%;
+  min-width: 30rem;
   margin: 0 auto;
   border: 1px solid #efefef;
   padding: 3rem;

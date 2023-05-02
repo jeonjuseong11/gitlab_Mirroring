@@ -71,7 +71,7 @@ const SignUp = () => {
           ]}
           hasFeedback
         >
-          <SignUpInput allowClear placeholder="비밀번호를 입력해주세요" />
+          <SignUpInput allowClear placeholder="비밀번호를 입력해주세요(8~50)" />
         </Form.Item>
         <label>비밀번호 확인</label>
         <Form.Item
