@@ -12,6 +12,7 @@ function AdSlider() {
   const settings = {
     centerMode: true,
     centerPadding: "0px",
+    arrows: false,
     infinite: true,
     speed: 500,
     slidesToShow: 3,
