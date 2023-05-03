@@ -6,11 +6,7 @@ export const SignUpWrapper = styled.div`
   background-color: #fbfbfb;
   height: 100vh;
 `;
-export const SignUpStudentWrapper = styled.div`
-  background-color: #fbfbfb;
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-`;
+
 export const SignUpForm = styled(Form)`
   background-color: white;
   width: 30%;
@@ -21,10 +17,12 @@ export const SignUpForm = styled(Form)`
   border-radius: 1.25rem;
   text-align: left;
 `;
-export const SignUpInput = styled(Input, Input.Password)`
+export const SignUpInput = styled(Input)`
   height: 3rem;
 `;
-
+export const SignUpInputPassword = styled(Input.Password)`
+  height: 3rem;
+`;
 export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: space-between;

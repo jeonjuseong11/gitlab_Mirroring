@@ -1,13 +1,16 @@
-import { AutoComplete, Checkbox, Form, Input, Radio, Select } from "antd";
+import { AutoComplete, Button, Checkbox, Form, Radio } from "antd";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { CHECK_USER_ID_REQUEST } from "../constants/actionTypes";
 import {
   ButtonWrapper,
   CancelBtn,
   SignUpBtn,
   SignUpForm,
   SignUpInput,
-  SignUpStudentWrapper,
+  SignUpInputPassword,
+  SignUpWrapper,
 } from "../styles/SignUpStyle";
 import {
   agreeValidate,
@@ -16,12 +19,23 @@ import {
   validateNickname,
   validatePassword,
 } from "../utils/signUpValidator";
-
+import { useSelector } from "react-redux";
 const SignUp = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [form] = Form.useForm();
+  const { idValid } = useSelector((state) => state.user);
+
   const onFinish = (values) => {
     console.log("회원가입 데이터: ", values);
+  };
+  const onCheckUserId = () => {
+    const userIdValue = form.getFieldValue("id");
+    console.log(userIdValue);
+    dispatch({
+      type: CHECK_USER_ID_REQUEST,
+      data: userIdValue,
+    });
   };
 
   const [autoCompleteResult, setAutoCompleteResult] = useState([]);
@@ -41,7 +55,7 @@ const SignUp = () => {
     value: email,
   }));
   return (
-    <SignUpStudentWrapper>
+    <SignUpWrapper>
       <SignUpForm
         form={form}
         name="register"
@@ -61,6 +75,9 @@ const SignUp = () => {
         >
           <SignUpInput allowClear placeholder="아이디를 입력해주세요" />
         </Form.Item>
+        <Form.Item>
+          <Button onClick={onCheckUserId}>중복확인</Button>
+        </Form.Item>
         <label>비밀번호</label>
         <Form.Item
           name="password"
@@ -71,7 +88,10 @@ const SignUp = () => {
           ]}
           hasFeedback
         >
-          <SignUpInput allowClear placeholder="비밀번호를 입력해주세요(8~50)" />
+          <SignUpInputPassword
+            allowClear
+            placeholder="비밀번호를 입력해주세요(8~50)"
+          />
         </Form.Item>
         <label>비밀번호 확인</label>
         <Form.Item
@@ -95,7 +115,10 @@ const SignUp = () => {
             }),
           ]}
         >
-          <SignUpInput allowClear placeholder="비밀번호를 입력해주세요" />
+          <SignUpInputPassword
+            allowClear
+            placeholder="비밀번호를 입력해주세요"
+          />
         </Form.Item>
         <label>닉네임</label>
         <Form.Item name="nickname" rules={[{ validator: validateNickname }]}>
@@ -147,7 +170,7 @@ const SignUp = () => {
           </ButtonWrapper>
         </Form.Item>
       </SignUpForm>
-    </SignUpStudentWrapper>
+    </SignUpWrapper>
   );
 };
 export default SignUp;
