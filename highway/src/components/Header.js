@@ -22,7 +22,11 @@ const ProfileWrapper = styled.div`
   text-decoration: none;
   color: black;
 `;
-
+const BlackLink = styled(Link)`
+  floatl: right;
+  text-decoration: none;
+  color: black;
+`;
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false); //임시로 로그인 여부 상태 생성
   return (
@@ -30,21 +34,16 @@ const Header = () => {
       <Title to="/">HIGHWAY</Title>
       <ProfileWrapper>
         {isLoggedIn ? (
-          <Link
-            to="/profile"
-            style={{ float: "right", textDecoration: "none", color: "black" }}
-          >
+          <BlackLink to="/profile">
             <Avatar
               size={28}
               icon={<UserOutlined />}
               style={{ marginRight: "5px" }}
             />
             userid
-          </Link>
+          </BlackLink>
         ) : (
-          <Link to="/login" style={{ float: "right" }}>
-            로그인
-          </Link>
+          <BlackLink to="/login">로그인</BlackLink>
         )}
       </ProfileWrapper>
     </HeaderWrapper>
