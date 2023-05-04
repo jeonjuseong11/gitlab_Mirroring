@@ -1,13 +1,15 @@
 //id 유효성 검사
 //영문자로 시작하고, 5~20 길이의 영문자와 숫자의 조합
+export const idRegExp = /^(?=.*[0-9]+)[a-zA-Z][a-zA-Z0-9]{1,20}$/g;
+
 export const validateId = (_, value) => {
-  const regExp = /^(?=.*[0-9]+)[a-zA-Z][a-zA-Z0-9]{5,20}$/g;
+  const regExp = /^(?=.*[0-9]+)[a-zA-Z][a-zA-Z0-9]{1,20}$/g;
   if (!value) {
     return Promise.reject(new Error("아이디를 입력해주세요"));
   }
   if (!regExp.test(value)) {
     return Promise.reject(
-      new Error("아이디는 5~20자이며 영어와 숫자 조합으로 입력해주세요")
+      new Error("아이디는 1~20자이며 영어와 숫자 조합으로 입력해주세요")
     );
   }
   return Promise.resolve();

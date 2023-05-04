@@ -8,7 +8,7 @@ import {
 
 const checkUserIdAPI = (data) => {
   // console.log(data);
-  return axios.get(`/user/idCheck?id=${data}`);
+  return axios.get(`/user/idCheck?userId=${data}`);
 };
 
 function* checkUserId(action) {

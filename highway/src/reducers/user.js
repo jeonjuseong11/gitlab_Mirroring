@@ -22,7 +22,7 @@ const reducer = (state = initalState, action) =>
         break;
       // 요기가 saga에 의해 실행된다.
       case CHECK_USER_ID_SUCCESS:
-        draft.idValid = true;
+        draft.idValid = action.data;
         draft.checkIdLoading = false;
         draft.checkIdDone = true;
         break;
