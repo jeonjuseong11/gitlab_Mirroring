@@ -8,6 +8,15 @@ const IconList = styled(Space)`
   gap: 0px !important;
   margin: 0px 3px;
 `;
+const TagsItem = styled(Button)`
+  display: inline-block;
+  height: 20px;
+  line-height: 10px;
+  background-color: #8282ff;
+  color: white;
+  margin-bottom: 3px;
+  border-radius: 5px;
+`;
 const IconText = ({ icon, text }) => (
   <IconList>
     {React.createElement(icon)}
@@ -111,11 +120,6 @@ const DepartmentList = () => {
       <List
         grid={{ gutter: 16, column: 5 }}
         dataSource={School}
-        loadMore={
-          <div style={{ textAlign: "center", margin: "10px 0" }}>
-            <Button>더 보기</Button>
-          </div>
-        }
         renderItem={(item) => (
           <List.Item style={{ marginTop: "20px" }}>
             <Card
@@ -127,10 +131,18 @@ const DepartmentList = () => {
               }
             >
               <Meta
-                title={item.name}
                 description={
                   <>
-                    <p>{item.descript}</p>
+                    {item.tags.map((v) => {
+                      return <TagsItem>{v}</TagsItem>;
+                    })}
+                  </>
+                }
+              />
+              <Meta title={item.name} description={<p>{item.descript}</p>} />
+              <Meta
+                description={
+                  <>
                     <IconText
                       icon={StarOutlined}
                       text={item.followList.length}
