@@ -21,7 +21,24 @@ const School = [
     name: "학교 이름1",
     descript: "학교 랭킹1",
     tags: ["1", "2"],
-    chat: [],
+    comments: [
+      {
+        id: 1,
+        content: "hello",
+      },
+      {
+        id: 2,
+        content: "hello",
+      },
+      {
+        id: 1,
+        content: "hello",
+      },
+      {
+        id: 2,
+        content: "hello",
+      },
+    ],
     good: 10,
     followList: ["1", "2"],
   },
@@ -30,7 +47,7 @@ const School = [
     name: "학교 이름2",
     descript: "학교 랭킹2",
     tags: ["2", "1"],
-    chat: [],
+    comments: [],
     good: 9,
     followList: ["1", "2"],
   },
@@ -39,7 +56,7 @@ const School = [
     name: "학교 이름3",
     descript: "학교 랭킹3",
     tags: ["1", "4"],
-    chat: [],
+    comments: [],
     good: 1,
     followList: ["1", "2"],
   },
@@ -48,7 +65,24 @@ const School = [
     name: "학교 이름4",
     descript: "학교 랭킹4",
     tags: ["4", "5"],
-    chat: [],
+    comments: [
+      {
+        id: 1,
+        content: "hello",
+      },
+      {
+        id: 2,
+        content: "hello",
+      },
+      {
+        id: 4,
+        content: "hello",
+      },
+      {
+        id: 1,
+        content: "hello",
+      },
+    ],
     good: 5,
     followList: ["1", "2"],
   },
@@ -57,13 +91,13 @@ const School = [
     name: "학교 이름5",
     descript: "학교 랭킹5",
     tags: ["5", "7"],
-    chat: [
+    comments: [
       {
         id: 1,
         content: "hello",
       },
       {
-        id: 1,
+        id: 2,
         content: "hello",
       },
     ],
@@ -96,8 +130,7 @@ const DepartmentList = () => {
                 title={item.name}
                 description={
                   <>
-                    <span>{item.descript}</span>
-                    <br />
+                    <p>{item.descript}</p>
                     <IconText
                       icon={StarOutlined}
                       text={item.followList.length}
@@ -110,7 +143,7 @@ const DepartmentList = () => {
                     />
                     <IconText
                       icon={MessageOutlined}
-                      text={item.chat.length}
+                      text={item.comments.length}
                       key="list-vertical-message"
                     />
                   </>
