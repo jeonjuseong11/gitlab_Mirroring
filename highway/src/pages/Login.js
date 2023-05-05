@@ -9,12 +9,31 @@ import {
   LoginMenu,
 } from "../styles/LoginStyle";
 import { useNavigate } from "react-router-dom";
+import { LOGIN_REQUEST } from "../constants/actionTypes";
+import { useDispatch, useSelector } from "react-redux";
 
 const Login = () => {
+  const {isLogIn} = useSelector((state)=>state.user);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const onFinish = (values) => {
-    console.log("로그인 값: ", values);
+    let body = {
+      userId : values.id,
+      userPw: values.password
+  }
+    dispatch({
+      type:LOGIN_REQUEST,
+      data : body
+    });
+    // console.log("로그인 값: ", values);
+    if(isLogIn){
+      navigate("/");
+    }
   };
+
+  useEffect(()=>{},[isLogIn])
+
   return (
     <LoginWrapper>
       <LeftOutlined
