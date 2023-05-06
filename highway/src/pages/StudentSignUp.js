@@ -6,7 +6,7 @@ import { CHECK_USER_ID_REQUEST } from "../constants/actionTypes";
 import {
   ButtonWrapper,
   CancelBtn,
-  SignUpBtn,
+  StudentSignUpBtn,
   SignUpForm,
   SignUpInput,
   SignUpInputPassword,
@@ -176,9 +176,9 @@ const SignUp = () => {
         </Form.Item>
         <Form.Item>
           <ButtonWrapper>
-            <SignUpBtn type="primary" htmlType="submit">
+            <StudentSignUpBtn type="primary" htmlType="submit">
               가입하기
-            </SignUpBtn>
+            </StudentSignUpBtn>
             <CancelBtn
               onClick={() => {
                 navigate(-1);
