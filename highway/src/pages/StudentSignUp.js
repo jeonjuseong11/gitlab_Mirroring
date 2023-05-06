@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { CHECK_USER_ID_REQUEST } from "../constants/actionTypes";
+import { useNavigate } from "react-router-dom";
+import { CHECK_USER_ID_REQUEST, SIGNUP_REQUEST } from "../constants/actionTypes";
 import {
   ButtonWrapper,
   CancelBtn,
@@ -32,12 +34,21 @@ const SignUp = () => {
   }, [idValid]);
 
   const onFinish = (values) => {
-    if (idValid) {
-      console.log("회원가입 데이터: ", values);
-    } else {
-      alert("아이디 중복확인을 해주세요");
+    const body = {
+      userId : values.id,
+      userPw : values.password,
+      userName : values.nickname,
+      userEmail : values.email,
+      userSex : values.gender,
+      userAge : 0
     }
+    dispatch({
+      type: SIGNUP_REQUEST,
+      data: body
+    })
+    navigate("/login")
   };
+
   const onCheckUserId = () => {
     const userIdValue = form.getFieldValue("id");
     if (!userIdValue) {

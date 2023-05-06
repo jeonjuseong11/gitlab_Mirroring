@@ -10,13 +10,17 @@ import {
   LoginForm,
   LoginFormTitle,
 } from "../styles/LoginStyle";
+
 import { useNavigate, useDispatch } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { LOGIN_REQUEST } from "../constants/actionTypes";
+import { useDispatch, useSelector } from "react-redux";
 
 const Login = () => {
   const {isLogIn} = useSelector((state)=>state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+
   const onFinish = (values) => {
     let body = {
       userId : values.id,
