@@ -1,7 +1,7 @@
 import { ConfigProvider } from "antd";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import TopMenu from "./components/TopMenu";
+import TopMenu from "./components/Menu/TopMenu";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import OtherSignUp from "./pages/OtherSignUp";

@@ -1,22 +1,9 @@
 import React, { useEffect } from "react";
-import { Outlet, Link, useLocation } from "react-router-dom";
-import Header from "./Header";
+import { Outlet, useLocation } from "react-router-dom";
+import Header from "../Header";
 import { Menu } from "antd";
-import { Wrapper } from "../styles/PageStyle";
-const MenuLists = [
-  {
-    key: "/schoolRanking",
-    label: <Link to="/schoolRanking">학교 랭킹</Link>,
-  },
-  {
-    key: "/search",
-    label: <Link to="/search">내 학교 찾기</Link>,
-  },
-  {
-    key: "/promotion",
-    label: <Link to="/promotion">홍보자료</Link>,
-  },
-];
+import { Wrapper } from "../../styles/PageStyle";
+import { MenuLists } from "./MenuList";
 const TopMenu = () => {
   const location = useLocation();
   useEffect(() => {
