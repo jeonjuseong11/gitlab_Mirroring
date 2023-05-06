@@ -7,6 +7,8 @@ import {
   LoginMenuItem,
   LoginInput,
   LoginMenu,
+  LoginForm,
+  LoginFormTitle,
 } from "../styles/LoginStyle";
 import { useNavigate } from "react-router-dom";
 
@@ -20,9 +22,7 @@ const Login = () => {
   };
   return (
     <LoginWrapper>
-      <LeftOutlined onClick={goHome} />
-      <h1 style={{ textAlign: "center" }}>로그인</h1>
-      <Form
+      <LoginForm
         name="normal_login"
         className="login-form"
         initialValues={{
@@ -30,6 +30,8 @@ const Login = () => {
         }}
         onFinish={onFinish}
       >
+        <LeftOutlined onClick={goHome} />
+        <LoginFormTitle>로그인</LoginFormTitle>
         <Form.Item
           name="id"
           rules={[
@@ -75,11 +77,11 @@ const Login = () => {
             Log in
           </LoginBtn>
         </Form.Item>
-      </Form>
-      <LoginMenu>
-        <LoginMenuItem to="/signup">회원가입</LoginMenuItem>
-        <LoginMenuItem to="/findpw">비밀번호를 까먹었나요?</LoginMenuItem>
-      </LoginMenu>
+        <LoginMenu>
+          <LoginMenuItem to="/signup">회원가입</LoginMenuItem>
+          <LoginMenuItem to="/findpw">비밀번호를 까먹었나요?</LoginMenuItem>
+        </LoginMenu>
+      </LoginForm>
     </LoginWrapper>
   );
 };

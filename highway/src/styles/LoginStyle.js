@@ -1,12 +1,22 @@
 import styled from "styled-components";
-import { Input, Button } from "antd";
+import { Input, Button, Form } from "antd";
 import { Link } from "react-router-dom";
 
 export const LoginWrapper = styled.div`
   margin: 0 auto;
-  width: 30%;
-  padding-top: 15%;
+  width: 100%;
+  height: 100vh;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+`;
+export const LoginForm = styled(Form)`
   text-align: left;
+  width: 30%;
+  min-width: 25rem;
+`;
+export const LoginFormTitle = styled.h1`
+  text-align: center;
 `;
 export const LoginInput = styled(Input)`
   width: 100%;
