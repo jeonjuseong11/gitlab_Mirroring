@@ -40,7 +40,12 @@ const Header = () => {
               icon={<UserOutlined />}
               style={{ marginRight: "5px" }}
             />
-            userid
+            {me.userName}
+            <Link to = "/"
+              onClick={onLogOut}
+            >
+            로그아웃
+            </Link>
           </BlackLink>
         ) : (
           <BlackLink to="/login">로그인</BlackLink>
