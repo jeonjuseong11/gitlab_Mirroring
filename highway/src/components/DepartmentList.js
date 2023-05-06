@@ -133,8 +133,8 @@ const DepartmentList = () => {
               <Meta
                 description={
                   <>
-                    {item.tags.map((v) => {
-                      return <TagsItem>{v}</TagsItem>;
+                    {item.tags.map((v, idx) => {
+                      return <TagsItem key={idx}>{v}</TagsItem>;
                     })}
                   </>
                 }
