@@ -15,13 +15,12 @@ const Login = () => {
   const onFinish = (values) => {
     console.log("로그인 값: ", values);
   };
+  const goHome = () => {
+    navigate("/");
+  };
   return (
     <LoginWrapper>
-      <LeftOutlined
-        onClick={() => {
-          navigate("/");
-        }}
-      />
+      <LeftOutlined onClick={goHome} />
       <h1 style={{ textAlign: "center" }}>로그인</h1>
       <Form
         name="normal_login"
