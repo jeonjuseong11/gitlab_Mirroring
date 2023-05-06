@@ -1,7 +1,7 @@
 import { ConfigProvider } from "antd";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import Categories from "./components/Categories";
+import TopMenu from "./components/TopMenu";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import OtherSignUp from "./pages/OtherSignUp";
@@ -17,16 +17,16 @@ function App() {
     <ConfigProvider theme={{ token: { colorPrimary: "#8282ff" } }}>
       <div className="App">
         <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/profile" element={<UserProfile />} />
-          <Route path="/signup/student" element={<StudentSignUp />} />
-          <Route path="/signup/other" element={<OtherSignUp />} />
-          <Route element={<Categories />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/search" element={<Search />} />
-            <Route path="/promotion" element={<Promotion />} />
-            <Route path="/schoolranking" element={<SchoolRanking />} />
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/signup" element={<SignUp />} />
+          <Route exact path="/profile" element={<UserProfile />} />
+          <Route exact path="/signup/student" element={<StudentSignUp />} />
+          <Route exact path="/signup/other" element={<OtherSignUp />} />
+          <Route element={<TopMenu />}>
+            <Route exact path="/" element={<Home />} />
+            <Route exact path="/search" element={<Search />} />
+            <Route exact path="/promotion" element={<Promotion />} />
+            <Route exact path="/schoolranking" element={<SchoolRanking />} />
           </Route>
         </Routes>
       </div>
