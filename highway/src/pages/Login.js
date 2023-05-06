@@ -10,16 +10,34 @@ import {
   LoginForm,
   LoginFormTitle,
 } from "../styles/LoginStyle";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useDispatch } from "react-router-dom";
 
 const Login = () => {
+  const {isLogIn} = useSelector((state)=>state.user);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  
   const onFinish = (values) => {
-    console.log("로그인 값: ", values);
+    let body = {
+      userId : values.id,
+      userPw: values.password
+  }
+    dispatch({
+      type:LOGIN_REQUEST,
+      data : body
+    });
+    // console.log("로그인 값: ", values);
+    if(isLogIn){
+      navigate("/");
+    }
   };
+
   const goHome = () => {
     navigate("/");
   };
+
+  useEffect(()=>{},[isLogIn])
+
   return (
     <LoginWrapper>
       <LoginForm
