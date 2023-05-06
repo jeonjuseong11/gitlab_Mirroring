@@ -1,28 +1,9 @@
-import { LikeOutlined, MessageOutlined, StarOutlined } from "@ant-design/icons";
-import { Button, Card, List, Space } from "antd";
-import Meta from "antd/es/card/Meta";
 import React from "react";
-import styled from "styled-components";
 
-const IconList = styled(Space)`
-  gap: 0px !important;
-  margin: 0px 3px;
-`;
-const TagsItem = styled(Button)`
-  display: inline-block;
-  height: 20px;
-  line-height: 10px;
-  background-color: #8282ff;
-  color: white;
-  margin-bottom: 3px;
-  border-radius: 5px;
-`;
-const IconText = ({ icon, text }) => (
-  <IconList>
-    {React.createElement(icon)}
-    {text}
-  </IconList>
-);
+import { LikeOutlined, MessageOutlined, StarOutlined } from "@ant-design/icons";
+import { Card, List } from "antd";
+import Meta from "antd/es/card/Meta";
+import { CardItem, IconText, ListWrapper, TagsItem } from "./CardStyle";
 
 const School = [
   {
@@ -114,15 +95,16 @@ const School = [
     followList: ["1", "2"],
   },
 ];
-const DepartmentList = () => {
+const CardList = () => {
   return (
-    <div style={{ margin: "0 auto", width: "60%" }}>
+    <ListWrapper>
       <List
         grid={{ gutter: 16, column: 5 }}
         dataSource={School}
         renderItem={(item) => (
-          <List.Item style={{ marginTop: "20px" }}>
+          <List.Item>
             <Card
+              bodyStyle={{ padding: "1rem", textAlign: "left" }}
               cover={
                 <img
                   alt="example"
@@ -130,19 +112,10 @@ const DepartmentList = () => {
                 />
               }
             >
+              <Meta title={item.name} description={item.descript} />
               <Meta
                 description={
-                  <>
-                    {item.tags.map((v, idx) => {
-                      return <TagsItem key={idx}>{v}</TagsItem>;
-                    })}
-                  </>
-                }
-              />
-              <Meta title={item.name} description={<p>{item.descript}</p>} />
-              <Meta
-                description={
-                  <>
+                  <CardItem>
                     <IconText
                       icon={StarOutlined}
                       text={item.followList.length}
@@ -158,15 +131,24 @@ const DepartmentList = () => {
                       text={item.comments.length}
                       key="list-vertical-message"
                     />
-                  </>
+                  </CardItem>
+                }
+              />
+              <Meta
+                description={
+                  <CardItem>
+                    {item.tags.map((v, idx) => {
+                      return <TagsItem key={idx}>{v}</TagsItem>;
+                    })}
+                  </CardItem>
                 }
               />
             </Card>
           </List.Item>
         )}
       />
-    </div>
+    </ListWrapper>
   );
 };
 
-export default DepartmentList;
+export default CardList;

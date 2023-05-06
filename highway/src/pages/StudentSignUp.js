@@ -1,7 +1,7 @@
 import { AutoComplete, Button, Checkbox, Form, Radio } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CHECK_USER_ID_REQUEST } from "../constants/actionTypes";
 import {
   ButtonWrapper,
@@ -171,7 +171,7 @@ const SignUp = () => {
           rules={[{ validator: agreeValidate }]}
         >
           <Checkbox>
-            <a href="">이용약관</a>에 동의합니다
+            <Link to="/terms">이용약관</Link>에 동의합니다
           </Checkbox>
         </Form.Item>
         <Form.Item>
