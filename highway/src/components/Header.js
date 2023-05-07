@@ -1,9 +1,10 @@
 import { UserOutlined } from "@ant-design/icons";
 import { Avatar } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { LOGOUT_REQUEST } from "../constants/actionTypes";
 
 //사이트 로고 부분
 const Title = styled(Link)`
@@ -39,8 +40,7 @@ const Header = () => {
     })
   }
 
-  useEffect(()=>{
-  },[isLogIn])
+  useEffect(()=>{},[isLogIn])
 
   return (
     <HeaderWrapper>
