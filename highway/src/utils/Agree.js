@@ -7,7 +7,7 @@ export const items = [
         type:'divider',
     },
     {
-        label: "동의 내용1",
+        label: "이용약관 동의 내용",
         key: '2',
     },
     {
@@ -21,7 +21,7 @@ export const items = [
         type:'divider',
     },
     {
-        label: "동의 내용1",
+        label: "개인정보 수집 및 이용 내용",
         key: '5',
     },
     
