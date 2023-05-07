@@ -2,7 +2,7 @@ import { AutoComplete, Button, Checkbox, Form, Radio } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { CHECK_USER_ID_REQUEST } from "../constants/actionTypes";
+import { CHECK_DUPLICATE_ID_REQUEST } from "../constants/actionTypes";
 import {
   ButtonWrapper,
   CancelBtn,
@@ -46,7 +46,7 @@ const OtherSignUp = () => {
       alert("아이디는 1~20자이며 영어와 숫자 조합으로 입력해주세요");
     } else {
       dispatch({
-        type: CHECK_USER_ID_REQUEST,
+        type: CHECK_DUPLICATE_ID_REQUEST,
         data: userIdValue,
       });
       alert("사용가능한 아이디입니다.");

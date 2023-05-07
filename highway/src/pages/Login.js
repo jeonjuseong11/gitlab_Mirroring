@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import axios from "axios";
 import { LeftOutlined, LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Checkbox, Form } from "antd";
 import {
@@ -16,30 +17,38 @@ import { LOGIN_REQUEST } from "../constants/actionTypes";
 import { useSelector, useDispatch } from "react-redux";
 
 const Login = () => {
-  const {isLogIn} = useSelector((state)=>state.user);
+  const { me, logInError, token } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const onFinish = (values) => {
     let body = {
-      userId : values.id,
-      userPw: values.password
-  }
+      userId: values.id,
+      userPw: values.password,
+    };
     dispatch({
-      type:LOGIN_REQUEST,
-      data : body
+      type: LOGIN_REQUEST,
+      data: body,
     });
-    // console.log("로그인 값: ", values);
-    if(isLogIn){
-      navigate("/");
-    }
+    console.log("로그인 값: ", values);
   };
+  useEffect(() => {
+    if (logInError) {
+      alert(logInError); //로그인 실패 이유
+    }
+  }, [logInError]);
 
   const goHome = () => {
     navigate("/");
   };
 
-  useEffect(()=>{},[isLogIn]);
+  useEffect(() => {
+    console.log(me);
+    if (me) {
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      navigate("/");
+    }
+  }, [me, token]);
 
   return (
     <LoginWrapper>

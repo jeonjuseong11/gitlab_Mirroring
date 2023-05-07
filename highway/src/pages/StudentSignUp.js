@@ -2,7 +2,10 @@ import { AutoComplete, Button, Checkbox, Form, Radio } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { CHECK_USER_ID_REQUEST, SIGNUP_REQUEST } from "../constants/actionTypes";
+import {
+  CHECK_DUPLICATE_ID_REQUEST,
+  SIGNUP_REQUEST,
+} from "../constants/actionTypes";
 import {
   ButtonWrapper,
   CancelBtn,
@@ -33,18 +36,19 @@ const SignUp = () => {
 
   const onFinish = (values) => {
     const body = {
-      userId : values.id,
-      userPw : values.password,
-      userName : values.nickname,
-      userEmail : values.email,
-      userSex : values.gender,
-      userAge : 0
-    }
+      userId: values.id,
+      userPw: values.password,
+      userName: values.nickname,
+      userEmail: values.email,
+      userSex: values.gender,
+      userAge: 0,
+    };
     dispatch({
       type: SIGNUP_REQUEST,
-      data: body
-    })
-    navigate("/login")
+      data: body,
+    });
+    alert("회원가입 성공! 로그인창으로 이동합니다");
+    navigate("/login");
   };
 
   const onCheckUserId = () => {
@@ -55,7 +59,7 @@ const SignUp = () => {
       alert("아이디는 1~20자이며 영어와 숫자 조합으로 입력해주세요");
     } else {
       dispatch({
-        type: CHECK_USER_ID_REQUEST,
+        type: CHECK_DUPLICATE_ID_REQUEST,
         data: userIdValue,
       });
       alert("사용가능한 아이디입니다.");
