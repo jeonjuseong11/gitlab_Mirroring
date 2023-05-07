@@ -96,10 +96,6 @@ function* watchCheckUserId() {
   yield takeLatest(CHECK_USER_ID_REQUEST, checkUserId);
 }
 
-function* watchCheckUserId() {
-  yield takeLatest(CHECK_USER_ID_REQUEST, checkUserId);
-}
-
 function* watchLogIn() {
   yield takeLatest(LOGIN_REQUEST, logIn);
 }

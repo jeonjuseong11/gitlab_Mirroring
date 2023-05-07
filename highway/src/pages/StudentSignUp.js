@@ -2,8 +2,6 @@ import { AutoComplete, Button, Checkbox, Form, Radio } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { CHECK_USER_ID_REQUEST } from "../constants/actionTypes";
-import { useNavigate } from "react-router-dom";
 import { CHECK_USER_ID_REQUEST, SIGNUP_REQUEST } from "../constants/actionTypes";
 import {
   ButtonWrapper,
