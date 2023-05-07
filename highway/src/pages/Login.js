@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { LeftOutlined, LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Checkbox, Form } from "antd";
 import {
@@ -10,16 +10,37 @@ import {
   LoginForm,
   LoginFormTitle,
 } from "../styles/LoginStyle";
+
 import { useNavigate } from "react-router-dom";
+import { LOGIN_REQUEST } from "../constants/actionTypes";
+import { useSelector, useDispatch } from "react-redux";
 
 const Login = () => {
+  const {isLogIn} = useSelector((state)=>state.user);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const onFinish = (values) => {
-    console.log("로그인 값: ", values);
+    let body = {
+      userId : values.id,
+      userPw: values.password
+  }
+    dispatch({
+      type:LOGIN_REQUEST,
+      data : body
+    });
+    // console.log("로그인 값: ", values);
+    if(isLogIn){
+      navigate("/");
+    }
   };
+
   const goHome = () => {
     navigate("/");
   };
+
+  useEffect(()=>{},[isLogIn]);
+
   return (
     <LoginWrapper>
       <LoginForm
@@ -78,7 +99,7 @@ const Login = () => {
           </LoginBtn>
         </Form.Item>
         <LoginMenu>
-          <LoginMenuItem to="/signup">회원가입</LoginMenuItem>
+          <LoginMenuItem to="/joinpresenter">회원가입</LoginMenuItem>
           <LoginMenuItem to="/findpw">비밀번호를 까먹었나요?</LoginMenuItem>
         </LoginMenu>
       </LoginForm>

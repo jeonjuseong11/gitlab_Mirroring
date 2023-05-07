@@ -1,8 +1,10 @@
 import { UserOutlined } from "@ant-design/icons";
 import { Avatar } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { LOGOUT_REQUEST } from "../constants/actionTypes";
 
 //사이트 로고 부분
 const Title = styled(Link)`
@@ -28,19 +30,35 @@ const BlackLink = styled(Link)`
   color: black;
 `;
 const Header = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); //임시로 로그인 여부 상태 생성
+  const {isLogIn} = useSelector((state)=>state.user);
+  const {me}= useSelector((state)=>state.user);
+  const dispatch = useDispatch();
+
+  const onLogOut = () => {
+    dispatch({
+      type:LOGOUT_REQUEST
+    })
+  }
+
+  useEffect(()=>{},[isLogIn])
+
   return (
     <HeaderWrapper>
       <Title to="/">HIGHWAY</Title>
       <ProfileWrapper>
-        {isLoggedIn ? (
+        {isLogIn ? (
           <BlackLink to="/profile">
             <Avatar
               size={28}
               icon={<UserOutlined />}
               style={{ marginRight: "5px" }}
             />
-            userid
+            {me.userName}
+            <Link to = "/"
+              onClick={onLogOut}
+            >
+            로그아웃
+            </Link>
           </BlackLink>
         ) : (
           <BlackLink to="/login">로그인</BlackLink>
