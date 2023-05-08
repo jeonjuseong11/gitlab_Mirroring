@@ -1,4 +1,4 @@
-import { AutoComplete, Button, Checkbox, Form, Radio } from "antd";
+import { AutoComplete, Button, Checkbox, Form, Input, Radio } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -14,6 +14,7 @@ import {
   SignUpInput,
   SignUpInputPassword,
   SignUpWrapper,
+  AgeInput,
 } from "../styles/SignUpStyle";
 import {
   agreeValidate,
@@ -35,17 +36,10 @@ const SignUp = () => {
   }, [idValid]);
 
   const onFinish = (values) => {
-    const body = {
-      userId: values.id,
-      userPw: values.password,
-      userName: values.nickname,
-      userEmail: values.email,
-      userSex: values.gender,
-      userAge: 0,
-    };
+    console.log(values);
     dispatch({
       type: SIGNUP_REQUEST,
-      data: body,
+      data: values,
     });
     alert("회원가입 성공! 로그인창으로 이동합니다");
     navigate("/login");
@@ -97,7 +91,7 @@ const SignUp = () => {
         <label>아이디</label>
 
         <Form.Item
-          name="id"
+          name="userId"
           tooltip="아이디는 영어로 시작해여 숫자와의 조합으로 작성해주세요"
           rules={[{ validator: validateId }]}
           hasFeedback
@@ -112,7 +106,7 @@ const SignUp = () => {
         </Form.Item>
         <label>비밀번호</label>
         <Form.Item
-          name="password"
+          name="userPw"
           rules={[
             {
               validator: validatePassword,
@@ -153,29 +147,38 @@ const SignUp = () => {
           />
         </Form.Item>
         <label>닉네임</label>
-        <Form.Item name="nickname" rules={[{ validator: validateNickname }]}>
+        <Form.Item name="userName" rules={[{ validator: validateNickname }]}>
           <SignUpInput allowClear placeholder="닉네임을 입력해주세요" />
         </Form.Item>
         <label>이메일</label>
-        <Form.Item name="email" rules={[{ validator: validateEmail }]}>
+        <Form.Item name="userEmail" rules={[{ validator: validateEmail }]}>
           <AutoComplete options={emailOptions} onChange={onEmailChange}>
             <SignUpInput placeholder="이메일을 입력해주세요" />
           </AutoComplete>
         </Form.Item>
-        <label>성별</label>
-        <Form.Item
-          name="gender"
-          rules={[
-            {
-              required: true,
-              message: "성별을 선택해주세요!",
-            },
-          ]}
-        >
-          <Radio.Group>
-            <Radio value="male">남성</Radio>
-            <Radio value="female">여성</Radio>
-          </Radio.Group>
+        
+        <Form.Item>
+          <AgeInput
+            name="userSex"
+            rules={[
+              {
+                required: true,
+                message: "성별을 선택해주세요!",
+              },
+            ]}
+          >
+            <label>성별</label>
+            <Radio.Group>
+              <Radio value="male">남성</Radio>
+              <Radio value="female">여성</Radio>
+            </Radio.Group>
+          </AgeInput>
+          <AgeInput
+            name="userAge"
+          >
+            <label>나이</label>
+            <Input placeholder="나이를 입력해주세요!"/>
+          </AgeInput>
         </Form.Item>
 
         <Form.Item
