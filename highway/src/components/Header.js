@@ -43,8 +43,10 @@ const Header = () => {
 
   useEffect(() => {
     console.log(me);
+    if (me) {
+      console.log(me.userName);
+    }
   }, [me]);
-
   return (
     <HeaderWrapper>
       <Title to="/">HIGHWAY</Title>
@@ -52,12 +54,8 @@ const Header = () => {
         {me ? (
           <>
             <BlackLink to="/profile">
-              <Avatar
-                size={28}
-                icon={<UserOutlined />}
-                style={{ marginRight: "5px" }}
-              >
-                {me.userName}
+              <Avatar size={28} style={{ marginRight: "5px" }}>
+                {me.userName[0]}
               </Avatar>
             </BlackLink>
             <BlackLink to="/" onClick={onLogOut}>
