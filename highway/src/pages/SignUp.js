@@ -19,7 +19,7 @@ const SignUp = () => {
         <Link to="/signup/other">
           <SignUpBtn icon={<UsergroupAddOutlined />}>
             <br />
-            이외의 사용자
+            기타 사용자
           </SignUpBtn>
         </Link>
         <Form.Item>
