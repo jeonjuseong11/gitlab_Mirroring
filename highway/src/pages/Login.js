@@ -30,7 +30,7 @@ const Login = () => {
       type: LOGIN_REQUEST,
       data: body,
     });
-    console.log("로그인 값: ", values);
+    // console.log("로그인 값: ", values);
   };
   useEffect(() => {
     if (logInError) {
@@ -43,7 +43,7 @@ const Login = () => {
   };
 
   useEffect(() => {
-    console.log(me);
+    // console.log(me);
     if (me) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       navigate("/");

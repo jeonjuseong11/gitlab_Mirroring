@@ -42,10 +42,10 @@ const Header = () => {
   };
 
   useEffect(() => {
-    console.log(me);
-    if (me) {
-      console.log(me.userName);
-    }
+    // console.log(me);
+    // if (me) {
+    //   console.log(me.userName);
+    // }
   }, [me]);
   return (
     <HeaderWrapper>
