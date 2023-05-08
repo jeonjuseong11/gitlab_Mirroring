@@ -1,8 +1,8 @@
 import { produce } from "immer";
 import {
-  CHECK_USER_ID_FAILURE,
-  CHECK_USER_ID_REQUEST,
-  CHECK_USER_ID_SUCCESS,
+  CHECK_DUPLICATE_ID_FAILURE,
+  CHECK_DUPLICATE_ID_REQUEST,
+  CHECK_DUPLICATE_ID_SUCCESS,
   LOGIN_FAILURE,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
@@ -35,18 +35,18 @@ export const initalState = {
 const reducer = (state = initalState, action) =>
   produce(state, (draft) => {
     switch (action.type) {
-      case CHECK_USER_ID_REQUEST:
+      case CHECK_DUPLICATE_ID_REQUEST:
         draft.checkIdLoading = true;
         draft.checkIdError = null;
         draft.checkIdDone = false;
         break;
       // 요기가 saga에 의해 실행된다.
-      case CHECK_USER_ID_SUCCESS:
+      case CHECK_DUPLICATE_ID_SUCCESS:
         draft.idValid = action.data;
         draft.checkIdLoading = false;
         draft.checkIdDone = true;
         break;
-      case CHECK_USER_ID_FAILURE:
+      case CHECK_DUPLICATE_ID_FAILURE:
         draft.checkIdLoading = false;
         draft.checkIdError = action.error;
         break;
