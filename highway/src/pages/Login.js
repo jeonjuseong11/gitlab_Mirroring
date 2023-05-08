@@ -104,7 +104,7 @@ const Login = () => {
           </LoginBtn>
         </Form.Item>
         <LoginMenu>
-          <LoginMenuItem to="/joinpresenter">회원가입</LoginMenuItem>
+          <LoginMenuItem to="/signup">회원가입</LoginMenuItem>
           <LoginMenuItem to="/findpw">비밀번호를 까먹었나요?</LoginMenuItem>
         </LoginMenu>
       </LoginForm>
