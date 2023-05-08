@@ -33,6 +33,7 @@ export const initialState = {
   loadUserLoading: false, //유저 정보 로딩 시도중
   loadUserDone: false,
   loadUserError: null,
+  myNo: null, //로그인한 유저 번호(백엔드쪽)
   me: null, //로그인한 유저 정보
   idValid: false,
   token: localStorage.getItem("token"), //jwt 토큰
@@ -66,7 +67,7 @@ const reducer = (state = initialState, action) =>
         // draft.token = action.data.token;
         draft.logInLoading = false;
         draft.logInDone = true;
-        draft.me = action.data;
+        draft.myNo = action.data;
         break;
       case LOGIN_FAILURE:
         draft.logInLoading = false;

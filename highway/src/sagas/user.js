@@ -49,14 +49,21 @@ function* logIn(action) {
   try {
     const result = yield call(logInAPI, action.data);
     const { token } = result.data;
-    // API 요청하는 콜마다 헤더에 accessToken 담아 보내도록 설정
+    localStorage.setItem("token", token);
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    // accessToken을 localStorage, cookie 등에 저장하지 않는다!
-
     yield put({
       type: LOGIN_SUCCESS,
       data: result.data,
     });
+    console.log(result.data);
+    if (result.data == -1) {
+      alert("아이디 비밀번호를 확인해주세요");
+    } else {
+      yield put({
+        type: LOAD_USER_REQUEST,
+        data: result.data,
+      });
+    }
   } catch (err) {
     console.error(err);
     yield put({
@@ -89,6 +96,8 @@ function* signUp(action) {
 
 function* logOut() {
   try {
+    localStorage.removeItem("token");
+    delete axios.defaults.headers.common["Authorization"];
     yield put({
       type: LOGOUT_SUCCESS,
     });
@@ -100,15 +109,17 @@ function* logOut() {
     });
   }
 }
-const loadUserAPI = (token) => {
-  return axios.get("/api/user", {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+const loadUserAPI = (data) => {
+  return axios.get(
+    `/user/info?userNo=${data}`
+    // headers: { Authorization: `Bearer ${token}` },
+  );
 };
 
 function* loadUser(action) {
   try {
     const result = yield call(loadUserAPI, action.data);
+    console.log(result);
     yield put({
       type: LOAD_USER_SUCCESS,
       data: result.data,
