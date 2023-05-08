@@ -22,15 +22,11 @@ const Login = () => {
   const navigate = useNavigate();
 
   const onFinish = (values) => {
-    let body = {
-      userId: values.id,
-      userPw: values.password,
-    };
     dispatch({
       type: LOGIN_REQUEST,
-      data: body,
+      data: values,
     });
-    // console.log("로그인 값: ", values);
+    console.log("로그인 값: ", values);
   };
   useEffect(() => {
     if (logInError) {
@@ -63,7 +59,7 @@ const Login = () => {
         <LeftOutlined onClick={goHome} />
         <LoginFormTitle>로그인</LoginFormTitle>
         <Form.Item
-          name="id"
+          name="userId"
           rules={[
             {
               required: true,
@@ -77,7 +73,7 @@ const Login = () => {
           />
         </Form.Item>
         <Form.Item
-          name="password"
+          name="userPw"
           rules={[
             {
               required: true,
