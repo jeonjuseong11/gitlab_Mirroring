@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, Radio } from "antd";
 //회원가입 페이지 전체를 감싸고 배경색을 담당
 //안에 것들을 화면 중앙에 배치함
 export const SignUpWrapper = styled.div`
@@ -48,7 +48,7 @@ export const StudentSignUpBtn = styled(Button)`
   display: inline-block;
 `;
 export const CancelBtn = styled(Button)`
-  border: 1px solid #8282ff;
+  border: 1px solid #8282ff;d
   color: #8282ff;
   width: 45%;
   height: 3rem;
@@ -58,6 +58,14 @@ export const BackToLogin = styled(Button)`
   width: 40%;
   margin-top : 7%;
   height: 3rem;
+  color: #FFFFFF;
   background-color: #8282ff;
   font-weight: 700;
+`
+export const RadioGroup = styled(Form)`
+`
+
+export const AgeGenderWrapper = styled(Form.Item)`
+  display: inline-block;
+  width: 50%;
 `
