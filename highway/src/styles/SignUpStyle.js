@@ -48,7 +48,7 @@ export const StudentSignUpBtn = styled(Button)`
   display: inline-block;
 `;
 export const CancelBtn = styled(Button)`
-  border: 1px solid #8282ff;
+  border: 1px solid #8282ff;d
   color: #8282ff;
   width: 45%;
   height: 3rem;
@@ -59,15 +59,14 @@ export const BackToLogin = styled(Button)`
   margin-top : 7%;
   color: #FFFFFF;
   height: 3rem;
+  color: #FFFFFF;
   background-color: #8282ff;
   font-weight: 700;
 `
+export const RadioGroup = styled(Form)`
+`
 
-// export const GenderRadio = styled(Form.Item)`
-//   display: 'inline-block'
-//   width: 'calc(40% - 8px)'
-// `
-export const AgeInput = styled(Form.Item)`
+export const AgeGenderWrapper = styled(Form.Item)`
   display: inline-block;
   width: 50%;
 `

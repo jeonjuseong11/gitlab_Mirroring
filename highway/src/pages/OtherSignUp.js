@@ -1,8 +1,11 @@
-import { AutoComplete, Button, Checkbox, Form, Radio } from "antd";
+import { AutoComplete, Button, Checkbox, Form, Input, Radio } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { CHECK_DUPLICATE_ID_REQUEST } from "../constants/actionTypes";
+import {
+  CHECK_DUPLICATE_ID_REQUEST,
+  SIGNUP_REQUEST,
+} from "../constants/actionTypes";
 import {
   ButtonWrapper,
   CancelBtn,
@@ -11,6 +14,8 @@ import {
   SignUpInput,
   SignUpInputPassword,
   SignUpWrapper,
+  AgeGenderWrapper,
+  RadioGroup,
 } from "../styles/SignUpStyle";
 import {
   agreeValidate,
@@ -21,7 +26,7 @@ import {
   validatePassword,
 } from "../utils/signUpValidator";
 import { useSelector } from "react-redux";
-const OtherSignUp = () => {
+const SignUp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [form] = Form.useForm();
@@ -32,12 +37,15 @@ const OtherSignUp = () => {
   }, [idValid]);
 
   const onFinish = (values) => {
-    if (idValid) {
-      console.log("회원가입 데이터: ", values);
-    } else {
-      alert("아이디 중복확인을 해주세요");
-    }
+    console.log(values);
+    dispatch({
+      type: SIGNUP_REQUEST,
+      data: values,
+    });
+    alert("회원가입 성공! 로그인창으로 이동합니다");
+    navigate("/login");
   };
+
   const onCheckUserId = () => {
     const userIdValue = form.getFieldValue("id");
     if (!userIdValue) {
@@ -80,11 +88,11 @@ const OtherSignUp = () => {
         }}
         scrollToFirstError
       >
-        <h2>일반 회원가입</h2>
+        <h2>회원가입</h2>
         <label>아이디</label>
 
         <Form.Item
-          name="id"
+          name="userId"
           tooltip="아이디는 영어로 시작해여 숫자와의 조합으로 작성해주세요"
           rules={[{ validator: validateId }]}
           hasFeedback
@@ -99,7 +107,7 @@ const OtherSignUp = () => {
         </Form.Item>
         <label>비밀번호</label>
         <Form.Item
-          name="password"
+          name="userPw"
           rules={[
             {
               validator: validatePassword,
@@ -140,29 +148,38 @@ const OtherSignUp = () => {
           />
         </Form.Item>
         <label>닉네임</label>
-        <Form.Item name="nickname" rules={[{ validator: validateNickname }]}>
+        <Form.Item name="userName" rules={[{ validator: validateNickname }]}>
           <SignUpInput allowClear placeholder="닉네임을 입력해주세요" />
         </Form.Item>
         <label>이메일</label>
-        <Form.Item name="email" rules={[{ validator: validateEmail }]}>
+        <Form.Item name="userEmail" rules={[{ validator: validateEmail }]}>
           <AutoComplete options={emailOptions} onChange={onEmailChange}>
             <SignUpInput placeholder="이메일을 입력해주세요" />
           </AutoComplete>
         </Form.Item>
-        <label>성별</label>
-        <Form.Item
-          name="gender"
-          rules={[
-            {
-              required: true,
-              message: "성별을 선택해주세요!",
-            },
-          ]}
-        >
-          <Radio.Group>
-            <Radio value="male">남성</Radio>
-            <Radio value="female">여성</Radio>
-          </Radio.Group>
+        
+        <Form.Item>
+          <AgeGenderWrapper
+            name="userSex"
+            rules={[
+              {
+                required: true,
+                message: "성별을 선택해주세요!",
+              },
+            ]}
+          >
+            <label>성별</label>
+            <RadioGroup>
+              <Radio value="male">남성</Radio>
+              <Radio value="female">여성</Radio>
+            </RadioGroup>
+          </AgeGenderWrapper>
+          <AgeGenderWrapper
+            name="userAge"
+          >
+            <label>나이</label>
+            <Input placeholder="나이를 입력해주세요!"/>
+          </AgeGenderWrapper>
         </Form.Item>
 
         <Form.Item
@@ -192,4 +209,4 @@ const OtherSignUp = () => {
     </SignUpWrapper>
   );
 };
-export default OtherSignUp;
+export default SignUp;
