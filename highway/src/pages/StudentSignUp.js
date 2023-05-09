@@ -14,7 +14,7 @@ import {
   SignUpInput,
   SignUpInputPassword,
   SignUpWrapper,
-  AgeInput,
+  SmallFormItem,
 } from "../styles/SignUpStyle";
 import {
   agreeValidate,
@@ -156,9 +156,9 @@ const SignUp = () => {
             <SignUpInput placeholder="이메일을 입력해주세요" />
           </AutoComplete>
         </Form.Item>
-        
+
         <Form.Item>
-          <AgeInput
+          <SmallFormItem
             name="userSex"
             rules={[
               {
@@ -172,13 +172,11 @@ const SignUp = () => {
               <Radio value="male">남성</Radio>
               <Radio value="female">여성</Radio>
             </Radio.Group>
-          </AgeInput>
-          <AgeInput
-            name="userAge"
-          >
+          </SmallFormItem>
+          <SmallFormItem name="userAge">
             <label>나이</label>
-            <Input placeholder="나이를 입력해주세요!"/>
-          </AgeInput>
+            <Input placeholder="나이를 입력해주세요!" />
+          </SmallFormItem>
         </Form.Item>
 
         <Form.Item

@@ -56,18 +56,14 @@ export const CancelBtn = styled(Button)`
 `;
 export const BackToLogin = styled(Button)`
   width: 40%;
-  margin-top : 7%;
-  color: #FFFFFF;
+  margin-top: 7%;
+  color: #ffffff;
   height: 3rem;
   background-color: #8282ff;
   font-weight: 700;
-`
-
-// export const GenderRadio = styled(Form.Item)`
-//   display: 'inline-block'
-//   width: 'calc(40% - 8px)'
-// `
-export const AgeInput = styled(Form.Item)`
+`;
+//회원가입 나이,성별 입력란을 한 줄에 놓기 위해
+export const SmallFormItem = styled(Form.Item)`
   display: inline-block;
   width: 50%;
-`
+`;
