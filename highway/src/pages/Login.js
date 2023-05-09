@@ -38,8 +38,6 @@ const Login = () => {
   };
 
   useEffect(() => {
-    console.log(token);
-    // const me = JSON.stringify(localStorage.getItem("USER_DATA"));
     if (me) {
       // console.log(me);
       navigate("/");

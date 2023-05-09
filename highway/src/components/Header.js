@@ -39,13 +39,14 @@ const Header = () => {
     dispatch({
       type: LOGOUT_REQUEST,
     });
+    localStorage.removeItem("USER_DATA");
   };
 
   useEffect(() => {
     // console.log(me);
-    // if (me) {
-    //   console.log(me.userName);
-    // }
+    if (me) {
+      // console.log(me.userName);
+    }
   }, [me]);
   return (
     <HeaderWrapper>
