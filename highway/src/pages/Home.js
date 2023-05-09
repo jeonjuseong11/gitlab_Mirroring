@@ -3,12 +3,12 @@ import Slider from "../components/Slider/AdSlider";
 import AppLayout from "../components/AppLayout";
 import SearchForm from "../components/SearchForm";
 import CardList from "../components/Card/CardList";
-import { LOAD_USER_REQUEST, LOGIN_REQUEST } from "../constants/actionTypes";
+import { LOAD_USER_REQUEST } from "../constants/actionTypes";
 import { useDispatch } from "react-redux";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const userInfo = JSON.parse(localStorage.getItem("USER_DATA"));
+  const userInfo = JSON.parse(localStorage.getItem("USER_INFO"));
 
   useEffect(() => {
     console.log(userInfo);

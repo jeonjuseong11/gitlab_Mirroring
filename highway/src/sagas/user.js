@@ -41,18 +41,17 @@ function* checkUserId(action) {
 
 const logInAPI = (data) => {
   return axios.get(
-    `user/login?userId=${data.userId}&userPw=${data.userPw}`,
+    `user/signIn?userId=${data.userId}&userPw=${data.userPw}`,
     data
   );
 };
 function* logIn(action) {
   try {
     const result = yield call(logInAPI, action.data);
-    // console.error(result.data);
-
-    // axios.defaults.headers.common[
-    //   "Authorization"
-    // ] = `Bearer ${result.data.token}`;
+    console.log(result.data.token);
+    axios.defaults.headers.common[
+      "Authorization"
+    ] = `Bearer ${result.data.token}`;
     yield put({
       type: LOGIN_SUCCESS,
       data: result.data,
@@ -98,7 +97,7 @@ function* signUp(action) {
 
 function* logOut() {
   try {
-    localStorage.removeItem("token");
+    localStorage.removeItem("USER_INFO");
     delete axios.defaults.headers.common["Authorization"];
     yield put({
       type: LOGOUT_SUCCESS,
@@ -121,6 +120,7 @@ const loadUserAPI = (data) => {
 function* loadUser(action) {
   try {
     const result = yield call(loadUserAPI, action.data);
+    localStorage.setItem("USER_INFO", JSON.stringify(result.data));
     // console.log(result.data);
     yield put({
       type: LOAD_USER_SUCCESS,

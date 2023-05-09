@@ -41,7 +41,6 @@ const Login = () => {
     if (me) {
       // console.log(me);
       navigate("/");
-      localStorage.setItem("USER_DATA", JSON.stringify(me));
     }
   }, [me, token]);
 
