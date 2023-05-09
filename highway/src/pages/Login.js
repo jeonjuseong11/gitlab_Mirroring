@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import axios from "axios";
 import { LeftOutlined, LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Checkbox, Form } from "antd";
 import {
@@ -26,7 +25,7 @@ const Login = () => {
       type: LOGIN_REQUEST,
       data: values,
     });
-    console.log("로그인 값: ", values);
+    // console.log("로그인 값: ", values);
   };
   useEffect(() => {
     if (logInError) {
@@ -39,10 +38,12 @@ const Login = () => {
   };
 
   useEffect(() => {
-    // console.log(me);
+    console.log(token);
+    // const me = JSON.stringify(localStorage.getItem("USER_DATA"));
     if (me) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      // console.log(me);
       navigate("/");
+      localStorage.setItem("USER_DATA", JSON.stringify(me));
     }
   }, [me, token]);
 

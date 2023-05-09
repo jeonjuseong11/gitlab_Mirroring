@@ -48,9 +48,11 @@ const logInAPI = (data) => {
 function* logIn(action) {
   try {
     const result = yield call(logInAPI, action.data);
-    const { token } = result.data;
-    localStorage.setItem("token", token);
-    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    // console.error(result.data);
+
+    // axios.defaults.headers.common[
+    //   "Authorization"
+    // ] = `Bearer ${result.data.token}`;
     yield put({
       type: LOGIN_SUCCESS,
       data: result.data,
