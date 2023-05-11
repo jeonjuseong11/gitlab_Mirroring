@@ -37,7 +37,7 @@ function App() {
             <Route exact path="/schoolranking" element={<SchoolRanking />} />
             <Route exact path="/schooldetail/:schoolId" element={<SchoolDetail />}>
               <Route>
-                <Route exact path="/schooldetail/:schoolId/" element={<SchoolDetailInfo />} />
+                <Route exact path="/schooldetail/:schoolId/info" element={<SchoolDetailInfo />} />
                 <Route exact path="/schooldetail/:schoolId/job" element={<SchoolDetailJob />} />
                 <Route
                   exact
