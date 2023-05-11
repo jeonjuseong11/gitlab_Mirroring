@@ -1,7 +1,13 @@
 import { ConfigProvider } from "antd";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
+
 import TopMenu from "./components/Menu/TopMenu";
+import SchoolDetailInfo from "./components/SchoolDetail/SchoolDetailInfo";
+import SchoolDetailJob from "./components/SchoolDetail/SchoolDetailJob";
+import SchoolDetailReview from "./components/SchoolDetail/SchoolDetailReview";
+import SchoolDetailQuestion from "./components/SchoolDetail/SchoolDetailQuestion";
+
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import OtherSignUp from "./pages/OtherSignUp";
@@ -13,10 +19,6 @@ import StudentSignUp from "./pages/StudentSignUp";
 import UserProfile from "./pages/UserProfile";
 import JoinPresenter from "./pages/JoinPresenter";
 import SchoolDetail from "./pages/SchoolDetail";
-import SchoolDetailInfo from "./components/SchoolDetailInfo";
-import SchoolDetailJob from "./components/SchoolDetailJob";
-import SchoolDetailReview from "./components/SchoolDetailReview";
-import SchoolDetailQuestion from "./components/SchoolDetailQuestion";
 
 function App() {
   return (
