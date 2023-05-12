@@ -1,7 +1,8 @@
 import React from "react";
+import { SubPageWrapper } from "./SchoolDetailStyle";
 
 const SchoolDetailQuestion = () => {
-  return <div>Q&A</div>;
+  return <SubPageWrapper>Q&A</SubPageWrapper>;
 };
 
 export default SchoolDetailQuestion;
