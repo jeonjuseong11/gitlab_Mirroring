@@ -18,7 +18,7 @@ const SchoolDetail = () => {
   const { schoolId } = useParams();
   const [path, setPath] = useState("/review"); //선택 메뉴를 표시하기 위함
   const { school } = useSelector((state) => state.school);
-  console.log(school[schoolId - 1]);
+  // console.log(school[schoolId - 1]);
   const schoolInfo = school[schoolId - 1];
   const totalRate =
     (schoolInfo.rate.trafficRate +
@@ -42,8 +42,10 @@ const SchoolDetail = () => {
       case `/schooldetail/${schoolId}/question`:
         setPath("/question");
         break;
+      default:
+        break;
     }
-  }, [location]);
+  }, [location, schoolId]);
 
   const subMenuLists = [
     { key: `/info`, label: <NavLink to={`/schooldetail/${schoolId}/info`}>정보</NavLink> },
@@ -70,7 +72,7 @@ const SchoolDetail = () => {
           <h2 style={{ margin: "0" }}>{schoolInfo.name}</h2>
           <div>
             <StarFilled style={{ color: "#FFDC82" }} />
-            {totalRate}
+            <span style={{ marginRight: "10px" }}>{totalRate}</span>
             <DepartsTags schoolInfo={schoolInfo} />
             <span style={{}}> {schoolInfo.schoolWebsite}</span>
           </div>
