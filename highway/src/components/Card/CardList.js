@@ -3,17 +3,16 @@ import React from "react";
 import { LikeOutlined, MessageOutlined, StarOutlined } from "@ant-design/icons";
 import { Card, List } from "antd";
 import Meta from "antd/es/card/Meta";
-import { CardItem, IconText, ListWrapper, TagsItem } from "./CardStyle";
+import { CardItem, IconText, ListWrapper } from "./CardStyle";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import DepartsTags from "../DepartsTag";
-
 const CardList = () => {
   const { school } = useSelector((state) => state.school);
   return (
     <ListWrapper>
       <List
-        grid={{ gutter: 16, column: 5 }}
+        grid={{ gutter: 8, xs: 1, sm: 2, md: 3, lg: 4, xl: 5, xxl: 5 }}
         dataSource={school}
         renderItem={(item) => (
           <List.Item key={item.id}>
