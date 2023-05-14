@@ -20,12 +20,12 @@ const SchoolDetail = () => {
   const { school } = useSelector((state) => state.school);
   // console.log(school[schoolId - 1]);
   const schoolInfo = school[schoolId - 1];
-  const totalRate =
-    (schoolInfo.rate.trafficRate +
-      schoolInfo.rate.facilityRate +
-      schoolInfo.rate.cafeteriaRate +
-      schoolInfo.rate.educationRate +
-      schoolInfo.rate.employmentRate) /
+  const totalStarRate =
+    (schoolInfo.totalRate.trafficRate +
+      schoolInfo.totalRate.facilityRate +
+      schoolInfo.totalRate.cafeteriaRate +
+      schoolInfo.totalRate.educationRate +
+      schoolInfo.totalRate.employmentRate) /
     5;
 
   useEffect(() => {
@@ -72,7 +72,7 @@ const SchoolDetail = () => {
           <h2 style={{ margin: "0" }}>{schoolInfo.name}</h2>
           <div>
             <StarFilled style={{ color: "#FFDC82" }} />
-            <span style={{ marginRight: "10px" }}>{totalRate}</span>
+            <span style={{ marginRight: "10px" }}>{totalStarRate}</span>
             <DepartsTags schoolInfo={schoolInfo} />
             <span style={{}}> {schoolInfo.schoolWebsite}</span>
           </div>
