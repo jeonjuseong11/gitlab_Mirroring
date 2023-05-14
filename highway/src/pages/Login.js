@@ -47,8 +47,6 @@ const Login = () => {
   return (
     <LoginWrapper>
       <LoginForm
-        name="normal_login"
-        className="login-form"
         initialValues={{
           remember: true,
         }}
@@ -93,11 +91,7 @@ const Login = () => {
           <Checkbox>로그인 상태 유지</Checkbox>
         </Form.Item>
         <Form.Item>
-          <LoginBtn
-            type="primary"
-            htmlType="submit"
-            className="login-form-button"
-          >
+          <LoginBtn type="primary" htmlType="submit" className="login-form-button">
             Log in
           </LoginBtn>
         </Form.Item>
