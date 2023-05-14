@@ -1,8 +1,8 @@
 import { produce } from "immer";
 import {
-  CHECK_DUPLICATE_ID_FAILURE,
   CHECK_DUPLICATE_ID_REQUEST,
   CHECK_DUPLICATE_ID_SUCCESS,
+  CHECK_DUPLICATE_ID_FAILURE,
   LOGIN_FAILURE,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
@@ -64,7 +64,7 @@ const reducer = (state = initialState, action) =>
         draft.logInDone = false;
         break;
       case LOGIN_SUCCESS:
-        // draft.token = action.data.token;
+        draft.token = action.data.token;
         draft.logInLoading = false;
         draft.logInDone = true;
         draft.myNo = action.data;
