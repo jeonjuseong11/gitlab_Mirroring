@@ -9,7 +9,7 @@ import { OneLineReviewWrapper } from "./SchoolDetailStyle";
 const OneLineReviewTitle = styled.div`
   width: 90%;
   margin: 0 auto;
-  padding-top: 3rem;
+  padding-top: 2rem;
   padding-bottom: 1rem;
   text-align: left;
   border-bottom: 1px solid #c2c2c2;

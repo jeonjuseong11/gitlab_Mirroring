@@ -12,7 +12,7 @@ const FormItemWrapper = styled.div`
 `;
 const FormItemP = styled.p`
   margin: 0px;
-  width: 20%;
+  width: 30%;
 `;
 const MessageWrapper = styled.div`
   margin-left: 1rem;
