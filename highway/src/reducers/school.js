@@ -37,8 +37,9 @@ export const initialState = {
       schoolWebsite: "https://000.000.com",
       reviews: [
         {
-          id: "test1",
-          tags: "디자인",
+          id: 1,
+          userName: "test1",
+          tags: ["디자인", "IT"],
           rate: {
             trafficRate: 5.0,
             facilityRate: 5.0,
@@ -66,6 +67,21 @@ export const initialState = {
         employmentRate: 3.0,
       },
       schoolWebsite: "https://000.000.com",
+      reviews: [
+        {
+          id: 1,
+          userName: "test1",
+          tags: ["디자인", "IT"],
+          rate: {
+            trafficRate: 5.0,
+            facilityRate: 5.0,
+            cafeteriaRate: 5.0,
+            educationRate: 5.0,
+            employmentRate: 5.0,
+          },
+          content: "test용",
+        },
+      ],
     },
     {
       id: 3,
@@ -83,6 +99,21 @@ export const initialState = {
         employmentRate: 4.5,
       },
       schoolWebsite: "https://000.000.com",
+      reviews: [
+        {
+          id: 1,
+          userName: "test1",
+          tags: ["디자인", "IT"],
+          rate: {
+            trafficRate: 5.0,
+            facilityRate: 5.0,
+            cafeteriaRate: 5.0,
+            educationRate: 5.0,
+            employmentRate: 5.0,
+          },
+          content: "test용",
+        },
+      ],
     },
     {
       id: 4,
@@ -117,6 +148,21 @@ export const initialState = {
         employmentRate: 4.0,
       },
       schoolWebsite: "https://000.000.com",
+      reviews: [
+        {
+          id: 1,
+          userName: "test1",
+          tags: ["디자인", "IT"],
+          rate: {
+            trafficRate: 5.0,
+            facilityRate: 5.0,
+            cafeteriaRate: 5.0,
+            educationRate: 5.0,
+            employmentRate: 5.0,
+          },
+          content: "test용",
+        },
+      ],
     },
     {
       id: 5,
@@ -143,6 +189,21 @@ export const initialState = {
         employmentRate: 2.0,
       },
       schoolWebsite: "https://000.000.com",
+      reviews: [
+        {
+          id: 1,
+          userName: "test1",
+          tags: ["디자인", "IT"],
+          rate: {
+            trafficRate: 5.0,
+            facilityRate: 5.0,
+            cafeteriaRate: 5.0,
+            educationRate: 5.0,
+            employmentRate: 5.0,
+          },
+          content: "test용",
+        },
+      ],
     },
   ],
 };
