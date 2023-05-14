@@ -27,7 +27,7 @@ export const initialState = {
       ],
       good: 10,
       followList: ["1", "2"],
-      rate: {
+      totalRate: {
         trafficRate: 5.0,
         facilityRate: 5.0,
         cafeteriaRate: 5.0,
@@ -35,6 +35,20 @@ export const initialState = {
         employmentRate: 5.0,
       },
       schoolWebsite: "https://000.000.com",
+      reviews: [
+        {
+          id: "test1",
+          tags: "디자인",
+          rate: {
+            trafficRate: 5.0,
+            facilityRate: 5.0,
+            cafeteriaRate: 5.0,
+            educationRate: 5.0,
+            employmentRate: 5.0,
+          },
+          content: "test용",
+        },
+      ],
     },
     {
       id: 2,
@@ -44,7 +58,7 @@ export const initialState = {
       comments: [],
       good: 9,
       followList: ["1", "2"],
-      rate: {
+      totalRate: {
         trafficRate: 3.0,
         facilityRate: 3.0,
         cafeteriaRate: 3.0,
@@ -61,7 +75,7 @@ export const initialState = {
       comments: [],
       good: 1,
       followList: ["1", "2"],
-      rate: {
+      totalRate: {
         trafficRate: 4.5,
         facilityRate: 4.5,
         cafeteriaRate: 4.5,
@@ -95,7 +109,7 @@ export const initialState = {
       ],
       good: 5,
       followList: ["1", "2"],
-      rate: {
+      totalRate: {
         trafficRate: 4.0,
         facilityRate: 4.0,
         cafeteriaRate: 4.0,
@@ -121,7 +135,7 @@ export const initialState = {
       ],
       good: 15,
       followList: ["1", "2"],
-      rate: {
+      totalRate: {
         trafficRate: 2.0,
         facilityRate: 2.0,
         cafeteriaRate: 2.0,
