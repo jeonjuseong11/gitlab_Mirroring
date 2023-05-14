@@ -11,7 +11,7 @@ import { SubWrapper, Wrapper } from "../styles/PageStyle";
 import { MenuWrapper } from "../components/Menu/MenuList";
 import { useSelector } from "react-redux";
 import { StarFilled } from "@ant-design/icons";
-import DepartsTags from "../components/DepartsTag";
+import DepartsTags from "../components/DepartsTags";
 
 const SchoolDetail = () => {
   const location = useLocation();
@@ -48,7 +48,10 @@ const SchoolDetail = () => {
   }, [location, schoolId]);
 
   const subMenuLists = [
-    { key: `/info`, label: <NavLink to={`/schooldetail/${schoolId}/info`}>정보</NavLink> },
+    {
+      key: `/info`,
+      label: <NavLink to={`/schooldetail/${schoolId}/info`}>정보</NavLink>,
+    },
     {
       key: `/review`,
       label: <NavLink to={`/schooldetail/${schoolId}/review`}>리뷰</NavLink>,
@@ -80,7 +83,11 @@ const SchoolDetail = () => {
         <SubWrapper>
           <MenuWrapper>
             <Wrapper>
-              <Menu mode="horizontal" items={subMenuLists} selectedKeys={path} />
+              <Menu
+                mode="horizontal"
+                items={subMenuLists}
+                selectedKeys={path}
+              />
             </Wrapper>
           </MenuWrapper>
           <main>

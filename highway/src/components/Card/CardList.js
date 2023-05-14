@@ -6,7 +6,7 @@ import Meta from "antd/es/card/Meta";
 import { CardItem, IconText, ListWrapper } from "./CardStyle";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import DepartsTags from "../DepartsTag";
+import DepartsTags from "../DepartsTags";
 const CardList = () => {
   const { school } = useSelector((state) => state.school);
   return (
@@ -39,7 +39,11 @@ const CardList = () => {
                         text={item.followList.length}
                         key="list-vertical-star-o"
                       />
-                      <IconText icon={LikeOutlined} text={item.good} key="list-vertical-like-o" />
+                      <IconText
+                        icon={LikeOutlined}
+                        text={item.good}
+                        key="list-vertical-like-o"
+                      />
                       <IconText
                         icon={MessageOutlined}
                         text={item.comments.length}

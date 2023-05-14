@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import { Col, Rate, Row } from "antd";
-import { ReviewDetailWrapper, SubPageWrapper, StarRateWrapper } from "./SchoolDetailStyle";
+import { SubPageWrapper, StarRateWrapper } from "./SchoolDetailStyle";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import OneLineReview from "./OneLineReview";
-import ReviewPost from "../ReviewPost";
+import ReviewDetail from "../ReviewDetail";
 
 const SchoolDetailReview = () => {
   const targetRef = useRef(null);
@@ -33,7 +33,9 @@ const SchoolDetailReview = () => {
           <StarRateWrapper>
             <div style={{ width: "60%" }}>
               <p>전체 리뷰 통계</p>
-              <h1 style={{ fontSize: "3rem", fontWeight: "500" }}>{totalStarRate}</h1>
+              <h1 style={{ fontSize: "3rem", fontWeight: "500" }}>
+                {totalStarRate}
+              </h1>
               <Rate
                 disabled
                 defaultValue={totalStarRate}
@@ -103,7 +105,7 @@ const SchoolDetailReview = () => {
               />
             </div>
           </StarRateWrapper>
-          <ReviewPost />
+          <ReviewDetail />
         </Col>
         <Col xs={22} md={6} style={{ minWidth: "25rem" }} ref={adjustRef}>
           <OneLineReview />
