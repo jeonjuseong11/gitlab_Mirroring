@@ -1,7 +1,14 @@
 import axios from "axios";
 import { all, fork, put, takeLatest, call } from "redux-saga/effects";
 
-import { ADD_COMMENT_FAILURE, ADD_COMMENT_REQUEST, ADD_COMMENT_SUCCESS } from "../reducers/post";
+import {
+  ADD_COMMENT_FAILURE,
+  ADD_COMMENT_REQUEST,
+  ADD_COMMENT_SUCCESS,
+  ADD_REVIEW_FAILURE,
+  ADD_REVIEW_REQUEST,
+  ADD_REVIEW_SUCCESS,
+} from "../reducers/post";
 
 function addCommentAPI(data) {
   return axios.post(`/post/${data.postId}/comment`, data); // POST /post/1/comment
@@ -46,7 +53,7 @@ function* watchAddComment() {
   yield takeLatest(ADD_COMMENT_REQUEST, addComment);
 }
 function* watchAddReview() {
-  yield takeLatest(ADD_COMMENT_REQUEST, addReview);
+  yield takeLatest(ADD_REVIEW_REQUEST, addReview);
 }
 
 export default function* postSaga() {
