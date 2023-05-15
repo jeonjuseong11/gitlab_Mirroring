@@ -1,31 +1,21 @@
-import React from 'react';
-import RecommendHeadLine from './RecommendHeadLine';
-import { RecommendImage, RecommendWrapper } from '../../styles/PromotionStyle';
-import { Link } from "react-router-dom";
-
-
-const contentStyle = {
-  color: '#fff',
-  lineHeight: '160px',
-  textAlign: 'center',
-  background: '#364d79',
-};
+import React from "react";
+import { TestHeadLineWrapper } from "../../styles/PromotionStyle";
+import { Link, useLocation } from "react-router-dom";
 
 const RecommendList = () => {
+  const location = useLocation();
+  console.log(location.pathname);
+
   return (
-    <RecommendWrapper>
+    <div>
       <h1>HIGHWAY TIMES</h1>
-      <Link to={"/"}>
-      <RecommendImage
-        width={753}
-        height={424}
-        preview={{
-          mask:<RecommendHeadLine />
-        }}
-        src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-      />
-      </Link>
-    </RecommendWrapper>
+      <TestHeadLineWrapper>
+        <Link to={"/"}>
+          <h2>제목</h2>
+          <p>기사</p>
+        </Link>
+      </TestHeadLineWrapper>
+    </div>
   );
 };
 
