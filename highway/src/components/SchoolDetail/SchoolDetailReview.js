@@ -33,7 +33,9 @@ const SchoolDetailReview = () => {
           <StarRateWrapper>
             <div style={{ width: "60%" }}>
               <p>전체 리뷰 통계</p>
-              <h1 style={{ fontSize: "3rem", fontWeight: "500" }}>{totalStarRate}</h1>
+              <h1 style={{ fontSize: "3rem", fontWeight: "500" }}>
+                {totalStarRate}
+              </h1>
               <Rate
                 disabled
                 defaultValue={totalStarRate}
@@ -45,10 +47,10 @@ const SchoolDetailReview = () => {
             </div>
             <div
               style={{
-                width: "40%",
-                display: "inline-block",
+                lineHeight: "1.1rem",
                 paddingTop: "1rem",
                 paddingLeft: "1rem",
+                display: "inline-block",
               }}
             >
               <p style={{ margin: "0" }}>교통</p>
