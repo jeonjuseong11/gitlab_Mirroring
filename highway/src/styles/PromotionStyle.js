@@ -1,5 +1,6 @@
 import { Image, Form } from "antd";
 import styled from "styled-components";
+import { NewsDummyData as items } from "../utils/NewsDummyData";
 
 export const PromotionWrapper = styled(Form)`
   width: 50%;
@@ -17,13 +18,29 @@ export const RecommendImage = styled(Image)`
 export const TestHeadLineWrapper = styled.div`
   width: 700px;
   height: 400px;
-    .src});
   border-radius: 15px;
-  background-color: red;
+  background-image: url("${items[Math.floor(Math.random() * items.length)]
+    .src}");
 `;
 // RecommendHeadLine.js
-export const RecommendHeadLineWrapper = styled.div`
-  float: right;
-`;
+export const RecommendHeadLineWrapper = styled.div``;
 // PromotionNewsDetail.js
 export const PromotionNewsDetailWrapper = styled.div``;
+// PromotionHome.js
+export const PromotionHomeWrapper = styled.div`
+  display: flex;
+  width: 700px;
+  height: 400px;
+`;
+export const PromotionHomeSection = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+export const PromtionHomeSectionImage = styled(Image)`
+  float: left;
+`;
+export const PromotionHomeTitleListWrapper = styled.div`
+  display: flex;
+
+  flex-direction: column;
+`;
