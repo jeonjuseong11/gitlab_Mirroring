@@ -1,10 +1,12 @@
 import { Form, Rate, Button } from "antd";
 import TextArea from "antd/es/input/TextArea";
-import React, { useEffect, useState } from "react";
-import { produce } from "immer";
-import { useSelector } from "react-redux";
+import React, { useCallback, useEffect, useState } from "react";
 import moment from "moment";
+import "moment/locale/ko"; //한국어 적용
 import styled from "styled-components";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { ADD_REVIEW_REQUEST } from "../constants/actionTypes";
 const FormItemWrapper = styled.div`
   display: flex;
   width: 100%;
@@ -17,10 +19,14 @@ const FormItemP = styled.p`
 const MessageWrapper = styled.div`
   margin-left: 1rem;
 `;
-const DetailReviewForm = () => {
+const DetailReviewForm = ({ setWrite }) => {
+  const { schoolId } = useParams();
+  const { schools } = useSelector((state) => state.school);
+  const reviews = schools[schoolId - 1].reviews;
   const [form] = Form.useForm();
-  const { addCommentLoading } = useSelector((state) => state.post);
-  const [detailReviews, setDetailReview] = useState([]);
+  // console.log(detailReviews);
+  const dispatch = useDispatch();
+  //별점 메시지를 위한 state
   const [trafficMessage, setTrafficMessage] = useState("");
   const [facilityMessage, setFacilityMessage] = useState("");
   const [cafeteriaMessage, setCafeteriaMessage] = useState("");
@@ -65,35 +71,51 @@ const DetailReviewForm = () => {
     }
   };
 
-  useEffect(() => {}, [detailReviews]);
-  const handleSubmit = (values) => {
-    // console.log(values);
-    if (!values) {
-      alert("빈칸이 있습니다.");
-      return;
-    }
-    setDetailReview(
-      produce(detailReviews, (draft) => {
-        draft.push({
-          author: "sss",
-          avatar: "없음",
-          tags: "디자인",
-          content: values.content,
-          secretContent: values.secretContent,
-          datetime: moment().fromNow(),
-          rate: {
-            trafficRate: values.trafficRate,
-            facilityRate: values.facilityRate,
-            cafeteriaRate: values.cafeteriaRate,
-            educationRate: values.educationRate,
-            employmentRate: values.employmentRate,
+  useEffect(() => {
+    console.log(reviews);
+  }, [reviews]);
+  const handleSubmit = useCallback(
+    (values) => {
+      // console.log(values);
+      if (!values) {
+        alert("빈칸이 있습니다.");
+        return;
+      }
+
+      dispatch({
+        type: ADD_REVIEW_REQUEST,
+        data: {
+          values: {
+            id: reviews.length + 1,
+            author: "sss",
+            tags: ["디자인"],
+            content: values.content,
+            secretContent: values.secretContent,
+            datetime: moment(),
+            rate: {
+              trafficRate: values.trafficRate,
+              facilityRate: values.facilityRate,
+              cafeteriaRate: values.cafeteriaRate,
+              educationRate: values.educationRate,
+              employmentRate: values.employmentRate,
+            },
           },
-        });
-      })
-    );
-  };
+          schoolId: schoolId,
+        },
+      });
+
+      form.setFieldsValue = "";
+      setWrite(false);
+    },
+    [schoolId]
+  );
+
   return (
-    <Form form={form} onFinish={handleSubmit} style={{ width: "100%", textAlign: "left" }}>
+    <Form
+      form={form}
+      onFinish={handleSubmit}
+      style={{ width: "100%", textAlign: "left", marginBottom: "3rem" }}
+    >
       <h2 style={{ textAlign: "left", marginTop: "0" }}>리뷰작성</h2>
       <FormItemP>학교의 리뷰</FormItemP>
       <Form.Item rules={[{ required: true }]} name="content">
@@ -139,7 +161,7 @@ const DetailReviewForm = () => {
         <MessageWrapper>{employmentMessage}</MessageWrapper>
       </FormItemWrapper>
       <Form.Item style={{ float: "right", marginTop: "1rem" }}>
-        <Button htmlType="submit" loading={addCommentLoading} type="primary">
+        <Button htmlType="submit" type="primary">
           리뷰 작성
         </Button>
       </Form.Item>
