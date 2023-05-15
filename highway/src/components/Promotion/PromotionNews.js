@@ -7,7 +7,6 @@ import { Image, List } from "antd";
 const PromotionNews = () => {
   return (
     <AppLayout>
-      <h2>첫 번째 test 제목</h2>
       <List
         itemLayout="horizontal"
         dataSource={newsList}
