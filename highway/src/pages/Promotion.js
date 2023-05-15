@@ -1,9 +1,10 @@
 import { Menu } from "antd";
-import React, { useState } from "react";
+import React from "react";
 import { Outlet, useLocation } from "react-router-dom";
+import PromotionHome from "../components/Promotion/PromotionHome";
 import RecommendList from "../components/Promotion/RecommendList";
 import { PromotionWrapper } from "../styles/PromotionStyle";
-import {items} from "../utils/PromotionList";
+import { items } from "../utils/PromotionList";
 
 const Promotion = () => {
   const location = useLocation();
@@ -11,12 +12,9 @@ const Promotion = () => {
   return (
     <PromotionWrapper>
       <RecommendList />
-        <Menu
-          mode="horizontal"
-          items={items}
-          selectedKeys={location.pathname}
-        />
+      <Menu mode="horizontal" items={items} selectedKeys={location.pathname} />
       <Outlet />
+      <PromotionHome />
     </PromotionWrapper>
   );
 };
