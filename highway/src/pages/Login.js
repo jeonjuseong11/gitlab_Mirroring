@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import axios from "axios";
 import { LeftOutlined, LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Checkbox, Form } from "antd";
 import {
@@ -38,15 +39,22 @@ const Login = () => {
   };
 
   useEffect(() => {
+    // console.log(me);
+    const token = localStorage.getItem("ACCESSTOKEN");
     if (me) {
-      // console.log(me);
       navigate("/");
+      alert("로그인 성공");
+    } else if (token) {
+      navigate("/");
+      alert("로그인 상태에서 접근할 수 없는 페이지 입니다.");
     }
   }, [me, token]);
 
   return (
     <LoginWrapper>
       <LoginForm
+        name="normal_login"
+        className="login-form"
         initialValues={{
           remember: true,
         }}
