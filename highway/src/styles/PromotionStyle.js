@@ -35,12 +35,14 @@ export const PromotionHomeWrapper = styled.div`
 export const PromotionHomeSection = styled.div`
   display: flex;
   flex-direction: column;
+  margin: 1%;
 `;
-export const PromtionHomeSectionImage = styled(Image)`
-  float: left;
-`;
+export const PromtionHomeSectionImage = styled(Image)``;
 export const PromotionHomeTitleListWrapper = styled.div`
   display: flex;
-
   flex-direction: column;
+`;
+export const testUl = styled.ul``;
+export const testLi = styled.li`
+  float: left;
 `;
