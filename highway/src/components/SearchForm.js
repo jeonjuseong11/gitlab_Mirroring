@@ -6,16 +6,18 @@ import {
   ExperimentOutlined,
   FormatPainterOutlined,
   MedicineBoxOutlined,
+  ReloadOutlined,
   SearchOutlined,
   ToolOutlined,
 } from "@ant-design/icons";
-import { Input } from "antd";
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import { FilterButton, SearchInput, SearchWrapper } from "../styles/SearchFormStyle";
+import React from "react";
+import {
+  FilterButton,
+  SearchInput,
+  SearchWrapper,
+} from "../styles/SearchFormStyle";
 
-
-const SearchForm = ({filterValue, setFilterValue}) => {
+const SearchForm = ({ setFilterValue }) => {
   return (
     <SearchWrapper>
       <h3>나에게 맞는 분야는 무엇일까요?</h3>
@@ -26,15 +28,15 @@ const SearchForm = ({filterValue, setFilterValue}) => {
       <br />
       <FilterButton
         shape="circle"
-        onClick={(e)=>{
-          setFilterValue("운동");
+        onClick={(e) => {
+          setFilterValue("체육");
         }}
       >
         <DribbbleOutlined style={{ fontSize: "1.2rem" }} />
       </FilterButton>
       <FilterButton
         shape="circle"
-        onClick={(e)=>{
+        onClick={(e) => {
           setFilterValue("IT");
         }}
       >
@@ -42,7 +44,7 @@ const SearchForm = ({filterValue, setFilterValue}) => {
       </FilterButton>
       <FilterButton
         shape="circle"
-        onClick={(e)=>{
+        onClick={(e) => {
           setFilterValue("의료");
         }}
       >
@@ -50,7 +52,7 @@ const SearchForm = ({filterValue, setFilterValue}) => {
       </FilterButton>
       <FilterButton
         shape="circle"
-        onClick={(e)=>{
+        onClick={(e) => {
           setFilterValue("회계");
         }}
       >
@@ -58,7 +60,7 @@ const SearchForm = ({filterValue, setFilterValue}) => {
       </FilterButton>
       <FilterButton
         shape="circle"
-        onClick={(e)=>{
+        onClick={(e) => {
           setFilterValue("과학");
         }}
       >
@@ -66,7 +68,7 @@ const SearchForm = ({filterValue, setFilterValue}) => {
       </FilterButton>
       <FilterButton
         shape="circle"
-        onClick={(e)=>{
+        onClick={(e) => {
           setFilterValue("디자인");
         }}
       >
@@ -74,7 +76,7 @@ const SearchForm = ({filterValue, setFilterValue}) => {
       </FilterButton>
       <FilterButton
         shape="circle"
-        onClick={(e)=>{
+        onClick={(e) => {
           setFilterValue("전자");
         }}
       >
@@ -82,14 +84,15 @@ const SearchForm = ({filterValue, setFilterValue}) => {
       </FilterButton>
       <FilterButton
         shape="circle"
-        onClick={(e)=>{
+        onClick={(e) => {
           setFilterValue("경영");
         }}
       >
         <BankFilled style={{ fontSize: "1.2rem" }} />
       </FilterButton>
       <FilterButton
-        shape="circle"onClick={(e)=>{
+        shape="circle"
+        onClick={(e) => {
           setFilterValue("미정");
         }}
       >
@@ -97,11 +100,11 @@ const SearchForm = ({filterValue, setFilterValue}) => {
       </FilterButton>
       <FilterButton
         shape="circle"
-        onClick={(e)=>{
-          setFilterValue("미정");
+        onClick={(e) => {
+          setFilterValue("");
         }}
       >
-        <BankFilled style={{ fontSize: "1.2rem" }} />
+        <ReloadOutlined style={{ fontSize: "1.2rem" }} />
       </FilterButton>
     </SearchWrapper>
   );
