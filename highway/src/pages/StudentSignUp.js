@@ -1,8 +1,19 @@
-import { AutoComplete, Button, Checkbox, Form, Input, Radio } from "antd";
+import {
+  AutoComplete,
+  Button,
+  Checkbox,
+  Form,
+  Input,
+  Radio,
+  Modal,
+} from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { CHECK_DUPLICATE_ID_REQUEST, SIGNUP_REQUEST } from "../constants/actionTypes";
+import { useNavigate } from "react-router-dom";
+import {
+  CHECK_DUPLICATE_ID_REQUEST,
+  SIGNUP_REQUEST,
+} from "../constants/actionTypes";
 import {
   ButtonWrapper,
   CancelBtn,
@@ -22,7 +33,18 @@ import {
   validatePassword,
 } from "../utils/signUpValidator";
 import { useSelector } from "react-redux";
+import Terms from "../components/Terms/Terms";
 const SignUp = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [form] = Form.useForm();
@@ -64,7 +86,9 @@ const SignUp = () => {
       setAutoCompleteResult([]);
     } else {
       setAutoCompleteResult(
-        ["@gmail.com", "@naver.com", "@hanmail.net"].map((domain) => `${value}${domain}`)
+        ["@gmail.com", "@naver.com", "@hanmail.net"].map(
+          (domain) => `${value}${domain}`
+        )
       );
     }
   };
@@ -109,7 +133,10 @@ const SignUp = () => {
           ]}
           hasFeedback
         >
-          <SignUpInputPassword allowClear placeholder="비밀번호를 입력해주세요(8~50)" />
+          <SignUpInputPassword
+            allowClear
+            placeholder="비밀번호를 입력해주세요(8~50)"
+          />
         </Form.Item>
         <label>비밀번호 확인</label>
         <Form.Item
@@ -126,12 +153,17 @@ const SignUp = () => {
                 if (!value || getFieldValue("password") === value) {
                   return Promise.resolve();
                 }
-                return Promise.reject(new Error("비밀번호가 일치하지 않습니다."));
+                return Promise.reject(
+                  new Error("비밀번호가 일치하지 않습니다.")
+                );
               },
             }),
           ]}
         >
-          <SignUpInputPassword allowClear placeholder="비밀번호를 입력해주세요" />
+          <SignUpInputPassword
+            allowClear
+            placeholder="비밀번호를 입력해주세요"
+          />
         </Form.Item>
         <label>닉네임</label>
         <Form.Item name="userName" rules={[{ validator: validateNickname }]}>
@@ -165,14 +197,24 @@ const SignUp = () => {
             <Input placeholder="나이를 입력해주세요!" />
           </SmallFormItem>
         </Form.Item>
-
-        <Form.Item name="agreement" valuePropName="checked" rules={[{ validator: agreeValidate }]}>
-          <Checkbox>
-            <Link to={`/signup/student/terms`} state={{ data: identity }}>
-              이용약관
-            </Link>
-            에 동의합니다
-          </Checkbox>
+        <Form.Item
+          name="agreement"
+          valuePropName="checked"
+          rules={[{ validator: agreeValidate }]}
+        >
+          <Checkbox>이용약관에 동의합니다</Checkbox>
+          <Button type="primary" onClick={showModal}>
+            이용약관 보기
+          </Button>
+          <Modal
+            title="이용약관"
+            open={isModalOpen}
+            onOk={handleOk}
+            onCancel={handleCancel}
+            width={1000}
+          >
+            <Terms />
+          </Modal>
         </Form.Item>
         <Form.Item>
           <ButtonWrapper>
