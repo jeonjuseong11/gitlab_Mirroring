@@ -36,9 +36,6 @@ const SchoolDetail = () => {
       case `/schooldetail/${schoolId}/review`:
         setPath("/review");
         break;
-      case `/schooldetail/${schoolId}/job`:
-        setPath("/job");
-        break;
       case `/schooldetail/${schoolId}/question`:
         setPath("/question");
         break;
@@ -57,10 +54,6 @@ const SchoolDetail = () => {
       label: <NavLink to={`/schooldetail/${schoolId}/review`}>리뷰</NavLink>,
     },
     {
-      key: `/job`,
-      label: <NavLink to={`/schooldetail/${schoolId}/job`}>진학/취업</NavLink>,
-    },
-    {
       key: `/question`,
       label: <NavLink to={`/schooldetail/${schoolId}/question`}>Q&A</NavLink>,
     },
@@ -77,7 +70,7 @@ const SchoolDetail = () => {
             <StarFilled style={{ color: "#FFDC82" }} />
             <span style={{ marginRight: "10px" }}>{totalStarRate}</span>
             <DepartsTags schoolInfo={schoolInfo} />
-            <span style={{}}> {schoolInfo.schoolWebsite}</span>
+            <span> {schoolInfo.schoolWebsite}</span>
           </div>
         </SchoolInfo>
         <SubWrapper>
