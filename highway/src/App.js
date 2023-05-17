@@ -18,7 +18,6 @@ import Search from "./pages/Search";
 import SignUp from "./pages/SignUp";
 import StudentSignUp from "./pages/StudentSignUp";
 import UserProfile from "./pages/UserProfile";
-import Terms from "./pages/Terms";
 import PromotionNews from "./components/Promotion/PromotionNews";
 import PromotionVideos from "./components/Promotion/PromotionVideos";
 import PromotionNewsDetail from "./components/Promotion/PromotionNewsDetail";
@@ -35,23 +34,45 @@ function App() {
           <Route exact path="/profile" element={<UserProfile />} />
           <Route exact path="/signup/student" element={<StudentSignUp />} />
           <Route exact path="/signup/other" element={<OtherSignUp />} />
-          <Route exact path="/signup/student/terms" element={<Terms />} />
-          <Route exact path="/signup/other/terms" element={<Terms />} />
           <Route element={<TopMenu />}>
             <Route exact path="/" element={<Home />} />
             <Route exact path="/search" element={<Search />} />
             <Route exact path="/promotion" element={<Promotion />}>
               <Route exact path="/promotion" element={<PromotionHome />} />
               <Route exact path="/promotion/news" element={<PromotionNews />} />
-              <Route exact path="/promotion/videos" element={<PromotionVideos />} />
+              <Route
+                exact
+                path="/promotion/videos"
+                element={<PromotionVideos />}
+              />
             </Route>
-            <Route exact path="/promotion/news/:newsId" element={<PromotionNewsDetail />} />
-            <Route exact path="/promotion/videos/:videoId" element={<PromotionVideoDetail />} />
+            <Route
+              exact
+              path="/promotion/news/:newsId"
+              element={<PromotionNewsDetail />}
+            />
+            <Route
+              exact
+              path="/promotion/videos/:videoId"
+              element={<PromotionVideoDetail />}
+            />
             <Route exact path="/schoolranking" element={<SchoolRanking />} />
-            <Route exact path="/schooldetail/:schoolId" element={<SchoolDetail />}>
+            <Route
+              exact
+              path="/schooldetail/:schoolId"
+              element={<SchoolDetail />}
+            >
               <Route>
-                <Route exact path="/schooldetail/:schoolId/info" element={<SchoolDetailInfo />} />
-                <Route exact path="/schooldetail/:schoolId/job" element={<SchoolDetailJob />} />
+                <Route
+                  exact
+                  path="/schooldetail/:schoolId/info"
+                  element={<SchoolDetailInfo />}
+                />
+                <Route
+                  exact
+                  path="/schooldetail/:schoolId/job"
+                  element={<SchoolDetailJob />}
+                />
                 <Route
                   exact
                   path="/schooldetail/:schoolId/review"
