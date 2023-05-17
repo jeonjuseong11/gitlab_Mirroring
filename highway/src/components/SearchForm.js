@@ -10,7 +10,7 @@ import {
   SearchOutlined,
   ToolOutlined,
 } from "@ant-design/icons";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   FilterButton,
   SearchInput,
@@ -18,12 +18,27 @@ import {
 } from "../styles/SearchFormStyle";
 
 const SearchForm = ({ setFilterValue }) => {
+  const [inputValue, setInputValue] = useState("");
+  useEffect(() => {}, [inputValue]);
   return (
     <SearchWrapper>
       <h3>나에게 맞는 분야는 무엇일까요?</h3>
       <SearchInput
         placeholder="검색"
-        prefix={<SearchOutlined style={{ color: "black" }} />}
+        value={inputValue}
+        onChange={(e) => {
+          setInputValue(e.target.value);
+          console.log(inputValue);
+        }}
+        prefix={
+          <SearchOutlined
+            style={{ color: "black" }}
+            onClick={(e) => {
+              setFilterValue(inputValue);
+              console.log(inputValue);
+            }}
+          />
+        }
       />
       <br />
       <FilterButton
