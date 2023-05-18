@@ -2,7 +2,6 @@ import { Col, Menu, Row, Tabs } from "antd";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { NavLink, Outlet, useParams } from "react-router-dom";
-import Tags from "../Tags";
 import { FrequentAsked, QuestionWrapper, SubPageWrapper } from "./SchoolDetailStyle";
 
 const SchoolDetailInfo = () => {
