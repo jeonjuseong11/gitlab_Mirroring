@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 
 import TopMenu from "./components/Menu/TopMenu";
+import SchoolDetail from "./pages/SchoolDetail";
 import SchoolDetailInfo from "./components/SchoolDetail/SchoolDetailInfo";
 import SchoolDetailJob from "./components/SchoolDetail/SchoolDetailJob";
 import SchoolDetailReview from "./components/SchoolDetail/SchoolDetailReview";
@@ -17,25 +18,50 @@ import Search from "./pages/Search";
 import SignUp from "./pages/SignUp";
 import StudentSignUp from "./pages/StudentSignUp";
 import UserProfile from "./pages/UserProfile";
-import JoinPresenter from "./pages/JoinPresenter";
-import SchoolDetail from "./pages/SchoolDetail";
+import Terms from "./pages/Terms";
+import PromotionNews from "./components/Promotion/PromotionNews";
+import PromotionVideos from "./components/Promotion/PromotionVideos";
+import PromotionNewsDetail from "./components/Promotion/PromotionNewsDetail";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { LOAD_USER_REQUEST } from "./constants/actionTypes";
+import cookie from "react-cookies";
+import axios from "axios";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // console.log(userInfo.userNo);
+    const access = cookie.load("accessToken");
+    axios.defaults.headers.common["ACCESS_TOKEN"] = `${access}`;
+    if (access) {
+      dispatch({
+        type: LOAD_USER_REQUEST,
+      });
+    } else {
+      return;
+    }
+  }, []);
   return (
     <ConfigProvider theme={{ token: { colorPrimary: "#8282ff" } }}>
       <div className="App">
         <Routes>
           <Route exact path="/login" element={<Login />} />
-          <Route exact path="/joinpresenter" element={<JoinPresenter />} />
           <Route exact path="/signup" element={<SignUp />} />
           <Route exact path="/profile" element={<UserProfile />} />
-          {/* <Route exact path="/schooldetail/*" element={<SchoolDetail />} /> */}
           <Route exact path="/signup/student" element={<StudentSignUp />} />
           <Route exact path="/signup/other" element={<OtherSignUp />} />
+          <Route exact path="/signup/student/terms" element={<Terms />} />
+          <Route exact path="/signup/other/terms" element={<Terms />} />
           <Route element={<TopMenu />}>
             <Route exact path="/" element={<Home />} />
             <Route exact path="/search" element={<Search />} />
-            <Route exact path="/promotion" element={<Promotion />} />
+            <Route exact path="/promotion" element={<Promotion />}>
+              <Route exact path="/promotion/news" element={<PromotionNews />}></Route>
+              <Route exact path="/promotion/videos" element={<PromotionVideos />} />
+            </Route>
+            <Route exact path="/promotion/news/:newsId" element={<PromotionNewsDetail />} />
             <Route exact path="/schoolranking" element={<SchoolRanking />} />
             <Route exact path="/schooldetail/:schoolId" element={<SchoolDetail />}>
               <Route>
