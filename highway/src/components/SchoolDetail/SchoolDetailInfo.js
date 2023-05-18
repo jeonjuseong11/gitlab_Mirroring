@@ -1,5 +1,5 @@
-import { Col, Menu, Row, Tabs } from "antd";
-import React, { useEffect, useState } from "react";
+import { Col, Row, Tabs } from "antd";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { NavLink, Outlet, useParams } from "react-router-dom";
 import { FrequentAsked, QuestionWrapper, SubPageWrapper } from "./SchoolDetailStyle";
