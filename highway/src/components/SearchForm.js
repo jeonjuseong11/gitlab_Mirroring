@@ -16,8 +16,27 @@ import {
   SearchInput,
   SearchWrapper,
 } from "../styles/SearchFormStyle";
+import { Space, Tag } from "antd";
+const tagsData = [
+  "체육",
+  "IT",
+  "의료",
+  "회계",
+  "과학",
+  "디자인",
+  "전자",
+  "경영",
+];
+const { CheckableTag } = Tag;
 
-const SearchForm = ({ setFilterValue }) => {
+const SearchForm = ({ setSelectedTags, selectedTags }) => {
+  const handleChange = (tag, checked) => {
+    const nextSelectedTags = checked
+      ? [...selectedTags, tag]
+      : selectedTags.filter((t) => t !== tag);
+    console.log("You are interested in: ", nextSelectedTags);
+    setSelectedTags(nextSelectedTags);
+  };
   const [inputValue, setInputValue] = useState("");
   useEffect(() => {}, [inputValue]);
   return (
@@ -34,93 +53,29 @@ const SearchForm = ({ setFilterValue }) => {
           <SearchOutlined
             style={{ color: "black" }}
             onClick={(e) => {
-              setFilterValue(inputValue);
+              setSelectedTags(inputValue);
               console.log(inputValue);
             }}
           />
         }
       />
       <br />
-      <FilterButton
-        shape="circle"
-        onClick={(e) => {
-          setFilterValue("체육");
+      <span
+        style={{
+          marginRight: 8,
         }}
-      >
-        <DribbbleOutlined style={{ fontSize: "1.2rem" }} />
-      </FilterButton>
-      <FilterButton
-        shape="circle"
-        onClick={(e) => {
-          setFilterValue("IT");
-        }}
-      >
-        <DesktopOutlined style={{ fontSize: "1.2rem" }} />
-      </FilterButton>
-      <FilterButton
-        shape="circle"
-        onClick={(e) => {
-          setFilterValue("의료");
-        }}
-      >
-        <MedicineBoxOutlined style={{ fontSize: "1.2rem" }} />
-      </FilterButton>
-      <FilterButton
-        shape="circle"
-        onClick={(e) => {
-          setFilterValue("회계");
-        }}
-      >
-        <DollarCircleOutlined style={{ fontSize: "1.2rem" }} />
-      </FilterButton>
-      <FilterButton
-        shape="circle"
-        onClick={(e) => {
-          setFilterValue("과학");
-        }}
-      >
-        <ExperimentOutlined style={{ fontSize: "1.2rem" }} />
-      </FilterButton>
-      <FilterButton
-        shape="circle"
-        onClick={(e) => {
-          setFilterValue("디자인");
-        }}
-      >
-        <FormatPainterOutlined style={{ fontSize: "1.2rem" }} />
-      </FilterButton>
-      <FilterButton
-        shape="circle"
-        onClick={(e) => {
-          setFilterValue("전자");
-        }}
-      >
-        <ToolOutlined style={{ fontSize: "1.2rem" }} />
-      </FilterButton>
-      <FilterButton
-        shape="circle"
-        onClick={(e) => {
-          setFilterValue("경영");
-        }}
-      >
-        <BankFilled style={{ fontSize: "1.2rem" }} />
-      </FilterButton>
-      <FilterButton
-        shape="circle"
-        onClick={(e) => {
-          setFilterValue("미정");
-        }}
-      >
-        <BankFilled style={{ fontSize: "1.2rem" }} />
-      </FilterButton>
-      <FilterButton
-        shape="circle"
-        onClick={(e) => {
-          setFilterValue("");
-        }}
-      >
-        <ReloadOutlined style={{ fontSize: "1.2rem" }} />
-      </FilterButton>
+      ></span>
+      <Space size={[0, 8]} wrap>
+        {tagsData.map((tag) => (
+          <CheckableTag
+            key={tag}
+            checked={selectedTags.includes(tag)}
+            onChange={(checked) => handleChange(tag, checked)}
+          >
+            {tag}
+          </CheckableTag>
+        ))}
+      </Space>
     </SearchWrapper>
   );
 };

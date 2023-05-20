@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 const Home = () => {
   const dispatch = useDispatch();
   const userInfo = JSON.parse(localStorage.getItem("USER_INFO"));
-  const [filterValue, setFilterValue] = useState("");
+  const [selectedTags, setSelectedTags] = useState([]);
   useEffect(() => {
     console.log(userInfo);
     if (userInfo) {
@@ -22,8 +22,11 @@ const Home = () => {
   return (
     <AppLayout>
       <Slider />
-      <SearchForm filterValue={filterValue} setFilterValue={setFilterValue} />
-      <CardList filterValue={filterValue} />
+      <SearchForm
+        selectedTags={selectedTags}
+        setSelectedTags={setSelectedTags}
+      />
+      <CardList selectedTags={selectedTags} />
     </AppLayout>
   );
 };
