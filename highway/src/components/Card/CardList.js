@@ -10,6 +10,7 @@ import DepartsTags from "../DepartsTags";
 
 const CardList = ({ selectedTags }) => {
   const { school } = useSelector((state) => state.school);
+  // 단일 태그 검색
   const filtedSchool = school.map((it) => {
     const tags = it.tags;
     const FiltedTag = tags.map((item) => item.includes(selectedTags));
@@ -17,7 +18,20 @@ const CardList = ({ selectedTags }) => {
       return it;
     }
   });
-  const removeUndefinedList = filtedSchool.filter((it) => it !== undefined);
+
+  // 태그한 것들이 포함 되어있으면 표시
+  // const filtedSchool = school.map((it) => {
+  //   const tags = it.tags;
+  //   const mapSelectdTag = selectedTags.map((item) => {
+  //     const FiltedTag = tags.includes(item);
+  //     return FiltedTag;
+  //   });
+  //   if (mapSelectdTag.includes(true)) {
+  //     return it;
+  //   }
+  // });
+
+  const removeUndefinedList = filtedSchool.filter((v) => v !== undefined);
   return (
     <ListWrapper>
       <List

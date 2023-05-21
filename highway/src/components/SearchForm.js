@@ -26,6 +26,7 @@ const tagsData = [
   "디자인",
   "전자",
   "경영",
+  "미디어",
 ];
 const { CheckableTag } = Tag;
 
