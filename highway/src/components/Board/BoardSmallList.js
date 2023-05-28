@@ -9,7 +9,9 @@ const BoardSmallList = ({ data }) => {
       style={{ textAlign: "left", marginLeft: "1rem" }}
       header={
         <>
-          <span style={{ fontSize: "1.2rem", marginLeft: "1rem" }}>유머</span>
+          <span style={{ fontSize: "1.2rem", marginLeft: "1rem" }}>
+            자유게시판
+          </span>
           <Link to="/" style={{ float: "right", lineHeight: "2rem" }}>
             <span>더보기</span>
           </Link>
