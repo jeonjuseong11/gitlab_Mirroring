@@ -18,7 +18,7 @@ export const validateId = (_, value) => {
 // password 유효성 검사
 export const validatePassword = (_, value) => {
   const regExp =
-    /(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-z]{1,50})(?=.*[A-Z]{1,50}).{8,50}$/;
+    /(?=.*\d{1,50})(?=.*[~`!@#$%&*()-+=]{1,50})(?=.*[a-z]{1,50})(?=.*[A-Z]{1,50}).{8,50}$/;
   if (!value) {
     return Promise.reject(new Error("비밀번호는 필수 항목입니다."));
   }
@@ -59,7 +59,7 @@ export const validateNickname = (_, value) => {
 };
 // email 유효성 검사
 export const validateEmail = (_, value) => {
-  const regExp = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+  const regExp = /^[A-Za-z0-9_]+@[A-Za-z0-9]+\.[A-Za-z0-9]+/;
   if (!value) {
     return Promise.reject(new Error("이메일은 필수 항목입니다."));
   }
