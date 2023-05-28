@@ -1,5 +1,5 @@
 import axios from "axios";
-import { call, put, all, fork, takeLatest } from "redux-saga/effects";
+import { put, all, fork, takeLatest } from "redux-saga/effects";
 import {
   ADD_REVIEW_REQUEST,
   ADD_REVIEW_FAILURE,

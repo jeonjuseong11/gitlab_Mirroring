@@ -44,8 +44,10 @@ const DetailReviewContentWrapper = styled.div`
 `;
 const ReviewDetailList = () => {
   const { schoolId } = useParams();
-  const { reviews } = useSelector((state) => state.school.schools[schoolId - 1]);
-  console.log(reviews);
+  const { reviews } = useSelector(
+    (state) => state.school.schools[schoolId - 1]
+  );
+  // console.log(reviews);
   return (
     <>
       <List
@@ -69,7 +71,9 @@ const ReviewDetailList = () => {
                     </Avatar>
                     <h3>{item.author}</h3>
                     <span>
-                      <StarFilled style={{ color: "#FFDC82", marginLeft: "-5rem" }} />
+                      <StarFilled
+                        style={{ color: "#FFDC82", marginLeft: "-5rem" }}
+                      />
                       {(item.rate.trafficRate +
                         item.rate.facilityRate +
                         item.rate.cafeteriaRate +
@@ -139,7 +143,9 @@ const ReviewDetailList = () => {
                       }}
                     />
                   </DetailReviewsWrapper>
-                  <DetailReviewContentWrapper>{item.content}</DetailReviewContentWrapper>
+                  <DetailReviewContentWrapper>
+                    {item.content}
+                  </DetailReviewContentWrapper>
                 </>
               }
             />

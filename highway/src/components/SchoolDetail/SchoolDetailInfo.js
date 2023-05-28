@@ -1,14 +1,17 @@
 import { Col, Row, Tabs } from "antd";
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
-import { NavLink, Outlet, useParams } from "react-router-dom";
-import { FrequentAsked, QuestionWrapper, SubPageWrapper } from "./SchoolDetailStyle";
+import { useParams } from "react-router-dom";
+import {
+  FrequentAsked,
+  QuestionWrapper,
+  SubPageWrapper,
+} from "./SchoolDetailStyle";
 
 const SchoolDetailInfo = () => {
-  const { schoolId, tags } = useParams();
+  const { schoolId } = useParams();
   const schools = useSelector((state) => state.school.schools);
   const schoolDeparts = schools[schoolId - 1].tags;
-  const [departsList, setDepartsList] = useState([]);
 
   return (
     <SubPageWrapper>
@@ -30,9 +33,7 @@ const SchoolDetailInfo = () => {
         <Col span={10}>
           <QuestionWrapper>
             학과
-            {/* <Tabs items={schoolDeparts}>
-              <Tags.TabPane tab={item} key={item}></Tags.TabPane>;
-            </Tabs> */}
+            <Tabs items={schoolDeparts} />
           </QuestionWrapper>
         </Col>
       </Row>
