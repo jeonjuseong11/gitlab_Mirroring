@@ -1,9 +1,11 @@
 import { CommentOutlined, HeartOutlined } from "@ant-design/icons";
 import { List, Typography } from "antd";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const BoardSmallList = ({ data }) => {
+  const { schoolId } = useParams();
+
   return (
     <List
       style={{ textAlign: "left", marginLeft: "1rem" }}
@@ -12,7 +14,10 @@ const BoardSmallList = ({ data }) => {
           <span style={{ fontSize: "1.2rem", marginLeft: "1rem" }}>
             자유게시판
           </span>
-          <Link to="/" style={{ float: "right", lineHeight: "2rem" }}>
+          <Link
+            to={`/schoolboard/${schoolId}/list`}
+            style={{ float: "right", lineHeight: "2rem" }}
+          >
             <span>더보기</span>
           </Link>
         </>
@@ -34,7 +39,8 @@ const BoardSmallList = ({ data }) => {
             </div>,
           ]}
         >
-          <Typography.Text mark>[ITEM]</Typography.Text> {item}
+          {item}
+          {"          "}
         </List.Item>
       )}
     />
