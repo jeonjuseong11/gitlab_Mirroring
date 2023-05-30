@@ -149,6 +149,7 @@ function* loadUser() {
       type: LOAD_USER_FAILURE,
       data: e.response.data,
     });
+    alert(e.response.data);
   }
 }
 const refreshTokenAPI = () => {
