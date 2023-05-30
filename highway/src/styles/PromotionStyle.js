@@ -26,26 +26,3 @@ export const TestHeadLineWrapper = styled.div`
 export const RecommendHeadLineWrapper = styled.div``;
 // PromotionNewsDetail.js
 export const PromotionNewsDetailWrapper = styled.div``;
-// PromotionHomeItem.js
-export const PromotionHomeWrapper = styled.div`
-  display: flex;
-  width: 100%;
-  height: 400px;
-`;
-export const PromotionHomeSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 1%;
-`;
-export const PromtionHomeSectionImage = styled(Image)``;
-export const PromotionHomeTitleListWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-export const PromotionHomeItemUl = styled.ul`
-  list-style: none;
-`;
-export const PromotionHomeItemLi = styled.li`
-  width: 100%;
-  float: left;
-`;
