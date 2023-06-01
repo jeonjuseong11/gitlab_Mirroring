@@ -23,6 +23,9 @@ import {
   SignUpInputPassword,
   SignUpWrapper,
   SmallFormItem,
+  DoubleCheckButton,
+  NickNameInput,
+  AgeInput,
 } from "../styles/SignUpStyle";
 import {
   agreeValidate,
@@ -109,7 +112,6 @@ const SignUp = () => {
       >
         <h2>회원가입</h2>
         <label>아이디</label>
-
         <Form.Item
           name="userId"
           tooltip="아이디는 영어로 시작해여 숫자와의 조합으로 작성해주세요"
@@ -118,11 +120,9 @@ const SignUp = () => {
           validateStatus={idValid ? "success" : "error"}
         >
           <SignUpInput allowClear placeholder="아이디를 입력해주세요" />
-        </Form.Item>
-        <Form.Item>
-          <Button onClick={onCheckUserId} disabled={idValid}>
+          <DoubleCheckButton onClick={onCheckUserId} disabled={idValid}>
             중복확인
-          </Button>
+          </DoubleCheckButton>
         </Form.Item>
         <label>비밀번호</label>
         <Form.Item
@@ -168,7 +168,7 @@ const SignUp = () => {
         </Form.Item>
         <label>닉네임</label>
         <Form.Item name="userName" rules={[{ validator: validateNickname }]}>
-          <SignUpInput allowClear placeholder="닉네임을 입력해주세요" />
+          <NickNameInput allowClear placeholder="닉네임을 입력해주세요" />
         </Form.Item>
         <label>이메일</label>
         <Form.Item name="userEmail" rules={[{ validator: validateEmail }]}>
@@ -195,7 +195,7 @@ const SignUp = () => {
           </SmallFormItem>
           <SmallFormItem name="userAge">
             <label>나이</label>
-            <Input placeholder="나이를 입력해주세요!" />
+            <AgeInput placeholder="나이를 입력해주세요!" />
           </SmallFormItem>
         </Form.Item>
 

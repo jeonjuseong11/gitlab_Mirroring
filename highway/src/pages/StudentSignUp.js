@@ -1,12 +1,4 @@
-import {
-  AutoComplete,
-  Button,
-  Checkbox,
-  Form,
-  Input,
-  Radio,
-  Modal,
-} from "antd";
+import { AutoComplete, Button, Checkbox, Form, Radio, Modal } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -23,6 +15,10 @@ import {
   SignUpInputPassword,
   SignUpWrapper,
   SmallFormItem,
+  NickNameInput,
+  DoubleCheckButton,
+  AgeInput,
+  SignUpFormItem,
 } from "../styles/SignUpStyle";
 import {
   agreeValidate,
@@ -109,22 +105,21 @@ const SignUp = () => {
       >
         <h2>재학생 회원가입</h2>
         <label>아이디</label>
-        <Form.Item
+        <SignUpFormItem
           name="userId"
           tooltip="아이디는 영어로 시작해여 숫자와의 조합으로 작성해주세요"
           rules={[{ validator: validateId }]}
           hasFeedback
           validateStatus={idValid ? "success" : "error"}
+          style={{}}
         >
           <SignUpInput allowClear placeholder="아이디를 입력해주세요" />
-        </Form.Item>
-        <Form.Item>
-          <Button onClick={onCheckUserId} disabled={idValid}>
+          <DoubleCheckButton onClick={onCheckUserId} disabled={idValid}>
             중복확인
-          </Button>
-        </Form.Item>
+          </DoubleCheckButton>
+        </SignUpFormItem>
         <label>비밀번호</label>
-        <Form.Item
+        <SignUpFormItem
           name="userPw"
           rules={[
             {
@@ -137,9 +132,9 @@ const SignUp = () => {
             allowClear
             placeholder="비밀번호를 입력해주세요(8~50)"
           />
-        </Form.Item>
+        </SignUpFormItem>
         <label>비밀번호 확인</label>
-        <Form.Item
+        <SignUpFormItem
           name="confirm"
           dependencies={["password"]}
           hasFeedback
@@ -164,19 +159,22 @@ const SignUp = () => {
             allowClear
             placeholder="비밀번호를 입력해주세요"
           />
-        </Form.Item>
+        </SignUpFormItem>
         <label>닉네임</label>
-        <Form.Item name="userName" rules={[{ validator: validateNickname }]}>
-          <SignUpInput allowClear placeholder="닉네임을 입력해주세요" />
-        </Form.Item>
+        <SignUpFormItem
+          name="userName"
+          rules={[{ validator: validateNickname }]}
+        >
+          <NickNameInput allowClear placeholder="닉네임을 입력해주세요" />
+        </SignUpFormItem>
         <label>이메일</label>
-        <Form.Item name="userEmail" rules={[{ validator: validateEmail }]}>
+        <SignUpFormItem name="userEmail" rules={[{ validator: validateEmail }]}>
           <AutoComplete options={emailOptions} onChange={onEmailChange}>
             <SignUpInput placeholder="이메일을 입력해주세요" />
           </AutoComplete>
-        </Form.Item>
+        </SignUpFormItem>
 
-        <Form.Item>
+        <SignUpFormItem>
           <SmallFormItem
             name="userSex"
             rules={[
@@ -187,17 +185,17 @@ const SignUp = () => {
             ]}
           >
             <label>성별</label>
-            <Radio.Group>
+            <Form>
               <Radio value="male">남성</Radio>
               <Radio value="female">여성</Radio>
-            </Radio.Group>
+            </Form>
           </SmallFormItem>
           <SmallFormItem name="userAge">
             <label>나이</label>
-            <Input placeholder="나이를 입력해주세요!" />
+            <AgeInput placeholder="나이를 입력해주세요!" />
           </SmallFormItem>
-        </Form.Item>
-        <Form.Item
+        </SignUpFormItem>
+        <SignUpFormItem
           name="agreement"
           valuePropName="checked"
           rules={[{ validator: agreeValidate }]}
@@ -215,8 +213,8 @@ const SignUp = () => {
           >
             <Terms />
           </Modal>
-        </Form.Item>
-        <Form.Item>
+        </SignUpFormItem>
+        <SignUpFormItem>
           <ButtonWrapper>
             <StudentSignUpBtn type="primary" htmlType="submit">
               가입하기
@@ -229,7 +227,7 @@ const SignUp = () => {
               취소하기
             </CancelBtn>
           </ButtonWrapper>
-        </Form.Item>
+        </SignUpFormItem>
       </SignUpForm>
     </SignUpWrapper>
   );

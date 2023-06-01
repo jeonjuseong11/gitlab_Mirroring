@@ -31,9 +31,17 @@ export const SignUpForm = styled(Form)`
 `;
 //회원가입 폼 안에 input style
 export const SignUpInput = styled(Input)`
+  width: 78%;
+  height: 3rem;
+`;
+export const NickNameInput = styled(Input)`
   height: 3rem;
 `;
 export const SignUpInputPassword = styled(Input.Password)`
+  height: 3rem;
+`;
+export const AgeInput = styled(Input)`
+  width: 100%;
   height: 3rem;
 `;
 export const ButtonWrapper = styled.div`
@@ -63,8 +71,17 @@ export const BackToLogin = styled(Button)`
   background-color: #8282ff;
   font-weight: 700;
 `;
+export const DoubleCheckButton = styled(Button)`
+  transform: translateY(0.5rem);
+  width: 17%;
+  height: 3rem;
+  margin-left: 5%;
+`;
 //회원가입 나이,성별 입력란을 한 줄에 놓기 위해
 export const SmallFormItem = styled(Form.Item)`
   display: inline-block;
   width: 50%;
+`;
+export const SignUpFormItem = styled(Form.Item)`
+  margin-bottom: 7%;
 `;
