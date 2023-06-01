@@ -142,7 +142,7 @@ function* loadUser() {
     // console.log(action.data);
     yield put({
       type: LOAD_USER_SUCCESS,
-      data: result.data,
+      data: result.data.body,
     });
   } catch (e) {
     yield put({
