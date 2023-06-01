@@ -29,6 +29,7 @@ import axios from "axios";
 import SchoolBoard from "./pages/Board/SchoolBoard";
 import SchoolBoardList from "./pages/Board/SchoolBoardList";
 import SchoolBoardDetail from "./pages/Board/SchoolBoardDetail";
+import SchoolBoardPost from "./pages/Board/SchoolBoardPost";
 
 function App() {
   const dispatch = useDispatch();
@@ -86,6 +87,8 @@ function App() {
           <Route exact path="/schoolboard/:schoolId" element={<SchoolBoard />} />
           <Route exact path="/schoolboard/:schoolId/list" element={<SchoolBoardList />} />
           <Route exact path="/schoolboard/:schoolId/list/:postId" element={<SchoolBoardDetail />} />
+          <Route exact path="/schoolboard/:schoolId/post" element={<SchoolBoardPost />} />
+
           <Route element={<TopMenu />}>
             <Route exact path="/" element={<Home />} />
             <Route exact path="/search" element={<Search />} />
