@@ -10,19 +10,20 @@ import DepartsTags from "../DepartsTags";
 
 const CardList = ({ filterValue }) => {
   const { schools } = useSelector((state) => state.school);
-  const filtedSchool = schools.map((it) => {
-    const tags = it.tags;
-    const FiltedTag = tags.map((item) => item.includes(filterValue));
-    if (FiltedTag.includes(true)) {
-      return it;
-    }
-  });
-  const removeUndefinedList = filtedSchool.filter((it) => it !== undefined);
+  const sliceSchools = schools.slice(0,5);//학교 리스트 렌더링 제한 5개까지
+  // const filtedSchool = schools.map((it) => {
+  //   const tags = it.tags;
+  //   const FiltedTag = tags.map((item) => item.includes(filterValue));
+  //   if (FiltedTag.includes(true)) {
+  //     return it;
+  //   }
+  // });
+  // const removeUndefinedList = filtedSchool.filter((it) => it !== undefined);
   return (
     <ListWrapper>
       <List
         grid={{ gutter: 8, xs: 1, sm: 2, md: 3, lg: 4, xl: 5, xxl: 5 }}
-        dataSource={removeUndefinedList}
+        dataSource={sliceSchools}
         renderItem={(item) => (
           <List.Item key={item.id}>
             <Col>
@@ -44,21 +45,21 @@ const CardList = ({ filterValue }) => {
                   <Meta
                     description={
                       <CardItem>
-                        <IconText
+                        {/* <IconText
                           icon={StarOutlined}
-                          text={item.followList.length}
+                          text={item.length}
                           key="list-vertical-star-o"
-                        />
-                        <IconText icon={LikeOutlined} text={item.good} key="list-vertical-like-o" />
-                        <IconText
+                        /> */}
+                        {/* <IconText icon={LikeOutlined} text={item.good} key="list-vertical-like-o" /> */}
+                        {/* <IconText
                           icon={MessageOutlined}
                           text={item.comments.length}
                           key="list-vertical-message"
-                        />
+                        /> */}
                       </CardItem>
                     }
                   />
-                  <Meta description={<DepartsTags schoolInfo={item} />} />
+                  {/* <Meta description={<DepartsTags schoolInfo={item} />} /> */}
                 </Card>
               </Link>
             </Col>

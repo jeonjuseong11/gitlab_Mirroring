@@ -29,7 +29,7 @@ const reducer = (state = initialState, action) =>
         draft.loadSchoolListError = null;
         break;
       case LOAD_SCHOOL_LIST_SUCCESS:
-        draft.schools.push(action.data);
+        draft.schools=action.data;
         draft.loadSchoolListLoading = false;
         draft.loadSchoolListDone = true;
         break;
