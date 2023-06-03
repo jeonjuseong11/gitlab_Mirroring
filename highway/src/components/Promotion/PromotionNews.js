@@ -31,6 +31,9 @@ const PromotionNews = () => {
                   width={277}
                   height={122}
                   src={item.src}
+                  style={{
+                    borderRadius: "5%",
+                  }}
                 />
                 <List.Item.Meta
                   title={

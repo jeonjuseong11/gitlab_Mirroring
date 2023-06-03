@@ -31,6 +31,9 @@ const PromotionHomeItem = ({ random, title }) => {
                   height={100 * 3}
                   preview={false}
                   src={`${newsList[random].src}`}
+                  style={{
+                    borderRadius: "5%",
+                  }}
                 />
               </Link>
             </div>
