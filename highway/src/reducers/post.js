@@ -34,12 +34,16 @@ import {
   UPLOAD_IMAGES_FAILURE,
   UPLOAD_IMAGES_REQUEST,
   UPLOAD_IMAGES_SUCCESS,
+  LOAD_POST_COMMENTS_FAILURE,
+  LOAD_POST_COMMENTS_REQUEST,
+  LOAD_POST_COMMENTS_SUCCESS,
 } from "../constants/actionTypes";
 
 export const initialState = {
   imagePaths: [], //이미지 파일 관리
   schoolBoardPosts: [], //게시글 리스트
   schoolBoardPost: null, //단일 게시글
+  schoolBoardPostComments: null, // 게시글 댓글
   loadPostsLoading: false, //게시글 리스트
   loadPostsDone: false,
   loadPostsError: null,
@@ -70,6 +74,9 @@ export const initialState = {
   uploadImagesLoading: false, //이미지 업로드
   uploadImagesDone: false,
   uploadImagesError: null,
+  loadPostCommentLoading: false, // 게시판 댓글 조회
+  loadPostCommentDone: false,
+  loadPostCommentError: false,
 };
 
 const reducer = (state = initialState, action) =>
@@ -99,7 +106,9 @@ const reducer = (state = initialState, action) =>
         draft.likePostError = null;
         break;
       case LIKE_POST_SUCCESS: {
-        const post = draft.schoolBoardPosts.find((v) => v.id === action.data.PostId);
+        const post = draft.schoolBoardPosts.find(
+          (v) => v.id === action.data.PostId
+        );
         post.Likers.push({ id: action.data.userId });
         draft.likePostLoading = false;
         draft.likePostDone = true;
@@ -115,7 +124,9 @@ const reducer = (state = initialState, action) =>
         draft.unlikePostError = null;
         break;
       case UNLIKE_POST_SUCCESS: {
-        const post = draft.schoolBoardPosts.find((v) => v.id === action.data.PostId);
+        const post = draft.schoolBoardPosts.find(
+          (v) => v.id === action.data.PostId
+        );
         post.Likers = post.Likers.filter((v) => v.id !== action.data.userId);
         draft.unlikePostLoading = false;
         draft.unlikePostDone = true;
@@ -183,8 +194,9 @@ const reducer = (state = initialState, action) =>
       case UPDATE_POST_SUCCESS:
         draft.updatePostLoading = false;
         draft.updatePostDone = true;
-        draft.mainPschoolBoardPostsosts.find((v) => v.id === action.data.PostId).content =
-          action.data.content;
+        draft.mainPschoolBoardPostsosts.find(
+          (v) => v.id === action.data.PostId
+        ).content = action.data.content;
         break;
       case UPDATE_POST_FAILURE:
         draft.updatePostLoading = false;
@@ -198,7 +210,9 @@ const reducer = (state = initialState, action) =>
       case REMOVE_POST_SUCCESS:
         draft.removePostLoading = false;
         draft.removePostDone = true;
-        draft.mainPosts = draft.schoolBoardPosts.filter((v) => v.id !== action.data.PostId);
+        draft.mainPosts = draft.schoolBoardPosts.filter(
+          (v) => v.id !== action.data.PostId
+        );
         break;
       case REMOVE_POST_FAILURE:
         draft.removePostLoading = false;
@@ -210,7 +224,10 @@ const reducer = (state = initialState, action) =>
         draft.addCommentError = null;
         break;
       case ADD_COMMENT_SUCCESS: {
-        const post = draft.schoolBoardPosts.find((v) => v.id === action.data.PostId);
+        const post = draft.schoolBoardPosts.find(
+          // (v) => v.id === action.data.PostId
+          (v) => v.id === action.data.boardId // POSTMAN에 나온 주소대로
+        );
         post.Comments.unshift(action.data);
         draft.addCommentLoading = false;
         draft.addCommentDone = true;
@@ -221,6 +238,21 @@ const reducer = (state = initialState, action) =>
         draft.addCommentError = action.error;
         break;
       default:
+        break;
+      case LOAD_POST_COMMENTS_REQUEST:
+        draft.loadPostCommentLoading = true;
+        draft.loadPostCommentDone = false;
+        draft.loadPostCommentError = null;
+        break;
+      case LOAD_POST_COMMENTS_SUCCESS: {
+        draft.schoolBoardPostComments = action.data;
+        draft.loadPostCommentLoading = false;
+        draft.loadPostCommentDone = true;
+        break;
+      }
+      case LOAD_POST_COMMENTS_FAILURE:
+        draft.loadPostCommentLoading = false;
+        draft.loadPostCommentError = action.error;
         break;
     }
   });

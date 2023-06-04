@@ -35,6 +35,9 @@ import {
   UPDATE_POST_SUCCESS,
   UPDATE_POST_FAILURE,
   UPDATE_POST_REQUEST,
+  LOAD_POST_COMMENTS_FAILURE,
+  LOAD_POST_COMMENTS_REQUEST,
+  LOAD_POST_COMMENTS_SUCCESS,
 } from "../constants/actionTypes";
 import { ADD_POST_TO_ME, REMOVE_POST_OF_ME } from "../constants/actionTypes";
 
@@ -257,8 +260,12 @@ function* updatePost(action) {
 }
 
 function addCommentAPI(data) {
-  //게시물 댓글 작성
-  return axios.post(`/post/${data.postId}/comment`, data); // POST /post/1/comment
+  // 게시물 댓글 작성
+  // return axios.post(`/post/${data.postId}/comment`, data); // POST /post/1/comment
+  return axios.post(
+    `/comment?content=${data.content}&boardId=${data.boardId}`,
+    data
+  ); // POSTMAN에 나온 주소
 }
 
 function* addComment(action) {
@@ -272,6 +279,27 @@ function* addComment(action) {
     console.error(err);
     yield put({
       type: ADD_COMMENT_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+function loadPostCommentsAPI(data) {
+  //학교 게시판 댓글 조회
+  return axios.get(`/comment?boardId=${data.boardId}`);
+}
+
+function* loadPostComments(action) {
+  try {
+    const result = yield call(loadPostCommentsAPI, action.data);
+    yield put({
+      type: LOAD_POST_COMMENTS_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: LOAD_POST_COMMENTS_FAILURE,
       error: err.response.data,
     });
   }
@@ -321,6 +349,10 @@ function* watchAddComment() {
   yield takeLatest(ADD_COMMENT_REQUEST, addComment);
 }
 
+function* watchLoadPostComments() {
+  yield takeLatest(LOAD_POST_COMMENTS_REQUEST, loadPostComments);
+}
+
 export default function* postSaga() {
   yield all([
     fork(watchUploadImages),
@@ -334,5 +366,6 @@ export default function* postSaga() {
     fork(watchRemovePost),
     fork(watchUpdatePost),
     fork(watchAddComment),
+    fork(watchLoadPostComments),
   ]);
 }
