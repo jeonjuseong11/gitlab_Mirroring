@@ -8,40 +8,12 @@ const RecommendList = () => {
   return (
     <>
       <ul style={{ listStyle: "none" }}>
-        <li>
+        <li style={{ marginLeft: "-35%" }}>
           <h1>HIGHWAY TIMES</h1>
           <Link to={`news/${random}`}>
             <Image
               width={"45rem"}
               height={"25rem"}
-              preview={false}
-              src={`${items[random].src}`}
-              style={{
-                borderRadius: "5%",
-              }}
-            />
-          </Link>
-        </li>
-      </ul>
-      <ul style={{ listStyle: "none" }}>
-        <li>
-          <Link to={`news/${random}`}>
-            <Image
-              width={"15rem"}
-              height={"6rem"}
-              preview={false}
-              src={`${items[random].src}`}
-              style={{
-                borderRadius: "5%",
-              }}
-            />
-          </Link>
-        </li>
-        <li>
-          <Link to={`news/${random}`}>
-            <Image
-              width={"15rem"}
-              height={"6rem"}
               preview={false}
               src={`${items[random].src}`}
               style={{

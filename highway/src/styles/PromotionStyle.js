@@ -18,3 +18,10 @@ export const RecommendImage = styled(Image)`
 export const RecommendHeadLineWrapper = styled.div``;
 // PromotionNewsDetail.js
 export const PromotionNewsDetailWrapper = styled.div``;
+// PromotionHome.js
+export const PromotionHomeItemLi = styled.li`
+  float: left;
+  width: 100%;
+  margin-left: -15%;
+  margin-bottom: 5%;
+`;

@@ -12,11 +12,11 @@ const PromotionHomeItem = ({ random, title }) => {
       <Row gutter={[16, 16]} justify="center">
         <ul style={{ listStyle: "none", width: "75%" }}>
           <li>
-            <div style={{ display: "flex" }}>
-              <div style={{ width: "45%", marginLeft: "-5%" }}>
-                <h2>{title}</h2>
+            <div style={{ display: "flex", flexDirection: "row" }}>
+              <div style={{ width: "90%", marginLeft: "-30%" }}>
+                <h2 style={{ width: "100%" }}>{title}</h2>
               </div>
-              <div style={{ width: "45%", marginLeft: "-5%" }}>
+              <div style={{ marginLeft: "12.5%", marginTop: "2.5%" }}>
                 <Link to={`/promotion/news`}>
                   <Button icon={<RightCircleFilled />}>더보기</Button>
                 </Link>
@@ -38,7 +38,7 @@ const PromotionHomeItem = ({ random, title }) => {
               </Link>
             </div>
           </li>
-          <li style={{ width: "100%" }}>
+          <li style={{ width: "100%", marginLeft: "-15%" }}>
             <List
               itemLayout="horizontal"
               dataSource={newsList}
@@ -52,6 +52,7 @@ const PromotionHomeItem = ({ random, title }) => {
                             {item.newsTitle}
                           </Link>
                         }
+                        style={{ marginLeft: "15%" }}
                       />
                     </List.Item>
                   );
