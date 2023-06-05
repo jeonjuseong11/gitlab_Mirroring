@@ -37,6 +37,12 @@ import {
   LOAD_POST_COMMENTS_FAILURE,
   LOAD_POST_COMMENTS_REQUEST,
   LOAD_POST_COMMENTS_SUCCESS,
+  UPDATE_POST_COMMENT_REQUEST,
+  UPDATE_POST_COMMENT_SUCCESS,
+  UPDATE_POST_COMMENT_FAILURE,
+  REMOVE_POST_COMMENT_REQUEST,
+  REMOVE_POST_COMMENT_SUCCESS,
+  REMOVE_POST_COMMENT_FAILURE,
 } from "../constants/actionTypes";
 
 export const initialState = {
@@ -74,9 +80,15 @@ export const initialState = {
   uploadImagesLoading: false, //이미지 업로드
   uploadImagesDone: false,
   uploadImagesError: null,
-  loadPostCommentLoading: false, // 게시판 댓글 조회
-  loadPostCommentDone: false,
-  loadPostCommentError: false,
+  loadPostCommentsLoading: false, // 게시판 댓글 조회
+  loadPostCommentsDone: false,
+  loadPostCommentsError: false,
+  updatePostCommentLoading: false, // 게시판 댓글 수정
+  updatePostCommentDone: false,
+  updatePostCommentError: false,
+  removePostCommentLoading: false, // 게시판 댓글 삭제
+  removePostCommentDone: false,
+  removePostCommentError: false,
 };
 
 const reducer = (state = initialState, action) =>
@@ -240,19 +252,51 @@ const reducer = (state = initialState, action) =>
       default:
         break;
       case LOAD_POST_COMMENTS_REQUEST:
-        draft.loadPostCommentLoading = true;
-        draft.loadPostCommentDone = false;
-        draft.loadPostCommentError = null;
+        draft.loadPostCommentsLoading = true;
+        draft.loadPostCommentsDone = false;
+        draft.loadPostCommentsError = null;
         break;
       case LOAD_POST_COMMENTS_SUCCESS: {
-        draft.schoolBoardPostComments = action.data;
-        draft.loadPostCommentLoading = false;
-        draft.loadPostCommentDone = true;
+        draft.schoolBoardPostsComments = action.data;
+        draft.loadPostCommentsLoading = false;
+        draft.loadPostCommentsDone = true;
         break;
       }
       case LOAD_POST_COMMENTS_FAILURE:
-        draft.loadPostCommentLoading = false;
-        draft.loadPostCommentError = action.error;
+        draft.loadPostCommentsLoading = false;
+        draft.loadPostCommentsError = action.error;
+        break;
+      case UPDATE_POST_COMMENT_REQUEST:
+        draft.updatePostCommentLoading = true;
+        draft.updatePostCommentDone = false;
+        draft.updatePostCommentError = null;
+        break;
+      case UPDATE_POST_COMMENT_SUCCESS:
+        draft.updatePostCommentLoading = false;
+        draft.updatePostCommentDone = true;
+        draft.mainPschoolBoardPostsosts.find(
+          (v) => v.id === action.data.PostId
+        ).content = action.data.content;
+        break;
+      case UPDATE_POST_COMMENT_FAILURE:
+        draft.updatePostCommentLoading = false;
+        draft.updatePostCommentError = action.error;
+        break;
+      case REMOVE_POST_COMMENT_REQUEST:
+        draft.removePostCommentLoading = true;
+        draft.removePostCommentDone = false;
+        draft.removePostCommentError = null;
+        break;
+      case REMOVE_POST_COMMENT_SUCCESS:
+        draft.removePostCommentLoading = false;
+        draft.removePostCommentDone = true;
+        draft.mainPosts = draft.schoolBoardPosts.filter(
+          (v) => v.id !== action.data.PostId
+        );
+        break;
+      case REMOVE_POST_COMMENT_FAILURE:
+        draft.removePostCommentLoading = false;
+        draft.removePostCommentError = action.error;
         break;
     }
   });
