@@ -33,6 +33,7 @@ import SchoolBoard from "./pages/Board/SchoolBoard";
 import SchoolBoardList from "./pages/Board/SchoolBoardList";
 import SchoolBoardDetail from "./pages/Board/SchoolBoardDetail";
 import SchoolBoardPost from "./pages/Board/SchoolBoardPost";
+import moment from "moment";
 
 function App() {
   const dispatch = useDispatch();
@@ -55,16 +56,18 @@ function App() {
   };
 
   const setupTokenRefresh = (expire) => {
-    const expireDate = new Date(expire);
-    if (expireDate < new Date()) {
+    const expireTime = moment(expire);
+    const nowTime = moment();
+    //    console.log(moment(expireTime).diff(nowTime.format()) > 0);
+    if (moment(expireTime).diff(nowTime.format()) < 0) {
       localStorage.removeItem("ACCESSTOKEN");
       localStorage.removeItem("REFRESHTOKEN");
       localStorage.removeItem("EXPIRES");
       navigate("/");
       return;
     }
-
-    const refreshInterval = expireDate.setSeconds(expireDate.getSeconds() - 10);
+    const refreshInterval = expireTime.diff(nowTime);
+    //    console.log(refreshInterval);
     setInterval(reissueToken, refreshInterval);
   };
 
@@ -73,7 +76,9 @@ function App() {
       axios.defaults.headers.common["ACCESS_TOKEN"] = access;
       loadUser();
     }
-    setupTokenRefresh(expire);
+    if (expire) {
+      setupTokenRefresh(expire);
+    }
   }, [access, expire]);
 
   return (
