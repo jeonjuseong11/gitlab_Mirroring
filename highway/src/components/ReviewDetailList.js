@@ -44,10 +44,8 @@ const DetailReviewContentWrapper = styled.div`
 `;
 const ReviewDetailList = () => {
   const { schoolId } = useParams();
-  const { reviews } = useSelector(
-    (state) => state.school.schools[schoolId - 1]
-  );
-  // console.log(reviews);
+  const { reviews } = useSelector((state) => state.school.schools[schoolId - 1]);
+  console.log(reviews);
   return (
     <>
       <List
@@ -71,21 +69,17 @@ const ReviewDetailList = () => {
                     </Avatar>
                     <h3>{item.author}</h3>
                     <span>
-                      <StarFilled
-                        style={{ color: "#FFDC82", marginLeft: "-5rem" }}
-                      />
-                      {(item.rate.trafficRate +
-                        item.rate.facilityRate +
-                        item.rate.cafeteriaRate +
-                        item.rate.educationRate +
-                        item.rate.employmentRate) /
+                      <StarFilled style={{ color: "#FFDC82", marginLeft: "-5rem" }} />
+                      {(item.trafficRate +
+                        item.facilityRate +
+                        item.cafeteriaRate +
+                        item.educationRate +
+                        item.employmentRate) /
                         5}
                     </span>
                   </DetailReviewAvatarWrapper>
                   <DetailReviewUserTagsWrapper>
-                    {item.tags.map((v, idx) => {
-                      return <TagsItem key={idx}>{v}</TagsItem>;
-                    })}
+                    <TagsItem>{item.tags}</TagsItem>
                   </DetailReviewUserTagsWrapper>
                 </>
               }
@@ -96,7 +90,7 @@ const ReviewDetailList = () => {
                     <Rate
                       disabled
                       allowHalf
-                      defaultValue={item.rate.trafficRate}
+                      defaultValue={item.trafficRate}
                       style={{
                         alignItems: "center",
                         fontSize: "0.7rem",
@@ -106,7 +100,7 @@ const ReviewDetailList = () => {
                     <Rate
                       disabled
                       allowHalf
-                      defaultValue={item.rate.facilityRate}
+                      defaultValue={item.facilityRate}
                       style={{
                         alignItems: "center",
                         fontSize: "0.7rem",
@@ -116,7 +110,7 @@ const ReviewDetailList = () => {
                     <Rate
                       disabled
                       allowHalf
-                      defaultValue={item.rate.cafeteriaRate}
+                      defaultValue={item.cafeteriaRate}
                       style={{
                         alignItems: "center",
                         fontSize: "0.7rem",
@@ -126,7 +120,7 @@ const ReviewDetailList = () => {
                     <Rate
                       disabled
                       allowHalf
-                      defaultValue={item.rate.educationRate}
+                      defaultValue={item.educationRate}
                       style={{
                         alignItems: "center",
                         fontSize: "0.7rem",
@@ -136,16 +130,14 @@ const ReviewDetailList = () => {
                     <Rate
                       disabled
                       allowHalf
-                      defaultValue={item.rate.employmentRate}
+                      defaultValue={item.employmentRate}
                       style={{
                         alignItems: "center",
                         fontSize: "0.7rem",
                       }}
                     />
                   </DetailReviewsWrapper>
-                  <DetailReviewContentWrapper>
-                    {item.content}
-                  </DetailReviewContentWrapper>
+                  <DetailReviewContentWrapper>{item.content}</DetailReviewContentWrapper>
                 </>
               }
             />

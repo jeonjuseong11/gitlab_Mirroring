@@ -2,10 +2,7 @@ import { Button, Col, Form, Input, Row } from "antd";
 import React, { useCallback, useEffect } from "react";
 import BoardMenu from "../../components/Board/BoardMenu";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  ADD_COMMENT_REQUEST,
-  LOAD_POST_COMMENTS_REQUEST,
-} from "../../constants/actionTypes";
+import { ADD_COMMENT_REQUEST, LOAD_POST_COMMENTS_REQUEST } from "../../constants/actionTypes";
 import moment from "moment";
 import { useParams } from "react-router-dom";
 
