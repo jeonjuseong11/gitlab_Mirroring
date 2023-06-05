@@ -38,6 +38,12 @@ import {
   LOAD_POST_COMMENTS_FAILURE,
   LOAD_POST_COMMENTS_REQUEST,
   LOAD_POST_COMMENTS_SUCCESS,
+  UPDATE_POST_COMMENT_REQUEST,
+  UPDATE_POST_COMMENT_SUCCESS,
+  UPDATE_POST_COMMENT_FAILURE,
+  REMOVE_POST_COMMENT_REQUEST,
+  REMOVE_POST_COMMENT_SUCCESS,
+  REMOVE_POST_COMMENT_FAILURE,
 } from "../constants/actionTypes";
 import { ADD_POST_TO_ME, REMOVE_POST_OF_ME } from "../constants/actionTypes";
 
@@ -305,6 +311,48 @@ function* loadPostComments(action) {
   }
 }
 
+function removePostCommentAPI(data) {
+  // 게시물 댓글 삭제
+  return axios.delete(`/comment?id=${data.id}&content=${data.contnet}`, data);
+}
+
+function* removePostComment(action) {
+  try {
+    const result = yield call(removePostAPI, action.data);
+    yield put({
+      type: REMOVE_POST_COMMENT_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: REMOVE_POST_COMMENT_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+function updatePostCommentAPI(data) {
+  // 게시물 댓글 수정
+  return axios.patch(`/comment?id=${data.id}&content=${data.content}`, data);
+}
+
+function* updatePostComment(action) {
+  try {
+    const result = yield call(updatePostCommentAPI, action.data);
+    yield put({
+      type: UPDATE_POST_COMMENT_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: UPDATE_POST_COMMENT_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
 function* watchUploadImages() {
   yield takeLatest(UPLOAD_IMAGES_REQUEST, uploadImages);
 }
@@ -353,6 +401,14 @@ function* watchLoadPostComments() {
   yield takeLatest(LOAD_POST_COMMENTS_REQUEST, loadPostComments);
 }
 
+function* watchUpdatePostComment() {
+  yield takeLatest(UPDATE_POST_COMMENT_REQUEST, updatePostComment);
+}
+
+function* watchRemovePostComment() {
+  yield takeLatest(REMOVE_POST_COMMENT_REQUEST, removePostComment);
+}
+
 export default function* postSaga() {
   yield all([
     fork(watchUploadImages),
@@ -367,5 +423,7 @@ export default function* postSaga() {
     fork(watchUpdatePost),
     fork(watchAddComment),
     fork(watchLoadPostComments),
+    fork(watchUpdatePostComment),
+    fork(watchRemovePostComment),
   ]);
 }
