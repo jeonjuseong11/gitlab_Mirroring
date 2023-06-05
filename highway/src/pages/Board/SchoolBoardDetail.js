@@ -122,16 +122,21 @@ const SchoolBoardDetail = () => {
       },
     });
   };
-  const handleSubmit = (values) => {
+  const onFinish = (values) => {
+    console.log(values);
     if (!values) {
       alert("빈칸이 있습니다.");
       return;
     }
     dispatch({
       type: ADD_COMMENT_REQUEST,
-      data: values,
+      data: {
+        content: values.content,
+        boardId: postId,
+      },
     });
   };
+
   useEffect(() => {
     loadPostComments();
   }, []);
@@ -202,25 +207,30 @@ const SchoolBoardDetail = () => {
                   marginLeft: "-5%",
                 }}
               >
-                <Form onFinish={handleSubmit}>
+                <Form onFinish={onFinish}>
                   <li style={{ float: "left", width: "80%" }}>
-                    <Input
-                      rows={3}
-                      placeholder="댓글을 적어주세요."
-                      style={{ width: "100%", height: "80px" }}
-                    />
+                    <Form.Item name="content">
+                      <Input
+                        rows={3}
+                        placeholder="댓글을 적어주세요."
+                        style={{ width: "100%", height: "80px" }}
+                      />
+                    </Form.Item>
                   </li>
                   <li style={{ width: "100%" }}>
-                    <Button
-                      htmlType="submit"
-                      style={{
-                        width: "18%",
-                        marginLeft: "2%",
-                        height: "80px",
-                      }}
-                    >
-                      등록
-                    </Button>
+                    <Form.Item>
+                      <Button
+                        type="primary"
+                        htmlType="submit"
+                        style={{
+                          width: "96%",
+                          marginLeft: "2%",
+                          height: "80px",
+                        }}
+                      >
+                        등록
+                      </Button>
+                    </Form.Item>
                   </li>
                 </Form>
               </ul>
