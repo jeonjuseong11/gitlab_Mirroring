@@ -41,6 +41,7 @@ export const initialState = {
   idValid: false,
   refreshToken: null, //jwt 토큰
   accessToken: null,
+  expire: null,
 };
 
 const reducer = (state = initialState, action) =>
@@ -133,6 +134,7 @@ const reducer = (state = initialState, action) =>
       case REFRESH_TOKEN_SUCCESS:
         draft.accessToken = action.data.access_TOKEN;
         draft.refreshToken = action.data.refresh_TOKEN;
+        draft.expire = action.data.access_TOKEN_EXPIRATION;
         draft.refreshTokenLoading = false;
         draft.refreshTokenDone = true;
         break;
