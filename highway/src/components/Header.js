@@ -1,11 +1,11 @@
-import { Avatar, Button } from "antd";
+import { Avatar, Button, Image } from "antd";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { LOGOUT_REQUEST } from "../constants/actionTypes";
 import { NoDecoLink } from "../styles/PageStyle";
-
+const imgUrl = "/assets/TitleIcon.png";
 //사이트 로고 부분
 const Title = styled(Link)`
   text-decoration: none;
@@ -45,7 +45,9 @@ const Header = () => {
   }, [me]);
   return (
     <HeaderWrapper>
-      <Title to="/">HIGHWAY</Title>
+      <Title to="/">
+        <img src={imgUrl} alt="Logo" style={{ width: "10rem" }} />
+      </Title>
       <ProfileWrapper>
         {me != null ? (
           <>
