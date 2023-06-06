@@ -25,14 +25,10 @@ const OneLineReview = () => {
   const items = me
     ? [
         {
-          key: "edit",
-          label: "수정하기",
+          key: "message",
+          label: "메세지",
         },
-        {
-          key: "delete",
-          label: "삭제하기",
-          danger: true,
-        },
+
         {
           key: "declaration",
           label: "신고하기",
@@ -50,7 +46,7 @@ const OneLineReview = () => {
   return (
     <OneLineReviewWrapper>
       <OneLineReviewTitle>
-        <span>학교를 지나간 사람들</span>
+        <span>접속자</span>
       </OneLineReviewTitle>
       <OneLineReviewContent>
         <List

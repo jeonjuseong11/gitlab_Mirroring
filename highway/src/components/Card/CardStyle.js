@@ -7,6 +7,7 @@ import { Space, Button } from "antd";
 export const ListWrapper = styled.div`
   margin: 0 auto;
   width: 60%;
+  padding-bottom: 3rem;
 `;
 //Card 리스트 안에 공백을 처리하기위해 Card 리스트 안에 div
 export const CardItem = styled.div`
