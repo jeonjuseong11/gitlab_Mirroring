@@ -29,7 +29,6 @@ export const ReviewDetailWrapper = styled.div`
 export const SchoolDetailWrapper = styled.div`
   width: 100%;
   display: flex;
-  align-items: center;
   flex-direction: column;
   justify-content: center;
   height: auto;
@@ -43,10 +42,8 @@ export const SchoolImg = styled.div`
   justify-content: center;
 `;
 export const SchoolInfo = styled.div`
-  width: 60%;
   text-align: left;
   padding-bottom: 1rem;
-  margin-left: 2rem;
   margin-top: 2rem;
 `;
 export const SchoolLogo = styled.div`

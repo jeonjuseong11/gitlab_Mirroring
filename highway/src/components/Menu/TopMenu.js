@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import Header from "../Header";
-import { Menu } from "antd";
+import { Col, Menu, Row } from "antd";
 import { Wrapper } from "../../styles/PageStyle";
 import { MenuLists } from "./MenuList";
 import { MenuWrapper } from "./MenuList";
@@ -13,13 +13,21 @@ const TopMenu = () => {
   }, [location]);
   return (
     <div>
-      <Wrapper>
-        <Header />
-      </Wrapper>
+      <Row justify="center" gutter={[24, 24]}>
+        <Col xs={24} md={14}>
+          <Header />
+        </Col>
+      </Row>
       <MenuWrapper>
-        <Wrapper>
-          <Menu mode="horizontal" items={MenuLists} selectedKeys={location.pathname} />
-        </Wrapper>
+        <Row justify="center" gutter={[24, 24]}>
+          <Col xs={24} md={14}>
+            <Menu
+              mode="horizontal"
+              items={MenuLists}
+              selectedKeys={location.pathname}
+            />
+          </Col>
+        </Row>
       </MenuWrapper>
       <main>
         <Outlet />
