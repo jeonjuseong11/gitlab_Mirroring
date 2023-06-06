@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import newsList from "../../utils/NewsDummyData";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button, List, Row, Col, Image } from "antd";
 import { RightCircleFilled } from "@ant-design/icons";
 
 const PromotionHomeItem = ({ random, title }) => {
-  const [count, setCount] = useState(6);
-  const location = useLocation();
+  const [count, setCount] = useState(4);
   return (
     <>
       <Row gutter={[16, 16]} justify="center">
@@ -25,7 +24,7 @@ const PromotionHomeItem = ({ random, title }) => {
           </li>
           <li style={{ float: "left" }}>
             <div>
-              <Link to={`news/${random}`}>
+              <Link to={`/promotion/news/${random}`}>
                 <Image
                   width={100 * 4}
                   height={100 * 3}
@@ -38,18 +37,18 @@ const PromotionHomeItem = ({ random, title }) => {
               </Link>
             </div>
           </li>
-          <li style={{ width: "100%", marginLeft: "-15%" }}>
+          <li style={{ width: "100%", marginLeft: "-15%", textAlign: "left" }}>
             <List
               itemLayout="horizontal"
               dataSource={newsList}
               renderItem={(item) => {
                 if (item.newsId < count) {
                   return (
-                    <List.Item>
+                    <List.Item style={{ marginLeft: "67.5%" }}>
                       <List.Item.Meta
                         title={
                           <Link to={`/promotion/news/${item.newsId}`}>
-                            {item.newsTitle}
+                            <p>{item.newsTitle}</p>
                           </Link>
                         }
                         style={{ marginLeft: "15%" }}

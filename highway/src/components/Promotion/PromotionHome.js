@@ -27,10 +27,11 @@ const PromotionHome = () => {
         </PromotionHomeItemLi>
         <li
           style={{
-            width: "20%",
-            height: "300px",
+            width: "25%",
+            height: "500px",
             backgroundColor: "#d2d2d2",
-            marginLeft: "76.5%",
+            marginLeft: "71%",
+            borderRadius: "5%",
           }}
         >
           우측사이드
