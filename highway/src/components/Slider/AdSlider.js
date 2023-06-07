@@ -34,36 +34,11 @@ function AdSlider() {
   return (
     <SliderWrapper>
       <Slider {...settings}>
-        <div>
-          <img
-            style={{ width: "100%", height: "100%", borderRadius: "5px" }}
-            src="https://picsum.photos/1200/320"
-          />
-        </div>
-        <div>
-          <img
-            style={{ width: "100%", height: "100%", borderRadius: "5px" }}
-            src="https://picsum.photos/120/320"
-          />
-        </div>
-        <div>
-          <img
-            style={{ width: "100%", height: "100%", borderRadius: "5px" }}
-            src="https://picsum.photos/100/320"
-          />
-        </div>
-        <div>
-          <img
-            style={{ width: "100%", height: "100%", borderRadius: "5px" }}
-            src="https://picsum.photos/101/320"
-          />
-        </div>
-        <div>
-          <img
-            style={{ width: "100%", height: "100%", borderRadius: "5px" }}
-            src="https://picsum.photos/111/320"
-          />
-        </div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
       </Slider>
     </SliderWrapper>
   );
