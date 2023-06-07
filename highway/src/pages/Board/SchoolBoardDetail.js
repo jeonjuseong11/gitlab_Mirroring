@@ -1,11 +1,6 @@
-import {
-  CommentOutlined,
-  EyeOutlined,
-  FieldTimeOutlined,
-  LikeOutlined,
-} from "@ant-design/icons";
-import { Button, Col, Descriptions, Input, List, Row, Form } from "antd";
-import React, { useCallback, useEffect } from "react";
+import { CommentOutlined, FieldTimeOutlined } from "@ant-design/icons";
+import { Button, Descriptions, Input, List, Row, Form } from "antd";
+import React, { useEffect } from "react";
 import BoardMenu from "../../components/Board/BoardMenu";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -55,9 +50,9 @@ const dummyCommentData = [
     id: 1,
     content: "댓글1",
     createData: "1시간전",
-    userId: "김뿡뿡",
+    userId: "admin",
     boardId: 1,
-    parentId: "1시간전",
+    parentId: 0,
   },
   {
     id: 2,
@@ -65,7 +60,7 @@ const dummyCommentData = [
     createData: "2시간전",
     userId: "김빵빵",
     boardId: 1,
-    parentId: "2시간전",
+    parentId: 0,
   },
   {
     id: 3,
@@ -73,34 +68,39 @@ const dummyCommentData = [
     createData: "3시간전",
     userId: "김뽕뽕",
     boardId: 1,
-    parentId: "3시간전",
+    parentId: 0,
   },
   {
-    id: 1,
+    id: 4,
     content: "댓글4",
     createData: "4시간전",
     userId: "김뻥뻥",
     boardId: 1,
-    parentId: "4시간전",
+    parentId: 0,
   },
-];
-
-const dummyReplyData = [
   {
-    id: 1,
-    content: "대댓글1",
+    id: 5,
+    content: "대댓글1-1",
     createData: "1시간전",
     userId: "김뿡뿡",
     boardId: 1,
-    parentId: "1시간전",
+    parentId: 1,
   },
   {
-    id: 2,
+    id: 6,
+    content: "대댓글1-2",
+    createData: "1시간전",
+    userId: "admin",
+    boardId: 1,
+    parentId: 1,
+  },
+  {
+    id: 7,
     content: "대댓글2",
     createData: "2시간전",
     userId: "김뿡뿡",
-    boardId: 2,
-    parentId: "1시간전",
+    boardId: 1,
+    parentId: 2,
   },
 ];
 
@@ -109,7 +109,13 @@ const SchoolBoardDetail = () => {
   const { me } = useSelector((state) => state.user);
   const { schoolBoardPostComments } = useSelector((state) => state.post);
   const { postId } = useParams();
-  console.log(schoolBoardPostComments);
+  const userCheck = (item) => {
+    if (me.userId === item.userId) {
+      return true;
+    } else {
+      return false;
+    }
+  };
   const loadPostComments = () => {
     console.log("loadPostCommnets");
     dispatch({
@@ -229,9 +235,7 @@ const SchoolBoardDetail = () => {
                 }}
               >
                 <Form onFinish={onFinish}>
-                  <li
-                    style={{ float: "left", width: "80%", marginLeft: "0.5%" }}
-                  >
+                  <li style={{ float: "left", width: "80%" }}>
                     <Form.Item name="content">
                       <Input
                         rows={3}
@@ -261,65 +265,166 @@ const SchoolBoardDetail = () => {
                 size="large"
                 bordered
                 dataSource={dummyCommentData}
-                renderItem={(item) => (
-                  <List.Item>
-                    <ul
-                      style={{
-                        listStyle: "none",
-                        textAlign: "left",
-                        marginLeft: "-5%",
-                      }}
-                    >
-                      <li style={{ color: "blue" }}>{item.userId}</li>
-                      <li style={{ marginTop: "5%" }}>
-                        <h4>{item.content}</h4>
-                      </li>
-                      <li style={{ marginTop: "5%" }}>
-                        <FieldTimeOutlined />
-                        {item.createData}
-                      </li>
-                      {me ? (
-                        <li style={{ marginTop: "5%" }}>
-                          <button
-                            style={{ background: "none", border: "none" }}
-                            onClick={() => {
-                              alert("답글");
+                renderItem={(item) => {
+                  const userChecked = userCheck(item);
+                  return (
+                    <List.Item style={{ padding: "0px" }}>
+                      <ul
+                        style={{
+                          listStyle: "none",
+                          textAlign: "left",
+                          marginLeft: "-5%",
+                          width: "100%",
+                        }}
+                      >
+                        <li style={{ color: "blue" }}>
+                          <li
+                            style={{
+                              width: "78%",
+                              float: "left",
+                              marginLeft: "2%",
                             }}
                           >
-                            답글
-                          </button>
-                          <button
-                            style={{ background: "none", border: "none" }}
-                            onClick={() => {
-                              alert("수정");
+                            {item.userId}
+                          </li>
+                          <li
+                            style={{
+                              width: "30%",
+                              textAlign: "right",
+                              marginLeft: "68%",
+                              marginTop: "2%",
+                              marginRight: "2%",
                             }}
                           >
-                            수정
-                          </button>
-                          <button
-                            style={{ background: "none", border: "none" }}
-                            onClick={() => {
-                              alert("삭제");
-                            }}
-                          >
-                            삭제
-                          </button>
+                            {userChecked ? (
+                              <div style={{ marginLeft: "20%" }}>
+                                <button
+                                  style={{ background: "none", border: "none" }}
+                                  onClick={() => {
+                                    alert("답글");
+                                  }}
+                                >
+                                  답글
+                                </button>
+                                <button
+                                  style={{ background: "none", border: "none" }}
+                                  onClick={() => {
+                                    alert("수정");
+                                  }}
+                                >
+                                  수정
+                                </button>
+                                <button
+                                  style={{ background: "none", border: "none" }}
+                                  onClick={() => {
+                                    alert("삭제");
+                                  }}
+                                >
+                                  삭제
+                                </button>
+                              </div>
+                            ) : (
+                              <>
+                                <button
+                                  style={{
+                                    background: "none",
+                                    border: "none",
+                                    marginTop: "5%",
+                                  }}
+                                  onClick={() => {
+                                    alert("답글");
+                                  }}
+                                >
+                                  답글
+                                </button>
+                              </>
+                            )}
+                          </li>
                         </li>
-                      ) : (
-                        <>
-                          <button
-                            style={{ background: "none", border: "none" }}
-                            onClick={() => {
-                              alert("답글");
+                        <li
+                          style={{
+                            marginTop: "-2%",
+                            marginBottom: "-2%",
+                            marginLeft: "2%",
+                          }}
+                        >
+                          <h4>{item.content}</h4>
+                        </li>
+                        <li
+                          style={{
+                            marginTop: "2%",
+                            marginLeft: "2%",
+                            marginBottom: "2%",
+                          }}
+                        >
+                          <FieldTimeOutlined />
+                          {item.createData}
+                        </li>
+                        <li
+                          style={{
+                            width: "100.25%",
+                            marginLeft: "-0.25%",
+                            paddingBottom: "-16px",
+                          }}
+                        >
+                          <List
+                            style={{
+                              background: "#dfdfdf",
                             }}
-                          >
-                            대댓글달기
-                          </button>
-                        </>
-                      )}
-                    </ul>
-                  </List.Item>
-                )}
+                            size="large"
+                            bordered={false}
+                            dataSource={dummyCommentData}
+                            renderItem={(v) => {
+                              if (v.parentId === item.id) {
+                                return (
+                                  <List.Item style={{ padding: "0px" }}>
+                                    <ul
+                                      style={{
+                                        listStyle: "none",
+                                        marginLeft: "-5%",
+                                      }}
+                                    >
+                                      <li
+                                        style={{
+                                          color: "blue",
+                                          marginTop: "10%",
+                                          marginLeft: "25%",
+                                          width: "100%",
+                                        }}
+                                      >
+                                        {v.userId}
+                                      </li>
+                                      <li
+                                        style={{
+                                          marginTop: "-25%",
+                                          marginBottom: "-25%",
+                                          marginLeft: "25%",
+                                          width: "100%",
+                                        }}
+                                      >
+                                        <h4>{v.content}</h4>
+                                      </li>
+                                      <li
+                                        style={{
+                                          marginBottom: "25%",
+                                          marginLeft: "25%",
+                                          width: "100%",
+                                        }}
+                                      >
+                                        <FieldTimeOutlined />
+                                        {v.createData}
+                                      </li>
+                                    </ul>
+                                  </List.Item>
+                                );
+                              }
+                            }}
+                          />
+                        </li>
+                      </ul>
+                    </List.Item>
+                  );
+                }}
               />
             </div>
             <Button>더 보기</Button>
