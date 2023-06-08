@@ -1,27 +1,17 @@
 export const items = [
-  {
-    label: "HIGHWAY 이용약관",
-    key: "0",
-  },
-  {
-    type: "divider",
-  },
-  {
-    label: "이용약관 동의 내용",
-    key: "2",
-  },
-  {
-    type: "divider",
-  },
-  {
-    label: "개인정보 수집 및 이용 동의",
-    key: "3",
-  },
-  {
-    type: "divider",
-  },
-  {
-    label: "개인정보 수집 및 이용 내용",
-    key: "5",
-  },
-];
+    {
+      key: 'service',
+      href: '#service',
+      title: '이용약관',
+    },
+    {
+      key: 'private',
+      href: '#private',
+      title: '개인정보',
+    },
+    {
+      key: 'youngprivate',
+      href: '#youngprivate',
+      title: '청소년보호정책',
+    },
+  ]

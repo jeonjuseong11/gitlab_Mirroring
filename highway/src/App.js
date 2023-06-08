@@ -34,6 +34,8 @@ import SchoolBoardList from "./pages/Board/SchoolBoardList";
 import SchoolBoardDetail from "./pages/Board/SchoolBoardDetail";
 import SchoolBoardPost from "./pages/Board/SchoolBoardPost";
 import moment from "moment";
+import PromotionHome from "./components/Promotion/PromotionHome";
+import PromotionVideoDetail from "./components/Promotion/PromotionVideoDetail";
 
 function App() {
   const dispatch = useDispatch();
@@ -117,11 +119,8 @@ function App() {
             <Route exact path="/" element={<Home />} />
             <Route exact path="/search" element={<Search />} />
             <Route exact path="/promotion" element={<Promotion />}>
-              <Route
-                exact
-                path="/promotion/news"
-                element={<PromotionNews />}
-              ></Route>
+              <Route exact path="/promotion" element={<PromotionHome />} />
+              <Route exact path="/promotion/news" element={<PromotionNews />} />
               <Route
                 exact
                 path="/promotion/videos"
@@ -132,6 +131,11 @@ function App() {
               exact
               path="/promotion/news/:newsId"
               element={<PromotionNewsDetail />}
+            />
+            <Route
+              exact
+              path="/promotion/videos/:videoId"
+              element={<PromotionVideoDetail />}
             />
             <Route exact path="/schoolranking" element={<SchoolRanking />} />
             <Route
