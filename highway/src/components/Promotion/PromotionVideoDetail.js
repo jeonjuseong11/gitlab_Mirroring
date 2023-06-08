@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
-import newsList from "../../utils/NewsDummyData";
-import { Button, Col, Row } from "antd";
+import videoList from "../../utils/VideoDummyData";
+import { Button, Col, Image, Row } from "antd";
 import { FieldTimeOutlined, ShareAltOutlined } from "@ant-design/icons";
-import { CopyToClipboard } from "react-copy-to-clipboard";
+import CopyToClipboard from "react-copy-to-clipboard";
 
-const PromotionNewsDetail = () => {
+const PromotionVideoDetail = () => {
   const [minDisable, setMinDisable] = useState(false);
   const [maxDisable, setMaxDisable] = useState(false);
 
   const onChangeMaxDisable = () => {};
   // news테이블이 없기에 임시방편으로 세워둠
-  const { newsId } = useParams();
-  const id = parseInt(newsId);
+  const { videoId } = useParams();
+  const id = parseInt(videoId);
   const location = useLocation();
   const nowLocation = `http://localhost:3000${location.pathname}`;
 
@@ -22,9 +22,9 @@ const PromotionNewsDetail = () => {
     } else if (id >= 1) {
       setMinDisable(false);
     }
-    if (id === newsList.length - 1) {
+    if (id === videoList.length - 1) {
       setMaxDisable(true);
-    } else if (id <= newsList.length - 1) {
+    } else if (id <= videoList.length - 1) {
       setMaxDisable(false);
     }
   }, [id]);
@@ -34,7 +34,7 @@ const PromotionNewsDetail = () => {
         <Col style={{ width: "65%" }}>
           <ul style={{ listStyle: "none", textAlign: "left" }}>
             <li>
-              <h2>{newsList[id].newsTitle}</h2>
+              <h2>{videoList[id].videoTitle}</h2>
             </li>
             <li>
               <p>부제목</p>
@@ -47,7 +47,14 @@ const PromotionNewsDetail = () => {
             </li>
           </ul>
           <hr style={{ width: "100%" }} />
-          들어갈 뉴스 내용
+          <iframe
+            width="720 "
+            height="480"
+            src={videoList[id].src}
+            frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
         </Col>
         <Col style={{ width: "35%" }}>
           <div
@@ -94,4 +101,4 @@ const PromotionNewsDetail = () => {
   );
 };
 
-export default PromotionNewsDetail;
+export default PromotionVideoDetail;
