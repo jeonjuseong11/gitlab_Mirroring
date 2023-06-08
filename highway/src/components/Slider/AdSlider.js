@@ -3,10 +3,6 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./AdSlider.css";
-import styled from "styled-components";
-const SliderWrapper = styled.div`
-  margin: 2px auto;
-`;
 
 function AdSlider() {
   const settings = {
@@ -32,7 +28,7 @@ function AdSlider() {
   };
 
   return (
-    <SliderWrapper>
+    <div>
       <Slider {...settings}>
         <div></div>
         <div></div>
@@ -40,7 +36,7 @@ function AdSlider() {
         <div></div>
         <div></div>
       </Slider>
-    </SliderWrapper>
+    </div>
   );
 }
 
