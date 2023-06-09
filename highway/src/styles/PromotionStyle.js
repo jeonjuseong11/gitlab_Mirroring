@@ -2,7 +2,7 @@ import { Image, Form } from "antd";
 import styled from "styled-components";
 
 export const PromotionWrapper = styled(Form)`
-  width: 50%;
+  width: 61.5%;
   margin: 1% Auto;
 `;
 
