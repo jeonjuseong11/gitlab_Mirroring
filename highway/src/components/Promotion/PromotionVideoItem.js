@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import videoList from "../../utils/VideoDummyData";
 import { Link } from "react-router-dom";
-import { Image, List, Button } from "antd";
-import { DownOutlined } from "@ant-design/icons";
+import { Image, List } from "antd";
 
 const PromotionVideoItem = () => {
   const [count, setCount] = useState(3);
   const [disable, setDisable] = useState(false);
+
   const onMore = () => {
     setCount(count + 3);
   };
@@ -26,7 +26,7 @@ const PromotionVideoItem = () => {
           <Image preview={false} width={277} height={122} src={item.src} />
           <List.Item.Meta
             title={
-              <Link to={`/promotion/news/${item.videoId}`}>
+              <Link to={`/promotion/videos/${item.videoId}`}>
                 {item.videoTitle}
               </Link>
             }
