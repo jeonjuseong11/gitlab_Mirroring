@@ -1,42 +1,61 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
-import { NewsDummyData as items } from "../../utils/NewsDummyData";
+import { Outlet, useLocation } from "react-router-dom";
+import { NewsDummyData as newsList } from "../../utils/NewsDummyData";
 import PromotionHomeItem from "./PromotionHomeItem";
 import { PromotionHomeItemLi } from "../../styles/PromotionStyle";
+import { Col, Menu } from "antd";
+import { VideoDummyData as videoList } from "../../utils/VideoDummyData";
+import RecommendList from "./RecommendList";
+import { items } from "../../utils/PromotionList";
 
 const PromotionHome = () => {
-  const random = Math.floor(Math.random() * items.length);
+  const random = Math.floor(Math.random() * newsList.length);
   const location = useLocation();
   return (
     <>
-      <ul style={{ listStyle: "none", width: "100%" }}>
-        <PromotionHomeItemLi>
-          <PromotionHomeItem
-            random={random}
-            title={"이직을 준비하는 당신에게"}
-          />
-        </PromotionHomeItemLi>
-        <PromotionHomeItemLi>
-          <PromotionHomeItem
-            random={random}
-            title={"세상의 모든 회사 이야기"}
-          />
-        </PromotionHomeItemLi>
-        <PromotionHomeItemLi>
-          <PromotionHomeItem random={random} title={"직장 생활 치트키"} />
-        </PromotionHomeItemLi>
-        <li
-          style={{
-            width: "25%",
-            height: "500px",
-            backgroundColor: "#d2d2d2",
-            marginLeft: "71%",
-            borderRadius: "5%",
-          }}
-        >
-          우측사이드
-        </li>
-      </ul>
+      <RecommendList type={"news"} infoData={newsList} />
+      <Menu mode="horizontal" items={items} selectedKeys={location.pathname} />
+      <Outlet />
+      <Col xs={24} md={24}>
+        <ul style={{ listStyle: "none", width: "100%", marginTop: "3%" }}>
+          <PromotionHomeItemLi>
+            <PromotionHomeItem
+              random={random}
+              title={"이직을 준비하는 당신에게"}
+              type={"news"}
+              infoData={newsList}
+            />
+          </PromotionHomeItemLi>
+          <PromotionHomeItemLi>
+            <PromotionHomeItem
+              random={random}
+              title={"세상의 모든 회사 이야기"}
+              type={"news"}
+              infoData={newsList}
+            />
+          </PromotionHomeItemLi>
+          <PromotionHomeItemLi>
+            <PromotionHomeItem
+              random={random}
+              title={"직장 생활 치트키"}
+              type={"news"}
+              infoData={newsList}
+            />
+          </PromotionHomeItemLi>
+          <li
+            style={{
+              width: "20rem",
+              height: "500px",
+              backgroundColor: "#d2d2d2",
+              marginLeft: "59rem",
+              borderRadius: "5%",
+              marginLeft: "75%",
+            }}
+          >
+            우측사이드
+          </li>
+        </ul>
+      </Col>
     </>
   );
 };
