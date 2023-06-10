@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { LOAD_SCHOOL_LIST_REQUEST } from "../constants/actionTypes";
 
 const Home = () => {
-  const [filterValue, setFilterValue] = useState("");
+  const [filterValue, setFilterValue] = useState([""]);
   const dispatch = useDispatch();
   const loadSchoolInfo = () => {
     dispatch({

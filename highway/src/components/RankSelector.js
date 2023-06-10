@@ -16,7 +16,7 @@ export const RankTopic = [
   {
     icon: <ProfileOutlined />,
     content: "전체보기",
-    value: "",
+    value: [""],
   },
   {
     icon: <ExperimentOutlined />,

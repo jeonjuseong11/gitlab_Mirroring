@@ -9,7 +9,7 @@ const SearchInput = styled(Input)`
   height: 3rem;
   border-radius: 50px;
 `;
-const SearchForm = () => {
+const SearchForm = ({ setFilterValue, filterValue }) => {
   return (
     <>
       <Row justify="center" gutter={[24, 24]} style={{ marginTop: "2rem" }}>
@@ -30,6 +30,9 @@ const SearchForm = () => {
           {RankTopic.map((item) => {
             return (
               <Button
+                onClick={() => {
+                  setFilterValue(item.value);
+                }}
                 key={item.value}
                 shape="circle"
                 style={{
