@@ -38,7 +38,6 @@ const SchoolRanking = () => {
       female: Math.floor(Math.random() * 101), //더미데이터 생성
     }));
     setRankData(rankedData);
-    setSelectedSchool(rankedData[0]);
   }, []);
   const handleSchoolSelect = (school) => {
     setSelectedSchool(school);
@@ -53,7 +52,11 @@ const SchoolRanking = () => {
     }
     return item.tags.some((tag) => filterValue.includes(tag));
   });
-
+  useEffect(() => {
+    if (selectedSchool == null) {
+      setSelectedSchool(filteredData[0]);
+    }
+  }, [filteredData]);
   useEffect(() => {
     setSelectedSchool(filteredData[0]);
   }, [filterValue]);
