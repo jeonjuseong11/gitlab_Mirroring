@@ -1,6 +1,6 @@
 import { CommentOutlined, FieldTimeOutlined } from "@ant-design/icons";
 import { Button, Descriptions, Input, List, Row, Form } from "antd";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import BoardMenu from "../../components/Board/BoardMenu";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -11,6 +11,7 @@ import {
 } from "../../constants/actionTypes";
 import { useParams } from "react-router-dom";
 import BoardProfile from "../../components/Board/BoardProfile";
+import moment from "moment";
 
 const dummyboardData = [
   {
@@ -45,71 +46,22 @@ const dummyboardData = [
   },
 ];
 
-const dummyCommentData = [
-  {
-    id: 1,
-    content: "댓글1",
-    createData: "1시간전",
-    userId: "admin",
-    boardId: 1,
-    parentId: 0,
-  },
-  {
-    id: 2,
-    content: "댓글2",
-    createData: "2시간전",
-    userId: "김빵빵",
-    boardId: 1,
-    parentId: 0,
-  },
-  {
-    id: 3,
-    content: "댓글3",
-    createData: "3시간전",
-    userId: "김뽕뽕",
-    boardId: 1,
-    parentId: 0,
-  },
-  {
-    id: 4,
-    content: "댓글4",
-    createData: "4시간전",
-    userId: "김뻥뻥",
-    boardId: 1,
-    parentId: 0,
-  },
-  {
-    id: 5,
-    content: "대댓글1-1",
-    createData: "1시간전",
-    userId: "김뿡뿡",
-    boardId: 1,
-    parentId: 1,
-  },
-  {
-    id: 6,
-    content: "대댓글1-2",
-    createData: "1시간전",
-    userId: "admin",
-    boardId: 1,
-    parentId: 1,
-  },
-  {
-    id: 7,
-    content: "대댓글2",
-    createData: "2시간전",
-    userId: "김뿡뿡",
-    boardId: 1,
-    parentId: 2,
-  },
-];
-
 const SchoolBoardDetail = () => {
   const dispatch = useDispatch();
+  const access = localStorage.getItem("ACCESSTOKEN");
+  const expire = localStorage.getItem("EXPIRES");
   const { me } = useSelector((state) => state.user);
+  console.log(me);
   const { schoolBoardPostComments } = useSelector((state) => state.post);
+  const schoolBoardPostCommentsData = schoolBoardPostComments.data;
+  console.log(schoolBoardPostComments.data);
+
   const { postId } = useParams();
+  const [parentId, setParentId] = useState(null);
   const userCheck = (item) => {
+    if (me === null) {
+      return false;
+    }
     if (me.userId === item.userId) {
       return true;
     } else {
@@ -125,13 +77,13 @@ const SchoolBoardDetail = () => {
       },
     });
   };
-  const removePostComment = () => {
+  const removePostComment = (item) => {
     console.log("RemovePostCommnet");
     dispatch({
       type: REMOVE_POST_COMMENT_REQUEST,
       data: {
-        id: schoolBoardPostComments[postId].id,
-        content: schoolBoardPostComments[postId].content,
+        id: item.id,
+        content: item.content,
       },
     });
   };
@@ -146,8 +98,8 @@ const SchoolBoardDetail = () => {
     });
   };
   const onFinish = (values) => {
-    console.log(values);
-    if (!values) {
+    console.log(values.content);
+    if (values === undefined) {
       alert("빈칸이 있습니다.");
       return;
     }
@@ -155,9 +107,16 @@ const SchoolBoardDetail = () => {
       type: ADD_COMMENT_REQUEST,
       data: {
         content: values.content,
+        createData: moment(),
+        modifiedDate: moment(),
+        userId: me.userId,
         boardId: postId,
+        parentId: null,
       },
     });
+  };
+  const onReplyComment = () => {
+    setParentId(schoolBoardPostComments.id);
   };
 
   useEffect(() => {
@@ -211,7 +170,7 @@ const SchoolBoardDetail = () => {
                 <CommentOutlined
                   style={{ marginLeft: "2%", marginRight: "1%" }}
                 />
-                {dummyCommentData.length}
+                {schoolBoardPostCommentsData.length}
               </li>
             </ul>
             <hr />
@@ -264,9 +223,9 @@ const SchoolBoardDetail = () => {
               <List
                 size="large"
                 bordered
-                dataSource={dummyCommentData}
+                dataSource={schoolBoardPostCommentsData}
                 renderItem={(item) => {
-                  const userChecked = userCheck(item);
+                  const CommentUserChecked = userCheck(item);
                   return (
                     <List.Item style={{ padding: "0px" }}>
                       <ul
@@ -296,10 +255,13 @@ const SchoolBoardDetail = () => {
                               marginRight: "2%",
                             }}
                           >
-                            {userChecked ? (
+                            {CommentUserChecked ? (
                               <div style={{ marginLeft: "20%" }}>
                                 <button
-                                  style={{ background: "none", border: "none" }}
+                                  style={{
+                                    background: "none",
+                                    border: "none",
+                                  }}
                                   onClick={() => {
                                     alert("답글");
                                   }}
@@ -307,7 +269,10 @@ const SchoolBoardDetail = () => {
                                   답글
                                 </button>
                                 <button
-                                  style={{ background: "none", border: "none" }}
+                                  style={{
+                                    background: "none",
+                                    border: "none",
+                                  }}
                                   onClick={() => {
                                     alert("수정");
                                   }}
@@ -315,9 +280,12 @@ const SchoolBoardDetail = () => {
                                   수정
                                 </button>
                                 <button
-                                  style={{ background: "none", border: "none" }}
+                                  style={{
+                                    background: "none",
+                                    border: "none",
+                                  }}
                                   onClick={() => {
-                                    alert("삭제");
+                                    removePostComment(item);
                                   }}
                                 >
                                   삭제
@@ -363,7 +331,7 @@ const SchoolBoardDetail = () => {
                         <li
                           style={{
                             width: "100.25%",
-                            marginLeft: "-0.25%",
+                            marginLeft: "0.25%",
                             paddingBottom: "-16px",
                           }}
                         >
@@ -373,42 +341,104 @@ const SchoolBoardDetail = () => {
                             }}
                             size="large"
                             bordered={false}
-                            dataSource={dummyCommentData}
+                            dataSource={schoolBoardPostCommentsData}
                             renderItem={(v) => {
+                              const ReplyUserCheck = userCheck(v);
                               if (v.parentId === item.id) {
                                 return (
                                   <List.Item style={{ padding: "0px" }}>
                                     <ul
                                       style={{
                                         listStyle: "none",
-                                        marginLeft: "-5%",
+                                        textAlign: "left",
+                                        width: "100%",
+                                        marginTop: "2%",
                                       }}
                                     >
                                       <li
                                         style={{
+                                          width: "50%",
+                                          float: "left",
+                                          marginLeft: "-3%",
                                           color: "blue",
-                                          marginTop: "10%",
-                                          marginLeft: "25%",
-                                          width: "100%",
                                         }}
                                       >
                                         {v.userId}
                                       </li>
                                       <li
                                         style={{
-                                          marginTop: "-25%",
-                                          marginBottom: "-25%",
-                                          marginLeft: "25%",
+                                          width: "50%",
+                                          textAlign: "right",
+                                          marginLeft: "47%",
+                                        }}
+                                      >
+                                        {ReplyUserCheck ? (
+                                          <div style={{ marginLeft: "20%" }}>
+                                            <button
+                                              style={{
+                                                background: "none",
+                                                border: "none",
+                                              }}
+                                              onClick={() => {
+                                                alert("답글");
+                                              }}
+                                            >
+                                              답글
+                                            </button>
+                                            <button
+                                              style={{
+                                                background: "none",
+                                                border: "none",
+                                              }}
+                                              onClick={() => {
+                                                alert("수정");
+                                              }}
+                                            >
+                                              수정
+                                            </button>
+                                            <button
+                                              style={{
+                                                background: "none",
+                                                border: "none",
+                                              }}
+                                              onClick={() => {
+                                                removePostComment(v);
+                                              }}
+                                            >
+                                              삭제
+                                            </button>
+                                          </div>
+                                        ) : (
+                                          <>
+                                            <button
+                                              style={{
+                                                background: "none",
+                                                border: "none",
+                                              }}
+                                              onClick={() => {
+                                                alert("답글");
+                                              }}
+                                            >
+                                              답글
+                                            </button>
+                                          </>
+                                        )}
+                                      </li>
+                                      <li
+                                        style={{
                                           width: "100%",
+                                          marginTop: "-2%",
+                                          marginLeft: "-3%",
                                         }}
                                       >
                                         <h4>{v.content}</h4>
                                       </li>
                                       <li
                                         style={{
-                                          marginBottom: "25%",
-                                          marginLeft: "25%",
                                           width: "100%",
+                                          marginTop: "-2%",
+                                          marginLeft: "-3%",
+                                          marginBottom: "2%",
                                         }}
                                       >
                                         <FieldTimeOutlined />
@@ -427,7 +457,9 @@ const SchoolBoardDetail = () => {
                 }}
               />
             </div>
-            <Button>더 보기</Button>
+            <li style={{ marginTop: "5%" }}>
+              <Button>더 보기</Button>
+            </li>
           </li>
         </ul>
       </Row>

@@ -46,6 +46,7 @@ import {
   REMOVE_POST_COMMENT_FAILURE,
 } from "../constants/actionTypes";
 import { ADD_POST_TO_ME, REMOVE_POST_OF_ME } from "../constants/actionTypes";
+import { object } from "prop-types";
 
 function uploadImagesAPI(data) {
   //이미지 업로드
@@ -318,7 +319,7 @@ function removePostCommentAPI(data) {
 
 function* removePostComment(action) {
   try {
-    const result = yield call(removePostAPI, action.data);
+    const result = yield call(removePostCommentAPI, action.data);
     yield put({
       type: REMOVE_POST_COMMENT_SUCCESS,
       data: result.data,

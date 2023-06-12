@@ -49,7 +49,7 @@ export const initialState = {
   imagePaths: [], //이미지 파일 관리
   schoolBoardPosts: [], //게시글 리스트
   schoolBoardPost: null, //단일 게시글
-  schoolBoardPostComments: null, // 게시글 댓글
+  schoolBoardPostComments: { data: [] }, // 게시글 댓글
   loadPostsLoading: false, //게시글 리스트
   loadPostsDone: false,
   loadPostsError: null,
@@ -257,7 +257,7 @@ const reducer = (state = initialState, action) =>
         draft.loadPostCommentsError = null;
         break;
       case LOAD_POST_COMMENTS_SUCCESS: {
-        draft.schoolBoardPostsComments = action.data;
+        draft.schoolBoardPostComments = action.data;
         draft.loadPostCommentsLoading = false;
         draft.loadPostCommentsDone = true;
         break;
