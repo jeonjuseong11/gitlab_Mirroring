@@ -206,7 +206,7 @@ const reducer = (state = initialState, action) =>
       case UPDATE_POST_SUCCESS:
         draft.updatePostLoading = false;
         draft.updatePostDone = true;
-        draft.mainPschoolBoardPostsosts.find(
+        draft.schoolBoardPostComments.find(
           (v) => v.id === action.data.PostId
         ).content = action.data.content;
         break;
@@ -236,11 +236,11 @@ const reducer = (state = initialState, action) =>
         draft.addCommentError = null;
         break;
       case ADD_COMMENT_SUCCESS: {
-        const post = draft.schoolBoardPosts.find(
-          // (v) => v.id === action.data.PostId
-          (v) => v.id === action.data.boardId // POSTMAN에 나온 주소대로
-        );
-        post.Comments.unshift(action.data);
+        ///const post = draft.schoolBoardPostComments.find(
+        // (v) => v.id === action.data.PostId
+        //   (v) => v.id === action.data.boardId // POSTMAN에 나온 주소대로
+        // );
+        // post.Comments.unshift(action.data);
         draft.addCommentLoading = false;
         draft.addCommentDone = true;
         break;
@@ -257,6 +257,7 @@ const reducer = (state = initialState, action) =>
         draft.loadPostCommentsError = null;
         break;
       case LOAD_POST_COMMENTS_SUCCESS: {
+        console.log(action.data);
         draft.schoolBoardPostComments = action.data;
         draft.loadPostCommentsLoading = false;
         draft.loadPostCommentsDone = true;
@@ -274,9 +275,9 @@ const reducer = (state = initialState, action) =>
       case UPDATE_POST_COMMENT_SUCCESS:
         draft.updatePostCommentLoading = false;
         draft.updatePostCommentDone = true;
-        draft.mainPschoolBoardPostsosts.find(
-          (v) => v.id === action.data.PostId
-        ).content = action.data.content;
+        // draft.mainPschoolBoardPostsosts.find(
+        //   (v) => v.id === action.data.PostId
+        // ).content = action.data.content;
         break;
       case UPDATE_POST_COMMENT_FAILURE:
         draft.updatePostCommentLoading = false;
