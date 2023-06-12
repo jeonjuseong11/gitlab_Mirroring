@@ -282,6 +282,10 @@ function* addComment(action) {
       type: ADD_COMMENT_SUCCESS,
       data: result.data,
     });
+    yield put({
+      type: LOAD_POST_COMMENTS_REQUEST,
+      data: result.data,
+    });
   } catch (err) {
     console.error(err);
     yield put({
@@ -314,7 +318,7 @@ function* loadPostComments(action) {
 
 function removePostCommentAPI(data) {
   // 게시물 댓글 삭제
-  return axios.delete(`/comment?id=${data.id}&content=${data.contnet}`, data);
+  return axios.delete(`/comment?id=${data.id}`, data);
 }
 
 function* removePostComment(action) {
