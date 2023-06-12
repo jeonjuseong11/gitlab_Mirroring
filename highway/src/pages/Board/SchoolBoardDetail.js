@@ -65,10 +65,6 @@ const SchoolBoardDetail = () => {
     });
   };
   const updatePostComment = (item, values) => {
-    if (values === undefined) {
-      alert("빈칸이 있습니다.");
-      return;
-    }
     dispatch({
       type: UPDATE_POST_COMMENT_REQUEST,
       data: {
@@ -299,8 +295,19 @@ const SchoolBoardDetail = () => {
                           }}
                         >
                           {item.id === commentNum ? (
-                            <Form onFinish={updatePostComment(item)}>
-                              <ul>
+                            <Form
+                              onFinish={(values) => {
+                                console.log(values);
+                                dispatch({
+                                  type: UPDATE_POST_COMMENT_REQUEST,
+                                  data: {
+                                    id: item.id,
+                                    content: values.content,
+                                  },
+                                });
+                              }}
+                            >
+                              <ul style={{ listStyle: "none" }}>
                                 <li
                                   style={{
                                     float: "left",
@@ -453,8 +460,8 @@ const SchoolBoardDetail = () => {
                                         }}
                                       >
                                         {v.id === commentNum ? (
-                                          <Form onFinish={updatePostComment(v)}>
-                                            <ul>
+                                          <Form onFinish={updatePostComment}>
+                                            <ul style={{ listStyle: "none" }}>
                                               <li
                                                 style={{
                                                   float: "left",

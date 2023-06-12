@@ -339,7 +339,7 @@ function* removePostComment(action) {
 
 function updatePostCommentAPI(data) {
   // 게시물 댓글 수정
-  return axios.patch(`/comment?id=${data.id}&content=${data.content}`, data);
+  return axios.put(`/comment?id=${data.id}&content=${data.content}`, data);
 }
 
 function* updatePostComment(action) {
