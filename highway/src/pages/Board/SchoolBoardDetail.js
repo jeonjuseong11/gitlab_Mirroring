@@ -1,4 +1,8 @@
-import { CommentOutlined, FieldTimeOutlined } from "@ant-design/icons";
+import {
+  CommentOutlined,
+  FieldTimeOutlined,
+  LikeOutlined,
+} from "@ant-design/icons";
 import { Button, Descriptions, Input, List, Row, Form } from "antd";
 import React, { useEffect, useState } from "react";
 import BoardMenu from "../../components/Board/BoardMenu";
@@ -23,6 +27,7 @@ const dummyboardData = [
     title: "테스트1",
     userId: "admin",
     school_id: 1,
+    good: 18,
   },
 ];
 
@@ -72,6 +77,7 @@ const SchoolBoardDetail = () => {
         content: values,
       },
     });
+    setCommentNum(null);
   };
   const onFinish = (values) => {
     if (values === undefined) {
@@ -103,32 +109,45 @@ const SchoolBoardDetail = () => {
       <Row gutter={[16, 16]} justify="center">
         <ul
           style={{
-            width: "57.5%",
+            width: "75rem",
             listStyle: "none",
           }}
         >
-          <div style={{ width: "160%", marginLeft: "-1%", marginBottom: "2%" }}>
+          <div
+            style={{
+              width: "125rem",
+              marginLeft: "-0.5rem",
+              marginBottom: "1.5rem",
+              marginTop: "2rem",
+            }}
+          >
             <BoardProfile />
           </div>
           <li
             style={{
-              width: "25%",
-              height: "300px",
-              marginRight: "2%",
-              borderRadius: "10px",
+              width: "20rem",
+              height: "30rem",
+              marginRight: "1rem",
+              borderRadius: "5%",
               backgroundColor: "#f2f2f2",
               float: "left",
             }}
           >
             광고
           </li>
-          <li style={{ width: "70%", marginLeft: "30%", marginTop: "-13%" }}>
+          <li
+            style={{
+              width: "51rem",
+              marginLeft: "24rem",
+              marginTop: "-9.5rem",
+            }}
+          >
             <ul
               style={{
                 listStyle: "none",
                 textAlign: "left",
-                marginLeft: "-4.5%",
-                marginBottom: "2%",
+                marginLeft: "-2.5rem",
+                marginBottom: "1.5rem",
               }}
             >
               <li>
@@ -139,13 +158,17 @@ const SchoolBoardDetail = () => {
               <li>
                 <div>작성자 : {dummyboardData[postId - 1].userId}</div>
               </li>
-              <li style={{ marginTop: "2%", marginRight: "1%" }}>
+              <li style={{ marginTop: "1rem", marginRight: "1rem" }}>
                 <FieldTimeOutlined />
                 {dummyboardData[postId - 1].createData}
                 <CommentOutlined
-                  style={{ marginLeft: "2%", marginRight: "1%" }}
+                  style={{ marginLeft: "1rem", marginRight: "0.5rem" }}
                 />
                 {schoolBoardPostCommentsData.length}
+                <LikeOutlined
+                  style={{ marginLeft: "1rem", marginRight: "0.5rem" }}
+                />
+                {dummyboardData[postId - 1].good}
               </li>
             </ul>
             <hr />
@@ -156,37 +179,41 @@ const SchoolBoardDetail = () => {
             </Descriptions>
             <div
               style={{
-                width: "100%",
+                width: "51rem",
               }}
             >
               <ul
                 style={{
                   listStyle: "none",
-                  width: "100%",
-                  marginTop: "5%",
-                  marginBottom: "3%",
-                  marginLeft: "-5%",
+                  width: "51rem",
+                  marginTop: "2.5rem",
+                  marginBottom: "1.5rem",
+                  marginLeft: "-2.5rem",
                 }}
               >
                 <Form onFinish={onFinish}>
-                  <li style={{ float: "left", width: "80%" }}>
+                  <li style={{ float: "left", width: "42rem" }}>
                     <Form.Item name="content">
                       <Input
                         rows={3}
                         placeholder="댓글을 적어주세요."
-                        style={{ width: "100%", height: "80px" }}
+                        style={{
+                          width: "40rem",
+                          height: "5rem",
+                          marginLeft: "-2rem",
+                        }}
                       />
                     </Form.Item>
                   </li>
-                  <li style={{ width: "100%" }}>
+                  <li style={{ width: "51rem" }}>
                     <Form.Item>
                       <Button
                         type="primary"
                         htmlType="submit"
                         style={{
-                          width: "96%",
-                          marginLeft: "5%",
-                          height: "80px",
+                          width: "9rem",
+                          marginLeft: "-0.5rem",
+                          height: "5rem",
                         }}
                       >
                         등록
@@ -207,31 +234,30 @@ const SchoolBoardDetail = () => {
                         style={{
                           listStyle: "none",
                           textAlign: "left",
-                          marginLeft: "-5%",
-                          width: "100%",
+                          marginLeft: "-2rem",
+                          width: "50rem",
                         }}
                       >
                         <li style={{ color: "blue" }}>
                           <li
                             style={{
-                              width: "78%",
                               float: "left",
-                              marginLeft: "2%",
+                              marginLeft: "1rem",
                             }}
                           >
                             {item.userId}
                           </li>
                           <li
                             style={{
-                              width: "30%",
+                              width: "15rem",
                               textAlign: "right",
-                              marginLeft: "68%",
-                              marginTop: "2%",
-                              marginRight: "2%",
+                              marginLeft: "34rem",
+                              marginTop: "1rem",
+                              marginRight: "1rem",
                             }}
                           >
                             {CommentUserChecked ? (
-                              <div style={{ marginLeft: "20%" }}>
+                              <div style={{ marginLeft: "1rem" }}>
                                 <button
                                   style={{
                                     background: "none",
@@ -273,7 +299,7 @@ const SchoolBoardDetail = () => {
                                   style={{
                                     background: "none",
                                     border: "none",
-                                    marginTop: "5%",
+                                    marginTop: "0.5rem",
                                   }}
                                   onClick={() => {
                                     alert("답글");
@@ -289,9 +315,9 @@ const SchoolBoardDetail = () => {
                           name={item.id}
                           value={item.id}
                           style={{
-                            marginTop: "-2%",
-                            marginBottom: "-2%",
-                            marginLeft: "2%",
+                            marginTop: "-1rem",
+                            marginBottom: "-1rem",
+                            marginLeft: "1rem",
                           }}
                         >
                           {item.id === commentNum ? (
@@ -311,7 +337,9 @@ const SchoolBoardDetail = () => {
                                 <li
                                   style={{
                                     float: "left",
-                                    width: "80%",
+                                    width: "38rem",
+                                    marginTop: "2rem",
+                                    marginLeft: "-2.5rem",
                                   }}
                                 >
                                   <Form.Item name="content">
@@ -319,21 +347,22 @@ const SchoolBoardDetail = () => {
                                       rows={3}
                                       placeholder="댓글을 적어주세요."
                                       style={{
-                                        width: "100%",
-                                        height: "80px",
+                                        width: "37rem",
+                                        height: "5rem",
                                       }}
                                     />
                                   </Form.Item>
                                 </li>
-                                <li style={{ width: "100%" }}>
+                                <li style={{ width: "45rem" }}>
                                   <Form.Item>
                                     <Button
                                       type="primary"
                                       htmlType="submit"
                                       style={{
-                                        width: "96%",
-                                        marginLeft: "5%",
-                                        height: "80px",
+                                        width: "9rem",
+                                        marginLeft: "1rem",
+                                        height: "5rem",
+                                        marginTop: "2rem",
                                       }}
                                     >
                                       수정
