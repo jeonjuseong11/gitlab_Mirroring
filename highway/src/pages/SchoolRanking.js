@@ -38,7 +38,7 @@ const SchoolRanking = () => {
       female: Math.floor(Math.random() * 101), //더미데이터 생성
     }));
     setRankData(rankedData);
-    setSelectedSchool(filteredData[0]);
+    setSelectedSchool(rankedData[0]);
   }, []);
   const handleSchoolSelect = (school) => {
     setSelectedSchool(school);
@@ -48,19 +48,15 @@ const SchoolRanking = () => {
   };
 
   const filteredData = rankData.filter((item) => {
-    if (filterValue === "") {
+    if (filterValue == "") {
       return true;
     }
     return item.tags.some((tag) => filterValue.includes(tag));
   });
 
   useEffect(() => {
-    if (filterValue === "") {
-      setSelectedSchool(rankData[0]);
-    } else {
-      setSelectedSchool(filteredData[0]);
-    }
-  }, [filterValue, rankData]);
+    setSelectedSchool(filteredData[0]);
+  }, [filterValue]);
   const columns = [
     {
       title: "랭킹",
@@ -130,6 +126,7 @@ const SchoolRanking = () => {
             dataSource={filteredData}
             pagination={false}
             rowClassName={rowClassName}
+            rowKey={(record) => record.id}
           />
         </Col>
         <Col xs={24} md={5} flex="auto">

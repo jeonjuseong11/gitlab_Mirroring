@@ -67,7 +67,7 @@ export const RankTopic = [
 const RankSelector = ({ setFilterValue }) => {
   const handleFilterChange = (value) => {
     setFilterValue(value);
-    console.log(value);
+    // console.log(value);
   };
   return (
     <Row justify="center">
