@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import newsList from "../../utils/NewsDummyData";
 import { Link, useLocation } from "react-router-dom";
-import { Button, Image, List, Menu } from "antd";
+import { Button, List, Menu } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import RecommendList from "./RecommendList";
 import { items } from "../../utils/PromotionList";
@@ -52,13 +52,14 @@ const PromotionNews = () => {
                     }}
                   >
                     <Link to={`/promotion/news/${item.id}`}>
-                      <Image
+                      <div
                         preview={false}
-                        width={"15rem"}
-                        height={"9rem"}
                         src={item.src}
                         style={{
+                          width: "15rem",
+                          height: "9rem",
                           borderRadius: "5%",
+                          background: "#f2f2f2",
                         }}
                       />
                     </Link>

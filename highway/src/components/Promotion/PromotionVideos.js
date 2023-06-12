@@ -54,12 +54,13 @@ const PromotionVideos = () => {
                     }}
                   >
                     <Link to={`/promotion/videos/${item.id}`}>
-                      <Image
+                      <div
                         preview={false}
-                        width={"15rem"}
-                        height={"9rem"}
                         src={item.src}
                         style={{
+                          width: "15rem",
+                          height: "9rem",
+                          background: "#f2f2f2",
                           borderRadius: "5%",
                         }}
                       />

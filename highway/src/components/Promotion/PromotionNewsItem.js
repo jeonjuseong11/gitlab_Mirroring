@@ -1,7 +1,7 @@
 import React from "react";
 import newsList from "../../utils/NewsDummyData";
 import { Link } from "react-router-dom";
-import { Image, List } from "antd";
+import { List } from "antd";
 
 const PromotionNewsItem = () => {
   return (
@@ -10,11 +10,14 @@ const PromotionNewsItem = () => {
       dataSource={newsList}
       renderItem={(item) => (
         <List.Item>
-          <Image
+          <div
             preview={false}
-            width={"15rem"}
-            height={"9rem"}
             src={item.src}
+            style={{
+              width: "27rem",
+              height: "19rem",
+              background: "#f2f2f2",
+            }}
           />
           <List.Item.Meta
             title={

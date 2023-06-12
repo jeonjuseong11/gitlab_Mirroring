@@ -8,35 +8,35 @@ const RecommendList = ({ type, infoData }) => {
     <>
       <Row gutter={[16, 16]}>
         <Col span={12}>
-          <h1 style={{ marginLeft: "50%" }}>HIGHWAY TIMES</h1>
+          <h1 style={{ marginLeft: "25rem" }}>HIGHWAY TIMES</h1>
           <Link to={`${type}/${random}`}>
-            <Image
-              width={"45rem"}
-              height={"25rem"}
-              preview={false}
+            <div
               src={`${infoData[random].src}`}
               style={{
+                width: "45rem",
+                height: "27rem",
                 borderRadius: "5%",
-                marginLeft: "15%",
+                marginLeft: "5rem",
+                background: "#f2f2f2",
               }}
             />
           </Link>
         </Col>
-        <Col span={12} style={{ marginTop: "0.5%" }}>
-          <div style={{ width: "80%", marginLeft: "-15rem" }}>
+        <Col span={12}>
+          <div style={{ width: "80rem", marginLeft: "-15rem" }}>
             <div
               style={{
-                marginLeft: "95%",
-                marginTop: "16%",
+                marginLeft: "30rem",
+                marginTop: "5rem",
               }}
             >
               <Link to={`${type}/${random}`}>
-                <Image
-                  width={"18rem"}
-                  height={"10rem"}
-                  preview={false}
+                <div
                   src={`${infoData[random].src}`}
                   style={{
+                    width: "18rem",
+                    height: "10rem",
+                    background: "#f2f2f2",
                     borderRadius: "5%",
                   }}
                 />
@@ -53,17 +53,17 @@ const RecommendList = ({ type, infoData }) => {
             </div>
             <div
               style={{
-                marginLeft: "95%",
-                marginTop: "5%",
+                marginLeft: "30rem",
+                marginTop: "2rem",
               }}
             >
               <Link to={`${type}/${random}`}>
-                <Image
-                  width={"18rem"}
-                  height={"10rem"}
-                  preview={false}
+                <div
                   src={`${infoData[random].src}`}
                   style={{
+                    width: "18rem",
+                    height: "10rem",
+                    background: "#f2f2f2",
                     borderRadius: "5%",
                   }}
                 />

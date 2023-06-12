@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Button, List, Row, Col, Image } from "antd";
+import { Button, List, Row, Col } from "antd";
 import { RightCircleFilled } from "@ant-design/icons";
 
 const PromotionHomeItem = ({ random, title, type, infoData }) => {
@@ -13,7 +13,7 @@ const PromotionHomeItem = ({ random, title, type, infoData }) => {
             <li>
               <div style={{ display: "flex", flexDirection: "row" }}>
                 <div style={{ width: "55rem", marginLeft: "-18rem" }}>
-                  <h2 style={{ width: "100%" }}>{title}</h2>
+                  <h2 style={{ width: "55rem" }}>{title}</h2>
                 </div>
                 <div style={{ marginLeft: "8rem", marginTop: "1.2rem" }}>
                   <Link to={`/promotion/${type}`}>
@@ -25,14 +25,14 @@ const PromotionHomeItem = ({ random, title, type, infoData }) => {
             <li style={{ float: "left" }}>
               <div>
                 <Link to={`/promotion/${type}/${random}`}>
-                  <Image
-                    width={100 * 4}
-                    height={100 * 3}
+                  <div
                     preview={false}
-                    src={`${infoData[random].src}`}
                     style={{
+                      width: "27rem",
+                      height: "19rem",
                       borderRadius: "5%",
                       marginLeft: "1rem",
+                      background: "#f2f2f2",
                     }}
                   />
                 </Link>
