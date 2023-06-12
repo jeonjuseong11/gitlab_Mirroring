@@ -24,40 +24,18 @@ const dummyboardData = [
     userId: "admin",
     school_id: 1,
   },
-  {
-    id: 2,
-    category: 1,
-    content: "테스트 내용2",
-    createData: "2시간전",
-    modifiedDate: "2시간전",
-    title: "테스트2",
-    userId: "admin",
-    school_id: 1,
-  },
-  {
-    id: 3,
-    category: 1,
-    content: "테스트 내용3",
-    createData: "3시간전",
-    modifiedDate: "3시간전",
-    title: "테스트3",
-    userId: "admin",
-    school_id: 1,
-  },
 ];
 
 const SchoolBoardDetail = () => {
+  const [commentNum, setCommentNum] = useState(false);
+
   const dispatch = useDispatch();
-  const access = localStorage.getItem("ACCESSTOKEN");
-  const expire = localStorage.getItem("EXPIRES");
   const { me } = useSelector((state) => state.user);
-  console.log(me);
   const { schoolBoardPostComments } = useSelector((state) => state.post);
   const schoolBoardPostCommentsData = schoolBoardPostComments.data;
-  console.log(schoolBoardPostComments.data);
-
   const { postId } = useParams();
   const [parentId, setParentId] = useState(null);
+
   const userCheck = (item) => {
     if (me === null) {
       return false;
@@ -83,22 +61,23 @@ const SchoolBoardDetail = () => {
       type: REMOVE_POST_COMMENT_REQUEST,
       data: {
         id: item.id,
-        content: item.content,
       },
     });
   };
-  const updatePostComment = () => {
-    console.log("UpdatePostCommnet");
+  const updatePostComment = (item, values) => {
+    if (values === undefined) {
+      alert("빈칸이 있습니다.");
+      return;
+    }
     dispatch({
       type: UPDATE_POST_COMMENT_REQUEST,
       data: {
-        id: schoolBoardPostComments[postId].id,
-        content: schoolBoardPostComments[postId].content,
+        id: item.id,
+        content: values,
       },
     });
   };
   const onFinish = (values) => {
-    console.log(values.content);
     if (values === undefined) {
       alert("빈칸이 있습니다.");
       return;
@@ -111,7 +90,7 @@ const SchoolBoardDetail = () => {
         modifiedDate: moment(),
         userId: me.userId,
         boardId: postId,
-        parentId: null,
+        parentId: parentId,
       },
     });
   };
@@ -274,7 +253,7 @@ const SchoolBoardDetail = () => {
                                     border: "none",
                                   }}
                                   onClick={() => {
-                                    alert("수정");
+                                    setCommentNum(item.id);
                                   }}
                                 >
                                   수정
@@ -285,7 +264,8 @@ const SchoolBoardDetail = () => {
                                     border: "none",
                                   }}
                                   onClick={() => {
-                                    removePostComment(item);
+                                    alert("삭제");
+                                    // removePostComment(item);
                                   }}
                                 >
                                   삭제
@@ -310,13 +290,54 @@ const SchoolBoardDetail = () => {
                           </li>
                         </li>
                         <li
+                          name={item.id}
+                          value={item.id}
                           style={{
                             marginTop: "-2%",
                             marginBottom: "-2%",
                             marginLeft: "2%",
                           }}
                         >
-                          <h4>{item.content}</h4>
+                          {item.id === commentNum ? (
+                            <Form onFinish={updatePostComment(item)}>
+                              <ul>
+                                <li
+                                  style={{
+                                    float: "left",
+                                    width: "80%",
+                                  }}
+                                >
+                                  <Form.Item name="content">
+                                    <Input
+                                      rows={3}
+                                      placeholder="댓글을 적어주세요."
+                                      style={{
+                                        width: "100%",
+                                        height: "80px",
+                                      }}
+                                    />
+                                  </Form.Item>
+                                </li>
+                                <li style={{ width: "100%" }}>
+                                  <Form.Item>
+                                    <Button
+                                      type="primary"
+                                      htmlType="submit"
+                                      style={{
+                                        width: "96%",
+                                        marginLeft: "5%",
+                                        height: "80px",
+                                      }}
+                                    >
+                                      수정
+                                    </Button>
+                                  </Form.Item>
+                                </li>
+                              </ul>
+                            </Form>
+                          ) : (
+                            <h4>{item.content}</h4>
+                          )}
                         </li>
                         <li
                           style={{
@@ -391,7 +412,7 @@ const SchoolBoardDetail = () => {
                                                 border: "none",
                                               }}
                                               onClick={() => {
-                                                alert("수정");
+                                                setCommentNum(v.id);
                                               }}
                                             >
                                               수정
@@ -431,7 +452,46 @@ const SchoolBoardDetail = () => {
                                           marginLeft: "-3%",
                                         }}
                                       >
-                                        <h4>{v.content}</h4>
+                                        {v.id === commentNum ? (
+                                          <Form onFinish={updatePostComment(v)}>
+                                            <ul>
+                                              <li
+                                                style={{
+                                                  float: "left",
+                                                  width: "80%",
+                                                }}
+                                              >
+                                                <Form.Item name="content">
+                                                  <Input
+                                                    rows={3}
+                                                    placeholder="댓글을 적어주세요."
+                                                    style={{
+                                                      width: "100%",
+                                                      height: "80px",
+                                                    }}
+                                                  />
+                                                </Form.Item>
+                                              </li>
+                                              <li style={{ width: "100%" }}>
+                                                <Form.Item>
+                                                  <Button
+                                                    type="primary"
+                                                    htmlType="submit"
+                                                    style={{
+                                                      width: "96%",
+                                                      marginLeft: "5%",
+                                                      height: "80px",
+                                                    }}
+                                                  >
+                                                    수정
+                                                  </Button>
+                                                </Form.Item>
+                                              </li>
+                                            </ul>
+                                          </Form>
+                                        ) : (
+                                          <h4>{item.content}</h4>
+                                        )}
                                       </li>
                                       <li
                                         style={{
