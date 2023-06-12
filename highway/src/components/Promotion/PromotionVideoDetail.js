@@ -31,7 +31,7 @@ const PromotionVideoDetail = () => {
     }
   }, [id]);
   return (
-    <div style={{ marginLeft: "20%" }}>
+    <div style={{ marginLeft: "26rem" }}>
       <Row>
         <Col xs={24} md={13}>
           <ul style={{ listStyle: "none", textAlign: "left" }}>
@@ -43,12 +43,12 @@ const PromotionVideoDetail = () => {
             </li>
             <li>
               <p>
-                <FieldTimeOutlined style={{ marginRight: "2%" }} />
+                <FieldTimeOutlined style={{ marginRight: "0.5rem" }} />
                 생성 시간
               </p>
             </li>
           </ul>
-          <hr style={{ width: "100%" }} />
+          <hr style={{ width: "55rem" }} />
           <iframe
             width="720rem "
             height="480rem"
@@ -58,14 +58,14 @@ const PromotionVideoDetail = () => {
             allowfullscreen
           ></iframe>
         </Col>
-        <Col style={{ width: "35%" }}>
+        <Col style={{ width: "33rem" }}>
           <div
             style={{
               width: "20rem",
-              height: "500px",
+              height: "30rem",
               backgroundColor: "#d2d2d2",
-              marginTop: "5%",
-              marginLeft: "10%",
+              marginTop: "2rem",
+              marginLeft: "3rem",
               borderRadius: "5%",
             }}
           >
@@ -78,7 +78,7 @@ const PromotionVideoDetail = () => {
           <CopyToClipboard
             text={nowLocation}
             onCopy={() => alert("주소가 복사되었습니다")}
-            style={{ margin: "3%" }}
+            style={{ margin: "2rem" }}
           >
             <div className="URL">
               <Button>

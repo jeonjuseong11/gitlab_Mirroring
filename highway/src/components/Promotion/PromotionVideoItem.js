@@ -23,7 +23,12 @@ const PromotionVideoItem = () => {
       dataSource={videoList}
       renderItem={(item) => (
         <List.Item>
-          <Image preview={false} width={277} height={122} src={item.src} />
+          <Image
+            preview={false}
+            width={"15rem"}
+            height={"9rem"}
+            src={item.src}
+          />
           <List.Item.Meta
             title={
               <Link to={`/promotion/videos/${item.videoId}`}>

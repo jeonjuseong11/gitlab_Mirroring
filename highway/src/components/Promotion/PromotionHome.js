@@ -4,7 +4,6 @@ import { NewsDummyData as newsList } from "../../utils/NewsDummyData";
 import PromotionHomeItem from "./PromotionHomeItem";
 import { PromotionHomeItemLi } from "../../styles/PromotionStyle";
 import { Col, Menu } from "antd";
-import { VideoDummyData as videoList } from "../../utils/VideoDummyData";
 import RecommendList from "./RecommendList";
 import { items } from "../../utils/PromotionList";
 
@@ -17,7 +16,7 @@ const PromotionHome = () => {
       <Menu mode="horizontal" items={items} selectedKeys={location.pathname} />
       <Outlet />
       <Col xs={24} md={24}>
-        <ul style={{ listStyle: "none", width: "100%", marginTop: "3%" }}>
+        <ul style={{ listStyle: "none", width: "80rem", marginTop: "3rem" }}>
           <PromotionHomeItemLi>
             <PromotionHomeItem
               random={random}
@@ -45,11 +44,10 @@ const PromotionHome = () => {
           <li
             style={{
               width: "20rem",
-              height: "500px",
-              backgroundColor: "#d2d2d2",
+              height: "30rem",
+              backgroundColor: "#f2f2f2",
               marginLeft: "59rem",
               borderRadius: "5%",
-              marginLeft: "75%",
             }}
           >
             우측사이드

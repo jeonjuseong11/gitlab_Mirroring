@@ -24,20 +24,20 @@ const PromotionNews = () => {
     <>
       <RecommendList type={"news"} infoData={newsList} />
       <Menu mode="horizontal" items={items} selectedKeys={location.pathname} />
-      <ul style={{ listStyle: "none", width: "100%" }}>
+      <ul style={{ listStyle: "none", width: "78.5rem" }}>
         <li
           style={{
             width: "20rem",
-            height: "500px",
-            backgroundColor: "#d2d2d2",
-            marginLeft: "75%",
-            marginTop: "3%",
+            height: "30rem",
+            backgroundColor: "#f2f2f2",
+            marginLeft: "59rem",
+            marginTop: "3rem",
             borderRadius: "5%",
           }}
         >
           우측사이드
         </li>
-        <li style={{ marginTop: "-41%" }}>
+        <li style={{ marginTop: "-31rem" }}>
           <List
             itemLayout="horizontal"
             dataSource={newsList}
@@ -46,16 +46,16 @@ const PromotionNews = () => {
                 return (
                   <List.Item
                     style={{
-                      width: "70%",
-                      padding: "3%",
-                      marginLeft: "-4%",
+                      width: "60rem",
+                      padding: "2rem",
+                      marginLeft: "-4rem",
                     }}
                   >
                     <Link to={`/promotion/news/${item.id}`}>
                       <Image
                         preview={false}
-                        width={277}
-                        height={122}
+                        width={"15rem"}
+                        height={"9rem"}
                         src={item.src}
                         style={{
                           borderRadius: "5%",
@@ -67,7 +67,7 @@ const PromotionNews = () => {
                         <div
                           style={{
                             textAlign: "left",
-                            marginLeft: "5%",
+                            marginLeft: "2rem",
                           }}
                         >
                           <Link to={`/promotion/news/${item.id}`}>
@@ -76,7 +76,7 @@ const PromotionNews = () => {
                         </div>
                       }
                       description={
-                        <div style={{ textAlign: "left", marginLeft: "5%" }}>
+                        <div style={{ textAlign: "left", marginLeft: "2rem" }}>
                           <Link to={`/promotion/news/${item.id}`}>
                             <p style={{ color: "gray" }}>{item.content}</p>
                           </Link>

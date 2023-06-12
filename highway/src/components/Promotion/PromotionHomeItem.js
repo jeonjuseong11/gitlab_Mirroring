@@ -9,13 +9,13 @@ const PromotionHomeItem = ({ random, title, type, infoData }) => {
     <>
       <Row gutter={[16, 16]} justify="center">
         <Col xs={24} md={24}>
-          <ul style={{ listStyle: "none", width: "75%", marginLeft: "7%" }}>
+          <ul style={{ listStyle: "none", width: "60rem", marginLeft: "6rem" }}>
             <li>
               <div style={{ display: "flex", flexDirection: "row" }}>
-                <div style={{ width: "90%", marginLeft: "-30%" }}>
+                <div style={{ width: "55rem", marginLeft: "-18rem" }}>
                   <h2 style={{ width: "100%" }}>{title}</h2>
                 </div>
-                <div style={{ marginLeft: "12.5%", marginTop: "2.5%" }}>
+                <div style={{ marginLeft: "8rem", marginTop: "1.2rem" }}>
                   <Link to={`/promotion/${type}`}>
                     <Button icon={<RightCircleFilled />}>더보기</Button>
                   </Link>
@@ -39,7 +39,11 @@ const PromotionHomeItem = ({ random, title, type, infoData }) => {
               </div>
             </li>
             <li
-              style={{ width: "100%", marginLeft: "-15%", textAlign: "left" }}
+              style={{
+                width: "60rem",
+                marginLeft: "-9rem",
+                textAlign: "left",
+              }}
             >
               <List
                 itemLayout="horizontal"
@@ -48,14 +52,13 @@ const PromotionHomeItem = ({ random, title, type, infoData }) => {
                   console.log(item);
                   if (item.id < count) {
                     return (
-                      <List.Item style={{ marginLeft: "67.5%" }}>
+                      <List.Item style={{ marginLeft: "40rem" }}>
                         <List.Item.Meta
                           title={
                             <Link to={`/promotion/${type}/${item.id}`}>
                               <p>{item.title}</p>
                             </Link>
                           }
-                          style={{ marginLeft: "15%" }}
                         />
                       </List.Item>
                     );
