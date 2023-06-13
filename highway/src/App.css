@@ -12,3 +12,8 @@
   background-color: #8282ff;
   color: white;
 }
+.custom-segmented .ant-segmented-item-selected {
+  border: #8282ff solid;
+  background-color: white;
+  color: #8282ff;
+}
