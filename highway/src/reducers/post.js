@@ -43,6 +43,9 @@ import {
   REMOVE_POST_COMMENT_REQUEST,
   REMOVE_POST_COMMENT_SUCCESS,
   REMOVE_POST_COMMENT_FAILURE,
+  ADD_POST_COMMENT_REPLY_FAILURE,
+  ADD_POST_COMMENT_REPLY_REQUEST,
+  ADD_POST_COMMENT_REPLY_SUCCESS,
 } from "../constants/actionTypes";
 
 export const initialState = {
@@ -89,6 +92,9 @@ export const initialState = {
   removePostCommentLoading: false, // 게시판 댓글 삭제
   removePostCommentDone: false,
   removePostCommentError: false,
+  addPostCommentReplyLoading: false, //게시글 대댓글 추가
+  addPostCommentReplyDone: false,
+  addPostCommentReplyError: null,
 };
 
 const reducer = (state = initialState, action) =>
@@ -236,11 +242,6 @@ const reducer = (state = initialState, action) =>
         draft.addCommentError = null;
         break;
       case ADD_COMMENT_SUCCESS: {
-        ///const post = draft.schoolBoardPostComments.find(
-        // (v) => v.id === action.data.PostId
-        //   (v) => v.id === action.data.boardId // POSTMAN에 나온 주소대로
-        // );
-        // post.Comments.unshift(action.data);
         draft.addCommentLoading = false;
         draft.addCommentDone = true;
         break;
@@ -249,15 +250,12 @@ const reducer = (state = initialState, action) =>
         draft.addCommentLoading = false;
         draft.addCommentError = action.error;
         break;
-      default:
-        break;
       case LOAD_POST_COMMENTS_REQUEST:
         draft.loadPostCommentsLoading = true;
         draft.loadPostCommentsDone = false;
         draft.loadPostCommentsError = null;
         break;
       case LOAD_POST_COMMENTS_SUCCESS: {
-        console.log(action.data);
         draft.schoolBoardPostComments = action.data;
         draft.loadPostCommentsLoading = false;
         draft.loadPostCommentsDone = true;
@@ -275,9 +273,6 @@ const reducer = (state = initialState, action) =>
       case UPDATE_POST_COMMENT_SUCCESS:
         draft.updatePostCommentLoading = false;
         draft.updatePostCommentDone = true;
-        // draft.mainPschoolBoardPostsosts.find(
-        //   (v) => v.id === action.data.PostId
-        // ).content = action.data.content;
         break;
       case UPDATE_POST_COMMENT_FAILURE:
         draft.updatePostCommentLoading = false;
@@ -299,6 +294,22 @@ const reducer = (state = initialState, action) =>
         draft.removePostCommentLoading = false;
         draft.removePostCommentError = action.error;
         break;
+      case ADD_POST_COMMENT_REPLY_REQUEST:
+        draft.addPostCommentReplyLoading = true;
+        draft.addPostCommentReplyDone = false;
+        draft.addPostCommentReplyError = null;
+        break;
+      case ADD_POST_COMMENT_REPLY_SUCCESS: {
+        draft.addPostCommentReplyLoading = false;
+        draft.addPostCommentReplyDone = true;
+        break;
+      }
+      case ADD_POST_COMMENT_REPLY_FAILURE:
+        draft.addPostCommentReplyLoading = false;
+        draft.addPostCommentReplyError = action.error;
+        break;
+      default:
+        return state;
     }
   });
 

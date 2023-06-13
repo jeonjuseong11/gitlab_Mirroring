@@ -44,9 +44,11 @@ import {
   REMOVE_POST_COMMENT_REQUEST,
   REMOVE_POST_COMMENT_SUCCESS,
   REMOVE_POST_COMMENT_FAILURE,
+  ADD_POST_COMMENT_REPLY_FAILURE,
+  ADD_POST_COMMENT_REPLY_REQUEST,
+  ADD_POST_COMMENT_REPLY_SUCCESS,
 } from "../constants/actionTypes";
 import { ADD_POST_TO_ME, REMOVE_POST_OF_ME } from "../constants/actionTypes";
-import { object } from "prop-types";
 
 function uploadImagesAPI(data) {
   //이미지 업로드
@@ -282,10 +284,6 @@ function* addComment(action) {
       type: ADD_COMMENT_SUCCESS,
       data: result.data,
     });
-    yield put({
-      type: LOAD_POST_COMMENTS_REQUEST,
-      data: result.data,
-    });
   } catch (err) {
     console.error(err);
     yield put({
@@ -358,6 +356,31 @@ function* updatePostComment(action) {
   }
 }
 
+function addCommentReplyAPI(data) {
+  // 게시물 대댓글 작성
+  // return axios.post(`/post/${data.postId}/comment`, data); // POST /post/1/comment
+  return axios.post(
+    `/comment?content=${data.content}&boardId=${data.boardId}&parentId=${data.parentId}`,
+    data
+  ); // POSTMAN에 나온 주소
+}
+
+function* addCommentReply(action) {
+  try {
+    const result = yield call(addCommentReplyAPI, action.data);
+    yield put({
+      type: ADD_POST_COMMENT_REPLY_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: ADD_POST_COMMENT_REPLY_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
 function* watchUploadImages() {
   yield takeLatest(UPLOAD_IMAGES_REQUEST, uploadImages);
 }
@@ -414,6 +437,10 @@ function* watchRemovePostComment() {
   yield takeLatest(REMOVE_POST_COMMENT_REQUEST, removePostComment);
 }
 
+function* watchAddCommentReply() {
+  yield takeLatest(ADD_POST_COMMENT_REPLY_REQUEST, addCommentReply);
+}
+
 export default function* postSaga() {
   yield all([
     fork(watchUploadImages),
@@ -430,5 +457,6 @@ export default function* postSaga() {
     fork(watchLoadPostComments),
     fork(watchUpdatePostComment),
     fork(watchRemovePostComment),
+    fork(watchAddCommentReply),
   ]);
 }
