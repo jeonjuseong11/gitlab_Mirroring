@@ -32,15 +32,14 @@ const dummyboardData = [
 ];
 
 const SchoolBoardDetail = () => {
-  const [commentNum, setCommentNum] = useState(false);
-
   const dispatch = useDispatch();
   const { me } = useSelector((state) => state.user);
   const { schoolBoardPostComments } = useSelector((state) => state.post);
   const schoolBoardPostCommentsData = schoolBoardPostComments.data;
   const { postId } = useParams();
   const [parentId, setParentId] = useState(null);
-
+  const [commentNum, setCommentNum] = useState(false);
+  const [commnetCount, setCommentCount] = useState(0);
   const userCheck = (item) => {
     if (me === null) {
       return false;
@@ -286,8 +285,7 @@ const SchoolBoardDetail = () => {
                                     border: "none",
                                   }}
                                   onClick={() => {
-                                    alert("삭제");
-                                    // removePostComment(item);
+                                    removePostComment(item);
                                   }}
                                 >
                                   삭제
@@ -345,7 +343,7 @@ const SchoolBoardDetail = () => {
                                   <Form.Item name="content">
                                     <Input
                                       rows={3}
-                                      placeholder="댓글을 적어주세요."
+                                      value={item.content}
                                       style={{
                                         width: "37rem",
                                         height: "5rem",
@@ -377,9 +375,9 @@ const SchoolBoardDetail = () => {
                         </li>
                         <li
                           style={{
-                            marginTop: "2%",
-                            marginLeft: "2%",
-                            marginBottom: "2%",
+                            marginTop: "1rem",
+                            marginLeft: "1rem",
+                            marginBottom: "1rem",
                           }}
                         >
                           <FieldTimeOutlined />
@@ -387,8 +385,8 @@ const SchoolBoardDetail = () => {
                         </li>
                         <li
                           style={{
-                            width: "100.25%",
-                            marginLeft: "0.25%",
+                            width: "51rem",
+                            marginLeft: "-0.5rem",
                             paddingBottom: "-16px",
                           }}
                         >
@@ -398,7 +396,7 @@ const SchoolBoardDetail = () => {
                             }}
                             size="large"
                             bordered={false}
-                            dataSource={schoolBoardPostCommentsData}
+                            dataSource={schoolBoardPostCommentsData.children}
                             renderItem={(v) => {
                               const ReplyUserCheck = userCheck(v);
                               if (v.parentId === item.id) {
@@ -408,7 +406,7 @@ const SchoolBoardDetail = () => {
                                       style={{
                                         listStyle: "none",
                                         textAlign: "left",
-                                        width: "100%",
+                                        width: "75rem",
                                         marginTop: "2%",
                                       }}
                                     >
@@ -500,7 +498,7 @@ const SchoolBoardDetail = () => {
                                                 <Form.Item name="content">
                                                   <Input
                                                     rows={3}
-                                                    placeholder="댓글을 적어주세요."
+                                                    value={v.content}
                                                     style={{
                                                       width: "100%",
                                                       height: "80px",
