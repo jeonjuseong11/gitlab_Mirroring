@@ -15,7 +15,7 @@ const RecommendList = ({ type, infoData }) => {
               style={{
                 width: "45rem",
                 height: "27rem",
-                borderRadius: "5%",
+                borderRadius: "10px",
                 marginLeft: "5rem",
                 background: "#f2f2f2",
               }}
@@ -37,7 +37,7 @@ const RecommendList = ({ type, infoData }) => {
                     width: "18rem",
                     height: "10rem",
                     background: "#f2f2f2",
-                    borderRadius: "5%",
+                    borderRadius: "10px",
                   }}
                 />
                 <div
@@ -64,7 +64,7 @@ const RecommendList = ({ type, infoData }) => {
                     width: "18rem",
                     height: "10rem",
                     background: "#f2f2f2",
-                    borderRadius: "5%",
+                    borderRadius: "10px",
                   }}
                 />
                 <div

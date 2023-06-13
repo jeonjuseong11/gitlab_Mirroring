@@ -47,7 +47,7 @@ const PromotionHome = () => {
               height: "30rem",
               backgroundColor: "#f2f2f2",
               marginLeft: "59rem",
-              borderRadius: "5%",
+              borderRadius: "10px",
             }}
           >
             우측사이드

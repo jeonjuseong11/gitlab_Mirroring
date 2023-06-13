@@ -34,7 +34,7 @@ const PromotionVideos = () => {
             backgroundColor: "#f2f2f2",
             marginLeft: "59rem",
             marginTop: "3rem",
-            borderRadius: "5%",
+            borderRadius: "10px",
           }}
         >
           우측사이드
@@ -61,7 +61,7 @@ const PromotionVideos = () => {
                           width: "15rem",
                           height: "9rem",
                           background: "#f2f2f2",
-                          borderRadius: "5%",
+                          borderRadius: "10px",
                         }}
                       />
                     </Link>
@@ -95,7 +95,7 @@ const PromotionVideos = () => {
       <Button
         onClick={onMore}
         disabled={disable}
-        style={{ marginBottom: "2%", marginTop: "5%" }}
+        style={{ marginBottom: "2rem", marginTop: "2rem" }}
       >
         <DownOutlined />더 보기
       </Button>

@@ -66,7 +66,7 @@ const PromotionVideoDetail = () => {
               backgroundColor: "#d2d2d2",
               marginTop: "2rem",
               marginLeft: "3rem",
-              borderRadius: "5%",
+              borderRadius: "10px",
             }}
           >
             우측사이드

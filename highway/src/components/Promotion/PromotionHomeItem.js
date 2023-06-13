@@ -30,7 +30,7 @@ const PromotionHomeItem = ({ random, title, type, infoData }) => {
                     style={{
                       width: "27rem",
                       height: "19rem",
-                      borderRadius: "5%",
+                      borderRadius: "10px",
                       marginLeft: "1rem",
                       background: "#f2f2f2",
                     }}

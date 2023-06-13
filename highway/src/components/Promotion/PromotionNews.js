@@ -32,7 +32,7 @@ const PromotionNews = () => {
             backgroundColor: "#f2f2f2",
             marginLeft: "59rem",
             marginTop: "3rem",
-            borderRadius: "5%",
+            borderRadius: "10px",
           }}
         >
           우측사이드
@@ -58,7 +58,7 @@ const PromotionNews = () => {
                         style={{
                           width: "15rem",
                           height: "9rem",
-                          borderRadius: "5%",
+                          borderRadius: "10px",
                           background: "#f2f2f2",
                         }}
                       />
@@ -93,7 +93,7 @@ const PromotionNews = () => {
       <Button
         onClick={onMore}
         disabled={disable}
-        style={{ marginBottom: "2%", marginTop: "5%" }}
+        style={{ marginBottom: "2rem", marginTop: "2rem" }}
       >
         <DownOutlined />더 보기
       </Button>
