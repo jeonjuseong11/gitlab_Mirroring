@@ -1,25 +1,24 @@
 import { CommentOutlined, HeartOutlined } from "@ant-design/icons";
-import { List, Typography } from "antd";
+import { List, Tag } from "antd";
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { NoDecoLink } from "../../styles/PageStyle";
 
 const BoardMiddleList = ({ data }) => {
-  const { schoolId } = useParams();
   return (
     <List
-      style={{ textAlign: "left", marginLeft: "1rem" }}
+      style={{ textAlign: "left", borderRadius: "10px", backgroundColor: "white", padding: "1rem" }}
       header={
         <>
           <span style={{ fontSize: "1.2rem", marginLeft: "1rem" }}>인기글</span>
-          <Link to={`/schoolboard/${schoolId}/list`} style={{ float: "right" }}>
+          <NoDecoLink to={`/schoolboard/list`} style={{ float: "right", marginRight: "1rem" }}>
             <span>더보기</span>
-          </Link>
+          </NoDecoLink>
         </>
       }
       dataSource={data}
       renderItem={(item) => (
         <List.Item
-          style={{ marginLeft: "1rem", alignItems: "center" }}
+          style={{ paddingLeft: "1rem", alignItems: "center" }}
           actions={[
             <div style={{ display: "flex", gap: "1.5rem" }}>
               <span>
@@ -33,7 +32,7 @@ const BoardMiddleList = ({ data }) => {
             </div>,
           ]}
         >
-          <Typography.Text mark>[ITEM]</Typography.Text> {item}
+          <Tag color="#8282ff">ITEM</Tag> {item}
         </List.Item>
       )}
     />

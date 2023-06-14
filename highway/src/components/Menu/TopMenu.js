@@ -16,11 +16,7 @@ const TopMenu = () => {
       <MenuWrapper>
         <Row justify="center" gutter={[24, 24]}>
           <Col xs={24} md={15}>
-            <Menu
-              mode="horizontal"
-              items={MenuLists}
-              selectedKeys={location.pathname}
-            />
+            <Menu mode="horizontal" items={MenuLists} selectedKeys={location.pathname} />
           </Col>
         </Row>
       </MenuWrapper>

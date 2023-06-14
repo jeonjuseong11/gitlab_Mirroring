@@ -12,13 +12,13 @@ const BoardMenu = () => {
 
   const { me } = useSelector((state) => state.user);
   const localRefreshToken = localStorage.getItem("REFRESHTOKEN");
-  useEffect(() => {
-    if (!localRefreshToken) {
-      alert("로그인이 필요한 서비스입니다.");
-      navigate("/login");
-      return;
-    }
-  }, [me, navigate]);
+  // useEffect(() => {
+  //   if (!localRefreshToken) {
+  //     alert("로그인이 필요한 서비스입니다.");
+  //     navigate("/login");
+  //     return;
+  //   }
+  // }, [me, navigate]);
   return (
     <Row gutter={[16, 16]} justify="center">
       <Col xs={24} md={14}>
@@ -31,9 +31,6 @@ const BoardMenu = () => {
           </Menu.Item>
           <Menu.Item style={{ padding: "1rem" }}>
             <Link to={`/schoolboard/${schoolId}/list`}>게시판</Link>
-          </Menu.Item>
-          <Menu.Item style={{ padding: "1rem" }}>
-            <Link to="/">인기글</Link>
           </Menu.Item>
         </Menu>
       </Col>

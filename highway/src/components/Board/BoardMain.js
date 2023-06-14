@@ -18,19 +18,6 @@ const BoardMain = () => {
       <Col xs={24} md={10}>
         <BoardMiddleList data={data} />
       </Col>
-      <Col xs={24} md={4}>
-        <div
-          style={{
-            backgroundColor: "#f2f2f2",
-            borderRadius: "10px",
-            height: "20rem",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          Hot topic(조회수 기준 순위)
-        </div>
-      </Col>
     </>
   );
 };

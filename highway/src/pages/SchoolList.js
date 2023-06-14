@@ -20,7 +20,7 @@ const SchoolList = ({ schools }) => {
           pageSize: 5,
           align: "center",
         }}
-        grid={{ gutter: 12, xs: 1, sm: 2, md: 3, lg: 4, xl: 5, xxl: 5 }}
+        grid={{ gutter: 12, xs: 1, sm: 2, md: 3, lg: 3, xl: 3, xxl: 3 }}
         renderItem={(item) => (
           <List.Item key={item.id}>
             <Col>
