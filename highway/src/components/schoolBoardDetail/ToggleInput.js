@@ -1,21 +1,28 @@
 import { Button, Form, Input, List } from "antd";
 import React, { useState } from "react";
 import {
+  ADD_COMMENT_REQUEST,
+  ADD_POST_COMMENT_REPLY_REQUEST,
   REMOVE_POST_COMMENT_REQUEST,
   UPDATE_POST_COMMENT_REQUEST,
 } from "../../constants/actionTypes";
 import { useDispatch, useSelector } from "react-redux";
+import moment from "moment";
+import { useParams } from "react-router-dom";
 
 const ToggleInput = () => {
   const dispatch = useDispatch();
   const { me } = useSelector((state) => state.user);
   const { schoolBoardPostComments } = useSelector((state) => state.post);
-  console.log(schoolBoardPostComments);
+  const { postId } = useParams();
   const schoolBoardPostCommentsData = schoolBoardPostComments.data;
   const [replyCommentNum, setReplyCommnetNum] = useState([]);
   const [commentNum, setCommentNum] = useState(false);
   const [commnetCount, setCommentCount] = useState(0);
   const [parentId, setParentId] = useState(false);
+  const [inputContent, setInputContent] = useState("");
+  const [checkReply, setCheckReply] = useState(false);
+
   const userCheck = (item) => {
     if (me === null) {
       return false;
@@ -26,13 +33,12 @@ const ToggleInput = () => {
       return false;
     }
   };
-  const updatePostComment = (item, values) => {
-    console.log(values);
+  const updatePostComment = (item) => {
     dispatch({
       type: UPDATE_POST_COMMENT_REQUEST,
       data: {
         id: item.id,
-        content: values,
+        content: inputContent,
       },
     });
   };
@@ -45,6 +51,28 @@ const ToggleInput = () => {
       },
     });
   };
+
+  const addCommentReply = () => {
+    console.log("addCommentReply");
+    dispatch({
+      type: ADD_POST_COMMENT_REPLY_REQUEST,
+      data: {
+        content: inputContent,
+        createData: moment(),
+        modifiedDate: moment(),
+        userId: me.userId,
+        boardId: postId,
+        parentId: parentId,
+      },
+    });
+  };
+  const onCheckReply = (item) => {
+    if (item > 0) {
+      setCheckReply(true);
+    } else {
+      setCheckReply(false);
+    }
+  };
   return (
     <List
       size="large"
@@ -52,7 +80,6 @@ const ToggleInput = () => {
       dataSource={schoolBoardPostCommentsData}
       renderItem={(item) => {
         const CommentUserChecked = userCheck(item);
-        console.log(item);
         return (
           <List.Item style={{ padding: "0px" }}>
             <ul
@@ -71,6 +98,7 @@ const ToggleInput = () => {
                   }}
                 >
                   {item.userId}
+                  <br />
                   {item.content}
                 </li>
                 {item.id === commentNum ? (
@@ -90,37 +118,28 @@ const ToggleInput = () => {
                         marginLeft: "-2.5rem",
                       }}
                     >
-                      <Form onFinish={updatePostComment(item)}>
-                        <Form.Item name="content">
-                          <Input
-                            rows={3}
-                            value={item.content}
-                            style={{
-                              width: "37rem",
-                              height: "5rem",
-                            }}
-                          />
-                        </Form.Item>
-                      </Form>
+                      <input
+                        placeholder="수정해주세요"
+                        value={inputContent}
+                        onChange={(e) => {
+                          setInputContent(e.target.value);
+                        }}
+                      />
                     </li>
                     <li style={{ width: "45rem" }}>
-                      <Form.Item>
-                        <Button
-                          type="primary"
-                          htmlType="submit"
-                          onClick={() => {
-                            setCommentNum(false);
-                          }}
-                          style={{
-                            width: "9rem",
-                            marginLeft: "1rem",
-                            height: "5rem",
-                            marginTop: "2rem",
-                          }}
-                        >
-                          수정
-                        </Button>
-                      </Form.Item>
+                      <button
+                        onClick={() => {
+                          setCommentNum(false);
+                        }}
+                        style={{
+                          width: "9rem",
+                          marginLeft: "1rem",
+                          height: "5rem",
+                          marginTop: "2rem",
+                        }}
+                      >
+                        수정
+                      </button>
                     </li>
                   </ul>
                 ) : (
@@ -130,6 +149,7 @@ const ToggleInput = () => {
                         <button
                           onClick={() => {
                             setParentId(item.id);
+                            setCommentNum(false);
                           }}
                         >
                           답글
@@ -137,6 +157,7 @@ const ToggleInput = () => {
                         <button
                           onClick={() => {
                             setCommentNum(item.id);
+                            setParentId(false);
                           }}
                         >
                           수정
@@ -154,6 +175,7 @@ const ToggleInput = () => {
                         <button
                           onClick={() => {
                             setParentId(item.id);
+                            setCommentNum(false);
                           }}
                         >
                           답글
@@ -163,25 +185,31 @@ const ToggleInput = () => {
                   </li>
                 )}
               </li>
+
               <List
                 dataSource={item.children}
                 renderItem={(v) => {
+                  setCheckReply(v.length);
                   return (
                     <List.Item>
-                      {v === [] ? (
-                        <></>
+                      <li>
+                        {v.id}
+                        <br />
+                        {v.content}
+                      </li>
+                      {CommentUserChecked ? (
+                        <>
+                          <li>수정</li>
+                          <li>삭제</li>
+                        </>
                       ) : (
-                        <List.Item>
-                          <li>
-                            {v.id}
-                            {v.content}
-                          </li>
-                        </List.Item>
+                        <li></li>
                       )}
                     </List.Item>
                   );
                 }}
               />
+
               {parentId === item.id ? (
                 <ul style={{ listStyle: "none" }}>
                   <li
@@ -199,37 +227,32 @@ const ToggleInput = () => {
                       marginLeft: "-2.5rem",
                     }}
                   >
-                    <Form onFinish={updatePostComment(item)}>
-                      <Form.Item name="content">
-                        <Input
-                          rows={3}
-                          value={item.content}
-                          style={{
-                            width: "37rem",
-                            height: "5rem",
-                          }}
-                        />
-                      </Form.Item>
-                    </Form>
+                    <input
+                      value={inputContent}
+                      onChange={(e) => {
+                        setInputContent(e.target.value);
+                      }}
+                      style={{
+                        width: "37rem",
+                        height: "5rem",
+                      }}
+                    />
                   </li>
                   <li style={{ width: "45rem" }}>
-                    <Form.Item>
-                      <Button
-                        type="primary"
-                        htmlType="submit"
-                        onClick={() => {
-                          setCommentNum(false);
-                        }}
-                        style={{
-                          width: "9rem",
-                          marginLeft: "1rem",
-                          height: "5rem",
-                          marginTop: "2rem",
-                        }}
-                      >
-                        수정
-                      </Button>
-                    </Form.Item>
+                    <button
+                      onClick={() => {
+                        addCommentReply();
+                        setCommentNum(false);
+                      }}
+                      style={{
+                        width: "9rem",
+                        marginLeft: "1rem",
+                        height: "5rem",
+                        marginTop: "2rem",
+                      }}
+                    >
+                      답글달기
+                    </button>
                   </li>
                 </ul>
               ) : (

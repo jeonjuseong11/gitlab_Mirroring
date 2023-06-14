@@ -62,25 +62,7 @@ const SchoolBoardDetail = () => {
       },
     });
   };
-  const removePostComment = (item) => {
-    console.log("RemovePostCommnet");
-    dispatch({
-      type: REMOVE_POST_COMMENT_REQUEST,
-      data: {
-        id: item.id,
-      },
-    });
-  };
-  const updatePostComment = (item, values) => {
-    dispatch({
-      type: UPDATE_POST_COMMENT_REQUEST,
-      data: {
-        id: item.id,
-        content: values,
-      },
-    });
-    setCommentNum(null);
-  };
+
   const onFinish = (values) => {
     if (values === undefined) {
       alert("빈칸이 있습니다.");
@@ -98,9 +80,6 @@ const SchoolBoardDetail = () => {
       },
     });
   };
-  const onReplyComment = () => {
-    setParentId(schoolBoardPostComments.id);
-  };
 
   useEffect(() => {
     loadPostComments();
@@ -115,33 +94,10 @@ const SchoolBoardDetail = () => {
             listStyle: "none",
           }}
         >
-          <div
-            style={{
-              width: "125rem",
-              marginLeft: "-0.5rem",
-              marginBottom: "1.5rem",
-              marginTop: "2rem",
-            }}
-          >
-            <BoardProfile />
-          </div>
-          <li
-            style={{
-              width: "20rem",
-              height: "30rem",
-              marginRight: "1rem",
-              borderRadius: "5%",
-              backgroundColor: "#f2f2f2",
-              float: "left",
-            }}
-          >
-            광고
-          </li>
           <li
             style={{
               width: "51rem",
               marginLeft: "24rem",
-              marginTop: "-9.5rem",
             }}
           >
             <ul
