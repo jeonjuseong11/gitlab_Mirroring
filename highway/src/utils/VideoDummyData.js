@@ -1,9 +1,9 @@
 export const VideoDummyData = [
   {
     id: 0,
-    title: "특성화고·마이스터고 홍보영상",
-    content: "서울특별시 교육청",
-    src: "https://youtu.be/0gMYzRkguWo",
+    title: "대진디자인고등학교 홍보영상",
+    content: "대진 디자인고",
+    src: "https://www.youtube.com/embed/Ho0WrOkSqmQ",
     views: 132,
   },
   {
