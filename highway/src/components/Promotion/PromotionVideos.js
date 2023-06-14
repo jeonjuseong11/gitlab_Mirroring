@@ -25,14 +25,19 @@ const PromotionVideos = () => {
   return (
     <>
       <RecommendList type={"video"} infoData={videoList} />
-      <Menu mode="horizontal" items={items} selectedKeys={location.pathname} />
+      <Menu
+        mode="horizontal"
+        items={items}
+        selectedKeys={location.pathname}
+        style={{ width: "73rem", marginLeft: "3.5rem" }}
+      />
       <ul style={{ listStyle: "none", width: "78.5rem" }}>
         <li
           style={{
             width: "20rem",
             height: "30rem",
             backgroundColor: "#f2f2f2",
-            marginLeft: "59rem",
+            marginLeft: "55rem",
             marginTop: "3rem",
             borderRadius: "10px",
           }}
@@ -48,9 +53,9 @@ const PromotionVideos = () => {
                 return (
                   <List.Item
                     style={{
-                      width: "60rem",
+                      width: "50rem",
                       padding: "2rem",
-                      marginLeft: "-4rem",
+                      marginLeft: "1rem",
                     }}
                   >
                     <Link to={`/promotion/videos/${item.id}`}>
@@ -61,6 +66,7 @@ const PromotionVideos = () => {
                           width: "15rem",
                           height: "9rem",
                           background: "#f2f2f2",
+                          marginLeft: "-2rem",
                           borderRadius: "10px",
                         }}
                       />

@@ -48,10 +48,11 @@ const PromotionVideoDetail = () => {
               </p>
             </li>
           </ul>
-          <hr style={{ width: "55rem" }} />
+          <hr style={{ width: "50rem", marginLeft: "-2.5rem" }} />
           <iframe
             width="720rem "
             height="480rem"
+            style={{ marginLeft: "-6rem" }}
             src={videoList[id].src}
             frameborder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"

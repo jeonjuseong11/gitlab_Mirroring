@@ -16,14 +16,14 @@ const RecommendList = ({ type, infoData }) => {
                 width: "45rem",
                 height: "27rem",
                 borderRadius: "10px",
-                marginLeft: "5rem",
+                marginLeft: "7rem",
                 background: "#f2f2f2",
               }}
             />
           </Link>
         </Col>
         <Col span={12}>
-          <div style={{ width: "80rem", marginLeft: "-15rem" }}>
+          <div style={{ width: "80rem", marginLeft: "-16rem" }}>
             <div
               style={{
                 marginLeft: "30rem",

@@ -9,7 +9,7 @@ const PromotionHomeItem = ({ random, title, type, infoData }) => {
     <>
       <Row gutter={[16, 16]} justify="center">
         <Col xs={24} md={24}>
-          <ul style={{ listStyle: "none", width: "60rem", marginLeft: "6rem" }}>
+          <ul style={{ listStyle: "none", width: "60rem", marginLeft: "9rem" }}>
             <li>
               <div style={{ display: "flex", flexDirection: "row" }}>
                 <div style={{ width: "55rem", marginLeft: "-18rem" }}>

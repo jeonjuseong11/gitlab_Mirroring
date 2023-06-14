@@ -23,14 +23,19 @@ const PromotionNews = () => {
   return (
     <>
       <RecommendList type={"news"} infoData={newsList} />
-      <Menu mode="horizontal" items={items} selectedKeys={location.pathname} />
+      <Menu
+        mode="horizontal"
+        items={items}
+        selectedKeys={location.pathname}
+        style={{ width: "73rem", marginLeft: "3.5rem" }}
+      />
       <ul style={{ listStyle: "none", width: "78.5rem" }}>
         <li
           style={{
             width: "20rem",
             height: "30rem",
             backgroundColor: "#f2f2f2",
-            marginLeft: "59rem",
+            marginLeft: "55rem",
             marginTop: "3rem",
             borderRadius: "10px",
           }}
@@ -48,7 +53,7 @@ const PromotionNews = () => {
                     style={{
                       width: "60rem",
                       padding: "2rem",
-                      marginLeft: "-4rem",
+                      marginLeft: "1rem",
                     }}
                   >
                     <Link to={`/promotion/news/${item.id}`}>
@@ -60,6 +65,7 @@ const PromotionNews = () => {
                           height: "9rem",
                           borderRadius: "10px",
                           background: "#f2f2f2",
+                          marginLeft: "-2rem",
                         }}
                       />
                     </Link>

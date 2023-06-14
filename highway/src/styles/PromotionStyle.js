@@ -1,4 +1,4 @@
-import { Image, Form } from "antd";
+import { Form } from "antd";
 import styled from "styled-components";
 
 // Promotion.js

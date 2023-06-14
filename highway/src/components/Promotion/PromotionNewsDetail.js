@@ -48,7 +48,7 @@ const PromotionNewsDetail = () => {
               </p>
             </li>
           </ul>
-          <hr style={{ width: "55rem" }} />
+          <hr style={{ width: "50rem", marginLeft: "-2.5rem" }} />
           {newsList[id].content}
         </Col>
         <Col style={{ width: "33rem" }}>
