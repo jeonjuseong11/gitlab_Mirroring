@@ -36,6 +36,7 @@ import PromotionVideoDetail from "./components/Promotion/PromotionVideoDetail";
 import UserInfo from "./components/Profile/UserInfo";
 import ProfileRecentRecord from "./components/Profile/ProfileRecentRecord";
 import BoardMain from "./pages/Board/BoardMain";
+import BoardPostForm from "./components/Board/BoardPostForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -107,10 +108,10 @@ function App() {
               <Route exact path="/schoolboard/question" element={<h1>고민게시판</h1>} />
               <Route exact path="/schoolboard/project" element={<h1>프로젝트 모집</h1>} />
               <Route exact path="/schoolboard/popular" element={<h1>인기글</h1>} />
+              <Route exact path="/schoolboard/:postId" element={<SchoolBoardDetail />} />
             </Route>
+            <Route exact path="/schoolboard/post" element={<BoardPostForm />} />
             <Route exact path="/schoolboard/list" element={<SchoolBoardList />} />
-            <Route exact path="/schoolboard/list/:postId" element={<SchoolBoardDetail />} />
-            <Route exact path="/schoolboard/post" element={<SchoolBoardPost />} />
             <Route exact path="/promotion" element={<Promotion />}>
               <Route exact path="/promotion" element={<PromotionHome />} />
               <Route exact path="/promotion/news" element={<PromotionNews />} />
