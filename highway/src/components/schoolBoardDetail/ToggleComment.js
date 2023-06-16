@@ -100,7 +100,7 @@ const ToggleComment = () => {
   return (
     <>
       {!toggle ? (
-        <Col xs={23} md={11} style={{ marginLeft: "17rem" }}>
+        <Col xs={23} md={11} offset={4}>
           <Button
             type="primary"
             shape="circle"
@@ -111,7 +111,7 @@ const ToggleComment = () => {
           />
         </Col>
       ) : (
-        <Col xs={23} md={11} style={{ marginLeft: "17rem" }}>
+        <Col xs={23} md={11} offset={4}>
           <Button
             type="primary"
             shape="circle"
@@ -121,208 +121,202 @@ const ToggleComment = () => {
             }}
             icon={<CommentOutlined />}
           />
-          <Col>
-            <Input
-              placeholder="댓글을 적어주세요."
-              style={{
-                height: "5rem",
-                marginBottom: "1rem",
-              }}
-            />
-          </Col>
-          <Row gutter={[16, 16]} justify="center">
-            <Col>
-              <List
-                size="large"
-                bordered
-                dataSource={CommentDummyDatas.data}
-                renderItem={(item) => {
-                  const CommentUserChecked = userCheck(item);
-                  return (
-                    <List.Item style={{ padding: "0px" }}>
-                      <ul
+          <Input
+            placeholder="댓글을 적어주세요."
+            style={{
+              height: "5rem",
+              marginBottom: "1rem",
+            }}
+          />
+          <List
+            size="large"
+            bordered
+            dataSource={CommentDummyDatas.data}
+            renderItem={(item) => {
+              const CommentUserChecked = userCheck(item);
+              return (
+                <List.Item style={{ padding: "0px" }}>
+                  <ul
+                    style={{
+                      listStyle: "none",
+                      textAlign: "left",
+                      marginLeft: "-2rem",
+                      width: "50rem",
+                    }}
+                  >
+                    <li style={{ color: "blue" }}>
+                      <li
                         style={{
-                          listStyle: "none",
-                          textAlign: "left",
-                          marginLeft: "-2rem",
-                          width: "50rem",
+                          float: "left",
+                          marginLeft: "1rem",
                         }}
                       >
-                        <li style={{ color: "blue" }}>
+                        {item.userId}
+                        <br />
+                        {item.content}
+                      </li>
+                      {item.id === commentNum ? (
+                        <ul style={{ listStyle: "none" }}>
+                          <li
+                            onClick={() => {
+                              setCommentNum(false);
+                            }}
+                          >
+                            <button>취소</button>
+                          </li>
                           <li
                             style={{
                               float: "left",
-                              marginLeft: "1rem",
+                              width: "38rem",
+                              marginTop: "2rem",
+                              marginLeft: "-2.5rem",
                             }}
                           >
-                            {item.userId}
-                            <br />
-                            {item.content}
+                            <input
+                              placeholder="수정해주세요"
+                              value={inputContent}
+                              onChange={(e) => {
+                                setInputContent(e.target.value);
+                              }}
+                            />
                           </li>
-                          {item.id === commentNum ? (
-                            <ul style={{ listStyle: "none" }}>
-                              <li
+                          <li style={{ width: "45rem" }}>
+                            <button
+                              onClick={() => {
+                                setCommentNum(false);
+                              }}
+                              style={{
+                                width: "9rem",
+                                marginLeft: "1rem",
+                                height: "5rem",
+                                marginTop: "2rem",
+                              }}
+                            >
+                              수정
+                            </button>
+                          </li>
+                        </ul>
+                      ) : (
+                        <li>
+                          {CommentUserChecked ? (
+                            <li>
+                              <button
                                 onClick={() => {
+                                  setParentId(item.id);
                                   setCommentNum(false);
                                 }}
                               >
-                                <button>취소</button>
-                              </li>
-                              <li
-                                style={{
-                                  float: "left",
-                                  width: "38rem",
-                                  marginTop: "2rem",
-                                  marginLeft: "-2.5rem",
+                                답글
+                              </button>
+                              <button
+                                onClick={() => {
+                                  setCommentNum(item.id);
+                                  setParentId(false);
                                 }}
                               >
-                                <input
-                                  placeholder="수정해주세요"
-                                  value={inputContent}
-                                  onChange={(e) => {
-                                    setInputContent(e.target.value);
-                                  }}
-                                />
-                              </li>
-                              <li style={{ width: "45rem" }}>
-                                <button
-                                  onClick={() => {
-                                    setCommentNum(false);
-                                  }}
-                                  style={{
-                                    width: "9rem",
-                                    marginLeft: "1rem",
-                                    height: "5rem",
-                                    marginTop: "2rem",
-                                  }}
-                                >
-                                  수정
-                                </button>
-                              </li>
-                            </ul>
+                                수정
+                              </button>
+                              <button
+                                onClick={() => {
+                                  removePostComment(item);
+                                }}
+                              >
+                                삭제
+                              </button>
+                            </li>
                           ) : (
                             <li>
-                              {CommentUserChecked ? (
-                                <li>
-                                  <button
-                                    onClick={() => {
-                                      setParentId(item.id);
-                                      setCommentNum(false);
-                                    }}
-                                  >
-                                    답글
-                                  </button>
-                                  <button
-                                    onClick={() => {
-                                      setCommentNum(item.id);
-                                      setParentId(false);
-                                    }}
-                                  >
-                                    수정
-                                  </button>
-                                  <button
-                                    onClick={() => {
-                                      removePostComment(item);
-                                    }}
-                                  >
-                                    삭제
-                                  </button>
-                                </li>
-                              ) : (
-                                <li>
-                                  <button
-                                    onClick={() => {
-                                      setParentId(item.id);
-                                      setCommentNum(false);
-                                    }}
-                                  >
-                                    답글
-                                  </button>
-                                </li>
-                              )}
+                              <button
+                                onClick={() => {
+                                  setParentId(item.id);
+                                  setCommentNum(false);
+                                }}
+                              >
+                                답글
+                              </button>
                             </li>
                           )}
                         </li>
+                      )}
+                    </li>
 
-                        <List
-                          dataSource={item.children}
-                          renderItem={(v) => {
-                            setCheckReply(v.length);
-                            return (
-                              <List.Item>
-                                <li>
-                                  {v.id}
-                                  <br />
-                                  {v.content}
-                                </li>
-                                {CommentUserChecked ? (
-                                  <>
-                                    <li>수정</li>
-                                    <li>삭제</li>
-                                  </>
-                                ) : (
-                                  <li></li>
-                                )}
-                              </List.Item>
-                            );
+                    <List
+                      dataSource={item.children}
+                      renderItem={(v) => {
+                        setCheckReply(v.length);
+                        return (
+                          <List.Item>
+                            <li>
+                              {v.id}
+                              <br />
+                              {v.content}
+                            </li>
+                            {CommentUserChecked ? (
+                              <>
+                                <li>수정</li>
+                                <li>삭제</li>
+                              </>
+                            ) : (
+                              <li></li>
+                            )}
+                          </List.Item>
+                        );
+                      }}
+                    />
+
+                    {parentId === item.id ? (
+                      <ul style={{ listStyle: "none" }}>
+                        <li
+                          onClick={() => {
+                            setParentId(false);
                           }}
-                        />
-
-                        {parentId === item.id ? (
-                          <ul style={{ listStyle: "none" }}>
-                            <li
-                              onClick={() => {
-                                setParentId(false);
-                              }}
-                            >
-                              <button>취소</button>
-                            </li>
-                            <li
-                              style={{
-                                float: "left",
-                                width: "38rem",
-                                marginTop: "2rem",
-                                marginLeft: "-2.5rem",
-                              }}
-                            >
-                              <input
-                                value={inputContent}
-                                onChange={(e) => {
-                                  setInputContent(e.target.value);
-                                }}
-                                style={{
-                                  width: "37rem",
-                                  height: "5rem",
-                                }}
-                              />
-                            </li>
-                            <li style={{ width: "45rem" }}>
-                              <button
-                                onClick={() => {
-                                  addCommentReply();
-                                  setCommentNum(false);
-                                }}
-                                style={{
-                                  width: "9rem",
-                                  marginLeft: "1rem",
-                                  height: "5rem",
-                                  marginTop: "2rem",
-                                }}
-                              >
-                                답글달기
-                              </button>
-                            </li>
-                          </ul>
-                        ) : (
-                          <></>
-                        )}
+                        >
+                          <button>취소</button>
+                        </li>
+                        <li
+                          style={{
+                            float: "left",
+                            width: "38rem",
+                            marginTop: "2rem",
+                            marginLeft: "-2.5rem",
+                          }}
+                        >
+                          <input
+                            value={inputContent}
+                            onChange={(e) => {
+                              setInputContent(e.target.value);
+                            }}
+                            style={{
+                              width: "37rem",
+                              height: "5rem",
+                            }}
+                          />
+                        </li>
+                        <li style={{ width: "45rem" }}>
+                          <button
+                            onClick={() => {
+                              addCommentReply();
+                              setCommentNum(false);
+                            }}
+                            style={{
+                              width: "9rem",
+                              marginLeft: "1rem",
+                              height: "5rem",
+                              marginTop: "2rem",
+                            }}
+                          >
+                            답글달기
+                          </button>
+                        </li>
                       </ul>
-                    </List.Item>
-                  );
-                }}
-              />
-            </Col>
-          </Row>
+                    ) : (
+                      <></>
+                    )}
+                  </ul>
+                </List.Item>
+              );
+            }}
+          />
         </Col>
       )}
     </>
