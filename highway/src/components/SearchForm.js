@@ -15,7 +15,7 @@ const SearchForm = ({ setFilterValue, filterValue }) => {
   useEffect(() => {}, [searchText, filterValue]);
   return (
     <>
-      <Row justify="center" gutter={[24, 24]} style={{ marginTop: "2rem" }}>
+      <Row justify="center" gutter={[24, 24]} style={{ marginTop: "3rem" }}>
         <Col xs={24} md={15}>
           <h3>나에게 맞는 분야는 무엇일까요?</h3>
         </Col>
