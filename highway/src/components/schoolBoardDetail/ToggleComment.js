@@ -105,16 +105,16 @@ const ToggleComment = () => {
       <Col xs={23} md={11} offset={4}>
         <div style={{ display: "inline-block", float: "left" }}>
           {good ? (
-            <HeartTwoTone
-              twoToneColor="#eb2f96"
-              key="heart"
-              onClick={onToggleGoods}
-              style={{ marginRight: "0.5rem" }}
-            />
+            <Button type="text" onClick={onToggleGoods}>
+              <HeartTwoTone twoToneColor="#eb2f96" key="heart" onClick={onToggleGoods} />
+              좋아요 {good ? CommentDummyDatas.data.length + 1 : CommentDummyDatas.data.length}
+            </Button>
           ) : (
-            <HeartOutlined key="heart" onClick={onToggleGoods} style={{ marginRight: "0.5rem" }} />
+            <Button type="text" onClick={onToggleGoods}>
+              <HeartOutlined key="heart" /> 좋아요{" "}
+              {good ? CommentDummyDatas.data.length + 1 : CommentDummyDatas.data.length}
+            </Button>
           )}
-          좋아요 {good ? CommentDummyDatas.data.length + 1 : CommentDummyDatas.data.length}
           {!toggle ? (
             <Button
               style={{ marginLeft: "1rem" }}
