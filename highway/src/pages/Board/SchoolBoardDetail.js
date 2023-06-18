@@ -1,13 +1,7 @@
-import { CommentOutlined, FieldTimeOutlined, LikeOutlined } from "@ant-design/icons";
-import { Button, Descriptions, Input, List, Row, Form, Col, Breadcrumb } from "antd";
-import React, { useEffect, useState } from "react";
+import { Col, Breadcrumb } from "antd";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  ADD_COMMENT_REQUEST,
-  LOAD_POST_COMMENTS_REQUEST,
-  REMOVE_POST_COMMENT_REQUEST,
-  UPDATE_POST_COMMENT_REQUEST,
-} from "../../constants/actionTypes";
+import { LOAD_POST_COMMENTS_REQUEST } from "../../constants/actionTypes";
 import { useParams } from "react-router-dom";
 import ToggleComment from "../../components/schoolBoardDetail/ToggleComment";
 import { formatDate } from "./BoardMain";
