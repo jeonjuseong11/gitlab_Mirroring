@@ -2,7 +2,7 @@ export const CommentDummyDatas = {
   data: [
     {
       id: 204,
-      content: "undefined",
+      content: "댓글1",
       userId: "Lee",
       parentId: null,
       isDeleted: null,
@@ -29,8 +29,8 @@ export const CommentDummyDatas = {
         },
         {
           id: 212,
-          content: "대댓글1-2",
-          userId: "admin",
+          content: "대댓글1-3",
+          userId: "Lee",
           parentId: 204,
           isDeleted: null,
           children: [],
@@ -43,7 +43,7 @@ export const CommentDummyDatas = {
     },
     {
       id: 206,
-      content: "undefined",
+      content: "댓글2",
       userId: "Lee",
       parentId: null,
       isDeleted: null,
@@ -64,7 +64,7 @@ export const CommentDummyDatas = {
     },
     {
       id: 208,
-      content: "undefined",
+      content: "댓글3",
       userId: "Lee",
       parentId: null,
       isDeleted: null,
@@ -74,7 +74,7 @@ export const CommentDummyDatas = {
     },
     {
       id: 213,
-      content: "undefined",
+      content: "댓글4",
       userId: "admin",
       parentId: null,
       isDeleted: null,
@@ -84,7 +84,7 @@ export const CommentDummyDatas = {
     },
     {
       id: 214,
-      content: "123",
+      content: "댓글5",
       userId: "admin",
       parentId: null,
       isDeleted: null,
