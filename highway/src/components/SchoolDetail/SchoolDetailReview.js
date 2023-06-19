@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { Col, Rate, Row } from "antd";
-import { SubPageWrapper, StarRateWrapper } from "./SchoolDetailStyle";
+import { StarRateWrapper } from "./SchoolDetailStyle";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import OneLineReview from "./OneLineReview";
@@ -9,6 +9,7 @@ import ReviewDetail from "../ReviewDetail";
 const SchoolDetailReview = () => {
   const { schools } = useSelector((state) => state.school);
   const { schoolId } = useParams();
+
   // console.log(schoolId);
   const school = schools[schoolId - 1];
   // console.log(school);
@@ -30,9 +31,7 @@ const SchoolDetailReview = () => {
               <p style={{ fontSize: "1rem" }}>리뷰가 없습니다.</p>
             ) : (
               <>
-                <h1 style={{ fontSize: "3rem", fontWeight: "500" }}>
-                  {totalStarRate}
-                </h1>
+                <h1 style={{ fontSize: "3rem", fontWeight: "500" }}>{totalStarRate}</h1>
                 <Rate
                   disabled
                   defaultValue={totalStarRate}
