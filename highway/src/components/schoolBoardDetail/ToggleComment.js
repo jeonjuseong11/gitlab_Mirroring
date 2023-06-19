@@ -1,5 +1,5 @@
 import { Col, Input, List, Button, Row } from "antd";
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import {
   ADD_COMMENT_REQUEST,
   ADD_POST_COMMENT_REPLY_REQUEST,
@@ -42,7 +42,7 @@ const ToggleComment = () => {
   const me = { userId: "Lee" };
   // const { schoolBoardPostComments } = useSelector((state) => state.post);
   // const schoolBoardPostCommentsData = schoolBoardPostComments.data;
-  console.log(CommentDummyDatas);
+  // console.log(CommentDummyDatas);
   const { postId } = useParams();
   const [replyCommentNum, setReplyCommnetNum] = useState([]);
   const [commentNum, setCommentNum] = useState(false);
@@ -51,7 +51,10 @@ const ToggleComment = () => {
   const [InputContent, setInputContent] = useState("");
   const [checkReply, setCheckReply] = useState(false);
   const [toggle, setToggle] = useState(false);
-
+  const [good, setGood] = useState(false);
+  const onToggleGoods = useCallback(() => {
+    setGood(!good);
+  });
   const userCheck = (item) => {
     if (me === null) {
       return false;

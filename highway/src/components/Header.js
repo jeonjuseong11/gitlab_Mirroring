@@ -1,4 +1,10 @@
-import { FileTextOutlined } from "@ant-design/icons";
+import {
+  CommentOutlined,
+  CustomerServiceOutlined,
+  FileTextOutlined,
+  NotificationOutlined,
+  QuestionCircleOutlined,
+} from "@ant-design/icons";
 import { Avatar, Button, Col, FloatButton, Row } from "antd";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -65,11 +71,34 @@ const Header = () => {
         icon={<FileTextOutlined />}
         tooltip={<div>적성검사 하러가기</div>}
         style={{
-          height: 60,
-          width: 60,
+          // height: 60,
+          // width: 60,
           right: 40,
         }}
       />
+      {/* <FloatButton
+        type="primary"
+        icon={<QuestionCircleOutlined />}
+        tooltip={<div>서비스에 대한 생각을 남겨주세요</div>}
+        style={{
+          height: 60,
+          width: 60,
+          right: 40,
+          bottom: 120,
+        }}
+      /> */}
+      <FloatButton.Group
+        trigger="click"
+        type="primary"
+        style={{ right: 40, bottom: 100 }}
+        icon={<CustomerServiceOutlined />}
+      >
+        <FloatButton
+          icon={<CommentOutlined />}
+          tooltip={<div>서비스에 대한 생각을 남겨주세요</div>}
+        />
+        <FloatButton icon={<QuestionCircleOutlined />} tooltip={<div>버그 리포트</div>} />
+      </FloatButton.Group>
     </>
   );
 };

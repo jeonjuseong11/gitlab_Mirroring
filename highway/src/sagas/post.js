@@ -178,7 +178,7 @@ function* loadTagPosts(action) {
 
 function loadPostsAPI(data) {
   //게시글 리스트 로딩
-  return axios.get(``);
+  return axios.get(`/board`);
 }
 
 function* loadPosts(action) {
@@ -204,15 +204,15 @@ function addPostAPI(data) {
 
 function* addPost(action) {
   try {
-    const result = yield call(addPostAPI, action.data);
+    // const result = yield call(addPostAPI, action.data);
     yield put({
       type: ADD_POST_SUCCESS,
-      data: result.data,
+      data: action.data,
     });
-    yield put({
-      type: ADD_POST_TO_ME,
-      data: result.data.id,
-    });
+    // yield put({
+    //   type: ADD_POST_TO_ME,
+    //   data: result.data.id,
+    // });
   } catch (err) {
     console.error(err);
     yield put({
@@ -271,10 +271,7 @@ function* updatePost(action) {
 function addCommentAPI(data) {
   // 게시물 댓글 작성
   // return axios.post(`/post/${data.postId}/comment`, data); // POST /post/1/comment
-  return axios.post(
-    `/comment?content=${data.content}&boardId=${data.boardId}`,
-    data
-  ); // POSTMAN에 나온 주소
+  return axios.post(`/comment?content=${data.content}&boardId=${data.boardId}`, data); // POSTMAN에 나온 주소
 }
 
 function* addComment(action) {

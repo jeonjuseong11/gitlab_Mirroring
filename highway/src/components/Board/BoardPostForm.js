@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Input, Button, Upload, message, Modal, Row, Col, Select } from "antd";
 import { EditOutlined, PlusOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { ADD_POST_REQUEST } from "../../constants/actionTypes";
 
 const { TextArea } = Input;
 const getBase64 = (file) =>
@@ -16,6 +18,28 @@ const onFinish = (values) => {
   // 여기에서 폼 데이터를 서버로 전송하거나 처리할 수 있습니다.
 };
 const BoardPostForm = () => {
+  const boardPost = () => {
+    dispatch({
+      type: ADD_POST_REQUEST,
+      data: {
+        values: {
+          id: reviews.length + 1,
+          author: "11", //로그인 오류로 인한 테스트용
+          // author: me.userId,
+          tags: ["디자인"],
+          content: values.content,
+          secretContent: values.secretContent,
+          datetime: moment(),
+          trafficRate: values.trafficRate,
+          facilityRate: values.facilityRate,
+          cafeteriaRate: values.cafeteriaRate,
+          educationRate: values.educationRate,
+          employmentRate: values.employmentRate,
+        },
+        schoolId: schoolId,
+      },
+    });
+  };
   const [form] = Form.useForm();
   const [previewVisible, setPreviewVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
