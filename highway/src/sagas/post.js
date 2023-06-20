@@ -176,9 +176,8 @@ function* loadTagPosts(action) {
   }
 }
 
-function loadPostsAPI(data) {
-  //게시글 리스트 로딩
-  return axios.get(`/board`);
+function loadPostsAPI() {
+  return axios.get(`/board/list`);
 }
 
 function* loadPosts(action) {
@@ -186,7 +185,7 @@ function* loadPosts(action) {
     const result = yield call(loadPostsAPI, action.data);
     yield put({
       type: LOAD_POSTS_SUCCESS,
-      data: result.data,
+      data: result.data.data,
     });
   } catch (err) {
     console.error(err);

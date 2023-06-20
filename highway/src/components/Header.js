@@ -12,6 +12,7 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { LOGOUT_REQUEST } from "../constants/actionTypes";
 import { NoDecoLink } from "../styles/PageStyle";
+import { info } from "../utils/Message";
 const imgUrl = "/assets/TitleIcon.png";
 //사이트 로고 부분
 const Title = styled(Link)`
@@ -25,6 +26,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const onLogOut = () => {
+    info("로그아웃");
     dispatch({
       type: LOGOUT_REQUEST,
     });
