@@ -118,50 +118,50 @@ export const initialState = {
   ],
   school: [],
   schoolReviews: [
-    {
-      id: 1,
-      author: "student1",
-      tags: "전기전자과",
-      trafficRate: 5.0,
-      facilityRate: 5.0,
-      cafeteriaRate: 5.0,
-      educationRate: 5.0,
-      employmentRate: 5.0,
-      content: "Review1 contents",
-    },
-    {
-      id: 2,
-      author: "student2",
-      tags: "컴퓨터소프트웨어과",
-      trafficRate: 5.0,
-      facilityRate: 5.0,
-      cafeteriaRate: 5.0,
-      educationRate: 5.0,
-      employmentRate: 5.0,
-      content: "Review2 contents",
-    },
-    {
-      id: 3,
-      author: "student3",
-      tags: "전기전자과",
-      trafficRate: 5.0,
-      facilityRate: 5.0,
-      cafeteriaRate: 5.0,
-      educationRate: 5.0,
-      employmentRate: 5.0,
-      content: "Review3 contents",
-    },
-    {
-      id: 4,
-      author: "student4",
-      tags: "산업디자인과",
-      trafficRate: 5.0,
-      facilityRate: 5.0,
-      cafeteriaRate: 5.0,
-      educationRate: 5.0,
-      employmentRate: 5.0,
-      content: "Review4 contents",
-    },
+    // {
+    //   id: 1,
+    //   author: "student1",
+    //   tags: "전기전자과",
+    //   trafficRate: 5.0,
+    //   facilityRate: 5.0,
+    //   cafeteriaRate: 5.0,
+    //   educationRate: 5.0,
+    //   employmentRate: 5.0,
+    //   content: "Review1 contents",
+    // },
+    // {
+    //   id: 2,
+    //   author: "student2",
+    //   tags: "컴퓨터소프트웨어과",
+    //   trafficRate: 5.0,
+    //   facilityRate: 5.0,
+    //   cafeteriaRate: 5.0,
+    //   educationRate: 5.0,
+    //   employmentRate: 5.0,
+    //   content: "Review2 contents",
+    // },
+    // {
+    //   id: 3,
+    //   author: "student3",
+    //   tags: "전기전자과",
+    //   trafficRate: 5.0,
+    //   facilityRate: 5.0,
+    //   cafeteriaRate: 5.0,
+    //   educationRate: 5.0,
+    //   employmentRate: 5.0,
+    //   content: "Review3 contents",
+    // },
+    // {
+    //   id: 4,
+    //   author: "student4",
+    //   tags: "산업디자인과",
+    //   trafficRate: 5.0,
+    //   facilityRate: 5.0,
+    //   cafeteriaRate: 5.0,
+    //   educationRate: 5.0,
+    //   employmentRate: 5.0,
+    //   content: "Review4 contents",
+    // },
   ],
 };
 
@@ -188,9 +188,9 @@ const reducer = (state = initialState, action) =>
         draft.addSchoolReviewError = null;
         break;
       case ADD_SCHOOL_REVIEW_SUCCESS:
-        const school = draft.schools.find((v) => v.id === parseInt(action.data.schoolId));
-        school.reviews.unshift(action.data.values);
-        console.log(action.data);
+        // const school = draft.schools.find((v) => v.id === parseInt(action.data.schoolId));
+        draft.schoolReviews.unshift(action.data);
+        // console.log(action.data);
         draft.addSchoolReviewLoading = false;
         draft.addSchoolReviewDone = true;
         break;
@@ -204,9 +204,9 @@ const reducer = (state = initialState, action) =>
         draft.loadSchoolReviewsError = null;
         break;
       case LOAD_SCHOOL_REVIEWS_SUCCESS:
-        // draft.schoolReviews = action.data;
-        draft.schools.find((v) => v.id === parseInt(action.data.schoolId)).reviews =
-          draft.schoolReviews;
+        draft.schoolReviews = action.data;
+        // draft.schools.find((v) => v.id === parseInt(action.data.schoolId)).reviews =
+        //   draft.schoolReviews;
         draft.loadSchoolReviewsLoading = false;
         draft.loadSchoolReviewsDone = true;
         break;

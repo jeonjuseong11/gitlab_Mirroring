@@ -6,7 +6,8 @@ import "moment/locale/ko"; //한국어 적용
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { ADD_SCHOOL_REVIEW_REQUEST } from "../constants/actionTypes";
+import { ADD_SCHOOL_REVIEW_REQUEST, LOAD_SCHOOL_REVIEWS_REQUEST } from "../constants/actionTypes";
+import axios from "axios";
 const FormItemWrapper = styled.div`
   display: flex;
   width: 100%;
@@ -73,43 +74,50 @@ const DetailReviewForm = ({ setWrite }) => {
       return "";
     }
   };
+  const loadSchoolReviews = ({ schoolId }) => {
+    dispatch({
+      type: LOAD_SCHOOL_REVIEWS_REQUEST,
+      data: schoolId,
+    });
+  };
+  const accessToken = localStorage.getItem("ACCESSTOKEN");
+  axios.defaults.headers.common["ACCESS_TOKEN"] = accessToken;
+
   useEffect(() => {
     console.log(reviews);
   }, [reviews]);
-  const handleSubmit = useCallback(
-    (values) => {
-      // console.log(values);
-      if (!values) {
-        alert("빈칸이 있습니다.");
-        return;
-      }
-
-      dispatch({
-        type: ADD_SCHOOL_REVIEW_REQUEST,
-        data: {
-          values: {
-            id: reviews.length + 1,
-            author: "11", //로그인 오류로 인한 테스트용
-            // author: me.userId,
-            tags: ["디자인"],
-            content: values.content,
-            secretContent: values.secretContent,
-            datetime: moment(),
-            trafficRate: values.trafficRate,
-            facilityRate: values.facilityRate,
-            cafeteriaRate: values.cafeteriaRate,
-            educationRate: values.educationRate,
-            employmentRate: values.employmentRate,
-          },
-          schoolId: schoolId,
-        },
-      });
-
-      form.setFieldsValue = "";
-      setWrite(false);
-    },
-    [schoolId]
-  );
+  const handleSubmit = useCallback((values) => {
+    // console.log(values);
+    if (!values) {
+      alert("빈칸이 있습니다.");
+      return;
+    }
+    dispatch({
+      type: ADD_SCHOOL_REVIEW_REQUEST,
+      data: {
+        // author: "11", //로그인 오류로 인한 테스트용
+        author: me.userId,
+        tags: "디자인",
+        content: values.content,
+        // secretContent: values.secretContent,
+        // datetime: moment(),
+        trafficRate: values.trafficRate,
+        facilityRate: values.facilityRate,
+        cafeteriaRate: values.cafeteriaRate,
+        educationRate: values.educationRate,
+        employmentRate: values.employmentRate,
+        schoolId: schoolId,
+      },
+    });
+    form.setFieldsValue = "";
+    setWrite(false);
+    // dispatch({
+    //   type: LOAD_SCHOOL_REVIEWS_REQUEST,
+    //   data: {
+    //     schoolId: schoolId,
+    //   },
+    // });
+  }, []);
 
   return (
     <Form

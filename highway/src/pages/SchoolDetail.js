@@ -13,13 +13,16 @@ import { StarFilled, StarOutlined } from "@ant-design/icons";
 import DepartsTags from "../components/DepartsTags";
 import SchoolDetailInfo from "../components/SchoolDetail/SchoolDetailInfo";
 import { LOAD_SCHOOL_REVIEWS_REQUEST } from "../constants/actionTypes";
+import axios from "axios";
 
 const SchoolDetail = () => {
   const { schoolId } = useParams();
+  const accessToken = localStorage.getItem("ACCESSTOKEN");
   const { schools } = useSelector((state) => state.school);
   // console.log(school[schoolId - 1]);
   const dispatch = useDispatch();
   const loadSchoolReviews = () => {
+    axios.defaults.headers.common["ACCESS_TOKEN"] = accessToken;
     dispatch({
       type: LOAD_SCHOOL_REVIEWS_REQUEST,
       data: {
@@ -27,6 +30,7 @@ const SchoolDetail = () => {
       },
     });
   };
+
   useEffect(() => {
     loadSchoolReviews();
   }, []);
