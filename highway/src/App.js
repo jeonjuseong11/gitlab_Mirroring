@@ -29,7 +29,7 @@ import axios from "axios";
 import SchoolBoard from "./pages/SchoolBoard";
 import SchoolBoardList from "./pages/Board/SchoolBoardList";
 import SchoolBoardDetail from "./pages/Board/SchoolBoardDetail";
-import SchoolBoardPost from "./pages/Board/SchoolBoardPost";
+
 import moment from "moment";
 import PromotionHome from "./components/Promotion/PromotionHome";
 import PromotionVideoDetail from "./components/Promotion/PromotionVideoDetail";
@@ -109,12 +109,8 @@ function App() {
               <Route exact path="/profile/recentrecord" element={<ProfileRecentRecord />} />
             </Route>
             <Route element={<SchoolBoard />}>
-              <Route exact path="/schoolboard/" element={<BoardMain />} />
-              <Route exact path="/schoolboard/free" element={<h1>자유게시판</h1>} />
-              <Route exact path="/schoolboard/question" element={<h1>고민게시판</h1>} />
-              <Route exact path="/schoolboard/project" element={<h1>프로젝트 모집</h1>} />
-              <Route exact path="/schoolboard/popular" element={<h1>인기글</h1>} />
-              <Route exact path="/schoolboard/:postId" element={<SchoolBoardDetail />} />
+              <Route exact path="/schoolboard/:category" element={<BoardMain />} />
+              <Route exact path="/schoolboard/:category/:postId" element={<SchoolBoardDetail />} />
             </Route>
             <Route exact path="/schoolboard/post" element={<BoardPostForm />} />
             <Route exact path="/schoolboard/list" element={<SchoolBoardList />} />
