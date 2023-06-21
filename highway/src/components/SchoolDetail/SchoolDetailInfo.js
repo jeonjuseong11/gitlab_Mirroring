@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import SchoolDetailReview from "./SchoolDetailReview";
 import { QuestionWrapper, SubPageWrapper } from "./SchoolDetailStyle";
 
-const SchoolDetailInfo = () => {
+const SchoolDetailInfo = ({ rateAverages, roundedTotalRate, reviewCount }) => {
   const { schoolId } = useParams();
   const schools = useSelector((state) => state.school.schools);
   const school = schools[schoolId - 1];
@@ -52,7 +52,11 @@ const SchoolDetailInfo = () => {
           <SchoolDetailJob />
         </Col>
       </Row> */}
-      <SchoolDetailReview />
+      <SchoolDetailReview
+        reviewCount={reviewCount}
+        rateAverages={rateAverages}
+        roundedTotalRate={roundedTotalRate}
+      />
     </SubPageWrapper>
   );
 };
