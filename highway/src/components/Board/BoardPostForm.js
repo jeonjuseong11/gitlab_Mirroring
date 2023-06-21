@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Form, Input, Button, Upload, message, Modal, Row, Col, Select } from "antd";
 import { EditOutlined, PlusOutlined } from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import { ADD_POST_REQUEST } from "../../constants/actionTypes";
 
 const { TextArea } = Input;
@@ -78,25 +76,22 @@ const BoardPostForm = () => {
       <Row gutter={[16, 16]} justify="center">
         <Col xs={24} md={15} style={{ textAlign: "left", marginTop: "1rem", padding: "1rem" }}>
           <Form form={form} onFinish={onFinish}>
-            <Form.Item>
+            <Form.Item name="category">
               <Select
                 placeholder="게시판 종류"
                 style={{
                   width: "30%",
                   borderRadius: "0",
                 }}
-              />
-              <Select
-                placeholder="관련 태그"
-                style={{
-                  width: "30%",
-                  borderRadius: "0",
-                  marginLeft: "1rem",
-                }}
+                options={[
+                  { value: "자유게시판", label: "자유게시판" },
+                  { value: "질문게시판", label: "질문게시판" },
+                  { value: "프로젝트 모집", label: "프로젝트 모집" },
+                ]}
               />
             </Form.Item>
             <Form.Item name="title">
-              <Input className="custom-input" placeholder="제목을 입력해주세요" style={{}} />
+              <Input className="custom-input" placeholder="제목을 입력해주세요" />
             </Form.Item>
             <Form.Item name="content">
               <TextArea

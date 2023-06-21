@@ -26,11 +26,15 @@ const SchoolBoardDetail = () => {
       <Col xs={23} md={11} style={{ textAlign: "left" }}>
         <Breadcrumb
           items={[
+            // {
+            //   title: <a href="">{schoolBoardPosts[postId - 1].board}</a>, //게시판으로 이동
+            // },
             {
-              title: <a href="">{schoolBoardPosts[postId - 1].board}</a>, //게시판으로 이동
-            },
-            {
-              title: <a href="">{schoolBoardPosts[postId - 1].category}</a>, //x특성화 분야로 이동하게
+              title: (
+                <a href={`/schoolboard/${schoolBoardPosts[postId - 1].category}`}>
+                  {schoolBoardPosts[postId - 1].category}
+                </a>
+              ), //x특성화 분야로 이동하게
             },
           ]}
         />
