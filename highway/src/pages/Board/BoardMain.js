@@ -59,9 +59,16 @@ const BoardMain = () => {
       item.title.toLowerCase().includes(searchText.toLowerCase())
     );
   }
-  if (category == "all") {
-    filteredData = sortedData;
-  }
+
+  const changeCategory = (category) => {
+    if (category == 1) {
+      return "자유게시판";
+    } else if (category == 2) {
+      return "프로젝트모집";
+    } else if (category == 3) {
+      return "고민게시판";
+    }
+  };
 
   const handleSortOrder = (order) => {
     setSortOrder((prevOrder) => (prevOrder === order ? "" : order));
@@ -138,7 +145,7 @@ const BoardMain = () => {
                   <IconText icon={MessageOutlined} text="2" key="list-vertical-message" />,
                 ]}
               >
-                <span style={{ color: "gray" }}>{item.category}</span>
+                <span style={{ color: "gray" }}>{changeCategory(item.category)}</span>
                 <List.Item.Meta title={item.title} description={item.content} />
                 <div
                   style={{
