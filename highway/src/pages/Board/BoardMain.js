@@ -29,6 +29,16 @@ export const formatDate = (dateString) => {
     return `${months}달 전`;
   }
 };
+
+export const changeCategory = (category) => {
+  if (category == 1) {
+    return "자유게시판";
+  } else if (category == 2) {
+    return "프로젝트모집";
+  } else if (category == 3) {
+    return "고민게시판";
+  }
+};
 const BoardMain = () => {
   const { category } = useParams();
   const { schoolBoardPosts } = useSelector((state) => state.post);
@@ -59,16 +69,6 @@ const BoardMain = () => {
       item.title.toLowerCase().includes(searchText.toLowerCase())
     );
   }
-
-  const changeCategory = (category) => {
-    if (category == 1) {
-      return "자유게시판";
-    } else if (category == 2) {
-      return "프로젝트모집";
-    } else if (category == 3) {
-      return "고민게시판";
-    }
-  };
 
   const handleSortOrder = (order) => {
     setSortOrder((prevOrder) => (prevOrder === order ? "" : order));

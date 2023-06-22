@@ -3,6 +3,7 @@ import { Col, List, Row } from "antd";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
+import { changeCategory } from "../pages/Board/BoardMain";
 import { IconText } from "./Card/CardStyle";
 
 const HomeBoardList = () => {
@@ -45,7 +46,7 @@ const HomeBoardList = () => {
                     transition: "background 0.3s",
                   }}
                 >
-                  <span style={{ color: "gray" }}>{item.category}</span>
+                  <span style={{ color: "gray" }}>{changeCategory(item.category)}</span>
                   <List.Item.Meta title={item.title} description={item.content} />
                   <List.Item.Meta
                     description={
