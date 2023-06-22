@@ -270,7 +270,10 @@ function* updatePost(action) {
 function addCommentAPI(data) {
   // 게시물 댓글 작성
   // return axios.post(`/post/${data.postId}/comment`, data); // POST /post/1/comment
-  return axios.post(`/comment?content=${data.content}&boardId=${data.boardId}`, data); // POSTMAN에 나온 주소
+  return axios.post(
+    `/comment/list?content=${data.content}&boardId=${data.boardId}`,
+    data
+  ); // POSTMAN에 나온 주소
 }
 
 function* addComment(action) {
@@ -291,7 +294,7 @@ function* addComment(action) {
 
 function loadPostCommentsAPI(data) {
   //학교 게시판 댓글 조회
-  return axios.get(`/comment?boardId=${data.boardId}`);
+  return axios.get(`/comment/list?boardId=${data.boardId}`);
 }
 
 function* loadPostComments(action) {
@@ -299,7 +302,7 @@ function* loadPostComments(action) {
     const result = yield call(loadPostCommentsAPI, action.data);
     yield put({
       type: LOAD_POST_COMMENTS_SUCCESS,
-      data: result.data,
+      data: result.data.data,
     });
   } catch (err) {
     console.error(err);
@@ -312,7 +315,7 @@ function* loadPostComments(action) {
 
 function removePostCommentAPI(data) {
   // 게시물 댓글 삭제
-  return axios.delete(`/comment?id=${data.id}`, data);
+  return axios.delete(`/comment/list?id=${data.id}`, data);
 }
 
 function* removePostComment(action) {
@@ -333,7 +336,7 @@ function* removePostComment(action) {
 
 function updatePostCommentAPI(data) {
   // 게시물 댓글 수정
-  return axios.put(`/comment?id=${data.id}&content=${data.content}`, data);
+  return axios.put(`/comment/list?id=${data.id}&content=${data.content}`, data);
 }
 
 function* updatePostComment(action) {
