@@ -77,8 +77,8 @@ const SchoolBoard = () => {
               borderRadius: "10px",
             }}
           >
-            <Menu.Item key="/schoolboard/all">
-              <NavLink to="/schoolboard/all">전체</NavLink>
+            <Menu.Item key="/schoolboard">
+              <NavLink to="/schoolboard">전체</NavLink>
             </Menu.Item>
             <Menu.Item key="/schoolboard/free">
               <NavLink to="/schoolboard/free">😀 자유게시판</NavLink>

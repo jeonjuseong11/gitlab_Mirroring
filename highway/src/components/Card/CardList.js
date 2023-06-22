@@ -50,7 +50,7 @@ const CardList = ({ filterValue }) => {
           renderItem={(item) => (
             <List.Item key={item.id}>
               <Col>
-                <Link to={`/schooldetail/${item.id}/review`}>
+                <Link to={`/schooldetail/${item.id}`}>
                   <Card
                     hoverable
                     bodyStyle={{
@@ -68,11 +68,11 @@ const CardList = ({ filterValue }) => {
                     <Meta
                       description={
                         <CardItem>
-                          <IconText
+                          {/* <IconText
                             icon={StarOutlined}
                             text={item.reviews.length}
                             key="list-vertical-star-o"
-                          />
+                          /> */}
                           <IconText
                             icon={UserOutlined}
                             text={item.members.length}

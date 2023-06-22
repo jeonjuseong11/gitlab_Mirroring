@@ -109,6 +109,7 @@ function App() {
               <Route exact path="/profile/recentrecord" element={<ProfileRecentRecord />} />
             </Route>
             <Route element={<SchoolBoard />}>
+              <Route exact path="/schoolboard/" element={<BoardMain />} />
               <Route exact path="/schoolboard/:category" element={<BoardMain />} />
               <Route exact path="/schoolboard/:category/:postId" element={<SchoolBoardDetail />} />
             </Route>
@@ -122,22 +123,7 @@ function App() {
             <Route exact path="/promotion/news/:newsId" element={<PromotionNewsDetail />} />
             <Route exact path="/promotion/videos/:videoId" element={<PromotionVideoDetail />} />
             <Route exact path="/schoolranking" element={<SchoolRanking />} />
-            <Route exact path="/schooldetail/:schoolId" element={<SchoolDetail />}>
-              <Route>
-                <Route exact path="/schooldetail/:schoolId/info" element={<SchoolDetailInfo />} />
-                <Route exact path="/schooldetail/:schoolId/job" element={<SchoolDetailJob />} />
-                <Route
-                  exact
-                  path="/schooldetail/:schoolId/review"
-                  element={<SchoolDetailReview />}
-                />
-                <Route
-                  exact
-                  path="/schooldetail/:schoolId/question"
-                  element={<SchoolDetailQuestion />}
-                />
-              </Route>
-            </Route>
+            <Route exact path="/schooldetail/:schoolId" element={<SchoolDetail />} />
           </Route>
         </Routes>
       </div>
