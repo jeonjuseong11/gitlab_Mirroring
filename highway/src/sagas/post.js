@@ -73,7 +73,7 @@ function* uploadImages(action) {
 
 function likePostAPI(data) {
   //게시글 좋아요
-  return axios.patch(``);
+  return axios.post(`heart?boardId=${data.boardId}`);
 }
 
 function* likePost(action) {
@@ -94,7 +94,7 @@ function* likePost(action) {
 
 function unlikePostAPI(data) {
   //게시글 좋아요 취소
-  return axios.delete(``);
+  return axios.delete(`heart?boardId=${data.boardId}`);
 }
 
 function* unlikePost(action) {
@@ -271,10 +271,7 @@ function* updatePost(action) {
 function addCommentAPI(data) {
   // 게시물 댓글 작성
   // return axios.post(`/post/${data.postId}/comment`, data); // POST /post/1/comment
-  return axios.post(
-    `/comment/list?content=${data.content}&boardId=${data.boardId}`,
-    data
-  ); // POSTMAN에 나온 주소
+  return axios.post(`/comment?content=${data.content}&boardId=${data.boardId}`, data); // POSTMAN에 나온 주소
 }
 
 function* addComment(action) {

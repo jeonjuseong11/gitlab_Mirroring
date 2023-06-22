@@ -67,7 +67,7 @@ const ToggleComment = () => {
     dispatch({
       type: ADD_COMMENT_REQUEST,
       data: {
-        content: values.content,
+        content: values,
         createData: moment(),
         modifiedDate: moment(),
         userId: me.userId,
