@@ -1,12 +1,7 @@
 import { Col, Input, List, Button, Row } from "antd";
 import React, { useState, useCallback } from "react";
-import {
-  ADD_COMMENT_REQUEST,
-  ADD_POST_COMMENT_REPLY_REQUEST,
-  REMOVE_POST_COMMENT_REQUEST,
-  UPDATE_POST_COMMENT_REQUEST,
-} from "../../constants/actionTypes";
-import { useDispatch } from "react-redux";
+import { ADD_COMMENT_REQUEST } from "../../constants/actionTypes";
+import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import { useParams } from "react-router-dom";
 import CommentDummyDatas from "../../utils/CommentDummyDatas";
@@ -39,8 +34,7 @@ export const formatDate = (dateString) => {
 
 const ToggleComment = () => {
   const dispatch = useDispatch();
-  // const { me } = useSelector((state) => state.user);
-  const me = { userId: "Lee" };
+  const { me } = useSelector((state) => state.user);
   // const { schoolBoardPostComments } = useSelector((state) => state.post);
   // const schoolBoardPostCommentsData = schoolBoardPostComments.data;
   // console.log(CommentDummyDatas);
@@ -56,40 +50,6 @@ const ToggleComment = () => {
   const onToggleGoods = useCallback(() => {
     setGood(!good);
   });
-
-  const updatePostComment = (item) => {
-    dispatch({
-      type: UPDATE_POST_COMMENT_REQUEST,
-      data: {
-        id: item.id,
-        content: InputContent,
-      },
-    });
-  };
-  const removePostComment = (item) => {
-    console.log("RemovePostCommnet");
-    dispatch({
-      type: REMOVE_POST_COMMENT_REQUEST,
-      data: {
-        id: item.id,
-      },
-    });
-  };
-
-  const addCommentReply = () => {
-    console.log("addCommentReply");
-    dispatch({
-      type: ADD_POST_COMMENT_REPLY_REQUEST,
-      data: {
-        content: InputContent,
-        createData: moment(),
-        modifiedDate: moment(),
-        userId: me.userId,
-        boardId: postId,
-        parentId: parentId,
-      },
-    });
-  };
 
   const onCheckReply = (item) => {
     if (item > 0) {
@@ -128,9 +88,19 @@ const ToggleComment = () => {
       ) : (
         <>
           <Col xs={23} md={11} offset={4} justify="center">
-            <Col xs={23} md={23}>
+            <Col xs={24} md={24}>
               <ToggleGoodAndCommentBtn toggle={toggle} setToggle={setToggle} />
               <Input
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    if (me === null) {
+                      alert("로그인이 필요한 기능입니다.");
+                    } else {
+                      onFinish(e.target.value);
+                    }
+                  }
+                }}
+                name="content"
                 placeholder="댓글을 적어주세요."
                 style={{
                   height: "5rem",

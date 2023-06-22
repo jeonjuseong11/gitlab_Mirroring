@@ -1,7 +1,10 @@
 import { Col, Breadcrumb } from "antd";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { LOAD_POSTS_REQUEST, LOAD_POST_COMMENTS_REQUEST } from "../../constants/actionTypes";
+import {
+  LOAD_POSTS_REQUEST,
+  LOAD_POST_COMMENTS_REQUEST,
+} from "../../constants/actionTypes";
 import { useParams } from "react-router-dom";
 import ToggleComment from "../../components/schoolBoardDetail/ToggleComment";
 import { formatDate } from "./BoardMain";
@@ -13,13 +16,14 @@ const SchoolBoardDetail = () => {
   const [parentId, setParentId] = useState(null);
   const { postId, category } = useParams();
 
-  const schoolBoardPost = schoolBoardPosts.find((post) => post.id === postId - 1);
-  console.log(schoolBoardPost);
+  const schoolBoardPost = schoolBoardPosts.find(
+    (post) => post.id === postId - 1
+  );
   const loadPostComments = () => {
-    // console.log("loadPostCommnets");
-    // dispatch({
-    //   type: LOAD_POSTS_REQUEST,
-    // });
+    console.log("loadPostCommnets");
+    dispatch({
+      type: LOAD_POSTS_REQUEST,
+    });
     dispatch({
       type: LOAD_POST_COMMENTS_REQUEST,
       data: {

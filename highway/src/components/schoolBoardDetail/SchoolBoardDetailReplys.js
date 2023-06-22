@@ -1,7 +1,13 @@
-import { Col, ConfigProvider, Empty, Input, List, Row } from "antd";
+import { Button, Col, ConfigProvider, Form, Input, List, Row } from "antd";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
-const SchoolBoardDetailReplys = ({ info, me }) => {
+const SchoolBoardDetailReplys = ({
+  info,
+  removePostComment,
+  updatePostComment,
+}) => {
+  const { me } = useSelector((state) => state.user);
   const [commentNum, setCommentNum] = useState(false);
   const [parentId, setParentId] = useState(false);
 
@@ -78,6 +84,9 @@ const SchoolBoardDetailReplys = ({ info, me }) => {
                                       float: "right",
                                       marginLeft: "0.5rem",
                                     }}
+                                    onClick={() => {
+                                      removePostComment(v);
+                                    }}
                                   >
                                     삭제
                                   </li>
@@ -92,17 +101,6 @@ const SchoolBoardDetailReplys = ({ info, me }) => {
                                   >
                                     수정
                                   </li>
-                                  {/* <li
-                                  style={{
-                                    float: "right",
-                                  }}
-                                  onClick={() => {
-                                    setParentId(v.id);
-                                    setCommentNum(false);
-                                  }}
-                                >
-                                  답
-                                </li> */}
                                 </ul>
                               ) : (
                                 <li
@@ -150,17 +148,6 @@ const SchoolBoardDetailReplys = ({ info, me }) => {
                           {parentId !== v.id ? (
                             <></>
                           ) : (
-                            //   <li
-                            //     style={{
-                            //       float: "right",
-                            //     }}
-                            //     onClick={() => {
-                            //       setParentId(v.id);
-                            //       setCommentNum(false);
-                            //     }}
-                            //   >
-                            //     답
-                            //   </li>
                             <li
                               style={{
                                 float: "right",
@@ -182,14 +169,22 @@ const SchoolBoardDetailReplys = ({ info, me }) => {
                     <Row>
                       {commentNum === v.id ? (
                         <Col xs={23} md={23}>
-                          <Input
-                            style={{
-                              marginTop: "1rem",
-                              marginLeft: "1rem",
-                              marginBottom: "1rem",
-                            }}
-                            placeholder="수정 내용을 적어주세요"
-                          ></Input>
+                          <Form updatePostComment={updatePostComment(v)}>
+                            <Form.Item>
+                              <Input
+                                name="InputContent"
+                                style={{
+                                  marginTop: "1rem",
+                                  marginLeft: "1rem",
+                                  marginBottom: "1rem",
+                                }}
+                                placeholder="수정 내용을 적어주세요"
+                              />
+                            </Form.Item>
+                            <Form.Item>
+                              <Button htmlType="submit">수정</Button>
+                            </Form.Item>
+                          </Form>
                         </Col>
                       ) : (
                         <Col
@@ -206,21 +201,6 @@ const SchoolBoardDetailReplys = ({ info, me }) => {
                         </Col>
                       )}
                     </Row>
-                    {/* <Row>
-                    <Col xs={23} md={23}>
-                      {parentId === v.id ? (
-                        <Input
-                          style={{
-                            marginTop: "0.5rem",
-                            marginLeft: "1rem",
-                          }}
-                          placeholder="답장을 적어주세요"
-                        ></Input>
-                      ) : (
-                        <></>
-                      )}
-                    </Col>
-                  </Row> */}
                   </Col>
                 </Row>
               </List.Item>
