@@ -23,11 +23,7 @@ const ReviewPost = () => {
         {me ? (
           <NoDecoLink onClick={onToggleWrite}>{write ? "취소" : "리뷰작성"}</NoDecoLink>
         ) : (
-          <>
-            {" "}
-            <NoDecoLink onClick={onToggleWrite}>{write ? "취소" : "리뷰작성"}</NoDecoLink>
-            //작업완료시 지울것
-          </>
+          <></>
         )}
       </div>
       {write ? <DetailReviewForm setWrite={setWrite} /> : <ReviewDetailList />}
