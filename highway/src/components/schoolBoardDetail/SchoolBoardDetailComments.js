@@ -10,7 +10,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import { useNavigate, useParams } from "react-router-dom";
-import { error } from "../../utils/Message";
+import { needLogin } from "../../utils/Message";
 
 const SchoolBoardDetailComments = ({ loadPostComments }) => {
   const { me } = useSelector((state) => state.user);
@@ -19,6 +19,9 @@ const SchoolBoardDetailComments = ({ loadPostComments }) => {
   const dispatch = useDispatch();
   const { postId } = useParams();
   const navigator = useNavigate();
+  const linkLogin = () => {
+    navigator("/login");
+  };
 
   const userCheck = (item) => {
     if (me === null) {
@@ -150,7 +153,7 @@ const SchoolBoardDetailComments = ({ loadPostComments }) => {
                                   }}
                                   onClick={() => {
                                     if (me === null) {
-                                      error("로그인이 필요한 서비스입니다");
+                                      needLogin(linkLogin);
                                     } else {
                                       setParentId(item.id);
                                       setCommentNum(false);
@@ -211,7 +214,7 @@ const SchoolBoardDetailComments = ({ loadPostComments }) => {
                             }}
                             onClick={() => {
                               if (me === null) {
-                                error("로그인이 필요한 서비스입니다");
+                                needLogin(linkLogin);
                               } else {
                                 setParentId(item.id);
                                 setCommentNum(false);
@@ -309,6 +312,7 @@ const SchoolBoardDetailComments = ({ loadPostComments }) => {
                       removePostComment={removePostComment}
                       updatePostComment={updatePostComment}
                       loadPostComments={loadPostComments}
+                      linkLogin={linkLogin}
                     />
                   )}
                 </Col>

@@ -1,4 +1,4 @@
-import { message, Modal } from "antd";
+import { Button, message, Modal } from "antd";
 
 export const info = (props) => {
   message.info(props);
@@ -13,6 +13,13 @@ export const error = (props) => {
 export const success = (props) => {
   Modal.success({
     content: props,
-    style: { top: "40vh" },
+  });
+};
+export const needLogin = (props) => {
+  Modal.confirm({
+    content: "로그인이 필요한 서비스입니다.",
+    okText: "이동하기",
+    cancelText: "취소",
+    onOk: props,
   });
 };

@@ -1,11 +1,13 @@
 import { Col, Input, List, Row } from "antd";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { needLogin } from "../../utils/Message";
 
 const SchoolBoardDetailReplys = ({
   info,
   removePostComment,
   updatePostComment,
+  linkLogin,
 }) => {
   const { me } = useSelector((state) => state.user);
   const [commentNum, setCommentNum] = useState(false);
@@ -163,7 +165,7 @@ const SchoolBoardDetailReplys = ({
                           onKeyDown={(e) => {
                             if (e.key === "Enter") {
                               if (me === null) {
-                                alert("로그인이 필요한 기능입니다.");
+                                needLogin(linkLogin);
                               } else {
                                 updatePostComment(e.target.value);
                               }
