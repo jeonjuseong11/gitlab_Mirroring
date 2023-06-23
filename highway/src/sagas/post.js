@@ -177,7 +177,7 @@ function* loadTagPosts(action) {
 }
 
 function loadPostsAPI() {
-  return axios.get(`/board/list`);
+  return axios.get(`/school/list`);
 }
 
 function* loadPosts() {
@@ -271,7 +271,10 @@ function* updatePost(action) {
 function addCommentAPI(data) {
   // 게시물 댓글 작성
   // return axios.post(`/post/${data.postId}/comment`, data); // POST /post/1/comment
-  return axios.post(`/comment?content=${data.content}&boardId=${data.boardId}`, data); // POSTMAN에 나온 주소
+  return axios.post(
+    `/comment?content=${data.content}&boardId=${data.boardId}`,
+    data
+  ); // POSTMAN에 나온 주소
 }
 
 function* addComment(action) {
@@ -313,7 +316,7 @@ function* loadPostComments(action) {
 
 function removePostCommentAPI(data) {
   // 게시물 댓글 삭제
-  return axios.delete(`/comment/list?id=${data.id}`, data);
+  return axios.delete(`/comment/?id=${data.id}`, data);
 }
 
 function* removePostComment(action) {
@@ -334,7 +337,7 @@ function* removePostComment(action) {
 
 function updatePostCommentAPI(data) {
   // 게시물 댓글 수정
-  return axios.put(`/comment/list?id=${data.id}&content=${data.content}`, data);
+  return axios.put(`/comment/?id=${data.id}&content=${data.content}`, data);
 }
 
 function* updatePostComment(action) {

@@ -12,7 +12,7 @@ import moment from "moment";
 import { useNavigate, useParams } from "react-router-dom";
 import { error } from "../../utils/Message";
 
-const SchoolBoardDetailComments = () => {
+const SchoolBoardDetailComments = ({ loadPostComments }) => {
   const { me } = useSelector((state) => state.user);
   const [commentNum, setCommentNum] = useState(false);
   const [parentId, setParentId] = useState(false);
@@ -40,6 +40,7 @@ const SchoolBoardDetailComments = () => {
         content: values,
       },
     });
+    loadPostComments();
   };
   const removePostComment = (item) => {
     console.log("RemovePostCommnet");
@@ -49,9 +50,10 @@ const SchoolBoardDetailComments = () => {
         id: item.id,
       },
     });
+    loadPostComments();
   };
 
-  const addCommentReply = (values) => {
+  const addCommentReply = (item, values) => {
     console.log("addCommentReply");
     dispatch({
       type: ADD_POST_COMMENT_REPLY_REQUEST,
@@ -61,9 +63,10 @@ const SchoolBoardDetailComments = () => {
         modifiedDate: moment(),
         userId: me.userId,
         boardId: postId,
-        parentId: parentId,
+        parentId: item.id,
       },
     });
+    loadPostComments();
   };
   return (
     <Col xs={24} md={24} style={{ marginBottom: "2rem" }}>
@@ -114,7 +117,6 @@ const SchoolBoardDetailComments = () => {
                                   listStyle: "none",
                                   color: "#a2a2a2",
                                   fontSize: "0.8rem",
-                                  marginRight: "1rem",
                                 }}
                               >
                                 <li
@@ -164,7 +166,6 @@ const SchoolBoardDetailComments = () => {
                                   float: "right",
                                   color: "#a2a2a2",
                                   fontSize: "0.8rem",
-                                  marginRight: "1rem",
                                 }}
                                 onClick={() => {
                                   setCommentNum(false);
@@ -181,7 +182,6 @@ const SchoolBoardDetailComments = () => {
                               float: "right",
                               color: "#a2a2a2",
                               fontSize: "0.8rem",
-                              marginRight: "1rem",
                             }}
                             onClick={() => {
                               setCommentNum(false);
@@ -208,7 +208,6 @@ const SchoolBoardDetailComments = () => {
                               marginTop: "1rem",
                               color: "#a2a2a2",
                               fontSize: "0.8rem",
-                              marginRight: "1rem",
                             }}
                             onClick={() => {
                               if (me === null) {
@@ -227,7 +226,6 @@ const SchoolBoardDetailComments = () => {
                               marginTop: "1rem",
                               color: "#a2a2a2",
                               fontSize: "0.8rem",
-                              marginRight: "1rem",
                             }}
                             onClick={() => {
                               setCommentNum(false);
@@ -242,9 +240,17 @@ const SchoolBoardDetailComments = () => {
                   </Row>
                   <Row>
                     {commentNum === item.id ? (
-                      <Col xs={23} md={23}>
+                      <Col xs={22} md={23}>
                         <Input
-                          name="InputContent"
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter") {
+                              if (me === null) {
+                                alert("로그인이 필요한 기능입니다.");
+                              } else {
+                                updatePostComment(e.target.value);
+                              }
+                            }
+                          }}
                           style={{
                             marginTop: "1rem",
                             marginLeft: "1rem",
@@ -262,7 +268,7 @@ const SchoolBoardDetailComments = () => {
                           marginLeft: "1.4rem",
                           marginTop: "1rem",
 
-                          marginBottom: "1rem",
+                          marginBottom: "2rem",
                         }}
                       >
                         {item.content}
@@ -270,10 +276,18 @@ const SchoolBoardDetailComments = () => {
                     )}
                   </Row>
                   <Row>
-                    <Col xs={23} md={23}>
+                    <Col xs={22} md={23}>
                       {parentId === item.id ? (
                         <Input
-                          name="InputContent"
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter") {
+                              if (me === null) {
+                                alert("로그인이 필요한 기능입니다.");
+                              } else {
+                                addCommentReply(item, e.target.value);
+                              }
+                            }
+                          }}
                           style={{
                             marginTop: "1rem",
                             marginLeft: "1rem",
@@ -286,12 +300,17 @@ const SchoolBoardDetailComments = () => {
                       )}
                     </Col>
                   </Row>
-                  <SchoolBoardDetailReplys
-                    info={item}
-                    me={me}
-                    removePostComment={removePostComment}
-                    updatePostComment={updatePostComment}
-                  />
+                  {item.children.length === 0 ? (
+                    <></>
+                  ) : (
+                    <SchoolBoardDetailReplys
+                      info={item}
+                      me={me}
+                      removePostComment={removePostComment}
+                      updatePostComment={updatePostComment}
+                      loadPostComments={loadPostComments}
+                    />
+                  )}
                 </Col>
               </>
             </List.Item>

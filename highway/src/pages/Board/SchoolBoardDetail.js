@@ -1,5 +1,5 @@
 import { Col, Breadcrumb } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   LOAD_POSTS_REQUEST,
@@ -32,6 +32,10 @@ const SchoolBoardDetail = () => {
     });
   };
 
+  useEffect(() => {
+    loadPostComments();
+  }, []);
+
   return (
     <>
       <Col xs={23} md={11} style={{ textAlign: "left" }}>
@@ -54,7 +58,7 @@ const SchoolBoardDetail = () => {
           </p>
         </div>
       </Col>
-      <ToggleComment />
+      <ToggleComment loadPostComments={loadPostComments} />
     </>
   );
 };

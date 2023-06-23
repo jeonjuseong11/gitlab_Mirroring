@@ -32,7 +32,7 @@ export const formatDate = (dateString) => {
   }
 };
 
-const ToggleComment = () => {
+const ToggleComment = ({ loadPostComments }) => {
   const dispatch = useDispatch();
   const { me } = useSelector((state) => state.user);
   // const { schoolBoardPostComments } = useSelector((state) => state.post);
@@ -47,6 +47,7 @@ const ToggleComment = () => {
   const [checkReply, setCheckReply] = useState(false);
   const [toggle, setToggle] = useState(false);
   const [good, setGood] = useState(false);
+
   const onToggleGoods = useCallback(() => {
     setGood(!good);
   });
@@ -75,19 +76,20 @@ const ToggleComment = () => {
         parentId: parentId,
       },
     });
+    loadPostComments();
   };
 
   return (
     <>
       {!toggle ? (
         <>
-          <Col xs={23} md={11} offset={4} justify="center">
+          <Col xs={23} md={11} justify="center">
             <ToggleGoodAndCommentBtn toggle={toggle} setToggle={setToggle} />
           </Col>
         </>
       ) : (
         <>
-          <Col xs={23} md={11} offset={4} justify="center">
+          <Col xs={23} md={11} justify="center">
             <Col xs={24} md={24}>
               <ToggleGoodAndCommentBtn toggle={toggle} setToggle={setToggle} />
               <Input
@@ -108,7 +110,7 @@ const ToggleComment = () => {
                   marginTop: "1rem",
                 }}
               />
-              <SchoolBoardDetailComments />
+              <SchoolBoardDetailComments loadPostComments={loadPostComments} />
             </Col>
           </Col>
         </>
