@@ -1,13 +1,10 @@
 import { Col, Breadcrumb, Row } from "antd";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  LOAD_POSTS_REQUEST,
-  LOAD_POST_COMMENTS_REQUEST,
-} from "../../constants/actionTypes";
+import { LOAD_POSTS_REQUEST, LOAD_POST_COMMENTS_REQUEST } from "../../constants/actionTypes";
 import { useParams } from "react-router-dom";
 import ToggleComment from "../../components/schoolBoardDetail/ToggleComment";
-import { formatDate } from "./BoardMain";
+import { changeCategory, formatDate } from "./BoardMain";
 
 const SchoolBoardDetail = () => {
   const dispatch = useDispatch();
@@ -16,11 +13,9 @@ const SchoolBoardDetail = () => {
   const [parentId, setParentId] = useState(null);
   const { postId, category } = useParams();
 
-  const schoolBoardPost = schoolBoardPosts.find(
-    (post) => post.id === postId - 1
-  );
+  const schoolBoardPost = schoolBoardPosts.find((post) => post.id === postId - 1);
   const loadPostComments = () => {
-    console.log("loadPostCommnets");
+    // console.log("loadPostCommnets");
     dispatch({
       type: LOAD_POSTS_REQUEST,
     });
@@ -45,7 +40,7 @@ const SchoolBoardDetail = () => {
             //   title: <a href="">{schoolBoardPost.board}</a>, //게시판으로 이동
             // },
             {
-              title: <a href={`/schoolboard/${category}`}>{category}</a>, //특성화 분야로 이동하게
+              title: <a href={`/schoolboard/${category}`}>{changeCategory(category)}</a>, //특성화 분야로 이동하게
             },
           ]}
         />
