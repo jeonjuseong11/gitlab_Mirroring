@@ -1,6 +1,6 @@
 import { Col, Input, List, Button, Row } from "antd";
 import React, { useState, useCallback } from "react";
-import { ADD_COMMENT_REQUEST } from "../../constants/actionTypes";
+import { ADD_COMMENT_REQUEST, LIKE_POST_REQUEST } from "../../constants/actionTypes";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import { useParams } from "react-router-dom";

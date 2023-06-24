@@ -81,7 +81,7 @@ function* likePost(action) {
     const result = yield call(likePostAPI, action.data);
     yield put({
       type: LIKE_POST_SUCCESS,
-      data: result.data,
+      data: result.data.data,
     });
   } catch (err) {
     console.error(err);
@@ -94,7 +94,7 @@ function* likePost(action) {
 
 function unlikePostAPI(data) {
   //게시글 좋아요 취소
-  return axios.delete(`heart?boardId=${data.boardId}`);
+  return axios.delete(`heart?heartId=${data.heartId}`);
 }
 
 function* unlikePost(action) {
@@ -102,7 +102,7 @@ function* unlikePost(action) {
     const result = yield call(unlikePostAPI, action.data);
     yield put({
       type: UNLIKE_POST_SUCCESS,
-      data: result.data,
+      data: { data: result.data.data, heartId: action.data.heartId },
     });
   } catch (err) {
     console.error(err);
@@ -177,7 +177,7 @@ function* loadTagPosts(action) {
 }
 
 function loadPostsAPI() {
-  return axios.get(`/school/list`);
+  return axios.get(`/board/list`);
 }
 
 function* loadPosts() {
@@ -271,10 +271,7 @@ function* updatePost(action) {
 function addCommentAPI(data) {
   // 게시물 댓글 작성
   // return axios.post(`/post/${data.postId}/comment`, data); // POST /post/1/comment
-  return axios.post(
-    `/comment?content=${data.content}&boardId=${data.boardId}`,
-    data
-  ); // POSTMAN에 나온 주소
+  return axios.post(`/comment?content=${data.content}&boardId=${data.boardId}`, data); // POSTMAN에 나온 주소
 }
 
 function* addComment(action) {
