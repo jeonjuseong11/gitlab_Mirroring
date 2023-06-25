@@ -1,6 +1,9 @@
 import { Col, Input, List, Button, Row } from "antd";
 import React, { useState, useCallback } from "react";
-import { ADD_COMMENT_REQUEST, LIKE_POST_REQUEST } from "../../constants/actionTypes";
+import {
+  ADD_COMMENT_REQUEST,
+  LIKE_POST_REQUEST,
+} from "../../constants/actionTypes";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import { useParams } from "react-router-dom";
@@ -79,35 +82,35 @@ const ToggleComment = ({ loadPostComments }) => {
     <>
       {!toggle ? (
         <>
-          <Col xs={23} md={11} justify="center">
+          <Col xs={23} md={11} offset={4} justify="center">
             <ToggleGoodAndCommentBtn toggle={toggle} setToggle={setToggle} />
           </Col>
         </>
       ) : (
         <>
-          <Col xs={23} md={11} justify="center">
-            <Col xs={24} md={24}>
-              <ToggleGoodAndCommentBtn toggle={toggle} setToggle={setToggle} />
-              <Input
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    if (me === null) {
-                      alert("로그인이 필요한 기능입니다.");
-                    } else {
-                      onFinish(e.target.value);
-                    }
+          <Col xs={23} md={11} offset={4} justify="center">
+            <ToggleGoodAndCommentBtn toggle={toggle} setToggle={setToggle} />
+            <Input
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  if (me === null) {
+                    alert("로그인이 필요한 기능입니다.");
+                  } else {
+                    onFinish(e.target.value);
                   }
-                }}
-                name="content"
-                placeholder="댓글을 적어주세요."
-                style={{
-                  height: "5rem",
-                  marginBottom: "1rem",
-                  marginTop: "1rem",
-                }}
-              />
-              <SchoolBoardDetailComments loadPostComments={loadPostComments} />
-            </Col>
+                }
+              }}
+              name="content"
+              placeholder="댓글을 적어주세요."
+              style={{
+                height: "5rem",
+                marginBottom: "1rem",
+                marginTop: "1rem",
+              }}
+            />
+          </Col>
+          <Col xs={23} md={11} offset={4} justify="center">
+            <SchoolBoardDetailComments loadPostComments={loadPostComments} />
           </Col>
         </>
       )}
