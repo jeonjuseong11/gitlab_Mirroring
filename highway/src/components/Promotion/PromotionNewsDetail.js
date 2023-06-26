@@ -31,9 +31,9 @@ const PromotionNewsDetail = () => {
     }
   }, [id]);
   return (
-    <div style={{ marginLeft: "26rem" }}>
-      <Row>
-        <Col xs={24} md={13}>
+    <>
+      <Row justify="center">
+        <Col xs={24} md={10}>
           <ul style={{ listStyle: "none", textAlign: "left" }}>
             <li>
               <h2>{newsList[id].title}</h2>
@@ -48,17 +48,17 @@ const PromotionNewsDetail = () => {
               </p>
             </li>
           </ul>
-          <hr style={{ width: "50rem", marginLeft: "-2.5rem" }} />
+          <hr />
           {newsList[id].content}
         </Col>
-        <Col style={{ width: "33rem" }}>
+        <Col xs={23} md={5} justify="center">
           <div
             style={{
               width: "20rem",
               height: "30rem",
-              backgroundColor: "#d2d2d2",
+              backgroundColor: "#f2f2f2",
               marginTop: "2rem",
-              marginLeft: "3rem",
+              marginLeft: "1.5rem",
               borderRadius: "10px",
             }}
           >
@@ -66,8 +66,8 @@ const PromotionNewsDetail = () => {
           </div>
         </Col>
       </Row>
-      <Row gutter={[16, 16]}>
-        <Col xs={24} md={20}>
+      <Row>
+        <Col xs={24} md={20} justify="center">
           <CopyToClipboard
             text={nowLocation}
             onCopy={() => alert("주소가 복사되었습니다")}
@@ -81,17 +81,15 @@ const PromotionNewsDetail = () => {
           </CopyToClipboard>
         </Col>
       </Row>
-      <Row gutter={[16, 16]}>
-        <Col xs={24} md={16} style={{ marginLeft: "-8rem" }}>
-          <PromotionHomeItem
-            random={random}
-            title={"직장 생활 치트키"}
-            type={"news"}
-            infoData={newsList}
-          />
-        </Col>
-      </Row>
-    </div>
+      <PromotionHomeItem
+        random={random}
+        title={"직장 생활 치트키"}
+        type={"news"}
+        infoData={newsList}
+        xs={22}
+        md={5}
+      />
+    </>
   );
 };
 

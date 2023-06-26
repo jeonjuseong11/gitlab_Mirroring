@@ -31,9 +31,9 @@ const PromotionVideoDetail = () => {
     }
   }, [id]);
   return (
-    <div style={{ marginLeft: "26rem" }}>
-      <Row>
-        <Col xs={24} md={13}>
+    <>
+      <Row justify="center">
+        <Col xs={24} md={10}>
           <ul style={{ listStyle: "none", textAlign: "left" }}>
             <li>
               <h2>{videoList[id].title}</h2>
@@ -48,25 +48,24 @@ const PromotionVideoDetail = () => {
               </p>
             </li>
           </ul>
-          <hr style={{ width: "50rem", marginLeft: "-2.5rem" }} />
+          <hr />
           <iframe
-            width="720rem "
+            width="640rem"
             height="480rem"
-            style={{ marginLeft: "-6rem" }}
             src={videoList[id].src}
             frameborder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
           ></iframe>
         </Col>
-        <Col style={{ width: "33rem" }}>
+        <Col xs={23} md={5}>
           <div
             style={{
               width: "20rem",
               height: "30rem",
-              backgroundColor: "#d2d2d2",
+              backgroundColor: "#f2f2f2",
               marginTop: "2rem",
-              marginLeft: "3rem",
+              marginLeft: "1.5rem",
               borderRadius: "10px",
             }}
           >
@@ -89,17 +88,15 @@ const PromotionVideoDetail = () => {
           </CopyToClipboard>
         </Col>
       </Row>
-      <Row gutter={[16, 16]}>
-        <Col xs={24} md={16} style={{ marginLeft: "-8rem" }}>
-          <PromotionHomeItem
-            random={random}
-            title={"직장 생활 치트키"}
-            type={"news"}
-            infoData={videoList}
-          />
-        </Col>
-      </Row>
-    </div>
+      <PromotionHomeItem
+        random={random}
+        title={"직장 생활 치트키"}
+        type={"news"}
+        infoData={videoList}
+        xs={22}
+        md={5}
+      />
+    </>
   );
 };
 

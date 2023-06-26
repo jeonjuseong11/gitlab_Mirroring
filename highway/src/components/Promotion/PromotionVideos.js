@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react";
-import AppLayout from "../AppLayout";
-import PromotionVideoItem from "./PromotionVideoItem";
 import videoList from "../../utils/VideoDummyData";
-import { Button, Image, List, Menu } from "antd";
+import { Button, Col, List, Row } from "antd";
 import { Link, useLocation } from "react-router-dom";
 import { DownOutlined } from "@ant-design/icons";
-import RecommendList from "./RecommendList";
-import { items } from "../../utils/PromotionList";
 
 const PromotionVideos = () => {
   const [count, setCount] = useState(4);
@@ -24,27 +20,8 @@ const PromotionVideos = () => {
   }, [count]);
   return (
     <>
-      <RecommendList type={"video"} infoData={videoList} />
-      <Menu
-        mode="horizontal"
-        items={items}
-        selectedKeys={location.pathname}
-        style={{ width: "73rem", marginLeft: "3.5rem" }}
-      />
-      <ul style={{ listStyle: "none", width: "78.5rem" }}>
-        <li
-          style={{
-            width: "20rem",
-            height: "30rem",
-            backgroundColor: "#f2f2f2",
-            marginLeft: "55rem",
-            marginTop: "3rem",
-            borderRadius: "10px",
-          }}
-        >
-          우측사이드
-        </li>
-        <li style={{ marginTop: "-31rem" }}>
+      <Row justify="center">
+        <Col xs={24} md={10}>
           <List
             itemLayout="horizontal"
             dataSource={videoList}
@@ -53,58 +30,87 @@ const PromotionVideos = () => {
                 return (
                   <List.Item
                     style={{
-                      width: "50rem",
                       padding: "2rem",
                       marginLeft: "1rem",
+                      borderBottom: "1px solid #f2f2f2",
                     }}
                   >
-                    <Link to={`/promotion/videos/${item.id}`}>
-                      <div
-                        preview={false}
-                        src={item.src}
-                        style={{
-                          width: "15rem",
-                          height: "9rem",
-                          background: "#f2f2f2",
-                          marginLeft: "-2rem",
-                          borderRadius: "10px",
-                        }}
-                      />
-                    </Link>
-                    <List.Item.Meta
-                      title={
+                    <Col
+                      xs={24}
+                      md={8}
+                      style={{
+                        background: "red",
+                        borderRadius: "10px",
+                        background: "#f2f2f2",
+                      }}
+                    >
+                      <Link to={`/promotion/videos/${item.id}`}>
                         <div
+                          src={item.src}
                           style={{
-                            textAlign: "left",
-                            marginLeft: "2rem",
+                            height: "9rem",
+                            marginLeft: "-2rem",
+                            borderRadius: "10px",
                           }}
-                        >
-                          <Link to={`/promotion/videos/${item.id}`}>
-                            <h2 style={{ color: "black" }}>{item.title}</h2>
-                          </Link>
-                        </div>
-                      }
-                      description={
-                        <div style={{ textAlign: "left", marginLeft: "2rem" }}>
-                          <Link to={`/promotion/videos/${item.id}`}>
-                            <p style={{ color: "gray" }}>{item.content}</p>
-                          </Link>
-                        </div>
-                      }
-                    />
+                        />
+                      </Link>
+                    </Col>
+                    <Col xs={24} md={15}>
+                      <List.Item.Meta
+                        title={
+                          <div
+                            style={{
+                              textAlign: "left",
+                              marginLeft: "2rem",
+                            }}
+                          >
+                            <Link to={`/promotion/videos/${item.id}`}>
+                              <h2 style={{ color: "black" }}>{item.title}</h2>
+                            </Link>
+                          </div>
+                        }
+                        description={
+                          <div
+                            style={{ textAlign: "left", marginLeft: "2rem" }}
+                          >
+                            <Link to={`/promotion/videos/${item.id}`}>
+                              <p style={{ color: "gray" }}>{item.content}</p>
+                            </Link>
+                          </div>
+                        }
+                      />
+                    </Col>
                   </List.Item>
                 );
             }}
           />
-        </li>
-      </ul>
-      <Button
-        onClick={onMore}
-        disabled={disable}
-        style={{ marginBottom: "2rem", marginTop: "2rem" }}
-      >
-        <DownOutlined />더 보기
-      </Button>
+        </Col>
+        <Col xs={23} md={5} justify="center">
+          <div
+            style={{
+              width: "20rem",
+              height: "30rem",
+              backgroundColor: "#f2f2f2",
+              marginTop: "2rem",
+              marginLeft: "1.5rem",
+              borderRadius: "10px",
+            }}
+          >
+            우측사이드
+          </div>
+        </Col>
+      </Row>
+      <Row>
+        <Col xs={23} md={23} justify="center">
+          <Button
+            onClick={onMore}
+            disabled={disable}
+            style={{ marginBottom: "2rem", marginTop: "2rem" }}
+          >
+            <DownOutlined />더 보기
+          </Button>
+        </Col>
+      </Row>
     </>
   );
 };
