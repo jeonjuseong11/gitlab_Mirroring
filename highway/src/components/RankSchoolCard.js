@@ -16,7 +16,7 @@ const RankSchoolCard = ({ selectedSchool }) => {
     <Card
       style={{ backgroundColor: "#f2f2f2", minWidth: "18rem" }}
       actions={[
-        <Link to={`/schooldetail/${selectedSchool.id}/review/`}>
+        <Link to={`/schooldetail/${selectedSchool.id}`}>
           <SearchOutlined /> 상세 정보 보기
         </Link>,
       ]}
