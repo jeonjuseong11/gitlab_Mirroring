@@ -1,141 +1,103 @@
-import { Col, Input, List, Row } from "antd";
+import { List, Input } from "antd";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { needLogin } from "../../utils/Message";
-import CommentCancleBtn from "../CommnetBtn/CommentCancleBtn";
-import CommentRUBtn from "../CommnetBtn/CommentRUBtn";
+import { useSelector, useDispatch } from "react-redux";
+import { formatDate } from "../../pages/Board/BoardMain";
+import {
+  REMOVE_POST_COMMENT_REQUEST,
+  UPDATE_POST_COMMENT_REQUEST,
+} from "../../constants/actionTypes";
+import { CommentSpan } from "./SchoolBoardDetailComments";
 
-const SchoolBoardDetailReplys = ({
-  info,
-  removePostComment,
-  updatePostComment,
-  linkLogin,
-}) => {
+const SchoolBoardDetailReplys = ({ info, updatePostComment, removePostComment }) => {
   const { me } = useSelector((state) => state.user);
-  const [commentNum, setCommentNum] = useState(false);
-  const [parentId, setParentId] = useState(false);
+  const dispatch = useDispatch();
+  const [editingCommentId, setEditingCommentId] = useState("");
+  const [editedComment, setEditedComment] = useState("");
 
-  const userCheck = (item) => {
-    if (me === null) {
-      return false;
-    }
-    if (me.userId === item.userId) {
-      return true;
-    } else {
-      return false;
+  const handleKeyDown = (e, item) => {
+    if (e.key === "Enter") {
+      if (!me) {
+        alert("로그인이 필요한 기능입니다.");
+      } else {
+        updatePostComment(item, editedComment);
+        setEditingCommentId("");
+      }
     }
   };
 
   return (
-    <List
-      dataSource={info.children}
-      renderItem={(v) => {
-        const ReplyCheck = userCheck(v);
-        return (
-          <List.Item
-            style={{
-              padding: "0px",
-              background: "#f2f2f2",
-              borderTop: "1px solid #d2d2d2",
-            }}
-          >
-            <Row>
-              <Col
+    <>
+      {info.children.length === 0 ? (
+        <></>
+      ) : (
+        <List
+          itemLayout="vertical"
+          dataSource={info.children}
+          style={{ textAlign: "left" }}
+          renderItem={(item) => {
+            const isEditing = editingCommentId === item.id;
+
+            return (
+              <List.Item
                 style={{
-                  textAlign: "left",
-                  marginLeft: "1.4rem",
-                  marginTop: "1rem",
-                  color: "blue",
+                  background: "#f2f2f2",
+                  borderBottom: "1px solid #d2d2d2",
                 }}
               >
-                {v.userId}
-              </Col>
-              {ReplyCheck ? (
-                <Col
-                  style={{
-                    textAlign: "right",
-                    marginTop: "1rem",
-                  }}
-                >
-                  {commentNum !== v.id ? (
-                    <ul style={{ listStyle: "none" }}>
-                      {parentId !== v.id ? (
-                        <CommentRUBtn
-                          item={v}
-                          setCommentNum={setCommentNum}
-                          setParentId={setParentId}
-                          removePostComment={removePostComment}
+                {me && me.userId === item.userId && (
+                  <div>
+                    {isEditing ? (
+                      <>
+                        <Input.TextArea
+                          style={{ padding: "1rem", resize: "none" }}
+                          maxLength="100"
+                          value={editedComment}
+                          onChange={(e) => setEditedComment(e.target.value)}
+                          onKeyDown={(e) => handleKeyDown(e, item)}
                         />
-                      ) : (
-                        <CommentCancleBtn
-                          setCommentNum={setCommentNum}
-                          setParentId={setParentId}
+                        <CommentSpan
+                          onClick={() => {
+                            updatePostComment(item, editedComment);
+                            setEditingCommentId("");
+                          }}
+                        >
+                          수정완료
+                        </CommentSpan>
+                        <CommentSpan
+                          onClick={() => {
+                            setEditingCommentId("");
+                            setEditedComment("");
+                          }}
+                        >
+                          취소
+                        </CommentSpan>
+                      </>
+                    ) : (
+                      <>
+                        <List.Item.Meta
+                          title={item.userId}
+                          description={<div> {item.content}</div>}
                         />
-                      )}
-                    </ul>
-                  ) : (
-                    <CommentCancleBtn
-                      setCommentNum={setCommentNum}
-                      setParentId={setParentId}
-                    />
-                  )}
-                </Col>
-              ) : (
-                <Col
-                  style={{
-                    textAlign: "right",
-                  }}
-                >
-                  {parentId !== v.id ? (
-                    <></>
-                  ) : (
-                    <CommentCancleBtn
-                      setCommentNum={setCommentNum}
-                      setParentId={setParentId}
-                    />
-                  )}
-                </Col>
-              )}
-            </Row>
-            <Row>
-              {commentNum === v.id ? (
-                <Col>
-                  <Input
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") {
-                        if (me === null) {
-                          needLogin(linkLogin);
-                        } else {
-                          updatePostComment(e.target.value);
-                        }
-                      }
-                    }}
-                    name="InputContent"
-                    style={{
-                      marginTop: "1rem",
-                      marginLeft: "1rem",
-                      marginBottom: "1rem",
-                    }}
-                    placeholder="수정 내용을 적어주세요"
-                  />
-                </Col>
-              ) : (
-                <Col
-                  style={{
-                    textAlign: "left",
-                    marginLeft: "1.4rem",
-                    marginTop: "1rem",
-                    marginBottom: "2rem",
-                  }}
-                >
-                  {v.content}
-                </Col>
-              )}
-            </Row>
-          </List.Item>
-        );
-      }}
-    />
+                        <CommentSpan>{formatDate(item.modifiedDate)}</CommentSpan>
+                        <CommentSpan
+                          onClick={() => {
+                            setEditingCommentId(item.id);
+                            setEditedComment(item.content);
+                          }}
+                        >
+                          수정
+                        </CommentSpan>
+                        <CommentSpan onClick={() => removePostComment(item)}>삭제</CommentSpan>
+                      </>
+                    )}
+                  </div>
+                )}
+              </List.Item>
+            );
+          }}
+        />
+      )}
+    </>
   );
 };
 
