@@ -75,6 +75,7 @@ const BoardMain = () => {
     setSortOrder((prevOrder) => (prevOrder === order ? "" : order));
   };
   const formatContent = (content, maxLength) => {
+    if (!content) return null;
     if (content.length <= maxLength) {
       return content;
     }
