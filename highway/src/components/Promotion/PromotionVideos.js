@@ -5,7 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 import { DownOutlined } from "@ant-design/icons";
 
 const PromotionVideos = () => {
-  const [count, setCount] = useState(4);
+  const [count, setCount] = useState(3);
   const [disable, setDisable] = useState(false);
   const location = useLocation();
   const onMore = () => {
@@ -39,7 +39,6 @@ const PromotionVideos = () => {
                       xs={24}
                       md={8}
                       style={{
-                        background: "red",
                         borderRadius: "10px",
                         background: "#f2f2f2",
                       }}
