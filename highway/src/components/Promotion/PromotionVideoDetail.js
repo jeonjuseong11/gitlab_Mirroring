@@ -56,7 +56,7 @@ const PromotionVideoDetail = () => {
             frameborder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
-          ></iframe>
+          />
         </Col>
         <Col xs={23} md={5}>
           <div
