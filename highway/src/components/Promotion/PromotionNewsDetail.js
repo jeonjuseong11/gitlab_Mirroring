@@ -5,6 +5,7 @@ import { Button, Col, Row } from "antd";
 import { FieldTimeOutlined, ShareAltOutlined } from "@ant-design/icons";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import PromotionHomeItem from "./PromotionHomeItem";
+import { info } from "../../utils/Message";
 
 const PromotionNewsDetail = () => {
   const [minDisable, setMinDisable] = useState(false);
@@ -70,7 +71,7 @@ const PromotionNewsDetail = () => {
         <Col xs={24} md={20} justify="center">
           <CopyToClipboard
             text={nowLocation}
-            onCopy={() => alert("주소가 복사되었습니다")}
+            onCopy={() => info("주소가 복사되었습니다.")}
             style={{ margin: "2rem" }}
           >
             <div className="URL">
