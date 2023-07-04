@@ -4,16 +4,6 @@ import { IconText } from "../../components/Card/CardStyle";
 import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
 
-const items = [
-  {
-    label: "인기게시판",
-    key: "app",
-  },
-  {
-    label: "자유게시판",
-    key: "SubMenu",
-  },
-];
 const SchoolBoardList = () => {
   const [hoveredItem, setHoveredItem] = useState(null);
   const { schoolId } = useParams();
