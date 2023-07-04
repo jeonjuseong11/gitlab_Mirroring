@@ -1,24 +1,20 @@
 import React from "react";
 import { items } from "../utils/Agree";
 import { Anchor } from "antd";
-import {
-  BackToSign,
-  TermGroup,
-  TermWrapper,
-  TermItem,
-} from "../styles/TermsStyle";
+import { TermGroup, TermWrapper, TermItem } from "../styles/TermsStyle";
 import Service from "../components/Terms/Service";
 import Private from "../components/Terms/Private";
 import YoungPrivate from "../components/Terms/YoungPrivate";
-import { Link } from "react-router-dom";
+import TermBtn from "../components/Terms/TermBtn";
 
 const Terms = () => {
-  console.log(window.location.href);
-  const text = window.location.href;
-  const url = text.replace("/terms", "");
   return (
     <TermWrapper>
-      <Anchor direction="horizontal" items={items} />
+      <Anchor
+        direction="horizontal"
+        items={items}
+        style={{ backgroundColor: "#FFFFFF" }}
+      />
       <TermGroup>
         <TermItem id="service">
           <Service />
@@ -29,10 +25,10 @@ const Terms = () => {
         <TermItem id="youngprivate">
           <YoungPrivate />
         </TermItem>
+        <TermItem id="termbtn">
+          <TermBtn />
+        </TermItem>
       </TermGroup>
-      <Link to={`${url}`}>
-        <BackToSign>돌아가기</BackToSign>
-      </Link>
     </TermWrapper>
   );
 };
