@@ -1,8 +1,19 @@
-import { AutoComplete, Button, Checkbox, Form, Radio, Select, Space } from "antd";
+import {
+  AutoComplete,
+  Button,
+  Checkbox,
+  Form,
+  Radio,
+  Select,
+  Space,
+} from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { CHECK_DUPLICATE_ID_REQUEST, SIGNUP_REQUEST } from "../constants/actionTypes";
+import {
+  CHECK_DUPLICATE_ID_REQUEST,
+  SIGNUP_REQUEST,
+} from "../constants/actionTypes";
 import {
   ButtonWrapper,
   CancelBtn,
@@ -67,7 +78,9 @@ const SignUp = () => {
       setAutoCompleteResult([]);
     } else {
       setAutoCompleteResult(
-        ["@gmail.com", "@naver.com", "@hanmail.net"].map((domain) => `${value}${domain}`)
+        ["@gmail.com", "@naver.com", "@hanmail.net"].map(
+          (domain) => `${value}${domain}`
+        )
       );
     }
   };
@@ -96,8 +109,16 @@ const SignUp = () => {
           validateStatus={idValid ? "success" : "error"}
         >
           <Space.Compact style={{ width: "100%" }}>
-            <SignUpInput allowClear placeholder="아이디를 입력해주세요" disabled={idValid} />
-            <Button onClick={onCheckUserId} disabled={idValid} style={{ height: "3rem" }}>
+            <SignUpInput
+              allowClear
+              placeholder="아이디를 입력해주세요"
+              disabled={idValid}
+            />
+            <Button
+              onClick={onCheckUserId}
+              disabled={idValid}
+              style={{ height: "3rem" }}
+            >
               중복확인
             </Button>
           </Space.Compact>
@@ -125,7 +146,10 @@ const SignUp = () => {
           ]}
           hasFeedback
         >
-          <SignUpInputPassword allowClear placeholder="비밀번호를 입력해주세요(8~50)" />
+          <SignUpInputPassword
+            allowClear
+            placeholder="비밀번호를 입력해주세요(8~50)"
+          />
         </Form.Item>
         <label>비밀번호 확인</label>
         <Form.Item
@@ -141,12 +165,17 @@ const SignUp = () => {
                 if (getFieldValue("userPw") === value) {
                   return Promise.resolve();
                 }
-                return Promise.reject(new Error("비밀번호가 일치하지 않습니다."));
+                return Promise.reject(
+                  new Error("비밀번호가 일치하지 않습니다.")
+                );
               },
             }),
           ]}
         >
-          <SignUpInputPassword allowClear placeholder="비밀번호를 입력해주세요" />
+          <SignUpInputPassword
+            allowClear
+            placeholder="비밀번호를 입력해주세요"
+          />
         </Form.Item>
         <label>닉네임</label>
         <Form.Item name="userName" rules={[{ validator: validateNickname }]}>
@@ -180,54 +209,54 @@ const SignUp = () => {
           </Form.Item>
         </div>
         <label>학교</label>
-        <Form.Item
-        name="schoolId"
-        rules={[{ validator: schoolValidate }]}
-        >
-        <Select
-    showSearch
-    style={{
-      width: 200,
-    }}
-    placeholder="Search to Select"
-    optionFilterProp="children"
-    filterOption={(input, option) => (option?.label ?? '').includes(input)}
-    filterSort={(optionA, optionB) =>
-      (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
-    }
-    options={[
-      {
-        value: schools[0].id,
-        label: schools[0].schul_NM,
-      },
-      {
-        value: schools[1].id,
-        label: schools[1].schul_NM,      
-      },
-      {
-        value: schools[2].id,
-        label: schools[2].schul_NM,
-      },
-      {
-        value: schools[3].id,
-        label: schools[3].schul_NM,
-      },
-      {
-        value: schools[4].id,
-        label: schools[4].schul_NM,
-      },
-    ]}
-  />
+        <Form.Item name="schoolId" rules={[{ validator: schoolValidate }]}>
+          <Select
+            showSearch
+            style={{
+              width: 200,
+            }}
+            placeholder="Search to Select"
+            optionFilterProp="children"
+            filterOption={(input, option) =>
+              (option?.label ?? "").includes(input)
+            }
+            filterSort={(optionA, optionB) =>
+              (optionA?.label ?? "")
+                .toLowerCase()
+                .localeCompare((optionB?.label ?? "").toLowerCase())
+            }
+            options={[
+              {
+                value: schools[0].id,
+                label: schools[0].schul_NM,
+              },
+              {
+                value: schools[1].id,
+                label: schools[1].schul_NM,
+              },
+              {
+                value: schools[2].id,
+                label: schools[2].schul_NM,
+              },
+              {
+                value: schools[3].id,
+                label: schools[3].schul_NM,
+              },
+              {
+                value: schools[4].id,
+                label: schools[4].schul_NM,
+              },
+            ]}
+          />
         </Form.Item>
-
-        <Form.Item name="agreement" valuePropName="checked" rules={[{ validator: agreeValidate }]}>
+        {/* <Form.Item name="agreement" valuePropName="checked" rules={[{ validator: agreeValidate }]}>
           <Checkbox>
             <Link to={`/signup/student/terms`} state={{ data: identity }}>
               이용약관
             </Link>
             에 동의합니다
           </Checkbox>
-        </Form.Item>
+        </Form.Item> */}
         <Form.Item>
           <ButtonWrapper>
             <StudentSignUpBtn type="primary" htmlType="submit">

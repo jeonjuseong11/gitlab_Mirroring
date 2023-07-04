@@ -164,8 +164,7 @@ const OtherSignUp = () => {
             <Radio value="female">여성</Radio>
           </Radio.Group>
         </Form.Item>
-
-        <Form.Item
+        {/* <Form.Item
           name="agreement"
           valuePropName="checked"
           rules={[{ validator: agreeValidate }]}
@@ -173,7 +172,7 @@ const OtherSignUp = () => {
           <Checkbox>
             <Link to="/terms">이용약관</Link>에 동의합니다
           </Checkbox>
-        </Form.Item>
+        </Form.Item> */}
         <Form.Item>
           <ButtonWrapper>
             <StudentSignUpBtn type="primary" htmlType="submit">
