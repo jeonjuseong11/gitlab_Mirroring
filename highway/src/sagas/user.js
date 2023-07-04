@@ -90,7 +90,7 @@ function* logIn(action) {
 
 const signUpAPI = (data) => {
   return axios.post(
-    `/user/join?uid=${data.userId}&pwd=${data.userPw}&name=${data.userName}&email=${data.userEmail}&gender=${data.userSex}&age=${data.userAge}`
+    `/user/join?uid=${data.userId}&pwd=${data.userPw}&name=${data.userName}&email=${data.userEmail}&gender=${data.userSex}&age=${data.userAge}&schoolId=${data.schoolId}`
   );
 };
 function* signUp(action) {
