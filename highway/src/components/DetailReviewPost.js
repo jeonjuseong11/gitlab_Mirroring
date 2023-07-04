@@ -87,6 +87,7 @@ const DetailReviewForm = ({ setWrite }) => {
     console.log(reviews);
   }, [reviews]);
   const handleSubmit = useCallback((values) => {
+    if(me.schoolId === schoolId){
     // console.log(values);
     if (!values) {
       alert("빈칸이 있습니다.");
@@ -117,6 +118,9 @@ const DetailReviewForm = ({ setWrite }) => {
     //     schoolId: schoolId,
     //   },
     // });
+  }else{
+    alert("현재 학교는 본인의 학교가 아닙니다.")
+  }
   }, []);
 
   return (
