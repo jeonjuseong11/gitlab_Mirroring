@@ -32,11 +32,11 @@ export const formatDate = (dateString) => {
 };
 
 export const changeCategory = (category) => {
-  if (category == 1) {
+  if (category == 0) {
     return "자유게시판";
-  } else if (category == 2) {
+  } else if (category == 1) {
     return "질문게시판";
-  } else if (category == 3) {
+  } else if (category == 2) {
     return "프로젝트 모집";
   }
 };
