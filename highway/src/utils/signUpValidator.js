@@ -84,3 +84,11 @@ export const validateAge = (_, value) => {
   }
   return Promise.resolve();
 };
+
+//학교 선택 유효성 검사
+export const schoolValidate = (_, value) => {
+  if (!value) {
+    return Promise.reject(new Error("학교를 선택해주세요"));
+  }
+  return Promise.resolve();
+};

@@ -1,4 +1,4 @@
-import { AutoComplete, Button, Checkbox, Form, Radio, Space } from "antd";
+import { AutoComplete, Button, Checkbox, Form, Radio, Select, Space } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -15,6 +15,7 @@ import {
 import {
   agreeValidate,
   idRegExp,
+  schoolValidate,
   validateAge,
   validateEmail,
   validateId,
@@ -24,6 +25,7 @@ import {
 import { useSelector } from "react-redux";
 import { error, info } from "../utils/Message";
 const SignUp = () => {
+  const { schools } = useSelector((state) => state.school);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [form] = Form.useForm();
@@ -177,6 +179,46 @@ const SignUp = () => {
             </Radio.Group>
           </Form.Item>
         </div>
+        <label>학교</label>
+        <Form.Item
+        name="schoolId"
+        rules={[{ validator: schoolValidate }]}
+        >
+        <Select
+    showSearch
+    style={{
+      width: 200,
+    }}
+    placeholder="Search to Select"
+    optionFilterProp="children"
+    filterOption={(input, option) => (option?.label ?? '').includes(input)}
+    filterSort={(optionA, optionB) =>
+      (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
+    }
+    options={[
+      {
+        value: schools[0].id,
+        label: schools[0].schul_NM,
+      },
+      {
+        value: schools[1].id,
+        label: schools[1].schul_NM,      
+      },
+      {
+        value: schools[2].id,
+        label: schools[2].schul_NM,
+      },
+      {
+        value: schools[3].id,
+        label: schools[3].schul_NM,
+      },
+      {
+        value: schools[4].id,
+        label: schools[4].schul_NM,
+      },
+    ]}
+  />
+        </Form.Item>
 
         <Form.Item name="agreement" valuePropName="checked" rules={[{ validator: agreeValidate }]}>
           <Checkbox>
