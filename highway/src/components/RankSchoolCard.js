@@ -1,14 +1,8 @@
-import {
-  EyeOutlined,
-  FileImageOutlined,
-  ProfileOutlined,
-  SearchOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
+import { EyeOutlined, FileImageOutlined, SearchOutlined, UserOutlined } from "@ant-design/icons";
 import { Avatar, Card } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
-import CircleChart from "./CircleChart";
+// import CircleChart from "./CircleChart";
 import DepartsTags from "./DepartsTags";
 
 const RankSchoolCard = ({ selectedSchool }) => {
@@ -54,9 +48,9 @@ const RankSchoolCard = ({ selectedSchool }) => {
           </>
         }
       />
-      <Card.Meta
+      {/* <Card.Meta
         description={<CircleChart male={selectedSchool.male} female={selectedSchool.female} />}
-      />
+      /> */}
     </Card>
   );
 };
