@@ -9,7 +9,7 @@ export const TermWrapper = styled(Form)`
   margin: 0 Auto;
 `;
 export const BackToSign = styled(Button)`
-  width: 25%;
+  width: 10%;
   margin-top: 7%;
   margin-left: 2%;
   height: 3rem;
@@ -17,7 +17,7 @@ export const BackToSign = styled(Button)`
   font-weight: 700;
 `;
 export const GoToToSign = styled(Button)`
-  width: 25%;
+  width: 10%;
   margin-top: 7%;
   margin-bottom: 7%;
   height: 3rem;
