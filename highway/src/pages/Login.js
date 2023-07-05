@@ -89,12 +89,16 @@ const Login = () => {
           <Checkbox>로그인 상태 유지</Checkbox>
         </Form.Item>
         <Form.Item>
-          <LoginBtn type="primary" htmlType="submit" className="login-form-button">
+          <LoginBtn
+            type="primary"
+            htmlType="submit"
+            className="login-form-button"
+          >
             Log in
           </LoginBtn>
         </Form.Item>
         <LoginMenu>
-          <LoginMenuItem to="/signup">회원가입</LoginMenuItem>
+          <LoginMenuItem to="/terms">회원가입</LoginMenuItem>
           <LoginMenuItem to="/findpw">비밀번호를 까먹었나요?</LoginMenuItem>
         </LoginMenu>
       </LoginForm>
