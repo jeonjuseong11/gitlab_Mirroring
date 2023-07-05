@@ -35,25 +35,16 @@ const PromotionVideos = () => {
                       borderBottom: "1px solid #f2f2f2",
                     }}
                   >
-                    <Col
-                      xs={24}
-                      md={8}
-                      style={{
-                        borderRadius: "10px",
-                        background: "#f2f2f2",
-                      }}
-                    >
-                      <Link to={`/promotion/videos/${item.id}`}>
-                        <div
-                          src={item.src}
-                          style={{
-                            height: "9rem",
-                            marginLeft: "-2rem",
-                            borderRadius: "10px",
-                          }}
-                        />
-                      </Link>
-                    </Col>
+                    <Link to={`/promotion/videos/${item.id}`}>
+                      <img
+                        src={item.image}
+                        style={{
+                          height: "9rem",
+                          borderRadius: "10px",
+                        }}
+                      />
+                    </Link>
+
                     <Col xs={24} md={15}>
                       <List.Item.Meta
                         title={
