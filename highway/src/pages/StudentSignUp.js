@@ -48,7 +48,6 @@ const SignUp = () => {
   }, [idValid]);
 
   const onFinish = (values) => {
-    console.log(values);
     dispatch({
       type: SIGNUP_REQUEST,
       data: values,
@@ -58,7 +57,7 @@ const SignUp = () => {
   };
 
   const onCheckUserId = () => {
-    const userIdValue = form.getFieldValue("userId");
+    const userIdValue = form.getFieldValue("uid");
     if (!userIdValue) {
       error("아이디를 입력해주세요");
     } else if (!idRegExp.test(userIdValue)) {
@@ -102,7 +101,7 @@ const SignUp = () => {
         <h2>재학생 회원가입</h2>
         <label>아이디</label>
         <Form.Item
-          name="userId"
+          name="uid"
           tooltip="아이디는 영어로 시작해여 숫자와의 조합으로 작성해주세요"
           rules={[{ validator: validateId }]}
           hasFeedback
@@ -138,7 +137,7 @@ const SignUp = () => {
         )}
         <label>비밀번호</label>
         <Form.Item
-          name="userPw"
+          name="pwd"
           rules={[
             {
               validator: validatePassword,
@@ -162,7 +161,7 @@ const SignUp = () => {
                 if (!value) {
                   return Promise.reject(new Error("비밀번호를 확인해주세요."));
                 }
-                if (getFieldValue("userPw") === value) {
+                if (getFieldValue("pwd") === value) {
                   return Promise.resolve();
                 }
                 return Promise.reject(
@@ -178,23 +177,23 @@ const SignUp = () => {
           />
         </Form.Item>
         <label>닉네임</label>
-        <Form.Item name="userName" rules={[{ validator: validateNickname }]}>
+        <Form.Item name="name" rules={[{ validator: validateNickname }]}>
           <SignUpInput allowClear placeholder="닉네임을 입력해주세요" />
         </Form.Item>
         <label>이메일</label>
-        <Form.Item name="userEmail" rules={[{ validator: validateEmail }]}>
+        <Form.Item name="email" rules={[{ validator: validateEmail }]}>
           <AutoComplete options={emailOptions} onChange={onEmailChange}>
             <SignUpInput placeholder="이메일을 입력해주세요" />
           </AutoComplete>
         </Form.Item>
         <label>나이</label>
-        <Form.Item name="userAge" rules={[{ validator: validateAge }]}>
+        <Form.Item name="age" rules={[{ validator: validateAge }]}>
           <SignUpInput type="number" placeholder="나이를 입력해주세요" />
         </Form.Item>
         <label>성별</label>
         <div style={{ display: "flex", height: "3rem", alignItems: "center" }}>
           <Form.Item
-            name="userSex"
+            name="gender"
             rules={[
               {
                 required: true,
@@ -209,9 +208,10 @@ const SignUp = () => {
           </Form.Item>
         </div>
         <label>학교</label>
-        <Form.Item name="schoolId" rules={[{ validator: schoolValidate }]}>
+        <Form.Item name="school_id" rules={[{ validator: schoolValidate }]}>
           <Select
             showSearch
+            type="number"
             style={{
               width: 200,
             }}
