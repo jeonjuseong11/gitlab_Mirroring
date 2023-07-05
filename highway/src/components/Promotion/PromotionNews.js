@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import newsList from "../../utils/NewsDummyData";
-import { Link, Outlet, useLocation } from "react-router-dom";
-import { Button, Col, List, Menu, Row } from "antd";
+import { Link, useLocation } from "react-router-dom";
+import { Button, Col, List, Row } from "antd";
 import { DownOutlined } from "@ant-design/icons";
-import RecommendList from "./RecommendList";
-import { items } from "../../utils/PromotionList";
 
 const PromotionNews = () => {
   const [count, setCount] = useState(3);
@@ -41,7 +39,6 @@ const PromotionNews = () => {
                       xs={24}
                       md={8}
                       style={{
-                        background: "red",
                         borderRadius: "10px",
                         background: "#f2f2f2",
                       }}

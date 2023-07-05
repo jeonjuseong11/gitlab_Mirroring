@@ -41,7 +41,6 @@ const PromotionHomeItem = ({ random, title, type, infoData, xs, md }) => {
             itemLayout="horizontal"
             dataSource={infoData}
             renderItem={(item) => {
-              console.log(item);
               if (item.id < count) {
                 return (
                   <List.Item>

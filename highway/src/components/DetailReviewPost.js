@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Form, Rate, Button } from "antd";
+import { Form, Rate, Button, message } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
@@ -10,6 +10,7 @@ import {
   LOAD_SCHOOL_REVIEWS_REQUEST,
 } from "../constants/actionTypes";
 import axios from "axios";
+import { notYourSchool } from "../utils/Message";
 
 const FormItemWrapper = styled.div`
   display: flex;
@@ -26,7 +27,13 @@ const MessageWrapper = styled.div`
   margin-left: 1rem;
 `;
 
-const DetailReviewForm = ({ setWrite, review, editing, setEditing, setEditContent }) => {
+const DetailReviewForm = ({
+  setWrite,
+  review,
+  editing,
+  setEditing,
+  setEditContent,
+}) => {
   const { schoolId } = useParams();
   const { me } = useSelector((state) => state.user);
   // console.log(review);
@@ -126,7 +133,7 @@ const DetailReviewForm = ({ setWrite, review, editing, setEditing, setEditConten
         form.setFieldsValue(""); // Clear form fields
         setWrite(false); // Close write mode
       } else {
-        alert("현재 학교는 본인의 학교가 아닙니다.");
+        notYourSchool("해당학교에는 리뷰를 작성할 수 없습니다.");
       }
     },
     [form, me, schoolId, setWrite, dispatch, editing, review]
@@ -172,36 +179,62 @@ const DetailReviewForm = ({ setWrite, review, editing, setEditing, setEditConten
       </Form.Item>
       <FormItemWrapper>
         <FormItemP>교통</FormItemP>
-        <Form.Item name="trafficRate" rules={[{ required: true }]} style={{ margin: "0" }}>
+        <Form.Item
+          name="trafficRate"
+          rules={[{ required: true }]}
+          style={{ margin: "0" }}
+        >
           <Rate onChange={(value) => handleRateChange("trafficRate", value)} />
         </Form.Item>
         <MessageWrapper>{trafficMessage}</MessageWrapper>
       </FormItemWrapper>
       <FormItemWrapper>
         <FormItemP>시설만족도</FormItemP>
-        <Form.Item name="facilityRate" rules={[{ required: true }]} style={{ margin: "0" }}>
+        <Form.Item
+          name="facilityRate"
+          rules={[{ required: true }]}
+          style={{ margin: "0" }}
+        >
           <Rate onChange={(value) => handleRateChange("facilityRate", value)} />
         </Form.Item>
         <MessageWrapper>{facilityMessage}</MessageWrapper>
       </FormItemWrapper>
       <FormItemWrapper>
         <FormItemP>급식</FormItemP>
-        <Form.Item name="cafeteriaRate" rules={[{ required: true }]} style={{ margin: "0" }}>
-          <Rate onChange={(value) => handleRateChange("cafeteriaRate", value)} />
+        <Form.Item
+          name="cafeteriaRate"
+          rules={[{ required: true }]}
+          style={{ margin: "0" }}
+        >
+          <Rate
+            onChange={(value) => handleRateChange("cafeteriaRate", value)}
+          />
         </Form.Item>
         <MessageWrapper>{cafeteriaMessage}</MessageWrapper>
       </FormItemWrapper>
       <FormItemWrapper>
         <FormItemP>교육</FormItemP>
-        <Form.Item name="educationRate" rules={[{ required: true }]} style={{ margin: "0" }}>
-          <Rate onChange={(value) => handleRateChange("educationRate", value)} />
+        <Form.Item
+          name="educationRate"
+          rules={[{ required: true }]}
+          style={{ margin: "0" }}
+        >
+          <Rate
+            onChange={(value) => handleRateChange("educationRate", value)}
+          />
         </Form.Item>
         <MessageWrapper>{educationMessage}</MessageWrapper>
       </FormItemWrapper>
       <FormItemWrapper>
         <FormItemP>취업</FormItemP>
-        <Form.Item name="employmentRate" rules={[{ required: true }]} style={{ margin: "0" }}>
-          <Rate onChange={(value) => handleRateChange("employmentRate", value)} />
+        <Form.Item
+          name="employmentRate"
+          rules={[{ required: true }]}
+          style={{ margin: "0" }}
+        >
+          <Rate
+            onChange={(value) => handleRateChange("employmentRate", value)}
+          />
         </Form.Item>
         <MessageWrapper>{employmentMessage}</MessageWrapper>
       </FormItemWrapper>
