@@ -23,3 +23,10 @@ export const needLogin = (props) => {
     onOk: props,
   });
 };
+export const notYourSchool = (props) => {
+  Modal.error({
+    title: "리뷰를 작성 할 수 없습니다.",
+    content: props,
+    style: { top: "40vh" },
+  });
+};
