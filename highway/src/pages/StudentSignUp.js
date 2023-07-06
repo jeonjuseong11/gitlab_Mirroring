@@ -1,15 +1,7 @@
-import {
-  AutoComplete,
-  Button,
-  Checkbox,
-  Form,
-  Radio,
-  Select,
-  Space,
-} from "antd";
+import { AutoComplete, Button, Form, Radio, Select, Space } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   CHECK_DUPLICATE_ID_REQUEST,
   SIGNUP_REQUEST,
@@ -24,7 +16,6 @@ import {
   SignUpWrapper,
 } from "../styles/SignUpStyle";
 import {
-  agreeValidate,
   idRegExp,
   schoolValidate,
   validateAge,
@@ -40,9 +31,9 @@ const SignUp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [form] = Form.useForm();
-  const identity = "student";
 
   const { idValid } = useSelector((state) => state.user);
+
   useEffect(() => {
     console.log(idValid);
   }, [idValid]);
@@ -67,8 +58,11 @@ const SignUp = () => {
         type: CHECK_DUPLICATE_ID_REQUEST,
         data: userIdValue,
       });
-      info("사용가능한 아이디입니다.");
+      if (idValid) {
+        info("사용가능한 아이디입니다.");
+      }
     }
+    console.log(idValid);
   };
 
   const [autoCompleteResult, setAutoCompleteResult] = useState([]);
@@ -105,24 +99,24 @@ const SignUp = () => {
           tooltip="아이디는 영어로 시작해여 숫자와의 조합으로 작성해주세요"
           rules={[{ validator: validateId }]}
           hasFeedback
-          validateStatus={idValid ? "success" : "error"}
+          validateStatus={idValid.data ? "success" : "error"}
         >
           <Space.Compact style={{ width: "100%" }}>
             <SignUpInput
               allowClear
               placeholder="아이디를 입력해주세요"
-              disabled={idValid}
+              disabled={idValid.data}
             />
             <Button
               onClick={onCheckUserId}
-              disabled={idValid}
+              disabled={idValid.data}
               style={{ height: "3rem" }}
             >
               중복확인
             </Button>
           </Space.Compact>
         </Form.Item>
-        {idValid ? (
+        {idValid.data ? (
           <p
             style={{
               color: "green",
@@ -249,14 +243,6 @@ const SignUp = () => {
             ]}
           />
         </Form.Item>
-        {/* <Form.Item name="agreement" valuePropName="checked" rules={[{ validator: agreeValidate }]}>
-          <Checkbox>
-            <Link to={`/signup/student/terms`} state={{ data: identity }}>
-              이용약관
-            </Link>
-            에 동의합니다
-          </Checkbox>
-        </Form.Item> */}
         <Form.Item>
           <ButtonWrapper>
             <StudentSignUpBtn type="primary" htmlType="submit">
