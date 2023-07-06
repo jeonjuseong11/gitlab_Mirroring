@@ -13,12 +13,10 @@ import SchoolDetail from "./pages/SchoolDetail";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import OtherSignUp from "./pages/OtherSignUp";
 import Promotion from "./pages/Promotion";
 import SchoolRanking from "./pages/SchoolRanking";
 import Search from "./pages/Search";
 import SignUp from "./pages/SignUp";
-import StudentSignUp from "./pages/StudentSignUp";
 import UserProfile from "./pages/UserProfile";
 import Terms from "./pages/Terms";
 import PromotionNews from "./components/Promotion/PromotionNews";
