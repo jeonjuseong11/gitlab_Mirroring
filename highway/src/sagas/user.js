@@ -68,15 +68,13 @@ function setAccessToken(accessToken, refreshToken, expiration) {
 function* logIn(action) {
   try {
     const result = yield call(logInAPI, action.data);
-    const { access_TOKEN, access_TOKEN_EXPIRATION, refresh_TOKEN } =
-      result.data;
+    const { access_TOKEN, access_TOKEN_EXPIRATION, refresh_TOKEN } = result.data;
     // console.log(result.data.token);//토큰 확인용
     axios.defaults.headers.common["ACCESS_TOKEN"] = `${access_TOKEN}`;
     setAccessToken(access_TOKEN, refresh_TOKEN, access_TOKEN_EXPIRATION);
-
     yield put({
       type: LOGIN_SUCCESS,
-      data: result.data.body,
+      data: result.data,
     });
     yield put({
       type: LOAD_USER_REQUEST,
@@ -97,10 +95,18 @@ const signUpAPI = (data) => {
 function* signUp(action) {
   try {
     const result = yield call(signUpAPI, action.data);
-    console.log(result);
     yield put({
       type: SIGNUP_SUCCESS,
-      data: result.data,
+      data: result.data.data,
+    });
+    const { access_TOKEN, access_TOKEN_EXPIRATION, refresh_TOKEN } = result.data;
+    setAccessToken(access_TOKEN, refresh_TOKEN, access_TOKEN_EXPIRATION);
+    axios.defaults.headers.common["ACCESS_TOKEN"] = `${result.data.access_TOKEN}`;
+
+    // console.log(result.data);
+
+    yield put({
+      type: LOAD_USER_REQUEST,
     });
   } catch (err) {
     console.error(err);
@@ -144,7 +150,7 @@ function* loadUser() {
     // console.log(action.data);
     yield put({
       type: LOAD_USER_SUCCESS,
-      data: result.data.body,
+      data: result.data.data,
     });
   } catch (e) {
     yield put({
@@ -166,8 +172,7 @@ const refreshTokenAPI = () => {
 function* refreshToken() {
   try {
     const result = yield call(refreshTokenAPI);
-    const { access_TOKEN, refresh_TOKEN, access_TOKEN_EXPIRATION } =
-      result.data;
+    const { access_TOKEN, refresh_TOKEN, access_TOKEN_EXPIRATION } = result.data;
     axios.defaults.headers.common["ACCESS_TOKEN"] = access_TOKEN;
     setAccessToken(access_TOKEN, refresh_TOKEN, access_TOKEN_EXPIRATION);
     // console.log(action.data);

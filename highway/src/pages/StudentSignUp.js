@@ -2,10 +2,7 @@ import { AutoComplete, Button, Form, Radio, Select, Space } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {
-  CHECK_DUPLICATE_ID_REQUEST,
-  SIGNUP_REQUEST,
-} from "../constants/actionTypes";
+import { CHECK_DUPLICATE_ID_REQUEST, SIGNUP_REQUEST } from "../constants/actionTypes";
 import {
   ButtonWrapper,
   CancelBtn,
@@ -17,6 +14,7 @@ import {
 } from "../styles/SignUpStyle";
 import {
   idRegExp,
+  roleValidate,
   schoolValidate,
   validateAge,
   validateEmail,
@@ -31,6 +29,7 @@ const SignUp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [form] = Form.useForm();
+  const [role, setRole] = useState("");
 
   const { idValid } = useSelector((state) => state.user);
 
@@ -71,9 +70,7 @@ const SignUp = () => {
       setAutoCompleteResult([]);
     } else {
       setAutoCompleteResult(
-        ["@gmail.com", "@naver.com", "@hanmail.net"].map(
-          (domain) => `${value}${domain}`
-        )
+        ["@gmail.com", "@naver.com", "@hanmail.net"].map((domain) => `${value}${domain}`)
       );
     }
   };
@@ -81,6 +78,7 @@ const SignUp = () => {
     label: email,
     value: email,
   }));
+
   return (
     <SignUpWrapper>
       <SignUpForm
@@ -102,16 +100,8 @@ const SignUp = () => {
           validateStatus={idValid.data ? "success" : "error"}
         >
           <Space.Compact style={{ width: "100%" }}>
-            <SignUpInput
-              allowClear
-              placeholder="아이디를 입력해주세요"
-              disabled={idValid.data}
-            />
-            <Button
-              onClick={onCheckUserId}
-              disabled={idValid.data}
-              style={{ height: "3rem" }}
-            >
+            <SignUpInput allowClear placeholder="아이디를 입력해주세요" disabled={idValid.data} />
+            <Button onClick={onCheckUserId} disabled={idValid.data} style={{ height: "3rem" }}>
               중복확인
             </Button>
           </Space.Compact>
@@ -139,10 +129,7 @@ const SignUp = () => {
           ]}
           hasFeedback
         >
-          <SignUpInputPassword
-            allowClear
-            placeholder="비밀번호를 입력해주세요(8~50)"
-          />
+          <SignUpInputPassword allowClear placeholder="비밀번호를 입력해주세요(8~50)" />
         </Form.Item>
         <label>비밀번호 확인</label>
         <Form.Item
@@ -158,17 +145,12 @@ const SignUp = () => {
                 if (getFieldValue("pwd") === value) {
                   return Promise.resolve();
                 }
-                return Promise.reject(
-                  new Error("비밀번호가 일치하지 않습니다.")
-                );
+                return Promise.reject(new Error("비밀번호가 일치하지 않습니다."));
               },
             }),
           ]}
         >
-          <SignUpInputPassword
-            allowClear
-            placeholder="비밀번호를 입력해주세요"
-          />
+          <SignUpInputPassword allowClear placeholder="비밀번호를 입력해주세요" />
         </Form.Item>
         <label>닉네임</label>
         <Form.Item name="name" rules={[{ validator: validateNickname }]}>
@@ -201,48 +183,85 @@ const SignUp = () => {
             </Radio.Group>
           </Form.Item>
         </div>
-        <label>학교</label>
-        <Form.Item name="school_id" rules={[{ validator: schoolValidate }]}>
+        <label>역할</label>
+        <Form.Item name="role" rules={[{ validator: roleValidate }]}>
           <Select
-            showSearch
-            type="number"
-            style={{
-              width: 200,
+            onSelect={(value) => {
+              if (value === 1) {
+                // alert("학생");
+                setRole(1);
+              } else if (value === 2) {
+                // alert("선생님");
+                setRole(2);
+              } else if (value === 3) {
+                // alert("부모님");
+                setRole(3);
+              }
             }}
-            placeholder="Search to Select"
-            optionFilterProp="children"
-            filterOption={(input, option) =>
-              (option?.label ?? "").includes(input)
-            }
-            filterSort={(optionA, optionB) =>
-              (optionA?.label ?? "")
-                .toLowerCase()
-                .localeCompare((optionB?.label ?? "").toLowerCase())
-            }
+            placeholder="선택해주세요"
             options={[
               {
-                value: schools[0].id,
-                label: schools[0].schul_NM,
+                value: 1,
+                label: "학생",
               },
               {
-                value: schools[1].id,
-                label: schools[1].schul_NM,
+                value: 2,
+                label: "선생님",
               },
               {
-                value: schools[2].id,
-                label: schools[2].schul_NM,
-              },
-              {
-                value: schools[3].id,
-                label: schools[3].schul_NM,
-              },
-              {
-                value: schools[4].id,
-                label: schools[4].schul_NM,
+                value: 3,
+                label: "부모님",
               },
             ]}
           />
         </Form.Item>
+        {role === 1 ? (
+          <>
+            <label>학교</label>
+            <Form.Item name="schoolId" rules={[{ validator: schoolValidate }]}>
+              <Select
+                showSearch
+                type="number"
+                style={{
+                  width: 200,
+                }}
+                placeholder="Search to Select"
+                optionFilterProp="children"
+                filterOption={(input, option) => (option?.label ?? "").includes(input)}
+                filterSort={(optionA, optionB) =>
+                  (optionA?.label ?? "")
+                    .toLowerCase()
+                    .localeCompare((optionB?.label ?? "").toLowerCase())
+                }
+                options={[
+                  {
+                    value: schools[0].id,
+                    label: schools[0].schul_NM,
+                  },
+                  {
+                    value: schools[1].id,
+                    label: schools[1].schul_NM,
+                  },
+                  {
+                    value: schools[2].id,
+                    label: schools[2].schul_NM,
+                  },
+                  {
+                    value: schools[3].id,
+                    label: schools[3].schul_NM,
+                  },
+                  {
+                    value: schools[4].id,
+                    label: schools[4].schul_NM,
+                  },
+                ]}
+              />
+            </Form.Item>
+          </>
+        ) : (
+          <></>
+        )}
+
         <Form.Item>
           <ButtonWrapper>
             <StudentSignUpBtn type="primary" htmlType="submit">
