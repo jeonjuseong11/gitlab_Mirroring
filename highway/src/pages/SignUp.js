@@ -292,7 +292,7 @@ const SignUp = () => {
             </StudentSignUpBtn>
             <CancelBtn
               onClick={() => {
-                navigate(`/signup`);
+                navigate(`/login`);
               }}
             >
               취소하기
