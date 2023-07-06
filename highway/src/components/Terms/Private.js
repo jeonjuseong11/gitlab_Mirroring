@@ -5,7 +5,14 @@ const Private = () => {
   return (
     <TermWrapper>
       <h1>HIGHWAY 개인정보 처리방침</h1>
-      <div style={{ height: "30vh", overflow: "scroll" }}>
+      <div
+        style={{
+          height: "30vh",
+          overflow: "scroll",
+          border: "1px solid gray",
+          marginBottom: "3rem",
+        }}
+      >
         <ul style={{ listStyle: "none", textAlign: "left" }}>
           <h4>1. 개인정보의 수집 및 이용목적</h4>
           <p>

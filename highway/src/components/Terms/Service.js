@@ -4,7 +4,14 @@ const Service = () => {
   return (
     <TermWrapper>
       <h1>HIGHWAY 이용약관</h1>
-      <div style={{ height: "30vh", overflow: "scroll" }}>
+      <div
+        style={{
+          height: "30vh",
+          overflow: "scroll",
+          border: "1px solid gray",
+          marginBottom: "3rem",
+        }}
+      >
         <ul style={{ listStyle: "none", textAlign: "left" }}>
           <h4>제 1조 (서비스 이용신청)</h4>
           <li>

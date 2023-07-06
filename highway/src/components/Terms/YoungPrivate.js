@@ -5,7 +5,14 @@ const YoungPrivate = () => {
   return (
     <TermWrapper>
       <h1>HIGHWAY 청소년 보호정책</h1>
-      <div style={{ height: "30vh", overflow: "scroll" }}>
+      <div
+        style={{
+          height: "30vh",
+          overflow: "scroll",
+          border: "1px solid gray",
+          marginBottom: "3rem",
+        }}
+      >
         <p>
           네이버 주식회사 ("회사" 또는 "네이버"라 함)는 청소년이 건전한 인격체로
           성장할 수 있도록 하기 위하여 청소년 보호정책을 수립, 시행하고
