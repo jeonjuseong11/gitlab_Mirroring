@@ -5,7 +5,7 @@ import { BackToSign, GoToToSign } from "../../styles/TermsStyle";
 const TermBtn = () => {
   const navigate = useNavigate();
   const handleBack = () => {
-    navigate(-1);
+    navigate("/login");
   };
   const handleSign = () => {
     navigate("/signup");
