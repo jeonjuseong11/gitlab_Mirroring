@@ -9,7 +9,7 @@ const UserInfo = () => {
 
   return (
     <>
-      <Col xs={24} md={11} style={{ marginBottom: "27vh" }}>
+      <Col xs={24} md={11}>
         <div
           style={{
             backgroundColor: "white",
@@ -19,7 +19,7 @@ const UserInfo = () => {
           }}
         >
           <h3 style={{ margin: "0" }}>기본 정보</h3>
-          <table style={{ marginTop: "1rem", width: "100%", height: "10rem" }}>
+          <table style={{ marginTop: "1rem", width: "100%", height: "15rem" }}>
             <tbody>
               <tr>
                 <th style={{ width: "5rem" }}>이름</th>
@@ -37,10 +37,14 @@ const UserInfo = () => {
                 <th>성별</th>
                 <td>{me?.userGender}</td>
               </tr>
+              <tr>
+                <th>소속학교</th>
+                <td>{me?.schoolName}</td>
+              </tr>
             </tbody>
           </table>
         </div>
-        <div
+        {/* <div
           style={{
             backgroundColor: "white",
             borderRadius: "10px",
@@ -54,13 +58,11 @@ const UserInfo = () => {
             <Avatar size={128}>학교로고</Avatar>
             <div style={{ marginLeft: "2rem" }}>
               <p>학교명</p>
-              <h3>OOO 고등학교</h3>
-              <p>학과</p>
-              <h3>OO학과</h3>
+              <h3>{me?.schoolName}</h3>
             </div>
           </div>
         </div>
-        <Button danger>계정 탈퇴</Button>
+        <Button danger>계정 탈퇴</Button> */}
       </Col>
     </>
   );
