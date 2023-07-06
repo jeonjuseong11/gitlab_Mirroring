@@ -1,12 +1,11 @@
 import React from "react";
 import { TermWrapper } from "../../styles/TermsStyle";
-import { Divider, Dropdown, Form, Space } from "antd";
-import { DownOutlined } from "@ant-design/icons";
 
-const items = [
-  {
-    label: (
-      <>
+const YoungPrivate = () => {
+  return (
+    <TermWrapper>
+      <h1>HIGHWAY 청소년 보호정책</h1>
+      <div style={{ height: "30vh", overflow: "scroll" }}>
         <p>
           네이버 주식회사 ("회사" 또는 "네이버"라 함)는 청소년이 건전한 인격체로
           성장할 수 있도록 하기 위하여 청소년 보호정책을 수립, 시행하고
@@ -49,29 +48,7 @@ const items = [
             다하고 있습니다.
           </li>
         </ul>
-      </>
-    ),
-    key: "0",
-  },
-];
-const YoungPrivate = () => {
-  return (
-    <TermWrapper>
-      <h1>HIGHWAY 청소년 보호정책</h1>
-
-      <Dropdown
-        menu={{
-          items,
-        }}
-        trigger={["click"]}
-      >
-        <a onClick={(e) => e.preventDefault()}>
-          <Space>
-            자세히 보기
-            <DownOutlined />
-          </Space>
-        </a>
-      </Dropdown>
+      </div>
     </TermWrapper>
   );
 };

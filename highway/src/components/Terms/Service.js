@@ -1,12 +1,10 @@
 import React from "react";
 import { TermWrapper } from "../../styles/TermsStyle";
-import { Dropdown, Form, Space } from "antd";
-import { DownOutlined } from "@ant-design/icons";
-
-const items = [
-  {
-    label: (
-      <>
+const Service = () => {
+  return (
+    <TermWrapper>
+      <h1>HIGHWAY 이용약관</h1>
+      <div style={{ height: "30vh", overflow: "scroll" }}>
         <ul style={{ listStyle: "none", textAlign: "left" }}>
           <h4>제 1조 (서비스 이용신청)</h4>
           <li>
@@ -314,29 +312,7 @@ const items = [
           </li>
         </ul>
         <p>부칙 - 이 약관은 2016-05-03부터 시행한다.</p>
-      </>
-    ),
-    key: "0",
-  },
-];
-
-const Service = () => {
-  return (
-    <TermWrapper>
-      <h1>HIGHWAY 이용약관</h1>
-      <Dropdown
-        menu={{
-          items,
-        }}
-        trigger={["click"]}
-      >
-        <a onClick={(e) => e.preventDefault()}>
-          <Space>
-            자세히 보기
-            <DownOutlined />
-          </Space>
-        </a>
-      </Dropdown>
+      </div>
     </TermWrapper>
   );
 };

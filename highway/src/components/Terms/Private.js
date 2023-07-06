@@ -1,12 +1,11 @@
 import React from "react";
 import { TermWrapper } from "../../styles/TermsStyle";
-import { Divider, Dropdown, Form, Space } from "antd";
-import { DownOutlined } from "@ant-design/icons";
 
-const items = [
-  {
-    label: (
-      <>
+const Private = () => {
+  return (
+    <TermWrapper>
+      <h1>HIGHWAY 개인정보 처리방침</h1>
+      <div style={{ height: "30vh", overflow: "scroll" }}>
         <ul style={{ listStyle: "none", textAlign: "left" }}>
           <h4>1. 개인정보의 수집 및 이용목적</h4>
           <p>
@@ -375,29 +374,7 @@ const items = [
             변경공고일자: 2023-06-13 - 이 약관은 2023-06-20부터 시행한다.
           </p>
         </ul>
-      </>
-    ),
-    key: "0",
-  },
-];
-
-const Private = () => {
-  return (
-    <TermWrapper>
-      <h1>HIGHWAY 개인정보 처리방침</h1>
-      <Dropdown
-        menu={{
-          items,
-        }}
-        trigger={["click"]}
-      >
-        <a onClick={(e) => e.preventDefault()}>
-          <Space>
-            자세히 보기
-            <DownOutlined />
-          </Space>
-        </a>
-      </Dropdown>
+      </div>
     </TermWrapper>
   );
 };
