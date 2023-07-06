@@ -9,7 +9,7 @@ const UserInfo = () => {
 
   return (
     <>
-      <Col xs={24} md={11}>
+      <Col xs={24} md={11} style={{ marginBottom: "51vh" }}>
         <div
           style={{
             backgroundColor: "white",
