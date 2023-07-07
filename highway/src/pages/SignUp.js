@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
   CHECK_DUPLICATE_ID_REQUEST,
+  RESET_DUPLICATE_ID_REQUEST,
   SIGNUP_REQUEST,
 } from "../constants/actionTypes";
 import {
@@ -38,10 +39,17 @@ const SignUp = () => {
   const [isIdValid, setIsIdValid] = useState(false);
 
   useEffect(() => {
-    console.log(idValid);
+    console.log(isIdValid);
     console.log("useEffet isIdValid : " + isIdValid);
   }, [idValid, isIdValid]);
-
+  useEffect(() => {
+    setIsIdValid(idValid);
+  }, [idValid]);
+  const onCancel = () => {
+    dispatch({
+      type: RESET_DUPLICATE_ID_REQUEST,
+    });
+  };
   const onFinish = (values) => {
     dispatch({
       type: SIGNUP_REQUEST,
@@ -122,7 +130,7 @@ const SignUp = () => {
             </Button>
           </Space.Compact>
         </Form.Item>
-        {isIdValid ? (
+        {isIdValid.data ? (
           <p
             style={{
               color: "green",
@@ -296,7 +304,7 @@ const SignUp = () => {
             <CancelBtn
               onClick={() => {
                 navigate(`/login`);
-                setIsIdValid(false);
+                onCancel();
               }}
             >
               취소하기
