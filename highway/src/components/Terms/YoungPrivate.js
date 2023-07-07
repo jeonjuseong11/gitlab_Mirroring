@@ -10,6 +10,7 @@ const YoungPrivate = () => {
           height: "30vh",
           overflow: "scroll",
           border: "1px solid gray",
+          borderRadius: "10px",
           marginBottom: "3rem",
         }}
       >
