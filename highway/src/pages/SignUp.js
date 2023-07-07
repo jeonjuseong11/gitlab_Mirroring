@@ -35,10 +35,12 @@ const SignUp = () => {
   const [role, setRole] = useState("");
 
   const { idValid } = useSelector((state) => state.user);
+  const [isIdValid, setIsIdValid] = useState(false);
 
   useEffect(() => {
     console.log(idValid);
-  }, [idValid]);
+    console.log("useEffet isIdValid : " + isIdValid);
+  }, [idValid, isIdValid]);
 
   const onFinish = (values) => {
     dispatch({
@@ -60,11 +62,12 @@ const SignUp = () => {
         type: CHECK_DUPLICATE_ID_REQUEST,
         data: userIdValue,
       });
-      if (idValid) {
+      console.log("isIdValid : " + isIdValid);
+      setIsIdValid(idValid);
+      if (isIdValid) {
         info("사용가능한 아이디입니다.");
       }
     }
-    console.log(idValid);
   };
 
   const [autoCompleteResult, setAutoCompleteResult] = useState([]);
@@ -102,24 +105,24 @@ const SignUp = () => {
           tooltip="아이디는 영어로 시작해여 숫자와의 조합으로 작성해주세요"
           rules={[{ validator: validateId }]}
           hasFeedback
-          validateStatus={idValid.data ? "success" : "error"}
+          validateStatus={isIdValid ? "success" : "error"}
         >
           <Space.Compact style={{ width: "100%" }}>
             <SignUpInput
               allowClear
               placeholder="아이디를 입력해주세요"
-              disabled={idValid.data}
+              disabled={isIdValid}
             />
             <Button
               onClick={onCheckUserId}
-              disabled={idValid.data}
+              disabled={isIdValid}
               style={{ height: "3rem" }}
             >
               중복확인
             </Button>
           </Space.Compact>
         </Form.Item>
-        {idValid.data ? (
+        {isIdValid ? (
           <p
             style={{
               color: "green",
@@ -293,6 +296,7 @@ const SignUp = () => {
             <CancelBtn
               onClick={() => {
                 navigate(`/login`);
+                setIsIdValid(false);
               }}
             >
               취소하기
