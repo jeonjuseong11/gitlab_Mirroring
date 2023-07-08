@@ -92,7 +92,7 @@ const SchoolDetailReview = ({ reviewCount, rateAverages, roundedTotalRate }) => 
         <ReviewDetail />
       </Col>
       <Col xs={22} md={5} style={{ minWidth: "15rem" }}>
-        <OneLineReview />
+        {/* <OneLineReview /> */}
       </Col>
     </Row>
   );

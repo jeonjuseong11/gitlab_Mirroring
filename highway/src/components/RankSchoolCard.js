@@ -23,19 +23,19 @@ const RankSchoolCard = ({ selectedSchool }) => {
             size={64}
           ></Avatar>
         }
-        title={selectedSchool.schul_NM}
+        title={selectedSchool.schoolName}
         description={
           <>
-            <DepartsTags schoolInfo={selectedSchool} />
+            {/* <DepartsTags schoolInfo={selectedSchool} /> */}
             <p>
-              <a href={selectedSchool.hmpg_ADRES}>{selectedSchool.hmpg_ADRES}</a>
+              <a href={selectedSchool.websiteAddress}>{selectedSchool.websiteAddress}</a>
             </p>
             {/* <p>
               <ProfileOutlined />
               <span style={{ marginRight: "1rem" }}>리뷰 수</span>
               {selectedSchool.reviews}
             </p> */}
-            <p>
+            {/* <p>
               <UserOutlined />
               <span style={{ marginRight: "1rem" }}>사용자 수</span>
               {selectedSchool.members.length}
@@ -44,7 +44,7 @@ const RankSchoolCard = ({ selectedSchool }) => {
               <EyeOutlined />
               <span style={{ marginRight: "1rem" }}>조회 수</span>
               {selectedSchool.views}
-            </p>
+            </p> */}
           </>
         }
       />

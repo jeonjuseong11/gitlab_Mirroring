@@ -1,44 +1,34 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Col, Row, Table } from "antd";
 
 import RankSchoolCard from "../components/RankSchoolCard";
 import RankSelector from "../components/RankSelector";
+import { LOAD_SCHOOL_LIST_REQUEST } from "../constants/actionTypes";
 
 const SchoolRanking = () => {
   const { schools, schoolReviews } = useSelector((state) => state.school);
   const [rankData, setRankData] = useState([]);
   const [selectedSchool, setSelectedSchool] = useState(null);
   const [filterValue, setFilterValue] = useState("");
-
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch({
+      type: LOAD_SCHOOL_LIST_REQUEST,
+    });
+  }, []);
   useEffect(() => {
     // 데이터 가져오는 로직을 여기에 구현
-    // 예시로 더미 데이터
-    const dummyData = [
-      {
-        id: 1,
-        schul_NM: "OO1고등학교", //학교 이름
-        rank: 1, //랭크
-        // reviews: 10, //리뷰 수
-        members: 10, //재학생 회원 수
-        male: 100, //남자 학생수
-        female: 120, //여자 학생 수
-        views: 10, //학교 조회수
-        hmpg_ADRES: "http://daejindesign.sen.hs.kr7", //학교 홈페이지
-        tags: ["전자", "IT", "디자인"], //학교 태그
-      },
-    ];
+
     const copiedData = schools.slice();
     const rankedData = copiedData.map((item, index) => ({
       ...item,
       rank: index + 1,
-      views: Math.floor(Math.random() * 101), //더미데이터 생성
-      male: Math.floor(Math.random() * 101), //더미데이터 생성
-      female: Math.floor(Math.random() * 101), //더미데이터 생성
+      // views: Math.floor(Math.random() * 101), //더미데이터 생성
       reviews: schoolReviews.length,
     }));
     setRankData(rankedData);
-  }, []);
+  }, [schools]);
   const handleSchoolSelect = (school) => {
     setSelectedSchool(school);
   };
@@ -50,7 +40,7 @@ const SchoolRanking = () => {
     if (filterValue == "") {
       return true;
     }
-    return item.tags.some((tag) => filterValue.includes(tag));
+    return item.tag.some((tag) => filterValue.includes(tag));
   });
   useEffect(() => {
     if (selectedSchool == null) {
@@ -68,8 +58,8 @@ const SchoolRanking = () => {
     },
     {
       title: "학교 명",
-      dataIndex: "schul_NM",
-      key: "schul_NM",
+      dataIndex: "schoolName",
+      key: "schoolName",
       render: (text, record) => (
         <a
           style={{
@@ -88,15 +78,15 @@ const SchoolRanking = () => {
     //   key: "reviews",
     //   render: (reviews) => reviews,
     // },
-    {
-      title: "유저 수",
-      dataIndex: "members",
-      key: "members",
-      render: (members) => members.length,
-    },
+    // {
+    //   title: "유저 수",
+    //   dataIndex: "members",
+    //   key: "members",
+    //   render: (members) => members.length,
+    // },
   ];
   const rowClassName = (record) => {
-    if (selectedSchool && selectedSchool.schul_NM === record.schul_NM) {
+    if (selectedSchool && selectedSchool.schoolName === record.schoolName) {
       return "selected-row";
     }
     return "";
