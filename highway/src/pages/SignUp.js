@@ -34,10 +34,12 @@ const SignUp = () => {
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const [role, setRole] = useState("");
-
+  const { me } = useSelector((state) => state.me);
   const { idValid } = useSelector((state) => state.user);
   const [isIdValid, setIsIdValid] = useState(false);
-
+  useEffect(() => {
+    navigate("/");
+  }, [me]);
   useEffect(() => {
     console.log(isIdValid);
     console.log("useEffet isIdValid : " + isIdValid);
@@ -84,9 +86,7 @@ const SignUp = () => {
       setAutoCompleteResult([]);
     } else {
       setAutoCompleteResult(
-        ["@gmail.com", "@naver.com", "@hanmail.net"].map(
-          (domain) => `${value}${domain}`
-        )
+        ["@gmail.com", "@naver.com", "@hanmail.net"].map((domain) => `${value}${domain}`)
       );
     }
   };
@@ -116,16 +116,8 @@ const SignUp = () => {
           validateStatus={isIdValid ? "success" : "error"}
         >
           <Space.Compact style={{ width: "100%" }}>
-            <SignUpInput
-              allowClear
-              placeholder="아이디를 입력해주세요"
-              disabled={isIdValid}
-            />
-            <Button
-              onClick={onCheckUserId}
-              disabled={isIdValid}
-              style={{ height: "3rem" }}
-            >
+            <SignUpInput allowClear placeholder="아이디를 입력해주세요" disabled={isIdValid} />
+            <Button onClick={onCheckUserId} disabled={isIdValid} style={{ height: "3rem" }}>
               중복확인
             </Button>
           </Space.Compact>
@@ -153,10 +145,7 @@ const SignUp = () => {
           ]}
           hasFeedback
         >
-          <SignUpInputPassword
-            allowClear
-            placeholder="비밀번호를 입력해주세요(8~50)"
-          />
+          <SignUpInputPassword allowClear placeholder="비밀번호를 입력해주세요(8~50)" />
         </Form.Item>
         <label>비밀번호 확인</label>
         <Form.Item
@@ -172,17 +161,12 @@ const SignUp = () => {
                 if (getFieldValue("pwd") === value) {
                   return Promise.resolve();
                 }
-                return Promise.reject(
-                  new Error("비밀번호가 일치하지 않습니다.")
-                );
+                return Promise.reject(new Error("비밀번호가 일치하지 않습니다."));
               },
             }),
           ]}
         >
-          <SignUpInputPassword
-            allowClear
-            placeholder="비밀번호를 입력해주세요"
-          />
+          <SignUpInputPassword allowClear placeholder="비밀번호를 입력해주세요" />
         </Form.Item>
         <label>닉네임</label>
         <Form.Item name="name" rules={[{ validator: validateNickname }]}>
@@ -244,10 +228,14 @@ const SignUp = () => {
                 value: 3,
                 label: "부모님",
               },
+              {
+                value: 4,
+                label: "예비 재학생",
+              },
             ]}
           />
         </Form.Item>
-        {role === 1 ? (
+        {role === 1 || role === 2 ? (
           <>
             <label>학교</label>
             <Form.Item name="schoolId" rules={[{ validator: schoolValidate }]}>
@@ -259,9 +247,7 @@ const SignUp = () => {
                 }}
                 placeholder="Search to Select"
                 optionFilterProp="children"
-                filterOption={(input, option) =>
-                  (option?.label ?? "").includes(input)
-                }
+                filterOption={(input, option) => (option?.label ?? "").includes(input)}
                 filterSort={(optionA, optionB) =>
                   (optionA?.label ?? "")
                     .toLowerCase()
