@@ -1,13 +1,22 @@
 import { Col, List, Row, Segmented, Tag } from "antd";
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { LOAD_SAVED_SCHOOL_REQUEST } from "../../constants/actionTypes";
 import SchoolList from "../../pages/SchoolList";
 
 const ProfileRecentRecord = () => {
-  const { schools } = useSelector((state) => state.school);
+  const { followList } = useSelector((state) => state.school);
   const data = [1, 2, 3, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
   const [selection, setSelection] = useState("학교");
-
+  const dispatch = useDispatch();
+  const loadSavedSchool = () => {
+    dispatch({
+      type: LOAD_SAVED_SCHOOL_REQUEST,
+    });
+  };
+  useEffect(() => {
+    loadSavedSchool();
+  }, []);
   return (
     <>
       <Col xs={24} md={11}>
@@ -22,7 +31,7 @@ const ProfileRecentRecord = () => {
           <h3>찜한 학교들</h3>
           찜한 학교는 최대 10개까지 볼 수 있습니다.
           <div>
-            <SchoolList schools={schools} />
+            <SchoolList schools={followList} />
           </div>
         </div>
       </Col>
