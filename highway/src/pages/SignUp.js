@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import {
   CHECK_DUPLICATE_ID_REQUEST,
   LOAD_SCHOOL_INFO_REQUEST,
+  LOAD_SCHOOL_LIST_REQUEST,
   RESET_DUPLICATE_ID_REQUEST,
   SIGNUP_REQUEST,
 } from "../constants/actionTypes";
@@ -31,7 +32,6 @@ import { useSelector } from "react-redux";
 import { error, info } from "../utils/Message";
 const SignUp = () => {
   const { schools } = useSelector((state) => state.school);
-  console.log(schools);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [form] = Form.useForm();
@@ -82,16 +82,17 @@ const SignUp = () => {
     }
   };
   // 백엔드 오류 수정시 주석 해제
-  // const loadSchoolsInfo = () => {
-  //   dispatch({
-  //     type: LOAD_SCHOOL_INFO_REQUEST,
-  //   });
-  // };
-  // useEffect(() => {
-  //   loadSchoolsInfo();
-  // }, []);
+  const loadSchoolsInfo = () => {
+    dispatch({
+      type: LOAD_SCHOOL_LIST_REQUEST,
+    });
+    console.log(schools);
+  };
+  useEffect(() => {
+    console.log("school");
+    loadSchoolsInfo();
+  }, []);
   const schoolsInfo = schools.map((it) => {
-    console.log(it);
     return {
       value: it.id,
       label: it.schoolName,
