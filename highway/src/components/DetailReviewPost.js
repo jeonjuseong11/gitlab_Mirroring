@@ -27,27 +27,32 @@ const MessageWrapper = styled.div`
   margin-left: 1rem;
 `;
 
-const DetailReviewForm = ({
-  setWrite,
-  review,
-  editing,
-  setEditing,
-  setEditContent,
-}) => {
+const DetailReviewForm = ({ setWrite, review, editing, setEditing, setEditContent }) => {
   const { schoolId } = useParams();
   const { me } = useSelector((state) => state.user);
+  const getUserRoleText = (userRole) => {
+    if (userRole === 1) {
+      return "재학생";
+    } else if (userRole === 2) {
+      return "선생님";
+    } else if (userRole === 3) {
+      return "부모님";
+    } else if (userRole === 4) {
+      return "예비재학생";
+    } else {
+      return "";
+    }
+  };
   // console.log(review);
   // Form instance with form hook
   const [form] = Form.useForm();
 
-  // State to manage messages for each rate category
   const [trafficMessage, setTrafficMessage] = useState("평가해주세요.");
   const [facilityMessage, setFacilityMessage] = useState("평가해주세요.");
   const [cafeteriaMessage, setCafeteriaMessage] = useState("평가해주세요.");
   const [educationMessage, setEducationMessage] = useState("평가해주세요.");
   const [employmentMessage, setEmploymentMessage] = useState("평가해주세요.");
 
-  // Function to handle rate change for each category
   const handleRateChange = (name, value) => {
     const message = getMessage(value);
     switch (name) {
@@ -71,7 +76,6 @@ const DetailReviewForm = ({
     }
   };
 
-  // Function to get the message based on the rate value
   const getMessage = (value) => {
     if (value === 1) {
       return "매우 나쁨";
@@ -90,18 +94,16 @@ const DetailReviewForm = ({
 
   const dispatch = useDispatch();
 
-  // Function to handle form submission
   const handleSubmit = useCallback(
     (values) => {
-      if (me.schoolId === schoolId) {
+      if (me.schoolId === parseInt(schoolId)) {
         if (editing) {
-          // When in edit mode, dispatch update review action
           dispatch({
             type: UPDATE_SCHOOL_REVIEW_REQUEST,
             data: {
               id: review.id,
               author: me.userId,
-              tags: "디자인",
+              tags: me.userRole,
               content: values.content,
               trafficRate: values.trafficRate,
               facilityRate: values.facilityRate,
@@ -111,15 +113,14 @@ const DetailReviewForm = ({
               schoolId: schoolId,
             },
           });
-          setEditing(false); // Disable edit mode
+          setEditing(false);
           setEditContent("");
         } else {
-          // When not in edit mode, dispatch add review action
           dispatch({
             type: ADD_SCHOOL_REVIEW_REQUEST,
             data: {
               author: me.userId,
-              tags: "디자인",
+              tags: getUserRoleText(me.userRole),
               content: values.content,
               trafficRate: values.trafficRate,
               facilityRate: values.facilityRate,
@@ -130,8 +131,8 @@ const DetailReviewForm = ({
             },
           });
         }
-        form.setFieldsValue(""); // Clear form fields
-        setWrite(false); // Close write mode
+        form.setFieldsValue("");
+        setWrite(false);
       } else {
         notYourSchool("해당학교에는 리뷰를 작성할 수 없습니다.");
       }
@@ -140,7 +141,6 @@ const DetailReviewForm = ({
   );
 
   useEffect(() => {
-    // When a review is provided (entered edit mode), set the form fields with the review data
     if (review) {
       form.setFieldsValue({
         content: review.content,
@@ -179,62 +179,36 @@ const DetailReviewForm = ({
       </Form.Item>
       <FormItemWrapper>
         <FormItemP>교통</FormItemP>
-        <Form.Item
-          name="trafficRate"
-          rules={[{ required: true }]}
-          style={{ margin: "0" }}
-        >
+        <Form.Item name="trafficRate" rules={[{ required: true }]} style={{ margin: "0" }}>
           <Rate onChange={(value) => handleRateChange("trafficRate", value)} />
         </Form.Item>
         <MessageWrapper>{trafficMessage}</MessageWrapper>
       </FormItemWrapper>
       <FormItemWrapper>
         <FormItemP>시설만족도</FormItemP>
-        <Form.Item
-          name="facilityRate"
-          rules={[{ required: true }]}
-          style={{ margin: "0" }}
-        >
+        <Form.Item name="facilityRate" rules={[{ required: true }]} style={{ margin: "0" }}>
           <Rate onChange={(value) => handleRateChange("facilityRate", value)} />
         </Form.Item>
         <MessageWrapper>{facilityMessage}</MessageWrapper>
       </FormItemWrapper>
       <FormItemWrapper>
         <FormItemP>급식</FormItemP>
-        <Form.Item
-          name="cafeteriaRate"
-          rules={[{ required: true }]}
-          style={{ margin: "0" }}
-        >
-          <Rate
-            onChange={(value) => handleRateChange("cafeteriaRate", value)}
-          />
+        <Form.Item name="cafeteriaRate" rules={[{ required: true }]} style={{ margin: "0" }}>
+          <Rate onChange={(value) => handleRateChange("cafeteriaRate", value)} />
         </Form.Item>
         <MessageWrapper>{cafeteriaMessage}</MessageWrapper>
       </FormItemWrapper>
       <FormItemWrapper>
         <FormItemP>교육</FormItemP>
-        <Form.Item
-          name="educationRate"
-          rules={[{ required: true }]}
-          style={{ margin: "0" }}
-        >
-          <Rate
-            onChange={(value) => handleRateChange("educationRate", value)}
-          />
+        <Form.Item name="educationRate" rules={[{ required: true }]} style={{ margin: "0" }}>
+          <Rate onChange={(value) => handleRateChange("educationRate", value)} />
         </Form.Item>
         <MessageWrapper>{educationMessage}</MessageWrapper>
       </FormItemWrapper>
       <FormItemWrapper>
         <FormItemP>취업</FormItemP>
-        <Form.Item
-          name="employmentRate"
-          rules={[{ required: true }]}
-          style={{ margin: "0" }}
-        >
-          <Rate
-            onChange={(value) => handleRateChange("employmentRate", value)}
-          />
+        <Form.Item name="employmentRate" rules={[{ required: true }]} style={{ margin: "0" }}>
+          <Rate onChange={(value) => handleRateChange("employmentRate", value)} />
         </Form.Item>
         <MessageWrapper>{employmentMessage}</MessageWrapper>
       </FormItemWrapper>

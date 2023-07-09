@@ -1,5 +1,5 @@
-import { StarFilled } from "@ant-design/icons";
-import { Avatar, Button, List, Rate, Skeleton } from "antd";
+import { EllipsisOutlined, StarFilled } from "@ant-design/icons";
+import { Avatar, Button, Dropdown, List, Menu, Rate, Skeleton } from "antd";
 import axios from "axios";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -24,14 +24,13 @@ const DetailReviewP = styled.p`
 `;
 const DetailReviewAvatarWrapper = styled.div`
   display: flex;
-  gap: 5rem;
   align-items: center;
   height: 2rem;
   margin-left: 1rem;
 `;
 const DetailReviewUserTagsWrapper = styled.div`
-  display: flex;
-  margin-left: 9rem;
+  width: 15rem;
+  margin-left: 2.5rem;
 `;
 const DetailReviewContentWrapper = styled.div`
   color: black;
@@ -47,7 +46,6 @@ const ReviewDetailList = ({ setWrite, setEditing, setEditContent }) => {
   const { schoolReviews, loadSchoolReviewsLoading } = useSelector((state) => state.school);
   const { me } = useSelector((state) => state.user);
   const userinfo = JSON.parse(localStorage.getItem("USERINFO"));
-
   const dispatch = useDispatch();
   const { schoolId } = useParams();
 
@@ -92,44 +90,50 @@ const ReviewDetailList = ({ setWrite, setEditing, setEditContent }) => {
                       <Avatar size={50} style={{ marginTop: "2rem" }}>
                         {item?.userName && item.userName.length > 0 ? item.userName[0] : ""}
                       </Avatar>
-                      <h3>{item?.userName}</h3>
-                      <span>
-                        <StarFilled style={{ color: "#FFDC82", marginLeft: "-5rem" }} />
-                        {(item?.trafficRate +
-                          item?.facilityRate +
-                          item?.cafeteriaRate +
-                          item?.educationRate +
-                          item?.employmentRate) /
-                          5}
-                      </span>
-                      {item?.userName === userinfo?.userId && (
+                      <div
+                        style={{
+                          width: "65%",
+                          textAlign: "left",
+                          display: "flex",
+                          marginLeft: "5rem",
+                        }}
+                      >
+                        <h3>{item?.userName}</h3>
+                        <p style={{ marginLeft: "1rem", paddingTop: "4px" }}>
+                          <StarFilled style={{ color: "#FFDC82" }} />
+                          {(item?.trafficRate +
+                            item?.facilityRate +
+                            item?.cafeteriaRate +
+                            item?.educationRate +
+                            item?.employmentRate) /
+                            5}
+                        </p>
+                      </div>
+
+                      {item?.userName == me?.userId && (
                         <List.Item
-                          action={
-                            <div
-                              style={{
-                                gap: "10px",
-                                fontWeight: "500",
-                                color: "#a2a2a2",
-                              }}
+                          style={{ float: "right" }}
+                          actions={[
+                            <Dropdown
+                              placement="bottomLeft"
+                              overlay={
+                                <Menu>
+                                  <Menu.Item onClick={() => handleEdit(item)}>수정하기</Menu.Item>
+                                  <Menu.Item danger onClick={() => removeReview(item.id)}>
+                                    삭제하기
+                                  </Menu.Item>
+                                </Menu>
+                              }
+                              trigger={["hover"]}
                             >
-                              <span style={{ cursor: "pointer" }} onClick={() => handleEdit(item)}>
-                                수정
-                              </span>
-                              <br />
-                              <span
-                                style={{ cursor: "pointer" }}
-                                onClick={() => removeReview(item.id)}
-                              >
-                                삭제
-                              </span>
-                            </div>
-                          }
+                              <EllipsisOutlined />
+                            </Dropdown>,
+                          ]}
                         />
                       )}
                     </DetailReviewAvatarWrapper>
-
                     <DetailReviewUserTagsWrapper>
-                      <TagsItem>{item?.tags}</TagsItem>
+                      <TagsItem style={{ marginLeft: "1rem" }}>{item?.tags}</TagsItem>
                     </DetailReviewUserTagsWrapper>
                   </>
                 }
