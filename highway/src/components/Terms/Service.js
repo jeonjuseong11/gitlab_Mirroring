@@ -6,7 +6,7 @@ const Service = () => {
       <h1>HIGHWAY 이용약관</h1>
       <div
         style={{
-          height: "30vh",
+          height: "20rem",
           overflow: "scroll",
           border: "1px solid gray",
           borderRadius: "10px",

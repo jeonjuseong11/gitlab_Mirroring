@@ -7,7 +7,7 @@ const YoungPrivate = () => {
       <h1>HIGHWAY 청소년 보호정책</h1>
       <div
         style={{
-          height: "30vh",
+          height: "20rem",
           overflow: "scroll",
           border: "1px solid gray",
           borderRadius: "10px",
