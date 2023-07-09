@@ -26,7 +26,7 @@ const UserProfile = () => {
     }
   };
   return (
-    <div style={{ backgroundColor: "#f2f2f2", height: "100%" }}>
+    <div style={{ backgroundColor: "#f2f2f2", height: "88.6vh" }}>
       <Row gutter={[16, 16]} justify="center" style={{ paddingTop: "1rem" }}>
         <Col xs={24} md={4}>
           <Menu
