@@ -46,6 +46,11 @@ const CardList = ({ filterValue }) => {
         <List
           grid={{ gutter: 12, xs: 1, sm: 2, md: 3, lg: 4, xl: 5, xxl: 5 }}
           dataSource={schools}
+          pagination={{
+            pageSize: 5,
+            position: "bottom",
+            align: "center",
+          }}
           renderItem={(item) => (
             <List.Item key={item.id}>
               <Col>
@@ -85,7 +90,10 @@ const CardList = ({ filterValue }) => {
                         <CardItem>
                           {item.tag?.map((v, idx) => {
                             return (
-                              <TagsItem key={idx} style={{ marginRight: "0.5rem" }}>
+                              <TagsItem
+                                key={idx}
+                                style={{ marginRight: "0.5rem" }}
+                              >
                                 {v}
                               </TagsItem>
                             );
