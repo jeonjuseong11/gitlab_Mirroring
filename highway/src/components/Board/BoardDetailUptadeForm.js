@@ -30,6 +30,8 @@ const BoardDetailUptadeForm = () => {
   const [fileList, setFileList] = useState([]);
   const { me } = useSelector((state) => state.user);
   const accessToken = localStorage.getItem("ACCESSTOKEN");
+  const { schoolBoardPost } = useSelector((state) => state.post);
+  console.log(schoolBoardPost);
 
   useEffect(() => {
     // 새로고침 시 로컬 스토리지에서 로그인 정보 가져오기
@@ -63,7 +65,6 @@ const BoardDetailUptadeForm = () => {
     [navigate]
   );
   const onFinish = (values) => {
-    console.log(values);
     dispatch({
       type: UPDATE_POST_REQUEST,
       data: {
@@ -73,6 +74,8 @@ const BoardDetailUptadeForm = () => {
         id: postId,
       },
     });
+    // navigate(`/schoolboard/${values.category}`);
+    window.location.replace(`/schoolboard/${values.category}`);
   };
 
   const handleChange = ({ fileList }) => {
@@ -162,20 +165,20 @@ const BoardDetailUptadeForm = () => {
             </Upload>
           </Form.Item> */}
           <Form.Item>
-            <a href={`/schoolboard/`}>
-              <Button
-                type="primary"
-                htmlType="submit"
-                style={{
-                  width: "10rem",
-                  height: "3rem",
-                  borderRadius: "50px",
-                  float: "right",
-                }}
-              >
-                수정 <EditOutlined />
-              </Button>
-            </a>
+            {/* <a href={`/schoolboard/`}> */}
+            <Button
+              type="primary"
+              htmlType="submit"
+              style={{
+                width: "10rem",
+                height: "3rem",
+                borderRadius: "50px",
+                float: "right",
+              }}
+            >
+              수정 <EditOutlined />
+            </Button>
+            {/* </a> */}
           </Form.Item>
           <Modal visible={previewVisible} footer={null} onCancel={handleCancel}>
             <img alt="Preview" style={{ width: "100%" }} src={previewImage} />
