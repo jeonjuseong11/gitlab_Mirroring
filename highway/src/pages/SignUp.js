@@ -36,12 +36,14 @@ const SignUp = () => {
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const [role, setRole] = useState("");
-  // const { me } = useSelector((state) => state.me);
+  const me = localStorage.getItem("USERINFO");
   const { idValid } = useSelector((state) => state.user);
   const [isIdValid, setIsIdValid] = useState(false);
-  // useEffect(() => {
-  //   navigate("/");
-  // }, [me]);
+  useEffect(() => {
+    if (me) {
+      navigate("/");
+    }
+  }, [me]);
   useEffect(() => {
     console.log(isIdValid);
     console.log("useEffet isIdValid : " + isIdValid);
@@ -88,8 +90,9 @@ const SignUp = () => {
     });
     console.log(schools);
   };
+
   useEffect(() => {
-    console.log("school");
+    // console.log("school");
     loadSchoolsInfo();
   }, []);
   const schoolsInfo = schools.map((it) => {
