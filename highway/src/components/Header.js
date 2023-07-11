@@ -32,6 +32,7 @@ const Header = () => {
     });
     // navigate(-1);
     window.localStorage.clear();
+    // window.location.replace(`/`);
   };
 
   useEffect(() => {
@@ -53,11 +54,19 @@ const Header = () => {
         <Col xs={16} md={9} style={{ textAlign: "right", marginTop: "0.3rem" }}>
           {me !== null ? (
             <>
-              <Button onClick={handleProfileClick} type="link" style={{ color: "black" }}>
+              <Button
+                onClick={handleProfileClick}
+                type="link"
+                style={{ color: "black" }}
+              >
                 <Avatar size={28}>{me?.userName[0]}</Avatar>
                 <span style={{ marginLeft: "0.5rem" }}>{me?.userName}</span>
               </Button>
-              <Button onClick={onLogOut} danger style={{ marginLeft: "0.5rem" }}>
+              <Button
+                onClick={onLogOut}
+                danger
+                style={{ marginLeft: "0.5rem" }}
+              >
                 로그아웃
               </Button>
             </>
@@ -87,7 +96,10 @@ const Header = () => {
           icon={<CommentOutlined />}
           tooltip={<div>서비스에 대한 생각을 남겨주세요</div>}
         />
-        <FloatButton icon={<QuestionCircleOutlined />} tooltip={<div>버그 리포트</div>} />
+        <FloatButton
+          icon={<QuestionCircleOutlined />}
+          tooltip={<div>버그 리포트</div>}
+        />
       </FloatButton.Group>
     </>
   );
