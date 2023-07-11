@@ -32,7 +32,7 @@ const Header = () => {
     });
     // navigate(-1);
     window.localStorage.clear();
-    // window.location.replace(`/`);
+    window.location.replace(`/`);
   };
 
   useEffect(() => {
