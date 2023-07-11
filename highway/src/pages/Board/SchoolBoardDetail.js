@@ -1,5 +1,5 @@
-import { Col, Breadcrumb, Row, Button } from "antd";
 import React, { useEffect, useState } from "react";
+import { Col, Breadcrumb, Row, Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import {
   LOAD_POST_COMMENTS_REQUEST,
@@ -15,9 +15,6 @@ const SchoolBoardDetail = () => {
   const navigator = useNavigate();
   const { schoolBoardPost } = useSelector((state) => state.post);
   const { me } = useSelector((state) => state.user);
-  console.log(schoolBoardPost);
-  console.log(me);
-  const [parentId, setParentId] = useState(null);
   const { postId, category } = useParams();
   const loadPostComments = () => {
     dispatch({
@@ -32,7 +29,7 @@ const SchoolBoardDetail = () => {
     dispatch({
       type: REMOVE_POST_REQUEST,
       data: {
-        id: schoolBoardPost?.board.id,
+        id: schoolBoardPost?.board?.id,
       },
     });
   };
@@ -56,26 +53,20 @@ const SchoolBoardDetail = () => {
             {
               title: (
                 <>
-                  <a href={`/schoolboard/${category}`}>
-                    {changeCategory(category)}
-                  </a>
+                  <a href={`/schoolboard/${category}`}>{changeCategory(category)}</a>
                 </>
               ),
             },
           ]}
         />
         <div>
-          <h2>{schoolBoardPost?.board.title}</h2>
-          <p>작성자 : {schoolBoardPost?.board.userId}</p>
-          <p>{formatDate(schoolBoardPost?.board.createDate)}</p>
-          <p
-            style={{
-              borderTop: "1px solid #c2c2c2",
-              paddingTop: "1rem",
-              paddingBottom: "5rem",
-            }}
-            dangerouslySetInnerHTML={{ __html: schoolBoardPost?.board.content }}
-          ></p>
+          <h2>{schoolBoardPost?.board?.title}</h2>
+          <p>작성자: {schoolBoardPost?.board?.userId}</p>
+          <p>{formatDate(schoolBoardPost?.board?.createDate)}</p>
+          <div
+            style={{ height: "20rem" }}
+            dangerouslySetInnerHTML={{ __html: schoolBoardPost?.board?.content }}
+          />
           <a href={`/schoolboard/${category}`}>
             <Button
               danger
@@ -90,7 +81,7 @@ const SchoolBoardDetail = () => {
           <Button
             style={{ float: "right", marginRight: "1rem" }}
             onClick={() => {
-              navigator(`/schoolboard/${schoolBoardPost.board.id}/update`);
+              navigator(`/schoolboard/${schoolBoardPost?.board.id}/update`);
             }}
           >
             수정
