@@ -243,15 +243,16 @@ function* addPost(action) {
 
 function removePostAPI(data) {
   //게시글 삭제
-  return axios.delete(`/post/${data}`);
+  return axios.delete(`board?id=${data.id}`);
 }
 
 function* removePost(action) {
   try {
     const result = yield call(removePostAPI, action.data);
+    console.log(action.data);
     yield put({
       type: REMOVE_POST_SUCCESS,
-      data: result.data,
+      data: result.data.board.id,
     });
     yield put({
       type: REMOVE_POST_OF_ME,
@@ -268,12 +269,16 @@ function* removePost(action) {
 
 function updatePostAPI(data) {
   //게시글 수정
-  return axios.patch(`/post/${data.PostId}`, data);
+  return axios.put(
+    `board?title=${data.title}&content=${data.content}&category=${data.category}&id=${data.id}`,
+    data
+  );
 }
 
 function* updatePost(action) {
   try {
     const result = yield call(updatePostAPI, action.data);
+    console.log(action.data);
     yield put({
       type: UPDATE_POST_SUCCESS,
       data: result.data,
@@ -290,7 +295,10 @@ function* updatePost(action) {
 function addCommentAPI(data) {
   // 게시물 댓글 작성
   // return axios.post(`/post/${data.postId}/comment`, data); // POST /post/1/comment
-  return axios.post(`/comment?content=${data.content}&boardId=${data.boardId}`, data); // POSTMAN에 나온 주소
+  return axios.post(
+    `/comment?content=${data.content}&boardId=${data.boardId}`,
+    data
+  ); // POSTMAN에 나온 주소
 }
 
 function* addComment(action) {
