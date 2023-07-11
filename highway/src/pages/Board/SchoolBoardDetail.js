@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Col, Breadcrumb, Row, Button } from "antd";
+import React, { useEffect } from "react";
+import { Col, Breadcrumb, Button, Avatar } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import {
   LOAD_POST_COMMENTS_REQUEST,
@@ -9,6 +9,7 @@ import {
 import { useNavigate, useParams } from "react-router-dom";
 import ToggleComment from "../../components/schoolBoardDetail/ToggleComment";
 import { changeCategory, formatDate } from "./BoardMain";
+import { UserOutlined } from "@ant-design/icons";
 
 const SchoolBoardDetail = () => {
   const dispatch = useDispatch();
@@ -16,13 +17,15 @@ const SchoolBoardDetail = () => {
   const { schoolBoardPost } = useSelector((state) => state.post);
   const { me } = useSelector((state) => state.user);
   const { postId, category } = useParams();
-  const loadPostComments = () => {
-    dispatch({
-      type: LOAD_POST_COMMENTS_REQUEST,
-      data: {
-        boardId: postId,
-      },
-    });
+  const loadPostComments = (postId) => {
+    if (postId) {
+      dispatch({
+        type: LOAD_POST_COMMENTS_REQUEST,
+        data: {
+          boardId: postId,
+        },
+      });
+    }
   };
 
   const removePost = () => {
@@ -42,7 +45,7 @@ const SchoolBoardDetail = () => {
 
   useEffect(() => {
     loadPost(postId);
-    loadPostComments();
+    loadPostComments(postId);
   }, [postId, category]);
 
   return (
@@ -60,9 +63,22 @@ const SchoolBoardDetail = () => {
           ]}
         />
         <div>
-          <h2>{schoolBoardPost?.board?.title}</h2>
-          <p>작성자: {schoolBoardPost?.board?.userId}</p>
-          <p>{formatDate(schoolBoardPost?.board?.createDate)}</p>
+          <div style={{ borderBottom: "1px solid #f2f2f2" }}>
+            <h2>{schoolBoardPost?.board?.title}</h2>
+            <Avatar
+              style={{ marginTop: "-1rem", backgroundColor: "#d2d2d2" }}
+              size={32}
+              icon={<UserOutlined />}
+            />
+            <div style={{ marginLeft: "1rem", display: "inline-block" }}>
+              <span style={{ fontWeight: "600" }}>{schoolBoardPost?.userName}</span>
+              <br></br>
+              <span style={{ fontSize: "0.5rem" }}>
+                {formatDate(schoolBoardPost?.board?.createDate)}
+              </span>
+            </div>
+            <p style={{ marginLeft: "1rem" }}></p>
+          </div>
           <div
             style={{ height: "20rem" }}
             dangerouslySetInnerHTML={{ __html: schoolBoardPost?.board?.content }}
