@@ -69,31 +69,28 @@ const CardList = ({ filterValue }) => {
                     }
                   >
                     <Meta title={item.schoolName} />
-                    {/* <Meta
+                    <Meta
                       description={
                         <CardItem>
-                          <IconText
+                          {/* <IconText
                             icon={StarOutlined}
                             // text={item.reviews.length}
                             key="list-vertical-star-o"
-                          />
+                          /> */}
                           <IconText
                             icon={UserOutlined}
-                            // text={item.members.length}
+                            text={item.studentCount}
                             key="list-vertical-message"
                           />
                         </CardItem>
                       }
-                    /> */}
+                    />
                     <Meta
                       title={
                         <CardItem>
                           {item.tag?.map((v, idx) => {
                             return (
-                              <TagsItem
-                                key={idx}
-                                style={{ marginRight: "0.5rem" }}
-                              >
+                              <TagsItem key={idx} style={{ marginRight: "0.5rem" }}>
                                 {v}
                               </TagsItem>
                             );
