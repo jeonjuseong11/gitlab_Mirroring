@@ -111,13 +111,21 @@ const SchoolRanking = () => {
           <RankSelector setFilterValue={handleFilterValueChange} />
         </Col>
       </Row>
-      <Row gutter={[24, 24]} justify="center" style={{ textAlign: "left", marginTop: "1rem" }}>
+      <Row
+        gutter={[24, 24]}
+        justify="center"
+        style={{ textAlign: "left", marginTop: "1rem" }}
+      >
         <Col xs={24} md={10} flex="auto">
           <Table
             style={{ minWidth: "14rem" }}
             columns={columns}
             dataSource={filteredData}
-            pagination={false}
+            pagination={{
+              pageSize: 10,
+              position: "bottom",
+              align: "center",
+            }}
             rowClassName={rowClassName}
             rowKey={(record) => record.id}
           />
