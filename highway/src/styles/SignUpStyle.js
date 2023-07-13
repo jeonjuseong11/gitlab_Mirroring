@@ -34,9 +34,15 @@ export const SignUpForm = styled(Form)`
 //회원가입 폼 안에 input style
 export const SignUpInput = styled(Input)`
   height: 3rem;
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  border: #f2f2f2;
 `;
 export const SignUpInputPassword = styled(Input.Password)`
   height: 3rem;
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  border: #f2f2f2;
 `;
 export const ButtonWrapper = styled.div`
   display: flex;

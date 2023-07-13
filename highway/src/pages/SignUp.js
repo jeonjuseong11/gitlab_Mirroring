@@ -138,7 +138,11 @@ const SignUp = () => {
         >
           <Space.Compact style={{ width: "100%" }}>
             <SignUpInput allowClear placeholder="아이디를 입력해주세요" disabled={isIdValid} />
-            <Button onClick={onCheckUserId} disabled={isIdValid} style={{ height: "3rem" }}>
+            <Button
+              onClick={onCheckUserId}
+              disabled={isIdValid}
+              style={{ height: "3rem", borderColor: "#f2f2f2" }}
+            >
               중복확인
             </Button>
           </Space.Compact>
