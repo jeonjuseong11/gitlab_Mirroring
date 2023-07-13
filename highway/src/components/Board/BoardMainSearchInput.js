@@ -6,9 +6,9 @@ const BoardMainSearchInput = () => {
   return (
     <Col xs={24} md={10}>
       <Input
+        className="custom-inputs"
         style={{
           height: "3.5rem",
-          borderRadius: "50px",
           marginTop: "2rem",
         }}
         prefix={<SearchOutlined />}
@@ -17,4 +17,5 @@ const BoardMainSearchInput = () => {
     </Col>
   );
 };
+
 export default BoardMainSearchInput;
