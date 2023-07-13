@@ -15,7 +15,7 @@ const Terms = () => {
       <Row justify="center">
         <Col xs={12} md={9} style={{ border: "1px solid blakc" }}>
           <p style={{ color: "black" }}>이용약관(필수)</p>
-          <TermsContents setOpen={setOpen} />
+          <TermsContents setOpen={setOpen} open={open} />
         </Col>
       </Row>
       <Row justify="center">

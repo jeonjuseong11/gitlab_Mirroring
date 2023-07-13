@@ -1,7 +1,7 @@
 import { Modal } from "antd";
 import React from "react";
 
-const TermsContents = ({ setOpen }) => {
+const TermsContents = ({ setOpen, open }) => {
   return (
     <Modal
       centered
