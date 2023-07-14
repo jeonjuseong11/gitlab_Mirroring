@@ -276,7 +276,9 @@ const reducer = (state = initialState, action) =>
       case REMOVE_POST_COMMENT_SUCCESS:
         draft.removePostCommentLoading = false;
         draft.removePostCommentDone = true;
-        draft.mainPosts = draft.schoolBoardPosts.filter((v) => v.id !== action.data.PostId);
+        // draft.schoolBoardPostComments = draft.schoolBoardPostComments.filter(
+        //   (v) => v.id !== action.data.PostId
+        // );
         break;
       case REMOVE_POST_COMMENT_FAILURE:
         draft.removePostCommentLoading = false;
