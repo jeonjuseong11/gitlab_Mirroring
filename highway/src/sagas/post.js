@@ -2,9 +2,9 @@ import axios from "axios";
 import { all, fork, put, takeLatest, throttle, call } from "redux-saga/effects";
 
 import {
-  ADD_COMMENT_FAILURE,
-  ADD_COMMENT_REQUEST,
-  ADD_COMMENT_SUCCESS,
+  ADD_POST_COMMENT_FAILURE,
+  ADD_POST_COMMENT_REQUEST,
+  ADD_POST_COMMENT_SUCCESS,
   ADD_POST_FAILURE,
   ADD_POST_REQUEST,
   ADD_POST_SUCCESS,
@@ -292,17 +292,18 @@ function* updatePost(action) {
   }
 }
 
-function addCommentAPI(data) {
+function addPostCommentAPI(data) {
+  console.log("addComment" + data);
   // 게시물 댓글 작성
   // return axios.post(`/post/${data.postId}/comment`, data); // POST /post/1/comment
   return axios.post(`/comment`, data); // POSTMAN에 나온 주소
 }
 
-function* addComment(action) {
+function* addPostComment(action) {
   try {
-    const result = yield call(addCommentAPI, action.data);
+    const result = yield call(addPostCommentAPI, action.data);
     yield put({
-      type: ADD_COMMENT_SUCCESS,
+      type: ADD_POST_COMMENT_SUCCESS,
       data: result.data,
     });
     yield put({
@@ -312,7 +313,7 @@ function* addComment(action) {
   } catch (err) {
     console.error(err);
     yield put({
-      type: ADD_COMMENT_FAILURE,
+      type: ADD_POST_COMMENT_FAILURE,
       error: err.response.data,
     });
   }
@@ -341,7 +342,7 @@ function* loadPostComments(action) {
 
 function removePostCommentAPI(data) {
   // 게시물 댓글 삭제
-  console.log(data);
+  console.log("삭제" + data);
   return axios.put(`/comment/delete`, data);
 }
 
@@ -390,31 +391,33 @@ function* updatePostComment(action) {
   }
 }
 
-function addCommentReplyAPI(data) {
-  // 게시물 대댓글 작성
-  // return axios.post(`/post/${data.postId}/comment`, data); // POST /post/1/comment
-  return axios.post(`/comment`, data); // POSTMAN에 나온 주소
-}
+// function addCommentReplyAPI(data) {
+//   console.log("대댓작성" + data);
 
-function* addCommentReply(action) {
-  try {
-    const result = yield call(addCommentReplyAPI, action.data);
-    yield put({
-      type: ADD_POST_COMMENT_REPLY_SUCCESS,
-      data: result.data,
-    });
-    yield put({
-      type: LOAD_POST_COMMENTS_REQUEST,
-      data: { boardId: action.data.boardId },
-    });
-  } catch (err) {
-    console.error(err);
-    yield put({
-      type: ADD_POST_COMMENT_REPLY_FAILURE,
-      error: err.response.data,
-    });
-  }
-}
+//   // 게시물 대댓글 작성
+//   // return axios.post(`/post/${data.postId}/comment`, data); // POST /post/1/comment
+//   return axios.post(`/comment`, data); // POSTMAN에 나온 주소
+// }
+
+// function* addCommentReply(action) {
+//   try {
+//     const result = yield call(addCommentReplyAPI, action.data);
+//     yield put({
+//       type: ADD_POST_COMMENT_REPLY_SUCCESS,
+//       data: result.data.data,
+//     });
+//     yield put({
+//       type: LOAD_POST_COMMENTS_REQUEST,
+//       data: { boardId: action.data.boardId },
+//     });
+//   } catch (err) {
+//     console.error(err);
+//     yield put({
+//       type: ADD_POST_COMMENT_REPLY_FAILURE,
+//       error: err.response.data,
+//     });
+//   }
+// }
 
 function* watchUploadImages() {
   yield takeLatest(UPLOAD_IMAGES_REQUEST, uploadImages);
@@ -459,8 +462,8 @@ function* watchUpdatePost() {
   yield takeLatest(UPDATE_POST_REQUEST, updatePost);
 }
 
-function* watchAddComment() {
-  yield takeLatest(ADD_COMMENT_REQUEST, addComment);
+function* watchAddPostComment() {
+  yield takeLatest(ADD_POST_COMMENT_REQUEST, addPostComment);
 }
 
 function* watchLoadPostComments() {
@@ -475,9 +478,9 @@ function* watchRemovePostComment() {
   yield takeLatest(REMOVE_POST_COMMENT_REQUEST, removePostComment);
 }
 
-function* watchAddCommentReply() {
-  yield takeLatest(ADD_POST_COMMENT_REPLY_REQUEST, addCommentReply);
-}
+// function* watchAddCommentReply() {
+//   yield takeLatest(ADD_POST_COMMENT_REPLY_REQUEST, addCommentReply);
+// }
 
 export default function* postSaga() {
   yield all([
@@ -491,10 +494,10 @@ export default function* postSaga() {
     fork(watchLoadPosts),
     fork(watchRemovePost),
     fork(watchUpdatePost),
-    fork(watchAddComment),
+    fork(watchAddPostComment),
     fork(watchLoadPostComments),
     fork(watchUpdatePostComment),
     fork(watchRemovePostComment),
-    fork(watchAddCommentReply),
+    // fork(watchAddCommentReply),
   ]);
 }
