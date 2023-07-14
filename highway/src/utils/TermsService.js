@@ -1,15 +1,9 @@
 import { Modal } from "antd";
 import React from "react";
 
-const TermsContents = ({ setOpen, open }) => {
+const TermsService = () => {
   return (
-    <Modal
-      centered
-      open={open}
-      onOk={() => setOpen(false)}
-      onCancel={() => setOpen(false)}
-      width={1000}
-    >
+    <div>
       <h1>HIGHWAY 이용약관</h1>
       <div
         style={{
@@ -328,8 +322,8 @@ const TermsContents = ({ setOpen, open }) => {
         </ul>
         <p>부칙 - 이 약관은 2016-05-03부터 시행한다.</p>
       </div>
-    </Modal>
+    </div>
   );
 };
 
-export default TermsContents;
+export default TermsService;
