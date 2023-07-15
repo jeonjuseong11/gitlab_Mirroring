@@ -29,7 +29,10 @@ const Terms = () => {
         >
           <Form.Item name="service" rules={[{ validator: agreeValidate }]}>
             <Row justify="center">
-              <Col xs={12} md={7}>
+              <Col xs={12} md={1}>
+                <Checkbox style={{ marginTop: "1rem" }} />
+              </Col>
+              <Col xs={12} md={9}>
                 <p
                   onClick={() => setServiceOpen(true)}
                   style={{ color: "black" }}
@@ -46,13 +49,13 @@ const Terms = () => {
               >
                 <TermsService />
               </Modal>
-              <Col xs={12} md={2}>
-                <Checkbox style={{ marginTop: "1rem" }} />
-              </Col>
             </Row>
           </Form.Item>
           <Form.Item name="private" rules={[{ validator: agreeValidate }]}>
             <Row justify="center">
+              <Col xs={12} md={2}>
+                <Checkbox style={{ marginTop: "1rem" }} />
+              </Col>
               <Col xs={12} md={9}>
                 <p
                   onClick={() => setPrivageOpen(true)}
@@ -60,9 +63,6 @@ const Terms = () => {
                 >
                   개인정보 동의(필수)
                 </p>
-              </Col>
-              <Col xs={12} md={2}>
-                <Checkbox style={{ marginTop: "1rem" }} />
               </Col>
               <Modal
                 centered
@@ -77,6 +77,9 @@ const Terms = () => {
           </Form.Item>
           <Form.Item name="youngPrivate" rules={[{ validator: agreeValidate }]}>
             <Row justify="center">
+              <Col xs={12} md={2}>
+                <Checkbox style={{ marginTop: "1rem" }} />
+              </Col>
               <Col xs={12} md={9}>
                 <p
                   onClick={() => setYoungOpen(true)}
@@ -84,9 +87,6 @@ const Terms = () => {
                 >
                   개인정보 동의(필수)
                 </p>
-              </Col>
-              <Col xs={12} md={2}>
-                <Checkbox style={{ marginTop: "1rem" }} />
               </Col>
               <Modal
                 centered
