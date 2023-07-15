@@ -96,3 +96,24 @@ blockquote {
   background-color: #f2f2f2;
   border-radius: 5px;
 }
+.loading-enter {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.loading-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 500ms, transform 500ms;
+}
+
+.loading-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.loading-exit-active {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 500ms, transform 500ms;
+}
