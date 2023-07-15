@@ -1,10 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Form, Input, Button, Modal, Row, Col, Select } from "antd";
+import { Form, Input, Button, Row, Col, Select } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 import { ADD_POST_REQUEST } from "../../constants/actionTypes";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { info, needLoginError } from "../../utils/Message";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import styled from "styled-components";
@@ -147,7 +146,7 @@ const BoardPostForm = () => {
               htmlType="submit"
               style={{
                 width: "10rem",
-                marginTop: "2rem",
+                marginTop: "3rem",
                 height: "3rem",
                 borderRadius: "50px",
                 float: "right",
