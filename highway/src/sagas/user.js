@@ -22,7 +22,6 @@ import {
 } from "../constants/actionTypes";
 
 const checkUserIdAPI = (data) => {
-  // console.log(data);
   return axios.get(`/user/idCheck?userId=${data}`);
 };
 function* checkUserId(action) {
@@ -42,7 +41,6 @@ function* checkUserId(action) {
 }
 
 const logInAPI = (data) => {
-  console.log(data);
   return axios.post(`user/login`, data);
 };
 function setAccessToken(accessToken, refreshToken, expiration) {
@@ -88,7 +86,6 @@ function* logIn(action) {
 }
 
 const signUpAPI = (data) => {
-  console.log(data);
   return axios.post(`/user/join`, data);
 };
 function* signUp(action) {
@@ -161,7 +158,6 @@ function* loadUser() {
   }
 }
 const refreshTokenAPI = () => {
-  // console.log(access);
   const localAccessToken = localStorage.getItem("ACCESSTOKEN");
   const localRefreshToken = localStorage.getItem("REFRESHTOKEN");
   axios.defaults.headers.common["REFRESH_TOKEN"] = localRefreshToken;
@@ -175,7 +171,6 @@ function* refreshToken() {
     const { access_TOKEN, refresh_TOKEN, access_TOKEN_EXPIRATION } = result.data;
     axios.defaults.headers.common["ACCESS_TOKEN"] = access_TOKEN;
     setAccessToken(access_TOKEN, refresh_TOKEN, access_TOKEN_EXPIRATION);
-    // console.log(action.data);
     yield put({
       type: REFRESH_TOKEN_SUCCESS,
       data: result.data,
