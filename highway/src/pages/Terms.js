@@ -29,24 +29,25 @@ const Terms = () => {
         >
           <Form.Item name="service" rules={[{ validator: agreeValidate }]}>
             <Row justify="center">
-              <Col xs={12} md={9}>
+              <Col xs={12} md={7}>
                 <p
                   onClick={() => setServiceOpen(true)}
                   style={{ color: "black" }}
                 >
                   이용약관(필수)
                 </p>
-                <Modal
-                  centered
-                  open={serviceOpen}
-                  onOk={() => setServiceOpen(false)}
-                  onCancel={() => setServiceOpen(false)}
-                  width={1000}
-                >
-                  <TermsService />
-                </Modal>
-
-                <Checkbox value="service" />
+              </Col>
+              <Modal
+                centered
+                open={serviceOpen}
+                onOk={() => setServiceOpen(false)}
+                onCancel={() => setServiceOpen(false)}
+                width={1000}
+              >
+                <TermsService />
+              </Modal>
+              <Col xs={12} md={2}>
+                <Checkbox style={{ marginTop: "1rem" }} />
               </Col>
             </Row>
           </Form.Item>
@@ -59,39 +60,43 @@ const Terms = () => {
                 >
                   개인정보 동의(필수)
                 </p>
-                <Checkbox />
-                <Modal
-                  centered
-                  open={privateOpen}
-                  onOk={() => setPrivageOpen(false)}
-                  onCancel={() => setPrivageOpen(false)}
-                  width={1000}
-                >
-                  <TermPravate />
-                </Modal>
               </Col>
+              <Col xs={12} md={2}>
+                <Checkbox style={{ marginTop: "1rem" }} />
+              </Col>
+              <Modal
+                centered
+                open={privateOpen}
+                onOk={() => setPrivageOpen(false)}
+                onCancel={() => setPrivageOpen(false)}
+                width={1000}
+              >
+                <TermPravate />
+              </Modal>
             </Row>
           </Form.Item>
           <Form.Item name="youngPrivate" rules={[{ validator: agreeValidate }]}>
             <Row justify="center">
-              <Col xs={12} md={12}>
+              <Col xs={12} md={9}>
                 <p
                   onClick={() => setYoungOpen(true)}
                   style={{ color: "black" }}
                 >
                   개인정보 동의(필수)
                 </p>
-                <Checkbox />
-                <Modal
-                  centered
-                  open={youngOpen}
-                  onOk={() => setYoungOpen(false)}
-                  onCancel={() => setYoungOpen(false)}
-                  width={1000}
-                >
-                  <TermYoungPrivate />
-                </Modal>
               </Col>
+              <Col xs={12} md={2}>
+                <Checkbox style={{ marginTop: "1rem" }} />
+              </Col>
+              <Modal
+                centered
+                open={youngOpen}
+                onOk={() => setYoungOpen(false)}
+                onCancel={() => setYoungOpen(false)}
+                width={1000}
+              >
+                <TermYoungPrivate />
+              </Modal>
             </Row>
           </Form.Item>
 
