@@ -108,7 +108,10 @@ const BoardDetailUptadeForm = () => {
           </Form.Item>
           <CustomQuillWrapper isFocused={isEditorFocused} name="content">
             <ReactQuill
-              placeholder={`${schoolBoardPost?.board.content}`}
+              placeholder={`${schoolBoardPost?.board.content.replace(
+                /<[^>]*>?/g,
+                ""
+              )}`}
               value={content}
               style={{ height: "20rem" }}
               onChange={handleChange}
