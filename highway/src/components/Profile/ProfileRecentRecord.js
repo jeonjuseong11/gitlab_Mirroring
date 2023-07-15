@@ -76,13 +76,13 @@ const ProfileRecentRecord = () => {
             borderRadius: "10px",
             textAlign: "left",
             padding: "2rem",
-            marginBottom: "1rem",
+            marginBottom: "2.4rem",
           }}
         >
           <h3 style={{ margin: "0" }}>좋아요 누른 게시물</h3>
           <List
             dataSource={schoolBoardPosts}
-            style={{ marginTop: "1rem" }}
+            style={{ marginTop: "1rem", minHeight: "13rem" }}
             pagination={{
               align: "center",
               onChange: (page) => {
