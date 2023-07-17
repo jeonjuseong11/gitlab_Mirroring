@@ -3,7 +3,10 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { LOAD_USER_REQUEST, REFRESH_TOKEN_REQUEST } from "./constants/actionTypes";
+import {
+  LOAD_USER_REQUEST,
+  REFRESH_TOKEN_REQUEST,
+} from "./constants/actionTypes";
 
 import TopMenu from "./components/Menu/TopMenu";
 import SchoolDetail from "./pages/SchoolDetail";
@@ -15,7 +18,6 @@ import SchoolRanking from "./pages/SchoolRanking";
 import Search from "./pages/Search";
 import SignUp from "./pages/SignUp";
 import UserProfile from "./pages/UserProfile";
-import Terms from "./pages/Terms";
 import PromotionNews from "./components/Promotion/PromotionNews";
 import PromotionVideos from "./components/Promotion/PromotionVideos";
 import PromotionNewsDetail from "./components/Promotion/PromotionNewsDetail";
@@ -95,29 +97,59 @@ function App() {
             <Route exact path="/" element={<Home />} />
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/search" element={<Search />} />
-            <Route exact path="/terms" element={<Terms />} />
             <Route exact path="/signup" element={<SignUp />} />
-
             <Route element={<UserProfile />}>
-              <Route exact path="/profile/recentrecord" element={<UserInfo />} />
+              <Route
+                exact
+                path="/profile/recentrecord"
+                element={<UserInfo />}
+              />
               <Route exact path="/profile/" element={<ProfileRecentRecord />} />
             </Route>
             <Route element={<SchoolBoard />}>
               <Route exact path="/schoolboard/" element={<BoardMain />} />
-              <Route exact path="/schoolboard/:category" element={<BoardMain />} />
-              <Route exact path="/schoolboard/:category/:postId" element={<SchoolBoardDetail />} />
+              <Route
+                exact
+                path="/schoolboard/:category"
+                element={<BoardMain />}
+              />
+              <Route
+                exact
+                path="/schoolboard/:category/:postId"
+                element={<SchoolBoardDetail />}
+              />
             </Route>
             <Route exact path="/schoolboard/post" element={<BoardPostForm />} />
-            <Route exact path="/schoolboard/:postId/update" element={<BoardDetailUptadeForm />} />
+            <Route
+              exact
+              path="/schoolboard/:postId/update"
+              element={<BoardDetailUptadeForm />}
+            />
             <Route exact path="/promotion" element={<Promotion />}>
               <Route exact path="/promotion" element={<PromotionHome />} />
               <Route exact path="/promotion/news" element={<PromotionNews />} />
-              <Route exact path="/promotion/videos" element={<PromotionVideos />} />
+              <Route
+                exact
+                path="/promotion/videos"
+                element={<PromotionVideos />}
+              />
             </Route>
-            <Route exact path="/promotion/news/:newsId" element={<PromotionNewsDetail />} />
-            <Route exact path="/promotion/videos/:videoId" element={<PromotionVideoDetail />} />
+            <Route
+              exact
+              path="/promotion/news/:newsId"
+              element={<PromotionNewsDetail />}
+            />
+            <Route
+              exact
+              path="/promotion/videos/:videoId"
+              element={<PromotionVideoDetail />}
+            />
             <Route exact path="/schoolranking" element={<SchoolRanking />} />
-            <Route exact path="/schooldetail/:schoolId" element={<SchoolDetail />} />
+            <Route
+              exact
+              path="/schooldetail/:schoolId"
+              element={<SchoolDetail />}
+            />
           </Route>
         </Routes>
       </div>
