@@ -85,7 +85,7 @@ const Terms = () => {
                   onClick={() => setYoungOpen(true)}
                   style={{ color: "black" }}
                 >
-                  개인정보 동의(필수)
+                  청소년 개인정보 동의(필수)
                 </p>
               </Col>
               <Modal
