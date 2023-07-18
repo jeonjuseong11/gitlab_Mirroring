@@ -1,10 +1,7 @@
 import React, { useEffect } from "react";
 import { Col, Breadcrumb, Button, Avatar, Menu, Dropdown } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  LOAD_POST_REQUEST,
-  REMOVE_POST_REQUEST,
-} from "../../constants/actionTypes";
+import { LOAD_POST_REQUEST, REMOVE_POST_REQUEST } from "../../constants/actionTypes";
 import { useNavigate, useParams } from "react-router-dom";
 import ToggleComment from "../../components/schoolBoardDetail/ToggleComment";
 import { changeCategory, formatDate } from "./BoardMain";
@@ -44,9 +41,7 @@ const SchoolBoardDetail = () => {
             {
               title: (
                 <>
-                  <a href={`/schoolboard/${category}`}>
-                    {changeCategory(category)}
-                  </a>
+                  <a href={`/schoolboard/${category}`}>{changeCategory(category)}</a>
                 </>
               ),
             },
@@ -61,9 +56,7 @@ const SchoolBoardDetail = () => {
               icon={<UserOutlined />}
             />
             <div style={{ marginLeft: "1rem", display: "inline-block" }}>
-              <span style={{ fontWeight: "600" }}>
-                {schoolBoardPost?.userName}
-              </span>
+              <span style={{ fontWeight: "600" }}>{schoolBoardPost?.userName}</span>
               <br></br>
               <span style={{ fontSize: "0.5rem" }}>
                 {formatDate(schoolBoardPost?.board?.createDate)}
@@ -76,9 +69,7 @@ const SchoolBoardDetail = () => {
                       <Menu>
                         <Menu.Item
                           onClick={() => {
-                            navigator(
-                              `/schoolboard/${schoolBoardPost?.board.id}/update`
-                            );
+                            navigator(`/schoolboard/${schoolBoardPost?.board.id}/update`);
                           }}
                         >
                           수정하기
@@ -103,7 +94,7 @@ const SchoolBoardDetail = () => {
             <p style={{ marginLeft: "1rem" }}></p>
           </div>
           <div
-            style={{ height: "20rem" }}
+            style={{ height: "20rem", padding: "1rem" }}
             dangerouslySetInnerHTML={{
               __html: schoolBoardPost?.board?.content,
             }}
