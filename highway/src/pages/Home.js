@@ -5,7 +5,7 @@ import SearchForm from "../components/SearchForm";
 import CardList from "../components/Card/CardList";
 import { useDispatch, useSelector } from "react-redux";
 import { LOAD_POSTS_REQUEST, LOAD_SCHOOL_LIST_REQUEST } from "../constants/actionTypes";
-import HomeBoardList from "../components/HomeBoardList";
+// import HomeBoardList from "../components/HomeBoardList";
 import axios from "axios";
 
 const Home = () => {
@@ -40,7 +40,7 @@ const Home = () => {
       <Slider />
       <SearchForm filterValue={filterValue} setFilterValue={setFilterValue} />
       <CardList filterValue={filterValue} />
-      <HomeBoardList />
+      {/* <HomeBoardList /> */}
     </AppLayout>
   );
 };

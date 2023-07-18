@@ -46,7 +46,7 @@ const Header = () => {
   return (
     <>
       <Row justify="center" gutter={[16, 16]} style={{ marginTop: "0.5rem" }}>
-        <Col xs={8} md={6} style={{ textAlign: "left" }}>
+        <Col xs={6} md={6} style={{ textAlign: "left" }}>
           <Title to="/">
             <img src={imgUrl} alt="Logo" style={{ width: "10rem" }} />
           </Title>
@@ -54,19 +54,11 @@ const Header = () => {
         <Col xs={16} md={9} style={{ textAlign: "right", marginTop: "0.3rem" }}>
           {me !== null ? (
             <>
-              <Button
-                onClick={handleProfileClick}
-                type="link"
-                style={{ color: "black" }}
-              >
+              <Button onClick={handleProfileClick} type="link" style={{ color: "black" }}>
                 <Avatar size={28}>{me?.userName[0]}</Avatar>
                 <span style={{ marginLeft: "0.5rem" }}>{me?.userName}</span>
               </Button>
-              <Button
-                onClick={onLogOut}
-                danger
-                style={{ marginLeft: "0.5rem" }}
-              >
+              <Button onClick={onLogOut} danger style={{ marginLeft: "0.5rem" }}>
                 로그아웃
               </Button>
             </>
@@ -101,10 +93,7 @@ const Header = () => {
           icon={<CommentOutlined />}
           tooltip={<div>서비스에 대한 생각을 남겨주세요</div>}
         />
-        <FloatButton
-          icon={<QuestionCircleOutlined />}
-          tooltip={<div>버그 리포트</div>}
-        />
+        <FloatButton icon={<QuestionCircleOutlined />} tooltip={<div>버그 리포트</div>} />
       </FloatButton.Group>
     </>
   );
