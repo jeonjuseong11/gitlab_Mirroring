@@ -24,7 +24,7 @@ export const SignUpWrapper = styled.div`
   height: 100%;
   width: 100%;
   background-color: #fbfbfb;
-  height: 100vh;
+  height: 130vh;
   align-items: center;
   display: flex;
   justify-content: center;

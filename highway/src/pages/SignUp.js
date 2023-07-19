@@ -1,4 +1,14 @@
-import { AutoComplete, Button, Form, Radio, Select, Space } from "antd";
+import {
+  AutoComplete,
+  Button,
+  Checkbox,
+  Divider,
+  Form,
+  Modal,
+  Radio,
+  Select,
+  Space,
+} from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -19,6 +29,7 @@ import {
   SchoolSelector,
 } from "../styles/SignUpStyle";
 import {
+  agreeValidate,
   idRegExp,
   roleValidate,
   schoolValidate,
@@ -30,15 +41,26 @@ import {
 } from "../utils/signUpValidator";
 import { error, info } from "../utils/Message";
 import { CSSTransition } from "react-transition-group";
+import Terms from "./Terms";
+import TermPravate from "../utils/TermPravate";
+import { RightOutlined } from "@ant-design/icons";
+import TermYoungPrivate from "../utils/TermYoungPrivate";
+import TermsService from "../utils/TermsService";
 
 const SignUp = () => {
-  const { schools, idValid, checkIdLoading, checkIdDone, me } = useSelector((state) => ({
-    schools: state.school.schools,
-    idValid: state.user.idValid,
-    checkIdLoading: state.user.checkIdLoading,
-    checkIdDone: state.user.checkIdDone,
-    me: state.user.me,
-  }));
+  const [serviceOpen, setServiceOpen] = useState(false);
+  const [privateOpen, setPrivageOpen] = useState(false);
+  const [youngOpen, setYoungOpen] = useState(false);
+
+  const { schools, idValid, checkIdLoading, checkIdDone, me } = useSelector(
+    (state) => ({
+      schools: state.school.schools,
+      idValid: state.user.idValid,
+      checkIdLoading: state.user.checkIdLoading,
+      checkIdDone: state.user.checkIdDone,
+      me: state.user.me,
+    })
+  );
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -113,7 +135,9 @@ const SignUp = () => {
       setAutoCompleteResult([]);
     } else {
       setAutoCompleteResult(
-        ["@gmail.com", "@naver.com", "@hanmail.net"].map((domain) => `${value}${domain}`)
+        ["@gmail.com", "@naver.com", "@hanmail.net"].map(
+          (domain) => `${value}${domain}`
+        )
       );
     }
   };
@@ -148,7 +172,9 @@ const SignUp = () => {
       setSelectedSchool(null);
     } else {
       setShowSchoolOptions(false);
-      const selectedSchool = schools.find((school) => school.schoolId === value);
+      const selectedSchool = schools.find(
+        (school) => school.schoolId === value
+      );
       // console.log(selectedSchool);
       setSelectedSchool(selectedSchool?.label);
       form.setFieldsValue({ schoolId: value });
@@ -166,17 +192,23 @@ const SignUp = () => {
         }}
         scrollToFirstError
       >
-        <h2>재학생 회원가입</h2>
+        <h2>회원가입</h2>
         <label>아이디</label>
         <Form.Item
           name="uid"
           tooltip="아이디는 영어로 시작하여 숫자와 조합으로 작성해주세요"
           rules={[{ validator: validateId }]}
           hasFeedback
-          validateStatus={isIdValid === null ? "error" : isIdValid ? "success" : "error"}
+          validateStatus={
+            isIdValid === null ? "error" : isIdValid ? "success" : "error"
+          }
         >
           <Space.Compact style={{ width: "100%" }}>
-            <SignUpInput allowClear placeholder="아이디를 입력해주세요" disabled={isIdValid} />
+            <SignUpInput
+              allowClear
+              placeholder="아이디를 입력해주세요"
+              disabled={isIdValid}
+            />
             <Button
               loading={isCheckingId}
               onClick={onCheckUserId}
@@ -219,7 +251,10 @@ const SignUp = () => {
           ]}
           hasFeedback
         >
-          <SignUpInputPassword allowClear placeholder="비밀번호를 입력해주세요(8~50)" />
+          <SignUpInputPassword
+            allowClear
+            placeholder="비밀번호를 입력해주세요(8~50)"
+          />
         </Form.Item>
         <label>비밀번호 확인</label>
         <Form.Item
@@ -235,12 +270,17 @@ const SignUp = () => {
                 if (getFieldValue("pwd") === value) {
                   return Promise.resolve();
                 }
-                return Promise.reject(new Error("비밀번호가 일치하지 않습니다."));
+                return Promise.reject(
+                  new Error("비밀번호가 일치하지 않습니다.")
+                );
               },
             }),
           ]}
         >
-          <SignUpInputPassword allowClear placeholder="비밀번호를 입력해주세요" />
+          <SignUpInputPassword
+            allowClear
+            placeholder="비밀번호를 입력해주세요"
+          />
         </Form.Item>
         <label>닉네임</label>
         <Form.Item name="name" rules={[{ validator: validateNickname }]}>
@@ -322,7 +362,9 @@ const SignUp = () => {
                 placeholder="학교를 선택해주세요"
                 optionFilterProp="children"
                 filterOption={(input, option) =>
-                  (option?.label ?? "").toLowerCase().indexOf(input.toLowerCase()) >= 0
+                  (option?.label ?? "")
+                    .toLowerCase()
+                    .indexOf(input.toLowerCase()) >= 0
                 }
                 filterSort={(optionA, optionB) =>
                   (optionA?.label ?? "")
@@ -336,6 +378,54 @@ const SignUp = () => {
             </Form.Item>
           </>
         </CSSTransition>
+        <label>약관 동의</label>
+        <div style={{ color: "#a2a2a2", marginTop: "1rem" }}>
+          이용약관(필수)
+          <RightOutlined onClick={() => setServiceOpen(true)} />
+        </div>
+        <Modal
+          centered
+          open={serviceOpen}
+          onOk={() => setServiceOpen(false)}
+          onCancel={() => setServiceOpen(false)}
+          width={1000}
+        >
+          <TermsService />
+        </Modal>
+        <div style={{ color: "#a2a2a2" }}>
+          개인정보 동의(필수)
+          <RightOutlined onClick={() => setPrivageOpen(true)} />
+        </div>
+        <Modal
+          centered
+          open={privateOpen}
+          onOk={() => setPrivageOpen(false)}
+          onCancel={() => setPrivageOpen(false)}
+          width={1000}
+        >
+          <TermPravate />
+        </Modal>
+        <div style={{ color: "#a2a2a2" }}>
+          청소년 개인정보 동의(필수)
+          <RightOutlined onClick={() => setYoungOpen(true)} />
+        </div>
+        <Modal
+          centered
+          open={youngOpen}
+          onOk={() => setYoungOpen(false)}
+          onCancel={() => setYoungOpen(false)}
+          width={1000}
+        >
+          <TermYoungPrivate />
+        </Modal>
+        <Divider />
+        <Form.Item
+          name="agreement"
+          valuePropName="checked"
+          rules={[{ validator: agreeValidate }]}
+        >
+          <Checkbox>약관 동의하기</Checkbox>
+        </Form.Item>
         <Form.Item>
           <ButtonWrapper>
             <StudentSignUpBtn type="primary" htmlType="submit">
