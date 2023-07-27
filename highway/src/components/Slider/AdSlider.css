@@ -1,3 +1,4 @@
+/* AdSlider.css */
 .slick-slide {
   height: 25rem;
   width: 100%;
@@ -13,17 +14,17 @@
 .slick-slide.slick-active.slick-center.slick-current div {
   background-color: gray;
   transform: scale(1.1);
-  width: 46.5vw;
   position: relative;
   border-radius: 5px;
-
-  left: -2vw;
+  width: 51vw;
 }
+
 .slick-slide.active {
   transform: scale(1.1);
   background-color: gray;
 }
 
-.slick-slide.active {
-  width: 51vw;
+/* 수정사항 */
+.slick-center {
+  transform: translateX(-25%);
 }
