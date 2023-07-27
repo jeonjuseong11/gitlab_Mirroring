@@ -41,7 +41,6 @@ import {
 } from "../utils/signUpValidator";
 import { error, info } from "../utils/Message";
 import { CSSTransition } from "react-transition-group";
-import Terms from "./Terms";
 import TermPravate from "../utils/TermPravate";
 import { RightOutlined } from "@ant-design/icons";
 import TermYoungPrivate from "../utils/TermYoungPrivate";
@@ -51,6 +50,10 @@ const SignUp = () => {
   const [serviceOpen, setServiceOpen] = useState(false);
   const [privateOpen, setPrivageOpen] = useState(false);
   const [youngOpen, setYoungOpen] = useState(false);
+  const [serviceChecked, setServiceChecked] = useState(false);
+  const [privateChecked, setPrivateChecked] = useState(false);
+  const [youngChecked, setYoungChecked] = useState(false);
+  const [termChecked, setTermChecked] = useState(false);
 
   const { schools, idValid, checkIdLoading, checkIdDone, me } = useSelector(
     (state) => ({
@@ -379,41 +382,72 @@ const SignUp = () => {
           </>
         </CSSTransition>
         <label>약관 동의</label>
-        <div style={{ color: "#a2a2a2", marginTop: "1rem" }}>
+        <div
+          style={
+            serviceChecked
+              ? { color: "black", marginTop: "1rem" }
+              : { color: "#a2a2a2", marginTop: "1rem" }
+          }
+          onClick={() => setServiceOpen(true)}
+        >
           이용약관(필수)
-          <RightOutlined onClick={() => setServiceOpen(true)} />
+          <RightOutlined />
         </div>
         <Modal
           centered
           open={serviceOpen}
-          onOk={() => setServiceOpen(false)}
-          onCancel={() => setServiceOpen(false)}
+          onOk={() => {
+            setServiceOpen(false);
+            setServiceChecked(true);
+          }}
+          onCancel={() => {
+            setServiceOpen(false);
+            setServiceChecked(true);
+          }}
           width={1000}
         >
           <TermsService />
         </Modal>
-        <div style={{ color: "#a2a2a2" }}>
+        <div
+          style={privateChecked ? { color: "black" } : { color: "#a2a2a2" }}
+          onClick={() => setPrivageOpen(true)}
+        >
           개인정보 동의(필수)
-          <RightOutlined onClick={() => setPrivageOpen(true)} />
+          <RightOutlined />
         </div>
         <Modal
           centered
           open={privateOpen}
-          onOk={() => setPrivageOpen(false)}
-          onCancel={() => setPrivageOpen(false)}
+          onOk={() => {
+            setPrivageOpen(false);
+            setPrivateChecked(true);
+          }}
+          onCancel={() => {
+            setPrivageOpen(false);
+            setPrivateChecked(true);
+          }}
           width={1000}
         >
           <TermPravate />
         </Modal>
-        <div style={{ color: "#a2a2a2" }}>
+        <div
+          style={youngChecked ? { color: "black" } : { color: "#a2a2a2" }}
+          onClick={() => setYoungOpen(true)}
+        >
           청소년 개인정보 동의(필수)
-          <RightOutlined onClick={() => setYoungOpen(true)} />
+          <RightOutlined />
         </div>
         <Modal
           centered
           open={youngOpen}
-          onOk={() => setYoungOpen(false)}
-          onCancel={() => setYoungOpen(false)}
+          onOk={() => {
+            setYoungOpen(false);
+            setYoungChecked(true);
+          }}
+          onCancel={() => {
+            setYoungOpen(false);
+            setYoungChecked(true);
+          }}
           width={1000}
         >
           <TermYoungPrivate />
