@@ -42,7 +42,7 @@ import {
 import { error, info } from "../utils/Message";
 import { CSSTransition } from "react-transition-group";
 import TermPravate from "../utils/TermPravate";
-import { RightOutlined } from "@ant-design/icons";
+import { CheckOutlined, RightOutlined } from "@ant-design/icons";
 import TermYoungPrivate from "../utils/TermYoungPrivate";
 import TermsService from "../utils/TermsService";
 
@@ -385,13 +385,13 @@ const SignUp = () => {
         <div
           style={
             serviceChecked
-              ? { color: "black", marginTop: "1rem" }
-              : { color: "#a2a2a2", marginTop: "1rem" }
+              ? { color: "black", marginTop: "1rem", cursor: "pointer" }
+              : { color: "#a2a2a2", marginTop: "1rem", cursor: "pointer" }
           }
           onClick={() => setServiceOpen(true)}
         >
           이용약관(필수)
-          <RightOutlined />
+          {!serviceChecked ? <RightOutlined /> : <CheckOutlined />}
         </div>
         <Modal
           centered
@@ -409,11 +409,15 @@ const SignUp = () => {
           <TermsService />
         </Modal>
         <div
-          style={privateChecked ? { color: "black" } : { color: "#a2a2a2" }}
+          style={
+            privateChecked
+              ? { color: "black", cursor: "pointer" }
+              : { color: "#a2a2a2", cursor: "pointer" }
+          }
           onClick={() => setPrivageOpen(true)}
         >
           개인정보 동의(필수)
-          <RightOutlined />
+          {!privateChecked ? <RightOutlined /> : <CheckOutlined />}
         </div>
         <Modal
           centered
@@ -431,11 +435,15 @@ const SignUp = () => {
           <TermPravate />
         </Modal>
         <div
-          style={youngChecked ? { color: "black" } : { color: "#a2a2a2" }}
+          style={
+            youngChecked
+              ? { color: "black", cursor: "pointer" }
+              : { color: "#a2a2a2", cursor: "pointer" }
+          }
           onClick={() => setYoungOpen(true)}
         >
           청소년 개인정보 동의(필수)
-          <RightOutlined />
+          {!youngChecked ? <RightOutlined /> : <CheckOutlined />}
         </div>
         <Modal
           centered
