@@ -40,9 +40,15 @@ const BoardDetailUptadeForm = () => {
   const { me } = useSelector((state) => state.user);
   const accessToken = localStorage.getItem("ACCESSTOKEN");
   const [isEditorFocused, setIsEditorFocused] = useState(false);
-  const [content, setContent] = useState("");
   const navigator = useNavigate();
-
+  const [title, setTitle] = useState(schoolBoardPost?.board.title);
+  const [content, setContent] = useState(
+    schoolBoardPost?.board.content.replace(/<[^>]*>?/g, "")
+  );
+  const [category, setCategory] = useState(schoolBoardPost?.board.category);
+  console.log(title);
+  console.log(content);
+  console.log(category);
   useEffect(() => {
     // 새로고침 시 로컬 스토리지에서 로그인 정보 가져오기
     if (accessToken) {
@@ -62,7 +68,8 @@ const BoardDetailUptadeForm = () => {
         id: postId,
       },
     });
-    window.location.replace(`/schoolboard/${values.category}`);
+    console.log(category);
+    window.location.replace(`/schoolboard/${category}`);
   };
 
   const handleChange = ({ fileList }) => {
@@ -93,6 +100,10 @@ const BoardDetailUptadeForm = () => {
           <Form.Item name="category">
             <Select
               placeholder={changeCategory(schoolBoardPost?.board.category)}
+              onChange={(e) => {
+                setCategory(e);
+              }}
+              value={category}
               style={{
                 width: "30%",
                 borderRadius: "0",
@@ -104,14 +115,12 @@ const BoardDetailUptadeForm = () => {
             <Input
               className="custom-input"
               placeholder={`${schoolBoardPost?.board.title}`}
+              value={title}
             />
           </Form.Item>
           <CustomQuillWrapper isFocused={isEditorFocused} name="content">
             <ReactQuill
-              placeholder={`${schoolBoardPost?.board.content.replace(
-                /<[^>]*>?/g,
-                ""
-              )}`}
+              placeholder={content}
               value={content}
               style={{ height: "20rem" }}
               onChange={handleChange}

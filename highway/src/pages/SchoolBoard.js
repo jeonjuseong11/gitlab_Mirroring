@@ -17,11 +17,11 @@ const SchoolBoard = () => {
   const { me } = useSelector((state) => state.user);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!me) {
-      navigate("/schoolboard/10");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (me === null) {
+  //     navigate("/schoolboard/10");
+  //   }
+  // }, []);
 
   useEffect(() => {
     if (category == "0") {
@@ -42,11 +42,12 @@ const SchoolBoard = () => {
       icon: <SmileOutlined />,
       label: "자유게시판",
       onClick: () => {
-        if (!me) {
-          needLoginError("글쓰기는 로그인 후에 가능합니다.", navigate);
-        } else {
-          navigate("/schoolboard/0");
-        }
+        navigate("/schoolboard/0");
+        // if (!me) {
+        //   needLoginError("글쓰기는 로그인 후에 가능합니다.", navigate);
+        // } else {
+        //   navigate("/schoolboard/0");
+        // }
       },
     },
     {
@@ -54,11 +55,12 @@ const SchoolBoard = () => {
       icon: <SearchOutlined />,
       label: "질문게시판",
       onClick: () => {
-        if (!me) {
-          needLoginError("글쓰기는 로그인 후에 가능합니다.", navigate);
-        } else {
-          navigate("/schoolboard/1");
-        }
+        navigate("/schoolboard/1");
+        // if (!me) {
+        //   needLoginError("글쓰기는 로그인 후에 가능합니다.", navigate);
+        // } else {
+        //   navigate("/schoolboard/1");
+        // }
       },
     },
     {
@@ -66,11 +68,12 @@ const SchoolBoard = () => {
       icon: <TeamOutlined />,
       label: "프로젝트 모집",
       onClick: () => {
-        if (!me) {
-          needLoginError("글쓰기는 로그인 후에 가능합니다.", navigate);
-        } else {
-          navigate("/schoolboard/2");
-        }
+        navigate("/schoolboard/2");
+        // if (!me) {
+        //   needLoginError("글쓰기는 로그인 후에 가능합니다.", navigate);
+        // } else {
+        //   navigate("/schoolboard/2");
+        // }
       },
     },
     {
