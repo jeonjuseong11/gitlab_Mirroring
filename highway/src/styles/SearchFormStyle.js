@@ -7,7 +7,7 @@ export const SearchInput = styled(Input)`
   border-radius: 10px;
   border: #f2f2f2;
   height: 3.5rem;
-  width: 85%;
+  width: 95%;
 `;
 
 export const SearchTitleRow = styled(Row)`

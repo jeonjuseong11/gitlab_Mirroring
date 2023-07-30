@@ -39,7 +39,7 @@ const SearchForm = ({ setFilterValue, filterValue }) => {
       </SearchTitleRow>
       <SearchFormWrapper>
         <Row justify="center" gutter={[16, 16]}>
-          <Col xs={24} md={10}>
+          <Col xs={24} md={8}>
             <SearchInput
               placeholder="검색"
               value={searchText}
@@ -56,7 +56,7 @@ const SearchForm = ({ setFilterValue, filterValue }) => {
       </SearchFormWrapper>
       <SearchButtonWrapper>
         <Row justify="center" gutter={[16, 16]}>
-          <SearchButtonCol xs={24} md={10}>
+          <SearchButtonCol xs={24} md={8}>
             {RankTopic.map((item) => (
               <SearchButton
                 key={item.value}
