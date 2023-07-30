@@ -3,6 +3,10 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { CommentSpan } from "../schoolBoardDetail/SchoolBoardDetailComments";
 import { needLogin } from "../../utils/Message";
+import {
+  SchoolBoardDetailCommentInputTextArea,
+  SchoolBoardDetailCommentListItem,
+} from "../../styles/SchoolBoardDetailCommentFormStyle";
 
 const SchoolBoardDetailCommentForm = ({
   parentId,
@@ -18,8 +22,7 @@ const SchoolBoardDetailCommentForm = ({
     <>
       {parentId === item.id && !isEditing && (
         <>
-          <List.Item
-            style={{ borderBottom: "1px solid #d2d2d2", textAlign: "left" }}
+          <SchoolBoardDetailCommentListItem
             actions={[
               <CommentSpan
                 key="reply"
@@ -45,8 +48,7 @@ const SchoolBoardDetailCommentForm = ({
               </CommentSpan>,
             ]}
           >
-            <Input.TextArea
-              style={{ padding: "1rem", resize: "none" }}
+            <SchoolBoardDetailCommentInputTextArea
               maxLength="100"
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
@@ -62,7 +64,7 @@ const SchoolBoardDetailCommentForm = ({
               }}
               placeholder="답글을 적어주세요"
             />
-          </List.Item>
+          </SchoolBoardDetailCommentListItem>
         </>
       )}
     </>

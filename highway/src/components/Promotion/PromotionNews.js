@@ -3,6 +3,16 @@ import newsList from "../../utils/NewsDummyData";
 import { Link, useLocation } from "react-router-dom";
 import { Button, Col, List, Row } from "antd";
 import { DownOutlined } from "@ant-design/icons";
+import {
+  PromotionNewsCol,
+  PromotionNewsImageDiv,
+  PromotionNewsListItem,
+  PromotionNewsListItemMetaDiv,
+  PromotionNewsMoreButton,
+  PromotionNewsTitle,
+  PromotionNewsWriter,
+  SideBarDiv,
+} from "../../styles/PromotionStyle";
 
 const PromotionNews = () => {
   const [count, setCount] = useState(3);
@@ -28,86 +38,48 @@ const PromotionNews = () => {
             renderItem={(item) => {
               if (item.id < count)
                 return (
-                  <List.Item
-                    style={{
-                      padding: "2rem",
-                      marginLeft: "1rem",
-                      borderBottom: "1px solid #f2f2f2",
-                    }}
-                  >
-                    <Col
-                      xs={24}
-                      md={8}
-                      style={{
-                        borderRadius: "10px",
-                        background: "#f2f2f2",
-                      }}
-                    >
+                  <PromotionNewsListItem>
+                    <PromotionNewsCol xs={24} md={8}>
                       <Link to={`/promotion/news/${item.id}`}>
-                        <div
-                          src={item.src}
-                          style={{
-                            height: "9rem",
-                            marginLeft: "-2rem",
-                            borderRadius: "10px",
-                          }}
-                        />
+                        <PromotionNewsImageDiv src={item.src} />
                       </Link>
-                    </Col>
+                    </PromotionNewsCol>
                     <Col xs={24} md={15}>
                       <List.Item.Meta
                         title={
-                          <div
-                            style={{
-                              textAlign: "left",
-                              marginLeft: "2rem",
-                            }}
-                          >
+                          <PromotionNewsListItemMetaDiv>
                             <Link to={`/promotion/news/${item.id}`}>
-                              <h2 style={{ color: "black" }}>{item.title}</h2>
+                              <PromotionNewsTitle>
+                                {item.title}
+                              </PromotionNewsTitle>
                             </Link>
-                          </div>
+                          </PromotionNewsListItemMetaDiv>
                         }
                         description={
-                          <div
-                            style={{ textAlign: "left", marginLeft: "2rem" }}
-                          >
+                          <PromotionNewsListItemMetaDiv>
                             <Link to={`/promotion/news/${item.id}`}>
-                              <p style={{ color: "gray" }}>{item.content}</p>
+                              <PromotionNewsWriter>
+                                {item.content}
+                              </PromotionNewsWriter>
                             </Link>
-                          </div>
+                          </PromotionNewsListItemMetaDiv>
                         }
                       />
                     </Col>
-                  </List.Item>
+                  </PromotionNewsListItem>
                 );
             }}
           />
         </Col>
         <Col xs={23} md={5} justify="center">
-          <div
-            style={{
-              width: "20rem",
-              height: "30rem",
-              backgroundColor: "#f2f2f2",
-              marginTop: "2rem",
-              marginLeft: "1.5rem",
-              borderRadius: "10px",
-            }}
-          >
-            우측사이드
-          </div>
+          <SideBarDiv>우측사이드</SideBarDiv>
         </Col>
       </Row>
       <Row>
         <Col xs={23} md={23} justify="center">
-          <Button
-            onClick={onMore}
-            disabled={disable}
-            style={{ marginBottom: "2rem", marginTop: "2rem" }}
-          >
+          <PromotionNewsMoreButton onClick={onMore} disabled={disable}>
             <DownOutlined />더 보기
-          </Button>
+          </PromotionNewsMoreButton>
         </Col>
       </Row>
     </>

@@ -4,9 +4,14 @@ import { EditOutlined } from "@ant-design/icons";
 import { ADD_POST_REQUEST } from "../../constants/actionTypes";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import styled from "styled-components";
+import {
+  BoardDetailPostReactQuill,
+  BoardDetailPostFormCol,
+  BoardDetailPostSelect,
+  BoardDetailPostButton,
+} from "../../styles/BoardDetailPostFormStyle";
 
 const CustomQuillWrapper = styled(Form.Item)`
   .ql-container {
@@ -99,19 +104,11 @@ const BoardPostForm = () => {
 
   return (
     <Row gutter={[16, 16]} justify="center">
-      <Col
-        xs={24}
-        md={15}
-        style={{ textAlign: "left", marginTop: "1rem", padding: "1rem" }}
-      >
+      <BoardDetailPostFormCol xs={24} md={15}>
         <Form form={form} onFinish={onFinish}>
           <Form.Item name="category">
-            <Select
+            <BoardDetailPostSelect
               placeholder="게시판 종류"
-              style={{
-                width: "30%",
-                borderRadius: "0",
-              }}
               options={options}
             />
           </Form.Item>
@@ -119,11 +116,10 @@ const BoardPostForm = () => {
             <Input className="custom-input" placeholder="제목을 입력해주세요" />
           </Form.Item>
           <CustomQuillWrapper isFocused={isEditorFocused} name="content">
-            <ReactQuill
+            <BoardDetailPostReactQuill
               placeholder="글의 내용을 입력해주세요 &#13;&#10;주제에 맞지 않는 글이나 커뮤니티 이용정책에 위배되어 일정 수
                 이상 신고를 받는 경우 글이 블라인드 처리될 수 있습니다."
               value={content}
-              style={{ height: "20rem" }}
               onChange={handleChange}
               theme="snow"
               onFocus={() => setIsEditorFocused(true)}
@@ -152,23 +148,16 @@ const BoardPostForm = () => {
             />
           </CustomQuillWrapper>
           <Form.Item>
-            <Button
+            <BoardDetailPostButton
               type="primary"
               htmlType="submit"
-              style={{
-                width: "10rem",
-                marginTop: "3rem",
-                height: "3rem",
-                borderRadius: "50px",
-                float: "right",
-              }}
               loading={addPostLoading}
             >
               완료 <EditOutlined />
-            </Button>
+            </BoardDetailPostButton>
           </Form.Item>
         </Form>
-      </Col>
+      </BoardDetailPostFormCol>
     </Row>
   );
 };

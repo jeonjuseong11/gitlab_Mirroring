@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import videoList from "../../utils/VideoDummyData";
 import { Link } from "react-router-dom";
 import { List } from "antd";
+import { PromotionVideoItemDiv } from "../../styles/PromotionStyle";
 
 const PromotionVideoItem = () => {
   const [count, setCount] = useState(3);
@@ -23,15 +24,7 @@ const PromotionVideoItem = () => {
       dataSource={videoList}
       renderItem={(item) => (
         <List.Item>
-          <div
-            preview={false}
-            src={item.src}
-            style={{
-              width: "27rem",
-              height: "19rem",
-              background: "#f2f2f2",
-            }}
-          />
+          <PromotionVideoItemDiv preview={false} src={item.src} />
           <List.Item.Meta
             title={
               <Link to={`/promotion/videos/${item.videoId}`}>

@@ -3,6 +3,13 @@ import videoList from "../../utils/VideoDummyData";
 import { Button, Col, List, Row } from "antd";
 import { Link, useLocation } from "react-router-dom";
 import { DownOutlined } from "@ant-design/icons";
+import {
+  PromotionVideosDiv,
+  PromotionVideosImage,
+  PromotionVideosListItem,
+  PromotionVideosTitle,
+  PromotionVideosWriter,
+} from "../../styles/PromotionStyle";
 
 const PromotionVideos = () => {
   const [count, setCount] = useState(3);
@@ -28,49 +35,33 @@ const PromotionVideos = () => {
             renderItem={(item) => {
               if (item.id < count)
                 return (
-                  <List.Item
-                    style={{
-                      padding: "2rem",
-                      marginLeft: "1rem",
-                      borderBottom: "1px solid #f2f2f2",
-                    }}
-                  >
+                  <PromotionVideosListItem>
                     <Link to={`/promotion/videos/${item.id}`}>
-                      <img
-                        src={item.image}
-                        style={{
-                          height: "9rem",
-                          borderRadius: "10px",
-                        }}
-                      />
+                      <PromotionVideosImage src={item.image} />
                     </Link>
-
                     <Col xs={24} md={15}>
                       <List.Item.Meta
                         title={
-                          <div
-                            style={{
-                              textAlign: "left",
-                              marginLeft: "2rem",
-                            }}
-                          >
+                          <PromotionVideosDiv>
                             <Link to={`/promotion/videos/${item.id}`}>
-                              <h2 style={{ color: "black" }}>{item.title}</h2>
+                              <PromotionVideosTitle>
+                                {item.title}
+                              </PromotionVideosTitle>
                             </Link>
-                          </div>
+                          </PromotionVideosDiv>
                         }
                         description={
-                          <div
-                            style={{ textAlign: "left", marginLeft: "2rem" }}
-                          >
+                          <PromotionVideosDiv>
                             <Link to={`/promotion/videos/${item.id}`}>
-                              <p style={{ color: "gray" }}>{item.content}</p>
+                              <PromotionVideosWriter>
+                                {item.content}
+                              </PromotionVideosWriter>
                             </Link>
-                          </div>
+                          </PromotionVideosDiv>
                         }
                       />
                     </Col>
-                  </List.Item>
+                  </PromotionVideosListItem>
                 );
             }}
           />

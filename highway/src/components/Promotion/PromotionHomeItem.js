@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, List, Row, Col } from "antd";
 import { RightCircleFilled } from "@ant-design/icons";
+import {
+  PromotionHomeItemButton,
+  PromotionHomeItemImageDiv,
+} from "../../styles/PromotionStyle";
 
 const PromotionHomeItem = ({ random, title, type, infoData, xs, md }) => {
   const [count, setCount] = useState(4);
@@ -13,27 +17,16 @@ const PromotionHomeItem = ({ random, title, type, infoData, xs, md }) => {
         </Col>
         <Col xs={xs} md={md}>
           <Link to={`/promotion/${type}`}>
-            <Button
-              style={{ marginTop: "1rem", marginBottom: "1rem" }}
-              icon={<RightCircleFilled />}
-            >
+            <PromotionHomeItemButton icon={<RightCircleFilled />}>
               더보기
-            </Button>
+            </PromotionHomeItemButton>
           </Link>
         </Col>
       </Row>
       <Row gutter={[16, 16]} justify="center">
         <Col xs={xs} md={md}>
           <Link to={`/promotion/${type}/${random}`}>
-            <div
-              style={{
-                width: "21rem",
-                height: "18rem",
-                borderRadius: "10px",
-                background: "#f2f2f2",
-                padding: "0px",
-              }}
-            />
+            <PromotionHomeItemImageDiv />
           </Link>
         </Col>
         <Col xs={xs} md={md} justify="center">

@@ -7,6 +7,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { changeCategory } from "../../pages/Board/BoardMain";
 import ReactQuill from "react-quill";
 import styled from "styled-components";
+import {
+  BoardDetailUpdateReactQuill,
+  BoardDetailUpdateCol,
+  BoardDetailUpdateSelect,
+  CancelUpdateBoardDetalilButton,
+  UpdateBoardDetailButton,
+} from "../../styles/BoardDetailUpdateStyle";
 
 const { TextArea } = Input;
 
@@ -91,23 +98,15 @@ const BoardDetailUptadeForm = () => {
 
   return (
     <Row gutter={[16, 16]} justify="center">
-      <Col
-        xs={24}
-        md={15}
-        style={{ textAlign: "left", marginTop: "1rem", padding: "1rem" }}
-      >
+      <BoardDetailUpdateCol xs={24} md={15}>
         <Form form={form} onFinish={onFinish}>
           <Form.Item name="category">
-            <Select
+            <BoardDetailUpdateSelect
               placeholder={changeCategory(schoolBoardPost?.board.category)}
               onChange={(e) => {
                 setCategory(e);
               }}
               value={category}
-              style={{
-                width: "30%",
-                borderRadius: "0",
-              }}
               options={options}
             />
           </Form.Item>
@@ -119,10 +118,9 @@ const BoardDetailUptadeForm = () => {
             />
           </Form.Item>
           <CustomQuillWrapper isFocused={isEditorFocused} name="content">
-            <ReactQuill
+            <BoardDetailUpdateReactQuill
               placeholder={content}
               value={content}
-              style={{ height: "20rem" }}
               onChange={handleChange}
               theme="snow"
               onFocus={() => setIsEditorFocused(true)}
@@ -151,38 +149,20 @@ const BoardDetailUptadeForm = () => {
             />
           </CustomQuillWrapper>
           <Form.Item>
-            <Button
+            <CancelUpdateBoardDetalilButton
               onClick={() => {
                 // navigator(`/schoolboard/${values.category}`) // 카테고리로 돌아갈려면
                 navigator(-1);
               }}
-              style={{
-                width: "10rem",
-                marginTop: "2rem",
-                marginLeft: "1rem",
-                height: "3rem",
-                borderRadius: "50px",
-                float: "right",
-              }}
             >
               취소
-            </Button>
-            <Button
-              type="primary"
-              htmlType="submit"
-              style={{
-                width: "10rem",
-                marginTop: "2rem",
-                height: "3rem",
-                borderRadius: "50px",
-                float: "right",
-              }}
-            >
+            </CancelUpdateBoardDetalilButton>
+            <UpdateBoardDetailButton type="primary" htmlType="submit">
               수정하기 <EditOutlined />
-            </Button>
+            </UpdateBoardDetailButton>
           </Form.Item>
         </Form>
-      </Col>
+      </BoardDetailUpdateCol>
     </Row>
   );
 };

@@ -5,6 +5,7 @@ import PromotionHomeItem from "./PromotionHomeItem";
 import { Col, Menu, Row } from "antd";
 import RecommendList from "./RecommendList";
 import { items } from "../../utils/PromotionList";
+import { PromotionHomeUl, SideBarDiv } from "../../styles/PromotionStyle";
 
 const PromotionHome = () => {
   const random = Math.floor(Math.random() * newsList.length);
@@ -13,7 +14,7 @@ const PromotionHome = () => {
     <>
       <Row justify="center">
         <Col xs={23} md={10}>
-          <ul style={{ listStyle: "none", padding: "0px" }}>
+          <PromotionHomeUl>
             <li>
               <PromotionHomeItem
                 random={random}
@@ -44,21 +45,10 @@ const PromotionHome = () => {
                 md={10}
               />
             </li>
-          </ul>
+          </PromotionHomeUl>
         </Col>
         <Col xs={23} md={5}>
-          <div
-            style={{
-              marginTop: "2rem",
-              width: "20rem",
-              height: "30rem",
-              marginLeft: "1.5rem",
-              backgroundColor: "#f2f2f2",
-              borderRadius: "10px",
-            }}
-          >
-            우측사이드
-          </div>
+          <SideBarDiv>우측사이드</SideBarDiv>
         </Col>
       </Row>
     </>

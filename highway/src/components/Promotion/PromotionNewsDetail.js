@@ -6,6 +6,11 @@ import { FieldTimeOutlined, ShareAltOutlined } from "@ant-design/icons";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import PromotionHomeItem from "./PromotionHomeItem";
 import { info } from "../../utils/Message";
+import {
+  PromotionNewsDetailIcon,
+  PromotionNewsDetailUl,
+  SideBarDiv,
+} from "../../styles/PromotionStyle";
 
 const PromotionNewsDetail = () => {
   const [minDisable, setMinDisable] = useState(false);
@@ -35,7 +40,7 @@ const PromotionNewsDetail = () => {
     <>
       <Row justify="center">
         <Col xs={24} md={10}>
-          <ul style={{ listStyle: "none", textAlign: "left" }}>
+          <PromotionNewsDetailUl>
             <li>
               <h2>{newsList[id].title}</h2>
             </li>
@@ -44,27 +49,16 @@ const PromotionNewsDetail = () => {
             </li>
             <li>
               <p>
-                <FieldTimeOutlined style={{ marginRight: "0.5rem" }} />
+                <PromotionNewsDetailIcon />
                 생성 시간
               </p>
             </li>
-          </ul>
+          </PromotionNewsDetailUl>
           <hr />
           {newsList[id].content}
         </Col>
         <Col xs={23} md={5} justify="center">
-          <div
-            style={{
-              width: "20rem",
-              height: "30rem",
-              backgroundColor: "#f2f2f2",
-              marginTop: "2rem",
-              marginLeft: "1.5rem",
-              borderRadius: "10px",
-            }}
-          >
-            우측사이드
-          </div>
+          <SideBarDiv>우측사이드</SideBarDiv>
         </Col>
       </Row>
       <Row>

@@ -6,6 +6,11 @@ import { FieldTimeOutlined, ShareAltOutlined } from "@ant-design/icons";
 import CopyToClipboard from "react-copy-to-clipboard";
 import PromotionHomeItem from "./PromotionHomeItem";
 import { info } from "../../utils/Message";
+import {
+  PromotionVideoDetailIcon,
+  PromotionVideoDetailUl,
+  SideBarDiv,
+} from "../../styles/PromotionStyle";
 
 const PromotionVideoDetail = () => {
   const [minDisable, setMinDisable] = useState(false);
@@ -35,7 +40,7 @@ const PromotionVideoDetail = () => {
     <>
       <Row justify="center">
         <Col xs={24} md={10}>
-          <ul style={{ listStyle: "none", textAlign: "left" }}>
+          <PromotionVideoDetailUl>
             <li>
               <h2>{videoList[id].title}</h2>
             </li>
@@ -44,11 +49,11 @@ const PromotionVideoDetail = () => {
             </li>
             <li>
               <p>
-                <FieldTimeOutlined style={{ marginRight: "0.5rem" }} />
+                <PromotionVideoDetailIcon />
                 생성 시간
               </p>
             </li>
-          </ul>
+          </PromotionVideoDetailUl>
           <hr />
           <iframe
             width="640rem"
@@ -60,18 +65,7 @@ const PromotionVideoDetail = () => {
           />
         </Col>
         <Col xs={23} md={5}>
-          <div
-            style={{
-              width: "20rem",
-              height: "30rem",
-              backgroundColor: "#f2f2f2",
-              marginTop: "2rem",
-              marginLeft: "1.5rem",
-              borderRadius: "10px",
-            }}
-          >
-            우측사이드
-          </div>
+          <SideBarDiv>우측사이드</SideBarDiv>
         </Col>
       </Row>
       <Row gutter={[16, 16]}>
