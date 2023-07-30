@@ -3,12 +3,19 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./AdSlider.css";
+import styled from "styled-components";
 const banner1 = "/assets/banner1.png";
 const banner2 = "/assets/banner2.png";
 const banner3 = "/assets/banner3.png";
 const banner4 = "/assets/banner4.png";
-const banner5 = "/assets/banner5.png";
-
+const SlideItem = styled.div`
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  background-image: ${(props) => `url(${props.image})`};
+  background-size: cover;
+  background-position: center;
+`;
 function AdSlider() {
   const settings = {
     centerMode: true,
@@ -39,54 +46,10 @@ function AdSlider() {
   return (
     <div>
       <Slider {...settings}>
-        <div className="slide-item">
-          <img
-            src={banner1}
-            alt="banner1"
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              borderRadius: "5px",
-            }}
-          />
-        </div>
-        <div className="slide-item">
-          <img
-            src={banner2}
-            alt="banner2"
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              borderRadius: "5px",
-            }}
-          />
-        </div>
-        <div className="slide-item">
-          <img
-            src={banner3}
-            alt="banner3"
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              borderRadius: "5px",
-            }}
-          />
-        </div>
-        <div className="slide-item">
-          <img
-            src={banner4}
-            alt="banner4"
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              borderRadius: "5px",
-            }}
-          />
-        </div>
+        <SlideItem image={banner1} />
+        <SlideItem image={banner2} />
+        <SlideItem image={banner3} />
+        <SlideItem image={banner4} />
       </Slider>
     </div>
   );
