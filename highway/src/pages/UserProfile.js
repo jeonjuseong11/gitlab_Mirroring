@@ -1,13 +1,20 @@
 import { UserOutlined } from "@ant-design/icons";
-import { Avatar, Col, Menu, Row } from "antd";
+import { Avatar, Col } from "antd";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
+import {
+  ProfileRow,
+  ProfileSchoolName,
+  ProfileTable,
+  ProfileUserName,
+  ProfileUserWrapper,
+  ProfileWrapper,
+} from "../styles/ProfileStyle";
 
 const UserProfile = () => {
   const { me } = useSelector((state) => state.user);
   const navigate = useNavigate();
-  const location = useLocation();
   const access = localStorage.getItem("ACCESSTOKEN");
   useEffect(() => {
     if (access === null) {
@@ -26,32 +33,17 @@ const UserProfile = () => {
     }
   };
   return (
-    <div style={{ backgroundColor: "#f2f2f2" }}>
-      <Row gutter={[16, 16]} justify="center" style={{ paddingTop: "1rem" }}>
+    <ProfileWrapper>
+      <ProfileRow gutter={[16, 16]} justify="center">
         <Col xs={24} md={4}>
-          <div
-            style={{
-              padding: "2rem",
-              backgroundColor: "white",
-              borderRadius: "10px",
-              minWidth: "12rem",
-            }}
-          >
+          <ProfileUserWrapper>
             <Avatar size={100} icon={<UserOutlined />} />
-            <h2 style={{ marginTop: "2rem" }}>
+            <ProfileUserName>
               {me?.userName}
               {renderUserRole()}
-            </h2>
-            <h4 style={{ paddingTop: "1rem" }}>{me?.schoolName}</h4>
-            <table
-              style={{
-                marginTop: "1rem",
-                width: "90%",
-                height: "10rem",
-                margin: "0 auto",
-                textAlign: "left",
-              }}
-            >
+            </ProfileUserName>
+            <ProfileSchoolName>{me?.schoolName}</ProfileSchoolName>
+            <ProfileTable>
               <tbody>
                 <tr>
                   <th>아이디</th>
@@ -70,8 +62,8 @@ const UserProfile = () => {
                   <td>{me?.schoolName}</td>
                 </tr>
               </tbody>
-            </table>
-          </div>
+            </ProfileTable>
+          </ProfileUserWrapper>
           {/* <Menu.Item key="/profile">
               <NavLink to="/profile">회원 정보</NavLink>
             </Menu.Item>
@@ -80,8 +72,8 @@ const UserProfile = () => {
             </Menu.Item> */}
         </Col>
         <Outlet />
-      </Row>
-    </div>
+      </ProfileRow>
+    </ProfileWrapper>
   );
 };
 

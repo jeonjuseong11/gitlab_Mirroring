@@ -49,3 +49,6 @@ export const LoginMenuItem = styled(Link)`
   vertical-align: baseline;
   margin-right: 1rem;
 `;
+export const LoginTitleImage = styled.image`
+  width: 10rem;
+`;

@@ -1,28 +1,31 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Form, Rate, Button, message } from "antd";
 import TextArea from "antd/es/input/TextArea";
-import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { ADD_SCHOOL_REVIEW_REQUEST, UPDATE_SCHOOL_REVIEW_REQUEST } from "../constants/actionTypes";
+import {
+  ADD_SCHOOL_REVIEW_REQUEST,
+  UPDATE_SCHOOL_REVIEW_REQUEST,
+} from "../constants/actionTypes";
 import { notYourSchool } from "../utils/Message";
+import {
+  FormItem,
+  FormItemP,
+  FormItemWrapper,
+  FormTitle,
+  MessageWrapper,
+  ReviewCancelBtn,
+  ReviewWriteBtnWrapper,
+  ReviewWriteForm,
+} from "../styles/ReviewPostStyle";
 
-const FormItemWrapper = styled.div`
-  display: flex;
-  width: 100%;
-  line-height: 2.3rem;
-`;
-
-const FormItemP = styled.p`
-  margin: 0px;
-  width: 30%;
-`;
-
-const MessageWrapper = styled.div`
-  margin-left: 1rem;
-`;
-
-const DetailReviewForm = ({ setWrite, review, editing, setEditing, setEditContent }) => {
+const DetailReviewForm = ({
+  setWrite,
+  review,
+  editing,
+  setEditing,
+  setEditContent,
+}) => {
   const { schoolId } = useParams();
   const { me } = useSelector((state) => state.user);
   const getUserRoleText = (userRole) => {
@@ -155,12 +158,8 @@ const DetailReviewForm = ({ setWrite, review, editing, setEditing, setEditConten
   }, [form, review]);
 
   return (
-    <Form
-      form={form}
-      onFinish={handleSubmit}
-      style={{ width: "100%", textAlign: "left", marginBottom: "3rem" }}
-    >
-      <h2 style={{ textAlign: "left", marginTop: "0" }}>리뷰작성</h2>
+    <ReviewWriteForm form={form} onFinish={handleSubmit}>
+      <FormTitle>리뷰작성</FormTitle>
       <FormItemP>학교의 리뷰</FormItemP>
       <Form.Item rules={[{ required: true }]} name="content">
         <TextArea
@@ -179,46 +178,51 @@ const DetailReviewForm = ({ setWrite, review, editing, setEditing, setEditConten
       </Form.Item> */}
       <FormItemWrapper>
         <FormItemP>교통</FormItemP>
-        <Form.Item name="trafficRate" rules={[{ required: true }]} style={{ margin: "0" }}>
+        <Form.Item name="trafficRate" rules={[{ required: true }]} style={{}}>
           <Rate onChange={(value) => handleRateChange("trafficRate", value)} />
         </Form.Item>
         <MessageWrapper>{trafficMessage}</MessageWrapper>
       </FormItemWrapper>
       <FormItemWrapper>
         <FormItemP>시설만족도</FormItemP>
-        <Form.Item name="facilityRate" rules={[{ required: true }]} style={{ margin: "0" }}>
+        <FormItem name="facilityRate" rules={[{ required: true }]}>
           <Rate onChange={(value) => handleRateChange("facilityRate", value)} />
-        </Form.Item>
+        </FormItem>
         <MessageWrapper>{facilityMessage}</MessageWrapper>
       </FormItemWrapper>
       <FormItemWrapper>
         <FormItemP>급식</FormItemP>
-        <Form.Item name="cafeteriaRate" rules={[{ required: true }]} style={{ margin: "0" }}>
-          <Rate onChange={(value) => handleRateChange("cafeteriaRate", value)} />
-        </Form.Item>
+        <FormItem name="cafeteriaRate" rules={[{ required: true }]}>
+          <Rate
+            onChange={(value) => handleRateChange("cafeteriaRate", value)}
+          />
+        </FormItem>
         <MessageWrapper>{cafeteriaMessage}</MessageWrapper>
       </FormItemWrapper>
       <FormItemWrapper>
         <FormItemP>교육</FormItemP>
-        <Form.Item name="educationRate" rules={[{ required: true }]} style={{ margin: "0" }}>
-          <Rate onChange={(value) => handleRateChange("educationRate", value)} />
-        </Form.Item>
+        <FormItem name="educationRate" rules={[{ required: true }]}>
+          <Rate
+            onChange={(value) => handleRateChange("educationRate", value)}
+          />
+        </FormItem>
         <MessageWrapper>{educationMessage}</MessageWrapper>
       </FormItemWrapper>
       <FormItemWrapper>
         <FormItemP>취업</FormItemP>
-        <Form.Item name="employmentRate" rules={[{ required: true }]} style={{ margin: "0" }}>
-          <Rate onChange={(value) => handleRateChange("employmentRate", value)} />
-        </Form.Item>
+        <FormItem name="employmentRate" rules={[{ required: true }]}>
+          <Rate
+            onChange={(value) => handleRateChange("employmentRate", value)}
+          />
+        </FormItem>
         <MessageWrapper>{employmentMessage}</MessageWrapper>
       </FormItemWrapper>
-      <Form.Item style={{ float: "right", marginTop: "1rem" }}>
+      <ReviewWriteBtnWrapper>
         <Button htmlType="submit" type="primary">
           {editing ? "리뷰 수정" : "리뷰 작성"}
           {/* Show "리뷰 수정" button when in edit mode */}
         </Button>
-        <Button
-          style={{ marginLeft: "1rem" }}
+        <ReviewCancelBtn
           onClick={() => {
             setWrite(false);
             setEditing(false);
@@ -226,9 +230,9 @@ const DetailReviewForm = ({ setWrite, review, editing, setEditing, setEditConten
           }}
         >
           취소
-        </Button>
-      </Form.Item>
-    </Form>
+        </ReviewCancelBtn>
+      </ReviewWriteBtnWrapper>
+    </ReviewWriteForm>
   );
 };
 

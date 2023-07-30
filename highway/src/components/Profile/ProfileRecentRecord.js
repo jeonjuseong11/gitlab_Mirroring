@@ -1,20 +1,20 @@
 import { Col, List, Tag } from "antd";
 import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { LOAD_SAVED_SCHOOL_REQUEST, LOAD_USER_POSTS_REQUEST } from "../../constants/actionTypes";
+import {
+  LOAD_SAVED_SCHOOL_REQUEST,
+  LOAD_USER_POSTS_REQUEST,
+} from "../../constants/actionTypes";
 import SchoolList from "../../pages/SchoolList";
 import { changeCategory } from "../../pages/Board/BoardMain";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
-
-export const ItemWrapper = styled.div`
-  padding-left: 1rem;
-  border-radius: 10px;
-  &:hover {
-    background-color: #f5f5f5;
-    cursor: pointer;
-  }
-`;
+import {
+  ItemWrapper,
+  LikePostList,
+  LikePostWrapper,
+  ProfileTitle,
+  SchoolWrapper,
+} from "../../styles/ProfileStyle";
 
 const ProfileRecentRecord = () => {
   const { followList } = useSelector((state) => state.school);
@@ -54,36 +54,19 @@ const ProfileRecentRecord = () => {
   return (
     <>
       <Col xs={24} md={11}>
-        <div
-          style={{
-            backgroundColor: "white",
-            borderRadius: "10px",
-            textAlign: "left",
-            padding: "2rem",
-            minHeight: "25rem",
-          }}
-        >
-          <h3 style={{ margin: "0" }}>찜한 학교들</h3>
+        <SchoolWrapper>
+          <ProfileTitle>찜한 학교들</ProfileTitle>
           찜한 학교는 최대 10개까지 볼 수 있습니다.
           <div>
             <SchoolList schools={followList} />
           </div>
-        </div>
+        </SchoolWrapper>
       </Col>
       <Col xs={24} md={11} offset={4}>
-        <div
-          style={{
-            backgroundColor: "white",
-            borderRadius: "10px",
-            textAlign: "left",
-            padding: "2rem",
-            marginBottom: "2.4rem",
-          }}
-        >
-          <h3 style={{ margin: "0" }}>좋아요 누른 게시물</h3>
-          <List
+        <LikePostWrapper>
+          <ProfileTitle>좋아요 누른 게시물</ProfileTitle>
+          <LikePostList
             dataSource={schoolBoardPosts}
-            style={{ marginTop: "1rem", minHeight: "13rem" }}
             pagination={{
               align: "center",
               onChange: (page) => {
@@ -102,7 +85,7 @@ const ProfileRecentRecord = () => {
             )}
             ref={listRef}
           />
-        </div>
+        </LikePostWrapper>
       </Col>
     </>
   );

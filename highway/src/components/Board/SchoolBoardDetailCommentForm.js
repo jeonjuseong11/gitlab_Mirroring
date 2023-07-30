@@ -2,6 +2,7 @@ import { Input, List } from "antd";
 import React from "react";
 import { useSelector } from "react-redux";
 import { CommentSpan } from "../schoolBoardDetail/SchoolBoardDetailComments";
+import { needLogin } from "../../utils/Message";
 
 const SchoolBoardDetailCommentForm = ({
   parentId,
@@ -10,6 +11,7 @@ const SchoolBoardDetailCommentForm = ({
   addCommentReply,
   setParentId,
   setCommentNum,
+  linkLogin,
 }) => {
   const { me } = useSelector((state) => state.user);
   return (

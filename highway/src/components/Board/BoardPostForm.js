@@ -10,12 +10,14 @@ import styled from "styled-components";
 
 const CustomQuillWrapper = styled(Form.Item)`
   .ql-container {
-    border-color: ${(props) => (props.isFocused ? "#a8a8fe !important" : "#f2f2f2 !important")};
+    border-color: ${(props) =>
+      props.isFocused ? "#a8a8fe !important" : "#f2f2f2 !important"};
     border-radius: 0 0 10px 10px;
   }
 
   .ql-toolbar {
-    border-color: ${(props) => (props.isFocused ? "#a8a8fe !important" : "#f2f2f2 !important")};
+    border-color: ${(props) =>
+      props.isFocused ? "#a8a8fe !important" : "#f2f2f2 !important"};
     border-radius: 10px 10px 0 0;
   }
   .ql-container::placeholder {
@@ -97,7 +99,11 @@ const BoardPostForm = () => {
 
   return (
     <Row gutter={[16, 16]} justify="center">
-      <Col xs={24} md={15} style={{ textAlign: "left", marginTop: "1rem", padding: "1rem" }}>
+      <Col
+        xs={24}
+        md={15}
+        style={{ textAlign: "left", marginTop: "1rem", padding: "1rem" }}
+      >
         <Form form={form} onFinish={onFinish}>
           <Form.Item name="category">
             <Select
@@ -126,7 +132,12 @@ const BoardPostForm = () => {
                 toolbar: [
                   [{ header: [1, 2, 3, 4, 5, 6] }, { font: [] }],
                   ["bold", "italic", "underline", "strike", "blockquote"],
-                  [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }],
+                  [
+                    { list: "ordered" },
+                    { list: "bullet" },
+                    { indent: "-1" },
+                    { indent: "+1" },
+                  ],
                   ["link", "image", "video"],
                   [{ direction: "rtl" }],
                   [{ color: [] }, { background: [] }],

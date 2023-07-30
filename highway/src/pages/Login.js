@@ -9,6 +9,7 @@ import {
   LoginMenu,
   LoginForm,
   LoginFormTitle,
+  LoginTitleImage,
 } from "../styles/LoginStyle";
 
 import { useNavigate } from "react-router-dom";
@@ -48,7 +49,7 @@ const Login = () => {
         onFinish={onFinish}
       >
         <LoginFormTitle>
-          <img src={imgUrl} alt="Logo" style={{ width: "13rem" }} />
+          <LoginTitleImage src={imgUrl} alt="Logo" />
         </LoginFormTitle>
         <Form.Item
           name="userId"
