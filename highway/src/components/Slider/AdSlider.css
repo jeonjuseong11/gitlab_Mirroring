@@ -28,3 +28,20 @@
 .slick-center {
   transform: translateX(-25%);
 }
+@media (max-width: 768px) {
+  .slick-slide {
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 4rem;
+  }
+
+  .slick-slide.slick-active.slick-center.slick-current div {
+    background-color: gray;
+    position: relative;
+    border-radius: 5px;
+    width: 100%;
+  }
+  .slick-center {
+    transform: translateX(0%);
+  }
+}

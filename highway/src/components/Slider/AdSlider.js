@@ -26,7 +26,6 @@ function AdSlider() {
         breakpoint: 768,
         settings: {
           slidesToShow: 1,
-          centerPadding: "20%",
         },
       },
     ],
@@ -44,28 +43,48 @@ function AdSlider() {
           <img
             src={banner1}
             alt="banner1"
-            style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: "5px" }}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              borderRadius: "5px",
+            }}
           />
         </div>
         <div className="slide-item">
           <img
             src={banner2}
             alt="banner2"
-            style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: "5px" }}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              borderRadius: "5px",
+            }}
           />
         </div>
         <div className="slide-item">
           <img
             src={banner3}
             alt="banner3"
-            style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: "5px" }}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              borderRadius: "5px",
+            }}
           />
         </div>
         <div className="slide-item">
           <img
             src={banner4}
             alt="banner4"
-            style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: "5px" }}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              borderRadius: "5px",
+            }}
           />
         </div>
       </Slider>
