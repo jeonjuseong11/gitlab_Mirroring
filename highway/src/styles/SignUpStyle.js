@@ -117,4 +117,5 @@ export const GenderValidWrapper = styled.div`
 export const TermsCheckWrapper = styled.div`
   color: ${(props) => (!props.value ? "#a2a2a2" : "black")};
   cursor: pointer;
+  margin-top: 0.3rem;
 `;

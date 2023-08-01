@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Form, Button, Anchor } from "antd";
 
+//utils/Term...
 export const TermWrapper = styled.div`
 height: 20rem;
 overflow:scroll;
