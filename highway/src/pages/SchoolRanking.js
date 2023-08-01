@@ -146,7 +146,7 @@ const SchoolRanking = () => {
         </Col>
       </Row>
       <Row gutter={[16, 16]} justify="center" style={{ textAlign: "left", marginTop: "1rem" }}>
-        <Col xs={24} md={10} flex="auto">
+        <Col xs={24} md={10}>
           <StyledTable
             style={{ minWidth: "14rem" }}
             columns={columns}
@@ -159,7 +159,7 @@ const SchoolRanking = () => {
             bordered={false}
           />
         </Col>
-        <Col xs={24} md={5} flex="auto">
+        <Col xs={24} md={5}>
           {selectedSchool && <RankSchoolCard selectedSchool={selectedSchool} />}
         </Col>
       </Row>

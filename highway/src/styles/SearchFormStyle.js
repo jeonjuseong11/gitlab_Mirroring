@@ -7,7 +7,6 @@ export const SearchInput = styled(Input)`
   border-radius: 10px;
   border: #f2f2f2;
   height: 3.5rem;
-  width: 95%;
 `;
 
 export const SearchTitleRow = styled(Row)`
@@ -34,20 +33,20 @@ export const SearchInputIcon = styled(SearchOutlined)`
 export const SearchButton = styled(Button)`
   border-radius: 10px;
   padding-top: 1rem;
-  height: 6rem;
-  width: 6rem;
+  height: 6.5rem;
+  width: 6.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: 1rem;
+  color: ${({ isActive }) => (isActive ? "#ffffff" : "")};
   background-color: ${({ isActive }) => (isActive ? "#8282ff" : "")};
-  color: ${({ isActive }) => (isActive ? "white" : "")};
 `;
 export const SearchButtonCol = styled(Col)`
   margin-bottom: 1rem;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 1.5rem;
+  gap: 1.4rem;
 `;
