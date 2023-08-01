@@ -1,20 +1,13 @@
 import { Modal } from "antd";
 import React from "react";
+import { TermUl, TermWrapper } from "../styles/TermsStyle";
 
 const TermsService = () => {
   return (
     <div>
       <h1>HIGHWAY 이용약관</h1>
-      <div
-        style={{
-          height: "20rem",
-          overflow: "scroll",
-          border: "1px solid gray",
-          borderRadius: "10px",
-          marginBottom: "3rem",
-        }}
-      >
-        <ul style={{ listStyle: "none" }}>
+      <TermWrapper>
+        <TermUl>
           <h4>제1조(목적)</h4>
           <li>
             1.본 약관은 HIGHWAY(하이웨이)가 운영하는 온라인 정보제공 사이트
@@ -26,8 +19,8 @@ const TermsService = () => {
             2.PC통신, 무선 등을 이용하는 전자상거래에 대해서도 그 성질에 반하지
             않는 한 본 약관을 준용합니다.
           </li>
-        </ul>
-        <ul style={{ listStyle: "none" }}>
+        </TermUl>
+        <TermUl>
           <h4>제2조(정의)</h4>
           <li>
             1.'회사'라 함은, 'HIGHWAY(하이웨이)'가 재화 또는 용역을 이용자에게
@@ -56,16 +49,16 @@ const TermsService = () => {
             6.'구매자'라 함은 '회사'가 제공하는 '상품'에 대한 구매서비스의
             이용을 청약한 '회원' 및 '비회원'을 말합니다.
           </li>
-        </ul>
+        </TermUl>
 
-        <ul style={{ listStyle: "none" }}>
+        <TermUl>
           <h4>제3조(약관 외 준칙)</h4>본 약관에서 정하지 아니한 사항은 법령 또는
           회사가 정한 서비스의 개별 약관, 운영정책 및 규칙(이하 '세부지침'이라
           합니다)의 규정에 따릅니다. 또한 본 약관과 세부지침이 충돌할 경우에는
           세부지침이 우선합니다.
-        </ul>
+        </TermUl>
 
-        <ul style={{ listStyle: "none" }}>
+        <TermUl>
           <h4>제4조(약관의 명시 및 개정)</h4>
           <li>
             1.'회사'는 이 약관의 내용과 상호 및 대표자 성명, 영업소 소재지,
@@ -106,9 +99,8 @@ const TermsService = () => {
           </li>
           <li>7.사용자가 학교에 대한 평가를 작성</li>
           <li>8.기타 '회사'가 정하는 업무</li>
-        </ul>
-
-        <ul style={{ listStyle: "none" }}>
+        </TermUl>
+        <TermUl>
           <h4>제5조(서비스의 중단 등)</h4>
           <li>
             1.'회사'가 제공하는 서비스는 연중무휴, 1일 24시간 제공을 원칙으로
@@ -132,9 +124,9 @@ const TermsService = () => {
             4.'회사'가 서비스를 정지하거나 이용을 제한하는 경우 그 사유 및 기간,
             복구 예정 일시 등을 지체 없이 '이용자'에게 알립니다.
           </li>
-        </ul>
+        </TermUl>
 
-        <ul style={{ listStyle: "none" }}>
+        <TermUl>
           <h4>제6조(회원가입)</h4>
           <li>
             1.'회사'가 정한 양식에 따라 '이용자'가 회원정보를 기입한 후 본
@@ -143,7 +135,7 @@ const TermsService = () => {
           <li>
             2.'회사'는 전항에 따라 회원가입을 신청한 '이용자' 중 다음 각호의
             사유가 없는 한 '회원'으로 등록합니다.
-            <ul style={{ listStyle: "none" }}>
+            <TermUl>
               <li>
                 1.가입신청자가 본 약관에 따라 회원자격을 상실한 적이 있는 경우.
                 다만, '회사'의 재가입 승낙을 얻은 경우에는 예외로 합니다.
@@ -155,14 +147,14 @@ const TermsService = () => {
                 3.기타 회원으로 등록하는 것이 '회사'의 운영에 현저한 지장을
                 초래하는 것으로 인정되는 경우
               </li>
-            </ul>
+            </TermUl>
           </li>
           <li>
             3.회원가입 시기는 '회사'의 가입승낙 안내가 '회원'에게 도달한
             시점으로 합니다.
           </li>
-        </ul>
-        <ul style={{ listStyle: "none" }}>
+        </TermUl>
+        <TermUl>
           <h4>제7조(회원탈퇴 및 자격상실 등)</h4>
           <li>
             1.'회원'은 '회사'에 언제든지 탈퇴를 요청할 수 있으며, '회사'는
@@ -172,7 +164,7 @@ const TermsService = () => {
           <li>
             2.'정보제공 사이트'은 다음 각호의 사유가 발생한 경우 '회사'의 자격을
             제한 또는 정지시킬 수 있습니다.
-            <ul style={{ listStyle: "none" }}>
+            <TermUl>
               <li>1.회원가입 시 허위정보를 기재한 경우</li>
               <li>2.다른 이용자의 정상적인 이용을 방해하는 경우</li>
               <li>3.관계법령 또는 본 약관에서 금지하는 행위를 한 경우 </li>
@@ -181,7 +173,7 @@ const TermsService = () => {
                 5.기타 '회원'으로 등록하는 것이 적절하지 않은 것으로 판단되는
                 경우
               </li>
-            </ul>
+            </TermUl>
           </li>
           <li>
             3.'회사'의 서비스를 1년 동안 이용하지 않는 '회원'의 경우
@@ -194,8 +186,8 @@ const TermsService = () => {
             보존할 필요가 있는 경우 '회사'는 정해진 기간 동안 회원정보를
             보관합니다.
           </li>
-        </ul>
-        <ul style={{ listStyle: "none" }}>
+        </TermUl>
+        <TermUl>
           <h4>제8조(회원에 대한 통지)</h4>
           <li>
             1.'회사'는 '회원' 회원가입 시 기재한 전자우편, 이동전화번호, 주소
@@ -207,8 +199,8 @@ const TermsService = () => {
             다만 '회원'이 서비스를 이용함에 있어 중요한 사항에 대하여는 개별
             통지합니다.
           </li>
-        </ul>
-        <ul style={{ listStyle: "none" }}>
+        </TermUl>
+        <TermUl>
           <h4>제9조(구매신청)</h4>
           '이용자'는 온라인 정보제공 사이트 상에서 다음 방법 또는 이와 유사한
           방법에 따라 구매를 신청할 수 있으며, '회사'는 '이용자'를 위하여 다음
@@ -222,13 +214,13 @@ const TermsService = () => {
           <li>4.재화 또는 용역 등에 대한 구매신청 및 확인</li>
           <li>5.결제방법 선택 및 결제</li>
           <li>6.'회사'의 최종 확인</li>
-        </ul>
-        <ul style={{ listStyle: "none" }}>
+        </TermUl>
+        <TermUl>
           <h4>제10조(계약의 성립)</h4>
           <li>
             1.'회사'는 다음 각호의 사유가 있는 경우 본 약관의 '구매신청' 조항에
             따른 구매신청을 승낙하지 않을 수 있습니다.
-            <ul style={{ listStyle: "none" }}>
+            <TermUl>
               <li>1.신청 내용에 허위, 누락, 오기가 있는 경우</li>
               <li>2.회원자격이 제한 또는 정지된 고객이 구매를 신청한 경우</li>
               <li>
@@ -239,7 +231,7 @@ const TermsService = () => {
                 4.기타 구매신청을 승낙하는 것이 '회사'의 기술상 현저한 지장을
                 초래하는 것으로 인정되는 경우
               </li>
-            </ul>
+            </TermUl>
           </li>
           <li>
             2.'회사'의 승낙이 본 약관의 '수신확인통지' 형태로 이용자에게 도달한
@@ -250,13 +242,13 @@ const TermsService = () => {
             및 판매가능여부, 구매신청의 정정 및 취소 등에 관한 정보가 포함되어야
             합니다.
           </li>
-        </ul>
-        <ul style={{ listStyle: "none" }}>
+        </TermUl>
+        <TermUl>
           <h4>제11조(개인정보보호)</h4>
           <li>
             1.'회사'는 '구매자'의 정보수집시 다음의 필수사항 등 구매계약 이행에
             필요한 최소한의 정보만을 수집합니다.
-            <ul style={{ listStyle: "none" }}>
+            <TermUl>
               <li>1.성명</li>
               <li>2.주민등록번호 또는 외국인등록번호</li>
               <li>3.주소</li>
@@ -264,7 +256,7 @@ const TermsService = () => {
               <li>5.아이디(ID)</li>
               <li>6.비밀번호</li>
               <li>7.전자우편(e-mail)주소</li>
-            </ul>
+            </TermUl>
           </li>
           <li>
             2.'회사'가 개인정보보호법 상의 고유식별정보 및 민감정보를 수집하는
@@ -274,7 +266,7 @@ const TermsService = () => {
           제3자 제공할 수 없으며 이에 대한 모든 책임은 '회사'가 부담합니다. 다만
           다음의 경우에는 예외로 합니다.
           <li>
-            <ul style={{ listStyle: "none" }}>
+            <TermUl>
               <li>
                 1.배송업무상 배송업체에게 배송에 필요한 최소한의 정보(성명,
                 주소, 전화번호)를 제공하는 경우
@@ -286,11 +278,11 @@ const TermsService = () => {
               <li>3.재화 등의 거래에 따른 대금정산을 위하여 필요한 경우</li>
               <li>4.도용방지를 위하여 본인 확인이 필요한 경우</li>
               <li>5.관계법령의 규정에 따른 경우</li>
-            </ul>
+            </TermUl>
           </li>
-        </ul>
+        </TermUl>
 
-        <ul style={{ listStyle: "none" }}>
+        <TermUl>
           <h4>제12조('회사'의 의무)</h4>
           <li>
             1.'회사'는 관계법령, 본 약관이 금지하거나 공서양속에 반하는 행위를
@@ -310,8 +302,8 @@ const TermsService = () => {
             4.'회사'는 '이용자'의 수신동의 없이 영리목적으로 광고성 전자우편,
             휴대전화 메시지, 전화, 우편 등을 발송하지 않습니다.{" "}
           </li>
-        </ul>
-        <ul style={{ listStyle: "none" }}>
+        </TermUl>
+        <TermUl>
           <h4>제13조(이용자 및 회원의 의무)</h4>
           <li>
             1.'이용자'는 회원가입 신청 시 사실에 근거하여 신청서를 작성해야
@@ -332,7 +324,7 @@ const TermsService = () => {
           </li>
           <li>
             4.'이용자'는 다음의 행위를 하여서는 안됩니다.
-            <ul style={{ listStyle: "none" }}>
+            <TermUl>
               <li>1.'회사'에 게시된 정보의 변경</li>
               <li>2.'회사'가 정한 정보 외의 다른 정보의 송신 또는 게시 </li>
               <li>3.'회사' 및 제3자의 저작권 등 지식재산권에 대한 침해</li>
@@ -344,7 +336,7 @@ const TermsService = () => {
                 공서양속에 반하는 정보를 '회사'의 '사이트'에 공개 또는 게시하는
                 행위
               </li>
-            </ul>
+            </TermUl>
           </li>
           <li>
             5.'회원'은 부여된 아이디(ID)와 비밀번호를 직접 관리해야 합니다.
@@ -354,8 +346,8 @@ const TermsService = () => {
             사용하고 있음을 인지한 경우에는 바로 '회사'에 통보하고 안내에 따라야
             합니다.
           </li>
-        </ul>
-        <ul style={{ listStyle: "none" }}>
+        </TermUl>
+        <TermUl>
           <h4>제14조(저작권의 귀속 및 이용)</h4>
           <li>
             1.'정보제공 사이트'이 제공하는 서비스 및 이와 관련된 모든
@@ -370,8 +362,8 @@ const TermsService = () => {
             3.'이용자'가 서비스 내에 게시한 게시물, 이용후기 등 콘텐츠(이하
             '콘텐츠')의 저작권은 해당 '콘텐츠'의 저작자에게 귀속됩니다.
           </li>
-        </ul>
-      </div>
+        </TermUl>
+      </TermWrapper>
     </div>
   );
 };
