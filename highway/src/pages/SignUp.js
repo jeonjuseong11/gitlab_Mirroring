@@ -27,6 +27,11 @@ import {
   SignUpInputPassword,
   SignUpWrapper,
   SchoolSelector,
+  DoubleCheckButton,
+  IdValidTrueP,
+  IdValidFalseP,
+  GenderValidWrapper,
+  TermsCheckWrapper,
 } from "../styles/SignUpStyle";
 import {
   agreeValidate,
@@ -212,37 +217,20 @@ const SignUp = () => {
               placeholder="아이디를 입력해주세요"
               disabled={isIdValid}
             />
-            <Button
+            <DoubleCheckButton
               loading={isCheckingId}
               onClick={onCheckUserId}
               disabled={isIdValid || isCheckingId}
-              style={{ height: "3rem", borderColor: "#f2f2f2" }}
             >
               중복확인
-            </Button>
+            </DoubleCheckButton>
           </Space.Compact>
         </Form.Item>
         {isIdValid === true && (
-          <p
-            style={{
-              color: "green",
-              marginTop: "-1.5rem",
-              marginBottom: "0rem",
-            }}
-          >
-            사용 가능한 아이디입니다
-          </p>
+          <IdValidTrueP>사용 가능한 아이디입니다</IdValidTrueP>
         )}
         {isIdValid === false && (
-          <p
-            style={{
-              color: "red",
-              marginTop: "-1.5rem",
-              marginBottom: "0rem",
-            }}
-          >
-            이미 사용 중인 아이디입니다
-          </p>
+          <IdValidFalseP>이미 사용 중인 아이디입니다</IdValidFalseP>
         )}
         <label>비밀번호</label>
         <Form.Item
@@ -300,7 +288,7 @@ const SignUp = () => {
           <SignUpInput type="number" placeholder="나이를 입력해주세요" />
         </Form.Item>
         <label>성별</label>
-        <div style={{ display: "flex", height: "3rem", alignItems: "center" }}>
+        <GenderValidWrapper>
           <Form.Item
             name="gender"
             rules={[
@@ -315,7 +303,7 @@ const SignUp = () => {
               <Radio value="female">여성</Radio>
             </Radio.Group>
           </Form.Item>
-        </div>
+        </GenderValidWrapper>
         <label>역할</label>
         <Form.Item name="role" rules={[{ validator: roleValidate }]}>
           <Select
@@ -382,17 +370,13 @@ const SignUp = () => {
           </>
         </CSSTransition>
         <label>약관 동의</label>
-        <div
-          style={
-            serviceChecked
-              ? { color: "black", marginTop: "1rem", cursor: "pointer" }
-              : { color: "#a2a2a2", marginTop: "1rem", cursor: "pointer" }
-          }
+        <TermsCheckWrapper
+          value={serviceChecked}
           onClick={() => setServiceOpen(true)}
         >
           이용약관(필수)
           {!serviceChecked ? <RightOutlined /> : <CheckOutlined />}
-        </div>
+        </TermsCheckWrapper>
         <Modal
           centered
           open={serviceOpen}
@@ -408,17 +392,13 @@ const SignUp = () => {
         >
           <TermsService />
         </Modal>
-        <div
-          style={
-            privateChecked
-              ? { color: "black", cursor: "pointer" }
-              : { color: "#a2a2a2", cursor: "pointer" }
-          }
+        <TermsCheckWrapper
+          value={privateChecked}
           onClick={() => setPrivageOpen(true)}
         >
           개인정보 동의(필수)
           {!privateChecked ? <RightOutlined /> : <CheckOutlined />}
-        </div>
+        </TermsCheckWrapper>
         <Modal
           centered
           open={privateOpen}
@@ -434,17 +414,13 @@ const SignUp = () => {
         >
           <TermPravate />
         </Modal>
-        <div
-          style={
-            youngChecked
-              ? { color: "black", cursor: "pointer" }
-              : { color: "#a2a2a2", cursor: "pointer" }
-          }
+        <TermsCheckWrapper
+          value={youngChecked}
           onClick={() => setYoungOpen(true)}
         >
           청소년 개인정보 동의(필수)
           {!youngChecked ? <RightOutlined /> : <CheckOutlined />}
-        </div>
+        </TermsCheckWrapper>
         <Modal
           centered
           open={youngOpen}

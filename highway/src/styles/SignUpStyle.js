@@ -93,3 +93,28 @@ export const SmallFormItem = styled(Form.Item)`
   display: inline-block;
   width: 50%;
 `;
+// 중복확인 버튼
+export const DoubleCheckButton = styled(Button)`
+  height: 3rem;
+  border-color: #f2f2f2;
+`;
+// SignUp Vliad
+export const IdValidTrueP = styled.p`
+  color: green;
+  margin-top: -1.5rem;
+  margin-bottom: 0rem;
+`;
+export const IdValidFalseP = styled.p`
+  color: red;
+  margin-top: -1.5rem;
+  margin-bottom: 0rem;
+`;
+export const GenderValidWrapper = styled.div`
+  display: flex;
+  height: 3rem;
+  align-items: center;
+`;
+export const TermsCheckWrapper = styled.div`
+  color: ${(props) => (!props.value ? "#a2a2a2" : "black")};
+  cursor: pointer;
+`;
