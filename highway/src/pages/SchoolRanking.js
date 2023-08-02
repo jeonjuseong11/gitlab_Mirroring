@@ -153,6 +153,7 @@ const SchoolRanking = () => {
             dataSource={filterValue === "" ? rankData : filteredData}
             pagination={{
               pageSize: 10,
+              position: ["bottomCenter"],
             }}
             rowClassName={rowClassName}
             rowKey={(record) => record.rank}

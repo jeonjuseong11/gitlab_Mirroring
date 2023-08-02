@@ -25,6 +25,8 @@ export const SearchFormWrapper = styled.div`
 
 export const SearchButtonWrapper = styled.div`
   margin-top: 1.5rem;
+  overflow-x: auto;
+  flex-wrap: nowrap;
 `;
 export const SearchInputIcon = styled(SearchOutlined)`
   color: black;

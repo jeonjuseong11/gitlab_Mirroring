@@ -48,7 +48,7 @@ const Header = () => {
       <Row justify="center" gutter={[16, 16]} style={{ marginTop: "0.5rem" }}>
         <Col xs={6} md={6} style={{ textAlign: "left" }}>
           <Title to="/">
-            <img src={imgUrl} alt="Logo" style={{ width: "10rem" }} />
+            <img src={imgUrl} alt="Logo" style={{ width: "12rem" }} />
           </Title>
         </Col>
         <Col xs={16} md={9} style={{ textAlign: "right", marginTop: "0.3rem" }}>
