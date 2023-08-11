@@ -5,7 +5,7 @@ import userSaga from "./user";
 import schoolSaga from "./school";
 import postSaga from "./post";
 
-axios.defaults.baseURL = "http://localhost:8080/";
+axios.defaults.baseURL = "http://highway-lb-1879269947.ap-northeast-2.elb.amazonaws.com/";
 // axios.defaults.headers["Access-Control-Allow-Origin"] = "*";
 // axios.defaults.withCredentials = true;
 export default function* rootSaga() {
