@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 import { LOGIN_REQUEST } from "../constants/actionTypes";
 import { useSelector, useDispatch } from "react-redux";
 
-const imgUrl = "/assets/TitleIcon.png";
+const imgUrl = `${process.env.PUBLIC_URL}/assets/TitleIcon.png`;
 const Login = () => {
   const { me, logInError } = useSelector((state) => state.user);
   const access = localStorage.getItem("ACCESSTOKEN");
