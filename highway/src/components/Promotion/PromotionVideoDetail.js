@@ -85,8 +85,8 @@ const PromotionVideoDetail = () => {
       </Row>
       <PromotionHomeItem
         random={random}
-        title={"직장 생활 치트키"}
-        type={"news"}
+        title={"다른 학교 홍보영상"}
+        type={"videos"}
         infoData={videoList}
         xs={22}
         md={5}

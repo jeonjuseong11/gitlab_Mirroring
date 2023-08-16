@@ -6,6 +6,7 @@ import {
   PromotionHomeItemButton,
   PromotionHomeItemImageDiv,
 } from "../../styles/PromotionStyle";
+import { VideoDummyData as videosItems } from "../../utils/VideoDummyData";
 
 const PromotionHomeItem = ({ random, title, type, infoData, xs, md }) => {
   const [count, setCount] = useState(4);
@@ -26,7 +27,11 @@ const PromotionHomeItem = ({ random, title, type, infoData, xs, md }) => {
       <Row gutter={[16, 16]} justify="center">
         <Col xs={xs} md={md}>
           <Link to={`/promotion/${type}/${random}`}>
-            <PromotionHomeItemImageDiv />
+            {/* <PromotionHomeItemImageDiv /> */}
+            <img
+              src={videosItems}
+              style={{ width: "21rem", height: "18rem" }}
+            />
           </Link>
         </Col>
         <Col xs={xs} md={md} justify="center">

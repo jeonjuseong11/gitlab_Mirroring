@@ -6,10 +6,10 @@ export const items = [
     key: "/promotion",
     label: <NavLink to="/promotion">홈</NavLink>,
   },
-  {
-    key: "/promotion/news",
-    label: <NavLink to="/promotion/news">뉴스</NavLink>,
-  },
+  // {
+  //   key: "/promotion/news",
+  //   label: <NavLink to="/promotion/news">뉴스</NavLink>,
+  // },
   {
     key: "/promotion/videos",
     label: <NavLink to="/promotion/videos">영상</NavLink>,

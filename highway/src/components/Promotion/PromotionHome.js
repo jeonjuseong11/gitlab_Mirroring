@@ -6,6 +6,7 @@ import { Col, Menu, Row } from "antd";
 import RecommendList from "./RecommendList";
 import { items } from "../../utils/PromotionList";
 import { PromotionHomeUl, SideBarDiv } from "../../styles/PromotionStyle";
+import { VideoDummyData as videoList } from "../../utils/VideoDummyData";
 
 const PromotionHome = () => {
   const random = Math.floor(Math.random() * newsList.length);
@@ -15,7 +16,7 @@ const PromotionHome = () => {
       <Row justify="center">
         <Col xs={23} md={10}>
           <PromotionHomeUl>
-            <li>
+            {/* <li>
               <PromotionHomeItem
                 random={random}
                 title={"이직을 준비하는 당신에게"}
@@ -41,6 +42,16 @@ const PromotionHome = () => {
                 title={"직장 생활 치트키"}
                 type={"news"}
                 infoData={newsList}
+                xs={23}
+                md={10}
+              />
+            </li> */}
+            <li>
+              <PromotionHomeItem
+                random={random}
+                title={"다른 학교 홍보영상"}
+                type={"videos"}
+                infoData={videoList}
                 xs={23}
                 md={10}
               />

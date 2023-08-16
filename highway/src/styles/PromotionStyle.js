@@ -106,3 +106,39 @@ export const PromotionVideosTitle = styled.h2`
 export const PromotionVideosWriter = styled.p`
   color: gray;
 `;
+// RecommedComponent
+// RecommnedList
+export const RecommnedListCol = styled(Col)`
+  height: 27rem;
+  margin-left: 0.5rem;
+  border-radius: 10px;
+  background: #f2f2f2;
+`;
+// 이미지
+export const RecommnedListImage = styled.div`
+  width: 18rem;
+  height: 10rem;
+  background: #f2f2f2;
+  border-radius: 10px;
+`;
+// 동영상
+export const RecommnedListVideo = styled.div`
+  width: 18rem;
+  height: 10rem;
+  background: #f2f2f2;
+  border-radius: 10px;
+`;
+export const RecommnedListTItle = styled.div`
+  width: 18rem;
+  color: black;
+  text-align: left;
+  margin-left: 3rem;
+`;
+export const RecommnedListBetweenOne = styled.div`
+  margin-top: 5rem;
+  margin-left: 2.5rem;
+`;
+export const RecommnedListBetweenTwo = styled.div`
+  margin-top: 2rem;
+  margin-left: 2.5rem;
+`;
