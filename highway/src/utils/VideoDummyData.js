@@ -20,7 +20,7 @@ export const VideoDummyData = [
     title: "안양 문화 고등학교 홍보영상",
     content: "안양 문화 고등학교",
     src: "https://www.youtube.com/embed/v0NtB8-wri4",
-    image: "https://img.youtube.com/vi/wri4/0.jpg",
+    image: "https://img.youtube.com/vi/v0NtB8-wri4/0.jpg",
     views: 15,
   },
   {
