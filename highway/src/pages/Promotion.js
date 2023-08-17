@@ -17,11 +17,11 @@ const Promotion = () => {
       </Row>
       <Row justify="center">
         <Col xs={10} md={15}>
-          <Menu
+          {/* <Menu
             mode="horizontal"
             items={items}
             selectedKeys={location.pathname}
-          />
+          /> */}
         </Col>
       </Row>
       <Outlet />

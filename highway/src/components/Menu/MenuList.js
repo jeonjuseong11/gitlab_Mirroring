@@ -13,7 +13,7 @@ export const MenuLists = [
   },
   {
     key: "/promotion",
-    label: <NavLink to="/promotion">홍보자료</NavLink>,
+    label: <NavLink to="/promotion/videos">홍보자료</NavLink>,
   },
   {
     key: "/schoolboard",

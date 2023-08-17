@@ -45,7 +45,7 @@ const PromotionHome = () => {
                 xs={23}
                 md={10}
               />
-            </li> */}
+            </li> 
             <li>
               <PromotionHomeItem
                 random={random}
@@ -55,7 +55,7 @@ const PromotionHome = () => {
                 xs={23}
                 md={12}
               />
-            </li>
+            </li>*/}
           </PromotionHomeUl>
         </Col>
         <Col xs={23} md={5}>
