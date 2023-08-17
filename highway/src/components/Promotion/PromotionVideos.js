@@ -15,6 +15,18 @@ const PromotionVideos = () => {
   const [count, setCount] = useState(3);
   const [disable, setDisable] = useState(false);
   const location = useLocation();
+  const [autoPlay, setAutoPlay] = useState(0);
+  const [mouseOver, setMouseOver] = useState(false);
+  const onAuto = (id) => {
+    return autoPlay.id;
+  };
+  const onMouse = () => {
+    if (mouseOver) {
+      setMouseOver(false);
+    } else {
+      setMouseOver(true);
+    }
+  };
   const onMore = () => {
     setCount(count + 3);
   };
@@ -25,7 +37,6 @@ const PromotionVideos = () => {
       setDisable(false);
     }
   }, [count]);
-
   return (
     <>
       <Row justify="center">
@@ -38,7 +49,32 @@ const PromotionVideos = () => {
                 return (
                   <PromotionVideosListItem>
                     <Link to={`/promotion/videos/${item.id}`}>
-                      <PromotionVideosImage src={item.image} />
+                      {!mouseOver ? (
+                        <>
+                          <PromotionVideosImage
+                            onMouseOver={() => {
+                              setAutoPlay(1);
+                              onMouse();
+                            }}
+                            src={item.image}
+                          />
+                        </>
+                      ) : (
+                        <>
+                          <iframe
+                            width="188px"
+                            height="141px"
+                            onMouseLeave={() => {
+                              setAutoPlay(0);
+                              onMouse();
+                            }}
+                            src={
+                              item.src +
+                              `?mute=1&controls=0&disablekb=1&autoplay=${autoPlay}`
+                            }
+                          />
+                        </>
+                      )}
                     </Link>
                     <Col xs={24} md={15}>
                       <List.Item.Meta
