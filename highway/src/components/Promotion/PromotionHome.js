@@ -53,7 +53,7 @@ const PromotionHome = () => {
                 type={"videos"}
                 infoData={videoList}
                 xs={23}
-                md={10}
+                md={12}
               />
             </li>
           </PromotionHomeUl>

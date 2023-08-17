@@ -11,6 +11,7 @@ import {
   PromotionVideoDetailUl,
   SideBarDiv,
 } from "../../styles/PromotionStyle";
+import PromotionSilder from "./PromotionSilder";
 
 const PromotionVideoDetail = () => {
   const [minDisable, setMinDisable] = useState(false);
@@ -68,7 +69,7 @@ const PromotionVideoDetail = () => {
           <SideBarDiv>우측사이드</SideBarDiv>
         </Col>
       </Row>
-      <Row gutter={[16, 16]}>
+      {/* <Row gutter={[16, 16]}>
         <Col xs={24} md={20}>
           <CopyToClipboard
             text={nowLocation}
@@ -90,7 +91,8 @@ const PromotionVideoDetail = () => {
         infoData={videoList}
         xs={22}
         md={5}
-      />
+      /> */}
+      <PromotionSilder />
     </>
   );
 };

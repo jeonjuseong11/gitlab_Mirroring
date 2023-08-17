@@ -29,7 +29,7 @@ const PromotionHomeItem = ({ random, title, type, infoData, xs, md }) => {
           <Link to={`/promotion/${type}/${random}`}>
             {/* <PromotionHomeItemImageDiv /> */}
             <img
-              src={videosItems}
+              src={videosItems[random]?.image}
               style={{ width: "21rem", height: "18rem" }}
             />
           </Link>
