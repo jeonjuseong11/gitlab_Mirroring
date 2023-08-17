@@ -46,13 +46,7 @@ const PromotionVideoDetail = () => {
               <h2>{videoList[id].title}</h2>
             </li>
             <li>
-              <p>부제목</p>
-            </li>
-            <li>
-              <p>
-                <PromotionVideoDetailIcon />
-                생성 시간
-              </p>
+              <p>{videoList[id].content}</p>
             </li>
           </PromotionVideoDetailUl>
           <hr />
@@ -66,7 +60,7 @@ const PromotionVideoDetail = () => {
           />
         </Col>
         <Col xs={23} md={5}>
-          <SideBarDiv>우측사이드</SideBarDiv>
+          <SideBarDiv></SideBarDiv>
         </Col>
       </Row>
       {/* <Row gutter={[16, 16]}>
