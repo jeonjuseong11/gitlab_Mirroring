@@ -4,10 +4,10 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./AdSlider.css";
 import styled from "styled-components";
-const banner1 = `${process.env.PUBLIC_URL}/assets/banner1.png`;
-const banner2 = `${process.env.PUBLIC_URL}/assets/banner2.png`;
-const banner3 = `${process.env.PUBLIC_URL}/assets/banner3.png`;
-const banner4 = `${process.env.PUBLIC_URL}/assets/banner4.png`;
+const banner1 = `/assets/banner1.png`;
+const banner2 = `/assets/banner2.png`;
+const banner3 = `/assets/banner3.png`;
+const banner4 = `/assets/banner4.png`;
 const SlideItem = styled.div`
   width: 100%;
   height: 100%;

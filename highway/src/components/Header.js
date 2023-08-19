@@ -12,7 +12,7 @@ import styled from "styled-components";
 import { LOGOUT_REQUEST } from "../constants/actionTypes";
 import { info } from "../utils/Message";
 
-const imgUrl = `${process.env.PUBLIC_URL}/assets/TitleIcon.png`;
+const imgUrl = `/assets/TitleIcon.png`;
 
 const Title = styled(Link)`
   text-decoration: none;
