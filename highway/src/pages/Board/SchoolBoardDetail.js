@@ -59,7 +59,7 @@ const SchoolBoardDetail = () => {
               <span style={{ fontWeight: "600" }}>{schoolBoardPost?.userName}</span>
               <br></br>
               <span style={{ fontSize: "0.5rem" }}>
-                {formatDate(schoolBoardPost?.board?.createDate)}
+                {formatDate(schoolBoardPost?.board?.modifiedDate)}
               </span>
               <span style={{ position: "absolute", right: 0 }}>
                 {canEditOrDelete && (

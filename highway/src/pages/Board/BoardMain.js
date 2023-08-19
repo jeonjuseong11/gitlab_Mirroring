@@ -7,9 +7,11 @@ import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { LOAD_POSTS_REQUEST } from "../../constants/actionTypes";
 
+moment.locale("ko"); // 한국어 로케일 설정
+
 export const formatDate = (dateString) => {
   const currentTime = moment();
-  const targetTime = moment(dateString);
+  const targetTime = moment.utc(dateString).local(); // UTC 시간을 한국 시간으로 변환
   const duration = moment.duration(currentTime.diff(targetTime));
 
   if (duration.asSeconds() < 60) {
@@ -79,7 +81,7 @@ const BoardMain = () => {
 
   if (sortOrder === "latest") {
     sortedData.sort((a, b) => {
-      return new Date(b.createDate) - new Date(a.createDate);
+      return new Date(b.modifiedDate) - new Date(a.modifiedDate);
     });
   }
 
@@ -193,7 +195,7 @@ const BoardMain = () => {
                     color: "#a2a2a2",
                   }}
                 >
-                  {formatDate(item.createDate)}
+                  {formatDate(item.modifiedDate)}
                 </div>
               </List.Item>
             </Link>

@@ -6,11 +6,14 @@ import moment from "moment";
 import { useParams } from "react-router-dom";
 import ToggleGoodAndCommentBtn from "./ToggleGoodAndCommentBtn";
 import CommentList from "./CommentList";
+import "moment/locale/ko"; // 한국어 로케일 설정
 import Item from "antd/es/list/Item";
+
+moment.locale("ko"); // 한국어 로케일 설정
 
 export const formatDate = (dateString) => {
   const currentTime = moment();
-  const targetTime = moment(dateString);
+  const targetTime = moment.utc(dateString).local(); // UTC 시간을 한국 시간으로 변환
   const duration = moment.duration(currentTime.diff(targetTime));
 
   if (duration.asSeconds() < 60) {
@@ -57,7 +60,7 @@ const ToggleComment = () => {
       data: {
         content: commentValue,
         boardId: parseInt(postId),
-        parentId: Item.parentId,
+        parentId: null,
       },
     });
 
