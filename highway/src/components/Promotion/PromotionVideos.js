@@ -18,6 +18,7 @@ const PromotionVideos = () => {
   const location = useLocation();
   const [autoPlay, setAutoPlay] = useState(0);
   const [mouseOver, setMouseOver] = useState(false);
+  const [checkAutoPlay, setCheckAutoPlay] = useState();
   const onAuto = (id) => {
     return autoPlay.id;
   };
@@ -58,7 +59,7 @@ const PromotionVideos = () => {
             itemLayout="horizontal"
             dataSource={videoList}
             renderItem={(item) => {
-              if (item.id < count)
+              if (item.id < count) {
                 return (
                   <PromotionVideosListItem>
                     <Link to={`/promotion/videos/${item.id}`}>
@@ -66,7 +67,7 @@ const PromotionVideos = () => {
                         <>
                           <PromotionVideosImage
                             onMouseOver={() => {
-                              console.log(item);
+                              setCheckAutoPlay(item.id);
                               setAutoPlay(1);
                               onMouse();
                             }}
@@ -75,16 +76,32 @@ const PromotionVideos = () => {
                         </>
                       ) : (
                         <>
-                          <PromotionVideoIframe
-                            onMouseLeave={() => {
-                              setAutoPlay(0);
-                              onMouse();
-                            }}
-                            src={
-                              item.src +
-                              `?mute=1&controls=0&disablekb=1&autoplay=${autoPlay}`
-                            }
-                          />
+                          {checkAutoPlay == item.id ? (
+                            <>
+                              <PromotionVideoIframe
+                                onMouseLeave={() => {
+                                  setCheckAutoPlay();
+                                  setAutoPlay(0);
+                                  onMouse();
+                                }}
+                                src={
+                                  item.src +
+                                  `?mute=1&controls=0&disablekb=1&autoplay=${autoPlay}`
+                                }
+                              />
+                            </>
+                          ) : (
+                            <>
+                              <PromotionVideosImage
+                                onMouseOver={() => {
+                                  setCheckAutoPlay(item.id);
+                                  setAutoPlay(1);
+                                  onMouse();
+                                }}
+                                src={item.image}
+                              />
+                            </>
+                          )}
                         </>
                       )}
                     </Link>
@@ -112,6 +129,7 @@ const PromotionVideos = () => {
                     </Col>
                   </PromotionVideosListItem>
                 );
+              }
             }}
           />
         </Col>

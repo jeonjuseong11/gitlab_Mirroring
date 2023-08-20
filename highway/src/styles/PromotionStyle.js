@@ -110,7 +110,6 @@ export const PromotionVideoIframe = styled.iframe`
   transition: filter 0.3s ease;
   transition: border-radius 0.3s ease;
   &:hover {
-    border-radius: 10px;
     filter: brightness(100%);
   }
 `;
