@@ -96,6 +96,23 @@ border-bottom:1px solid #f2f2f21
 export const PromotionVideosImage = styled.img`
   height: 9rem;
   border-radius: 10px;
+  transition: filter 0.3s ease;
+  transition: border-radius 0.3s ease;
+  &:hover {
+    border-radius: 0px;
+    filter: brightness(0%);
+  }
+`;
+export const PromotionVideoIframe = styled.iframe`
+  width: 188px;
+  height: 141px;
+  filter: brightness(0%);
+  transition: filter 0.3s ease;
+  transition: border-radius 0.3s ease;
+  &:hover {
+    border-radius: 10px;
+    filter: brightness(100%);
+  }
 `;
 export const PromotionVideosDiv = styled.div`
 text-align:left;
@@ -137,7 +154,7 @@ export const RecommnedListVideo = styled.div`
 `;
 export const RecommendMainImg = styled.img`
   height: 24rem;
-  margin-left: 0.5rem;
+  border-radius: 10px;
   transition: transform 0.3s ease;
   &:hover {
     transform: scale(1.1);
@@ -147,6 +164,7 @@ export const RecommendMainImg = styled.img`
 export const RecommendSideImg = styled.img`
   width: 18rem;
   height: 10rem;
+  border-radius: 10px;
   transition: transform 0.3s ease;
   &:hover {
     transform: scale(1.1);

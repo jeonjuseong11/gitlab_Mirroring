@@ -4,6 +4,7 @@ import { Button, Col, List, Row } from "antd";
 import { Link, useLocation } from "react-router-dom";
 import { DownOutlined } from "@ant-design/icons";
 import {
+  PromotionVideoIframe,
   PromotionVideosDiv,
   PromotionVideosImage,
   PromotionVideosListItem,
@@ -31,11 +32,13 @@ const PromotionVideos = () => {
   };
 
   const onMouse = () => {
-    if (mouseOver) {
-      setMouseOver(false);
-    } else {
-      setMouseOver(true);
-    }
+    setTimeout(() => {
+      if (mouseOver) {
+        setMouseOver(false);
+      } else {
+        setMouseOver(true);
+      }
+    }, 1000);
   };
   const onMore = () => {
     setCount(count + 3);
@@ -63,6 +66,7 @@ const PromotionVideos = () => {
                         <>
                           <PromotionVideosImage
                             onMouseOver={() => {
+                              console.log(item);
                               setAutoPlay(1);
                               onMouse();
                             }}
@@ -71,9 +75,7 @@ const PromotionVideos = () => {
                         </>
                       ) : (
                         <>
-                          <iframe
-                            width="188px"
-                            height="141px"
+                          <PromotionVideoIframe
                             onMouseLeave={() => {
                               setAutoPlay(0);
                               onMouse();
