@@ -4,6 +4,7 @@ import { Button, Col, List, Row } from "antd";
 import { Link, useLocation } from "react-router-dom";
 import { DownOutlined } from "@ant-design/icons";
 import {
+  MoreVideosButton,
   PromotionVideoIframe,
   PromotionVideosDiv,
   PromotionVideosImage,
@@ -132,13 +133,9 @@ const PromotionVideos = () => {
       </Row>
       <Row>
         <Col xs={23} md={23} justify="center">
-          <Button
-            onClick={onMore}
-            disabled={disable}
-            style={{ marginBottom: "2rem", marginTop: "2rem" }}
-          >
+          <MoreVideosButton onClick={onMore} disabled={disable}>
             <DownOutlined />더 보기
-          </Button>
+          </MoreVideosButton>
         </Col>
       </Row>
     </>

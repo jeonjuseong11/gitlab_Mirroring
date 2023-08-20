@@ -11,7 +11,9 @@ import CopyToClipboard from "react-copy-to-clipboard";
 import PromotionHomeItem from "./PromotionHomeItem";
 import { info } from "../../utils/Message";
 import {
+  MoreVideosButton,
   PromotionVideoDetailIcon,
+  PromotionVideoDetailIframe,
   PromotionVideoDetailUl,
   PromotionVideoIframe,
   PromotionVideosDiv,
@@ -20,6 +22,9 @@ import {
   PromotionVideosTitle,
   PromotionVideosWriter,
   SideBarDiv,
+  SideVideosContent,
+  SideVideosTitle,
+  SideVideosWrapper,
 } from "../../styles/PromotionStyle";
 import PromotionSilder from "./PromotionSilder";
 
@@ -85,9 +90,7 @@ const PromotionVideoDetail = () => {
             </li>
           </PromotionVideoDetailUl>
           <hr />
-          <iframe
-            width="640rem"
-            height="480rem"
+          <PromotionVideoDetailIframe
             src={videoList[id].src}
             frameborder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
@@ -150,28 +153,16 @@ const PromotionVideoDetail = () => {
                         <Col xs={24} md={15}>
                           <List.Item.Meta
                             title={
-                              <div style={{ marginLeft: "1rem" }}>
+                              <SideVideosWrapper style={{ marginLeft: "1rem" }}>
                                 <Link to={`/promotion/videos/${item.id}`}>
-                                  <h4
-                                    style={{
-                                      color: "black",
-                                      width: "8rem",
-                                      textAlign: "left",
-                                    }}
-                                  >
+                                  <SideVideosTitle>
                                     {item.title}
-                                  </h4>
-                                  <p
-                                    style={{
-                                      color: "gray",
-                                      width: "8rem",
-                                      textAlign: "left",
-                                    }}
-                                  >
+                                  </SideVideosTitle>
+                                  <SideVideosContent>
                                     {item.content}
-                                  </p>
+                                  </SideVideosContent>
                                 </Link>
-                              </div>
+                              </SideVideosWrapper>
                             }
                           />
                         </Col>
@@ -182,13 +173,9 @@ const PromotionVideoDetail = () => {
               />
             </Col>
             <Col xs={23} md={23} justify="center">
-              <Button
-                onClick={onMore}
-                disabled={disable}
-                style={{ marginBottom: "2rem", marginTop: "2rem" }}
-              >
+              <MoreVideosButton onClick={onMore} disabled={disable}>
                 <DownOutlined />더 보기
-              </Button>
+              </MoreVideosButton>
             </Col>
           </SideBarDiv>
         </Col>

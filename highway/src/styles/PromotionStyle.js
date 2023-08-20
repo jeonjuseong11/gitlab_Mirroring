@@ -79,6 +79,25 @@ export const PromotionVideoDetailUl = styled.ul`
 export const PromotionVideoDetailIcon = styled(FieldTimeOutlined)`
   margin-right: 0.5rem;
 `;
+export const SideVideosWrapper = styled.div`
+  &:hover {
+    text-decoration-line: underline;
+  }
+`;
+export const PromotionVideoDetailIframe = styled.iframe`
+  width: 42rem;
+  height: 24rem;
+`;
+export const SideVideosTitle = styled.h4`
+  color: black;
+  width: 8rem;
+  text-align: left;
+`;
+export const SideVideosContent = styled.p`
+  color: gray;
+  width: 8rem;
+  text-align: left;
+`;
 // PromotionVideoItem
 export const PromotionVideoItemDiv = styled.div`
   width: 27rem;
@@ -123,6 +142,10 @@ export const PromotionVideosTitle = styled.h2`
 `;
 export const PromotionVideosWriter = styled.p`
   color: gray;
+`;
+export const MoreVideosButton = styled(Button)`
+  margin-bottom: 2rem;
+  margin-top: 2rem;
 `;
 // RecommedComponent
 // RecommnedList
