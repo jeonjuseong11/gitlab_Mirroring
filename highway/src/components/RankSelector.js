@@ -70,9 +70,9 @@ export const RankTopic = [
   {
     icon: <DesktopOutlined />,
     content: (
-      <div style={{ display: "flex", flexDirection: "column", marginTop: "0.5rem" }}>
-        <span style={{ lineHeight: "0.3rem" }}>정보통신</span>
-        <span>및 SW</span>
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <span>정보통신</span>
+        <span style={{ marginTop: "-.5rem" }}>및 SW</span>
       </div>
     ),
     value: ["정보통신", "소프트웨어", "네트워크", "시스템", "IT"],
@@ -80,9 +80,9 @@ export const RankTopic = [
   {
     icon: <HighlightOutlined />,
     content: (
-      <div style={{ display: "flex", flexDirection: "column", marginTop: "0.5rem" }}>
-        <span style={{ lineHeight: "0.3rem" }}>예술 및</span>
-        <span>디자인</span>
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <span>예술 및</span>
+        <span style={{ marginTop: "-.5rem" }}>디자인</span>
       </div>
     ),
     value: ["예술", "디자인", "음악", "영상", "애니메이션", "연극"],
@@ -110,9 +110,9 @@ export const RankTopic = [
   {
     icon: <MedicineBoxOutlined />,
     content: (
-      <div style={{ display: "flex", flexDirection: "column", marginTop: "0.5rem" }}>
-        <span style={{ lineHeight: "0.3rem" }}>체육 및</span>
-        <span>스포츠</span>
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <span>체육 및</span>
+        <span style={{ marginTop: "-.5rem" }}>스포츠</span>
       </div>
     ),
     value: ["체육", "스포츠"],
@@ -134,11 +134,12 @@ const RankSelector = ({ setFilterValue }) => {
               <Col
                 key={item.value}
                 style={{
-                  paddingTop: "1rem",
                   width: "5rem",
                   height: "5rem",
+                  paddingTop: "1rem",
+                  marginBottom: "1rem",
                   justifyContent: "center",
-                  alignItems: "center ",
+                  alignContent: "center",
                   fontSize: "1rem",
                 }}
               >

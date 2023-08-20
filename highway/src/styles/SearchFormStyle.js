@@ -40,7 +40,6 @@ export const SearchButton = styled(Button)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   font-size: 1rem;
   color: ${({ isActive }) => (isActive ? "#ffffff" : "")};
   background-color: ${({ isActive }) => (isActive ? "#8282ff" : "")};
