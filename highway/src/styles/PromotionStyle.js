@@ -90,7 +90,8 @@ export const PromotionVideoItemDiv = styled.div`
 export const PromotionVideosListItem = styled(List.Item)`
 padding : 2rem;
 margin-left:1rem
-border-bottom:1px solid #f2f2f2
+border-bottom:1px solid #f2f2f21
+
 `;
 export const PromotionVideosImage = styled.img`
   height: 9rem;
@@ -102,9 +103,15 @@ margin-left-2rem;
 `;
 export const PromotionVideosTitle = styled.h2`
   color: black;
+  &:hover {
+    text-decoration-line: underline;
+  }
 `;
 export const PromotionVideosWriter = styled.p`
   color: gray;
+  &:hover {
+    text-decoration-line: underline;
+  }
 `;
 // RecommedComponent
 // RecommnedList
@@ -128,17 +135,36 @@ export const RecommnedListVideo = styled.div`
   background: #f2f2f2;
   border-radius: 10px;
 `;
-export const RecommnedListTItle = styled.div`
+export const RecommendMainImg = styled.img`
+  height: 24rem;
+  margin-left: 0.5rem;
+  transition: transform 0.3s ease;
+  &:hover {
+    transform: scale(1.1);
+    text-decoration-line: underline;
+  }
+`;
+export const RecommendSideImg = styled.img`
   width: 18rem;
-  color: black;
-  text-align: left;
-  margin-left: 3rem;
+  height: 10rem;
+  transition: transform 0.3s ease;
+  &:hover {
+    transform: scale(1.1);
+    text-decoration-line: underline;
+  }
 `;
-export const RecommnedListBetweenOne = styled.div`
-  margin-top: 5rem;
-  margin-left: 2.5rem;
+export const RecommnedSideWrapper = styled.div``;
+export const RecommnedSideTopDiv = styled.div`
+  margin-top: 4.8rem;
+
+  transition: transform 0.3s ease;
+  &:hover {
+    text-decoration-line: underline;
+  }
 `;
-export const RecommnedListBetweenTwo = styled.div`
-  margin-top: 2rem;
-  margin-left: 2.5rem;
+export const RecommnedSideBottomDiv = styled.div`
+  transition: transform 0.3s ease;
+  &:hover {
+    text-decoration-line: underline;
+  }
 `;

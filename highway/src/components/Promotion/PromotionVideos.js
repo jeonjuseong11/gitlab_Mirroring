@@ -20,6 +20,16 @@ const PromotionVideos = () => {
   const onAuto = (id) => {
     return autoPlay.id;
   };
+  const test = (value) => {
+    const id = videoList.map((it) => {
+      console.log(value);
+      const autoPlayId = it.title;
+      // if (value == autoPlayId) {
+      //   return 1;
+      // }
+    });
+  };
+
   const onMouse = () => {
     if (mouseOver) {
       setMouseOver(false);

@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import { Col, Image, Row } from "antd";
 import { VideoDummyData as videosItems } from "../../utils/VideoDummyData";
 import {
-  RecommnedListBetweenOne,
-  RecommnedListBetweenTwo,
-  RecommnedListCol,
-  RecommnedListImage,
-  RecommnedListTItle,
+  RecommnedSideTopDiv,
+  RecommnedSideBottomDiv,
+  RecommendSideImg,
+  RecommendMainImg,
+  RecommnedSideWrapper,
 } from "../../styles/PromotionStyle";
 const RecommendList = ({ type, infoData }) => {
   // const random = Math.floor(Math.random() * infoData.length);
@@ -19,59 +19,40 @@ const RecommendList = ({ type, infoData }) => {
   console.log(randomThree);
   return (
     <>
-      <Col xs={23} md={10} justify="center">
+      <Col xs={23} md={8} justify="center">
         <h1>HIGHWAY TIMES</h1>
         <Link to={`${type}/${randomOne}`}>
           {/* <RecommnedListCol xs={23} md={23} src={`${infoData[random].src}`} /> */}
           <Col xs={23} md={23}>
-            <img
-              style={{
-                height: "27rem",
-                marginLeft: "0.5rem",
-                // borderRadius: "10px",
-              }}
-              src={videosItems[randomOne].image}
-            />
+            <RecommendMainImg src={videosItems[randomOne].image} />
           </Col>
         </Link>
       </Col>
       <Col xs={23} md={5} justify="center">
-        <div>
-          <RecommnedListBetweenOne>
+        <RecommnedSideWrapper>
+          <RecommnedSideTopDiv>
             <Link to={`${type}/${randomTwo}`}>
               {/* <RecommnedListImage src={`${infoData[randomTwo].src}`} />
               <RecommnedListTItle>
                 <h4>{infoData[randomTwo].title}</h4>
               </RecommnedListTItle> */}
-              <Col>
-                <img
-                  style={{ width: "18rem", height: "10rem" }}
-                  src={`${videosItems[randomTwo].image}`}
-                />
-              </Col>
-              <RecommnedListTItle>
-                <h4>{videosItems[randomTwo].title}</h4>
-              </RecommnedListTItle>
+              <RecommendSideImg src={`${videosItems[randomTwo].image}`} />
+              <h4 style={{ color: "black" }}>{videosItems[randomTwo].title}</h4>
             </Link>
-          </RecommnedListBetweenOne>
-          <RecommnedListBetweenTwo>
+          </RecommnedSideTopDiv>
+          <RecommnedSideBottomDiv>
             <Link to={`${type}/${randomThree}`}>
               {/* <RecommnedListImage src={`${infoData[randomThree].src}`} />
               <RecommnedListTItle>
                 <h4>{infoData[randomThree].title}</h4>
               </RecommnedListTItle> */}
-              <Col>
-                <img
-                  style={{ width: "18rem", height: "10rem" }}
-                  src={`${videosItems[randomThree].image}`}
-                />
-              </Col>
-              <RecommnedListTItle>
-                <h4>{videosItems[randomThree].title}</h4>
-              </RecommnedListTItle>
+              <RecommendSideImg src={`${videosItems[randomThree].image}`} />
+              <h4 style={{ color: "black" }}>
+                {videosItems[randomThree].title}
+              </h4>
             </Link>
-          </RecommnedListBetweenTwo>
-        </div>
+          </RecommnedSideBottomDiv>
+        </RecommnedSideWrapper>
       </Col>
     </>
   );
