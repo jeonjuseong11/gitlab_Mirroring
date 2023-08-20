@@ -1,10 +1,7 @@
 import { Col, List, Tag } from "antd";
 import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  LOAD_SAVED_SCHOOL_REQUEST,
-  LOAD_USER_POSTS_REQUEST,
-} from "../../constants/actionTypes";
+import { LOAD_SAVED_SCHOOL_REQUEST, LOAD_USER_POSTS_REQUEST } from "../../constants/actionTypes";
 import SchoolList from "../../pages/SchoolList";
 import { changeCategory } from "../../pages/Board/BoardMain";
 import { Link } from "react-router-dom";

@@ -64,8 +64,8 @@ const SearchForm = ({ setFilterValue, filterValue }) => {
                 shape="square"
                 isActive={item.value === activeButton}
               >
-                <span>{item.icon}</span>
-                <span style={{ margin: "0.5rem" }}>{item.content}</span>
+                <span style={{ marginBottom: "1rem" }}>{item.icon}</span>
+                {item.content}
               </SearchButton>
             ))}
           </SearchButtonCol>

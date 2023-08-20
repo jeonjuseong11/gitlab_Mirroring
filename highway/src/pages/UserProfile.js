@@ -46,21 +46,21 @@ const UserProfile = () => {
             <ProfileTable>
               <tbody>
                 <tr>
-                  <th>아이디</th>
-                  <td>{me?.userId}</td>
+                  <th style={{ fontSize: ".8rem" }}>아이디</th>
+                  <td style={{ fontSize: ".7rem" }}>{me?.userId}</td>
                 </tr>
                 <tr>
-                  <th>이메일</th>
-                  <td>{me?.userEmail}</td>
+                  <th style={{ fontSize: ".8rem" }}>이메일</th>
+                  <td style={{ fontSize: ".7rem" }}>{me?.userEmail}</td>
                 </tr>
-                <tr>
+                {/* <tr>
                   <th>성별</th>
                   <td>{me?.userGender}</td>
-                </tr>
-                <tr>
+                </tr> */}
+                {/* <tr>
                   <th>소속학교</th>
                   <td>{me?.schoolName}</td>
-                </tr>
+                </tr> */}
               </tbody>
             </ProfileTable>
           </ProfileUserWrapper>

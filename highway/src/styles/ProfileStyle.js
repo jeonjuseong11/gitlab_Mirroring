@@ -9,23 +9,18 @@ export const ProfileRow = styled(Row)`
 `;
 export const ProfileTable = styled.table`
   margin-top: 1rem;
-  width: 90%;
-  height: 10rem;
-  margin: 0 auto;
   text-align: left;
 `;
 export const ProfileUserWrapper = styled.div`
   padding: 2rem;
   background-color: white;
   border-radius: 10px;
-  min-width: 12rem;
+  min-height: 17.4rem;
 `;
 export const ProfileUserName = styled.h2`
-  margin-top: 2rem;
+  margin-top: 1rem;
 `;
-export const ProfileSchoolName = styled.h4`
-  padding-top: 1rem;
-`;
+export const ProfileSchoolName = styled.h4``;
 export const ItemWrapper = styled.div`
   padding-left: 1rem;
   border-radius: 10px;
@@ -39,14 +34,14 @@ export const SchoolWrapper = styled.div`
   border-radius: 10px;
   text-align: left;
   padding: 2rem;
-  min-height: 25rem;
+  min-height: 15rem;
 `;
 export const LikePostWrapper = styled.div`
   background-color: white;
   border-radius: 10px;
   text-align: left;
   padding: 2rem;
-  margin-bottom: 2.4rem;
+  margin-bottom: 7.7rem;
 `;
 export const LikePostList = styled(List)`
   margin-top: 1rem;
