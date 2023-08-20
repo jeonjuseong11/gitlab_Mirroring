@@ -19,18 +19,6 @@ const PromotionVideos = () => {
   const [autoPlay, setAutoPlay] = useState(0);
   const [mouseOver, setMouseOver] = useState(false);
   const [checkAutoPlay, setCheckAutoPlay] = useState();
-  const onAuto = (id) => {
-    return autoPlay.id;
-  };
-  const test = (value) => {
-    const id = videoList.map((it) => {
-      console.log(value);
-      const autoPlayId = it.title;
-      // if (value == autoPlayId) {
-      //   return 1;
-      // }
-    });
-  };
 
   const onMouse = () => {
     setTimeout(() => {
@@ -39,7 +27,7 @@ const PromotionVideos = () => {
       } else {
         setMouseOver(true);
       }
-    }, 1000);
+    }, 600);
   };
   const onMore = () => {
     setCount(count + 3);
@@ -113,12 +101,6 @@ const PromotionVideos = () => {
                               <PromotionVideosTitle>
                                 {item.title}
                               </PromotionVideosTitle>
-                            </Link>
-                          </PromotionVideosDiv>
-                        }
-                        description={
-                          <PromotionVideosDiv>
-                            <Link to={`/promotion/videos/${item.id}`}>
                               <PromotionVideosWriter>
                                 {item.content}
                               </PromotionVideosWriter>

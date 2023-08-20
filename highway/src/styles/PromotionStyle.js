@@ -8,7 +8,6 @@ export const SideBarDiv = styled.div`
   width: 20rem;
   height: 30rem;
   margin-left: 1.5rem;
-  background-color: #f2f2f2;
   border-radius: 10px;
 `;
 
@@ -108,7 +107,6 @@ export const PromotionVideoIframe = styled.iframe`
   height: 141px;
   filter: brightness(0%);
   transition: filter 0.3s ease;
-  transition: border-radius 0.3s ease;
   &:hover {
     filter: brightness(100%);
   }
@@ -116,18 +114,15 @@ export const PromotionVideoIframe = styled.iframe`
 export const PromotionVideosDiv = styled.div`
 text-align:left;
 margin-left-2rem;
+&:hover {
+  text-decoration-line: underline;
+}
 `;
 export const PromotionVideosTitle = styled.h2`
   color: black;
-  &:hover {
-    text-decoration-line: underline;
-  }
 `;
 export const PromotionVideosWriter = styled.p`
   color: gray;
-  &:hover {
-    text-decoration-line: underline;
-  }
 `;
 // RecommedComponent
 // RecommnedList
