@@ -94,7 +94,7 @@ const PromotionVideos = () => {
                         </>
                       )}
                     </Link>
-                    <Col xs={24} md={15}>
+                    <Col xs={18} md={15}>
                       <List.Item.Meta
                         title={
                           <PromotionVideosDiv>
