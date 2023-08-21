@@ -14,19 +14,20 @@ export const SearchTitleRow = styled(Row)`
   margin-bottom: 1rem;
 `;
 
-export const SearchTitle = styled.h2`
-  margin: 0;
-`;
+export const SearchTitle = styled.h2``;
 
 export const SearchFormWrapper = styled.div`
   margin-bottom: 1rem;
   margin-top: 1rem;
+  min-width: 20rem;
 `;
 
 export const SearchButtonWrapper = styled.div`
   margin-top: 1.5rem;
   overflow-x: auto;
+  flex-direction: column;
   flex-wrap: nowrap;
+  min-width: 20rem;
 `;
 export const SearchInputIcon = styled(SearchOutlined)`
   color: black;
@@ -34,9 +35,9 @@ export const SearchInputIcon = styled(SearchOutlined)`
 `;
 export const SearchButton = styled(Button)`
   border-radius: 10px;
-  padding-top: 1rem;
-  height: 6.5rem;
-  width: 6.5rem;
+  padding-top: 0.5rem;
+  height: 6rem;
+  width: 6rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -44,10 +45,34 @@ export const SearchButton = styled(Button)`
   color: ${({ isActive }) => (isActive ? "#ffffff" : "")};
   background-color: ${({ isActive }) => (isActive ? "#8282ff" : "")};
 `;
-export const SearchButtonCol = styled(Col)`
+export const SearchButtonDiv = styled.div`
   margin-bottom: 1rem;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 1.4rem;
+  min-width: 20rem;
+`;
+export const SliderWrapper = styled.div`
+  overflow-x: auto;
+  display: flex;
+  justify-content: space-between;
+`;
+export const Container = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const ContentContainer = styled.div`
+  margin-top: 1rem;
+  width: 35rem;
+
+  @media (max-width: 768px) {
+    width: 90%;
+  }
+
+  @media (max-width: 480px) {
+    width: 90%;
+  }
 `;
