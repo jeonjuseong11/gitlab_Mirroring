@@ -90,8 +90,12 @@ export const SideVideosWrapper = styled.div`
 `;
 export const PromotionVideoDetailIframe = styled.iframe`
   width: 100%;
-  height: 100%;
+  height: 29vw;
   margin-top: 2rem;
+  @media screen and (max-width: 768px) {
+    width: 400px;
+    height: 100%;
+  }
 `;
 export const SideVideosTitle = styled.h4`
   color: black;
