@@ -7,12 +7,10 @@
 
 .slick-slide div {
   transition: all ease-in-out 0.3s;
-  background-color: lightgray;
   height: 20rem;
 }
 
 .slick-slide.slick-active.slick-center.slick-current div {
-  background-color: gray;
   transform: scale(1.1);
   position: relative;
   border-radius: 5px;
@@ -21,7 +19,6 @@
 
 .slick-slide.active {
   transform: scale(1.1);
-  background-color: gray;
 }
 
 /* 수정사항 */
@@ -36,7 +33,6 @@
   }
 
   .slick-slide.slick-active.slick-center.slick-current div {
-    background-color: gray;
     position: relative;
     border-radius: 5px;
     width: 100%;

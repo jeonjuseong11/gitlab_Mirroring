@@ -4,17 +4,21 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./AdSlider.css";
 import styled from "styled-components";
-const banner1 = `/assets/banner1.png`;
-const banner2 = `/assets/banner2.png`;
-const banner3 = `/assets/banner3.png`;
-const banner4 = `/assets/banner4.png`;
+import { Link } from "react-router-dom";
+const banner1 = `/assets/Banner1.png`;
+const banner2 = `/assets/Banner2.png`;
+const banner3 = `/assets/Banner3.png`;
+const banner4 = `/assets/Banner4.png`;
 const SlideItem = styled.div`
-  width: 100%;
-  height: 100%;
   border-radius: 5px;
-  background-image: ${(props) => `url(${props.image})`};
-  background-size: cover;
-  background-position: center;
+  overflow: hidden;
+  background: linear-gradient(
+    to right,
+    ${(props) => props.backgroundColor || "#ffffff"} 50%,
+    ${(props) => props.secondBackgroundColor || "#ffffff"} 50%
+  );
+  border: 1px solid #f2f2f2;
+  display: flex;
 `;
 function AdSlider() {
   const settings = {
@@ -42,14 +46,29 @@ function AdSlider() {
       slides[next].classList.add("active");
     },
   };
-
   return (
     <div>
       <Slider {...settings}>
-        <SlideItem image={banner1} />
-        <SlideItem image={banner2} />
-        <SlideItem image={banner3} />
-        <SlideItem image={banner4} />
+        <Link to={`/schoolboard/0`}>
+          <SlideItem backgroundColor="#f5efd0">
+            <img src={banner1} style={{ height: "100%", margin: "0 auto" }} />
+          </SlideItem>
+        </Link>
+        <Link to={`/schoolboard/0`}>
+          <SlideItem backgroundColor="#d0e3f7" secondBackgroundColor="#d0e3f7">
+            <img src={banner2} style={{ height: "100%", margin: "0 auto" }} />
+          </SlideItem>
+        </Link>
+        <Link to={`/schoolboard/0`}>
+          <SlideItem backgroundColor="#d0e3f7" secondBackgroundColor="#d0e3f7">
+            <img src={banner3} style={{ height: "100%", margin: "0 auto" }} />
+          </SlideItem>
+        </Link>
+        <Link to={`/schoolboard/0`}>
+          <SlideItem backgroundColor="#d1c4db" secondBackgroundColor="#ba8bc7">
+            <img src={banner4} style={{ height: "100%", margin: "0 auto" }} />
+          </SlideItem>
+        </Link>
       </Slider>
     </div>
   );
