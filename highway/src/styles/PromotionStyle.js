@@ -4,11 +4,14 @@ import styled from "styled-components";
 
 // PromotionSideBar
 export const SideBarDiv = styled.div`
-  margin-top: 2rem;
+  margin-top: 1.2rem;
   width: 20rem;
   height: 30rem;
   margin-left: 1.5rem;
   border-radius: 10px;
+  @media screen and (max-width: 768px) {
+    margin-top: 8rem;
+  }
 `;
 
 // PromotionHome
@@ -73,6 +76,7 @@ export const PromotionNewsDetailItemDiv = styled.div`
 `;
 // PromotionVideoDetail
 export const PromotionVideoDetailUl = styled.ul`
+  padding-left: 0.7rem;
   list-style: none;
   text-align: left;
 `;
@@ -85,8 +89,13 @@ export const SideVideosWrapper = styled.div`
   }
 `;
 export const PromotionVideoDetailIframe = styled.iframe`
-  width: 42rem;
-  height: 24rem;
+  width: 100%;
+  height: 29vw;
+  margin-top: 2rem;
+  @media screen and (max-width: 768px) {
+    width: 400px;
+    height: 100%;
+  }
 `;
 export const SideVideosTitle = styled.h4`
   color: black;
@@ -106,10 +115,12 @@ export const PromotionVideoItemDiv = styled.div`
 `;
 // PromotionVideos
 export const PromotionVideosListItem = styled(List.Item)`
-padding : 2rem;
-margin-left:1rem
-border-bottom:1px solid #f2f2f21
-
+  width: 80%;
+  padding: 2rem;
+  margin-left: 0.7rem;
+  border-bottom: 1px solid #f2f2f21 @media screen and (max-width: 768px) {
+    width: 10%;
+  }
 `;
 export const PromotionVideosImage = styled.img`
   height: 9rem;
@@ -131,11 +142,14 @@ export const PromotionVideoIframe = styled.iframe`
   }
 `;
 export const PromotionVideosDiv = styled.div`
-text-align:left;
-margin-left-2rem;
-&:hover {
-  text-decoration-line: underline;
-}
+  text-align: left;
+  margin-left: 2rem;
+  &:hover {
+    text-decoration-line: underline;
+  }
+  @media screen and (max-width: 768px) {
+    margin-left: 0rem;
+  }
 `;
 export const PromotionVideosTitle = styled.h2`
   color: black;
@@ -170,7 +184,8 @@ export const RecommnedListVideo = styled.div`
   border-radius: 10px;
 `;
 export const RecommendMainImg = styled.img`
-  height: 24rem;
+  width: 100%;
+  height: 100%;
   border-radius: 10px;
   transition: transform 0.3s ease;
   &:hover {
@@ -187,11 +202,15 @@ export const RecommendSideImg = styled.img`
     transform: scale(1.1);
     text-decoration-line: underline;
   }
+  @media screen and (max-width: 768px) {
+    margin-right: 2rem;
+    width: 96%;
+    height: 100%;
+  }
 `;
 export const RecommnedSideWrapper = styled.div``;
 export const RecommnedSideTopDiv = styled.div`
   margin-top: 4.8rem;
-
   transition: transform 0.3s ease;
   &:hover {
     text-decoration-line: underline;
