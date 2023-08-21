@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 // PromotionSideBar
 export const SideBarDiv = styled.div`
-  margin-top: 2rem;
+  margin-top: 1.2rem;
   width: 20rem;
   height: 30rem;
   margin-left: 1.5rem;
@@ -73,6 +73,7 @@ export const PromotionNewsDetailItemDiv = styled.div`
 `;
 // PromotionVideoDetail
 export const PromotionVideoDetailUl = styled.ul`
+  padding-left: 0.7rem;
   list-style: none;
   text-align: left;
 `;
@@ -87,6 +88,7 @@ export const SideVideosWrapper = styled.div`
 export const PromotionVideoDetailIframe = styled.iframe`
   width: 42rem;
   height: 24rem;
+  margin-top: 2rem;
 `;
 export const SideVideosTitle = styled.h4`
   color: black;
@@ -109,7 +111,6 @@ export const PromotionVideosListItem = styled(List.Item)`
 padding : 2rem;
 margin-left:1rem
 border-bottom:1px solid #f2f2f21
-
 `;
 export const PromotionVideosImage = styled.img`
   height: 9rem;

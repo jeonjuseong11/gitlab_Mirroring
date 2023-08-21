@@ -28,7 +28,7 @@ const PromotionVideos = () => {
       } else {
         setMouseOver(true);
       }
-    }, 600);
+    }, 1000);
   };
   const onMore = () => {
     setCount(count + 3);

@@ -42,7 +42,7 @@ const PromotionVideoDetail = () => {
       } else {
         setMouseOver(true);
       }
-    }, 600);
+    }, 1000);
   };
   const onMore = () => {
     setCount(count + 3);
@@ -81,6 +81,12 @@ const PromotionVideoDetail = () => {
     <>
       <Row justify="center">
         <Col xs={24} md={10}>
+          <PromotionVideoDetailIframe
+            src={videoList[id].src}
+            frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          />
           <PromotionVideoDetailUl>
             <li>
               <h2>{videoList[id].title}</h2>
@@ -89,13 +95,6 @@ const PromotionVideoDetail = () => {
               <p>{videoList[id].content}</p>
             </li>
           </PromotionVideoDetailUl>
-          <hr />
-          <PromotionVideoDetailIframe
-            src={videoList[id].src}
-            frameborder="0"
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          />
         </Col>
         <Col xs={23} md={5}>
           <SideBarDiv>
