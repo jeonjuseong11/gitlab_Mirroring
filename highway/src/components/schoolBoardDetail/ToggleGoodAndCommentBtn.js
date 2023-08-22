@@ -38,7 +38,7 @@ const ToggleGoodAndCommentBtn = ({ toggle, setToggle }) => {
 
   return (
     <>
-      <Col xs={{ span: 24, offset: 0 }} md={{ span: 11, offset: 4 }} style={{ textAlign: "left" }}>
+      <Col xs={{ span: 24, offset: 0 }} md={{ span: 15 }} style={{ textAlign: "left" }}>
         {good ? (
           <Button type="text" onClick={unlikePost} loading={likePostLoading}>
             <HeartTwoTone twoToneColor="#eb2f96" key="heart" />

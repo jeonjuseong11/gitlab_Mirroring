@@ -35,7 +35,7 @@ const SchoolBoardDetail = () => {
 
   return (
     <>
-      <Col xs={23} md={11} style={{ textAlign: "left" }}>
+      <Col xs={23} md={15} style={{ textAlign: "left", padding: "1rem" }}>
         <Breadcrumb
           items={[
             {
@@ -61,7 +61,7 @@ const SchoolBoardDetail = () => {
               <span style={{ fontSize: "0.5rem" }}>
                 {formatDate(schoolBoardPost?.board?.modifiedDate)}
               </span>
-              <span style={{ position: "absolute", right: 0 }}>
+              <span style={{ position: "absolute", right: "1rem" }}>
                 {canEditOrDelete && (
                   <Dropdown
                     placement="bottomLeft"

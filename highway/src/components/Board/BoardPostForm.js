@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Form, Input, Button, Row, Col, Select } from "antd";
-import { EditOutlined } from "@ant-design/icons";
+import { Form, Input, Button, Row, Col, Select, Upload, Modal } from "antd";
+import { EditOutlined, UploadOutlined } from "@ant-design/icons";
 import { ADD_POST_REQUEST } from "../../constants/actionTypes";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,47 +11,35 @@ import {
   BoardDetailPostFormCol,
   BoardDetailPostSelect,
   BoardDetailPostButton,
+  CustomQuillWrapper,
 } from "../../styles/BoardDetailPostFormStyle";
-
-const CustomQuillWrapper = styled(Form.Item)`
-  .ql-container {
-    border-color: ${(props) =>
-      props.isFocused ? "#a8a8fe !important" : "#f2f2f2 !important"};
-    border-radius: 0 0 10px 10px;
-  }
-
-  .ql-toolbar {
-    border-color: ${(props) =>
-      props.isFocused ? "#a8a8fe !important" : "#f2f2f2 !important"};
-    border-radius: 10px 10px 0 0;
-  }
-  .ql-container::placeholder {
-    color: #c2c2c2;
-    font-weight: 700;
-  }
-  .ql-container:focus::placeholder {
-    color: #a8a8fe;
-  }
-`;
-
-const { TextArea } = Input;
 
 const BoardPostForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { addPostLoading } = useSelector((state) => state.post);
   const [form] = Form.useForm();
-  const [previewVisible, setPreviewVisible] = useState(false);
-  const [previewImage, setPreviewImage] = useState("");
   const { me } = useSelector((state) => state.user);
   const accessToken = localStorage.getItem("ACCESSTOKEN");
   const [content, setContent] = useState("");
   const [isEditorFocused, setIsEditorFocused] = useState(false);
   const [options, setOptions] = useState([]);
-  const [isFormFilled, setIsFormFilled] = useState(false); // 추가: 폼이 채워져 있는지 여부를 나타내는 상태
+  const [fileList, setFileList] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false); // 추가: 모달 표시 여부 상태
 
+  const handleFileChange = ({ file, fileList }) => {
+    const allowedTypes = ["image/jpeg", "image/png"];
+    if (fileList.length <= 8 && allowedTypes.includes(file.type)) {
+      setFileList(fileList.map((fileItem) => fileItem.originFileObj)); // 실제 파일 추출
+    } else {
+      setModalVisible(true); // 허용되지 않는 파일 유형
+    }
+  };
+
+  const handleCloseModal = () => {
+    setModalVisible(false); // 모달 닫기
+  };
   useEffect(() => {
-    // 새로고침 시 로컬 스토리지에서 로그인 정보 가져오기
     if (!accessToken) {
       navigate(-1);
     }
@@ -60,25 +48,28 @@ const BoardPostForm = () => {
   const boardPost = useCallback(
     (values) => {
       const schoolId = values.category === "10" ? 0 : me?.schoolId;
-      dispatch({
-        type: ADD_POST_REQUEST,
-        data: {
-          title: values.title,
-          content: content,
-          category: values.category,
-          schoolId: schoolId,
-        },
+      console.log(values);
+      const formData = new FormData();
+      formData.append("category", values.category);
+      formData.append("title", values.title);
+      formData.append("content", content);
+      fileList.forEach((file, index) => {
+        formData.append("images", file);
       });
-      navigateToHomeBoard(values.category);
+      console.log("Form Data to Send:", formData);
+
+      // dispatch({
+      //   type: ADD_POST_REQUEST,
+      //   data: {
+      //     title: values.title,
+      //     content: content,
+      //     category: values.category,
+      //     schoolId: schoolId,
+      //   },
+      // });
+      // navigate(values.category);
     },
     [dispatch, me, content]
-  );
-
-  const navigateToHomeBoard = useCallback(
-    (category) => {
-      navigate(`/schoolboard/${category}`);
-    },
-    [navigate]
   );
 
   const onFinish = (values) => {
@@ -107,55 +98,68 @@ const BoardPostForm = () => {
       <BoardDetailPostFormCol xs={24} md={15}>
         <Form form={form} onFinish={onFinish}>
           <Form.Item name="category">
-            <BoardDetailPostSelect
-              placeholder="게시판 종류"
-              options={options}
-            />
+            <BoardDetailPostSelect placeholder="게시판 종류" options={options} />
           </Form.Item>
           <Form.Item name="title">
             <Input className="custom-input" placeholder="제목을 입력해주세요" />
           </Form.Item>
-          <CustomQuillWrapper isFocused={isEditorFocused} name="content">
-            <BoardDetailPostReactQuill
-              placeholder="글의 내용을 입력해주세요 &#13;&#10;주제에 맞지 않는 글이나 커뮤니티 이용정책에 위배되어 일정 수
-                이상 신고를 받는 경우 글이 블라인드 처리될 수 있습니다."
-              value={content}
-              onChange={handleChange}
-              theme="snow"
-              onFocus={() => setIsEditorFocused(true)}
-              onBlur={() => setIsEditorFocused(false)}
-              modules={{
-                toolbar: [
-                  [{ header: [1, 2, 3, 4, 5, 6] }, { font: [] }],
-                  ["bold", "italic", "underline", "strike", "blockquote"],
-                  [
-                    { list: "ordered" },
-                    { list: "bullet" },
-                    { indent: "-1" },
-                    { indent: "+1" },
-                  ],
-                  ["link", "image", "video"],
-                  [{ direction: "rtl" }],
-                  [{ color: [] }, { background: [] }],
-                  [{ align: [] }],
-                  ["clean"],
-                ],
-                clipboard: {
-                  // toggle to add extra line breaks when pasting HTML:
-                  matchVisual: false,
-                },
-              }}
-            />
-          </CustomQuillWrapper>
           <Form.Item>
-            <BoardDetailPostButton
-              type="primary"
-              htmlType="submit"
-              loading={addPostLoading}
+            <CustomQuillWrapper isFocused={isEditorFocused} name="content">
+              <BoardDetailPostReactQuill
+                placeholder="글의 내용을 입력해주세요"
+                value={content}
+                onChange={handleChange}
+                theme="snow"
+                onFocus={() => setIsEditorFocused(true)}
+                onBlur={() => setIsEditorFocused(false)}
+                modules={{
+                  toolbar: [
+                    [{ header: [1, 2, 3, 4, 5, 6] }, { font: [] }],
+                    ["bold", "italic", "underline", "strike", "blockquote"],
+                    [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }],
+                    ["link", "video"], //image 추가하면 나중에 글이랑 이미지를 섞어서 보여줄때 쓰면될듯
+                    [{ direction: "rtl" }],
+                    [{ color: [] }, { background: [] }],
+                    [{ align: [] }],
+                    ["clean"],
+                  ],
+
+                  clipboard: {
+                    matchVisual: false,
+                  },
+                }}
+              />
+            </CustomQuillWrapper>
+          </Form.Item>
+          <Form.Item name="images">
+            <Upload
+              fileList={fileList}
+              onChange={handleFileChange}
+              beforeUpload={() => false}
+              listType="picture-card"
+              showUploadList={{ showPreviewIcon: true, showRemoveIcon: true }}
             >
+              {fileList.length >= 8 ? null : (
+                <div>
+                  <UploadOutlined />
+                  <div style={{ marginTop: 8 }}>Upload</div>
+                </div>
+              )}
+            </Upload>
+          </Form.Item>
+          <Form.Item>
+            <BoardDetailPostButton type="primary" htmlType="submit" loading={addPostLoading}>
               완료 <EditOutlined />
             </BoardDetailPostButton>
           </Form.Item>
+          <Modal
+            visible={modalVisible}
+            onCancel={handleCloseModal}
+            onOk={handleCloseModal}
+            centered
+          >
+            <p>이미지 파일만 올릴수 있습니다</p>
+          </Modal>
         </Form>
       </BoardDetailPostFormCol>
     </Row>

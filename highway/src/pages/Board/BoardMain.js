@@ -1,9 +1,15 @@
-import { LikeOutlined, MessageOutlined } from "@ant-design/icons";
-import { Button, Col, Input, List } from "antd";
+import {
+  LikeOutlined,
+  MessageOutlined,
+  SearchOutlined,
+  SmileOutlined,
+  TeamOutlined,
+} from "@ant-design/icons";
+import { Button, Col, Input, List, Menu } from "antd";
 import React, { useEffect, useState } from "react";
 import moment from "moment";
 import { IconText } from "../../components/Card/CardStyle";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { LOAD_POSTS_REQUEST } from "../../constants/actionTypes";
 
@@ -63,10 +69,10 @@ const BoardMain = () => {
   const [sortOrder, setSortOrder] = useState("latest");
   const sortedData = [...schoolBoardPosts];
   const [searchText, setSearchText] = useState("");
-
+  const location = useLocation();
+  const navigate = useNavigate();
   const loadPosts = (category) => {
     let schoolId = parseInt(category) === 10 ? 0 : me && me.schoolId ? me.schoolId : 0;
-
     dispatch({
       type: LOAD_POSTS_REQUEST,
       data: { category, schoolId },
@@ -105,104 +111,183 @@ const BoardMain = () => {
     const truncatedContent = strippedContent.slice(0, maxLength);
     return truncatedContent.trim() + "...";
   };
-
+  const menuItems = [
+    {
+      key: "/schoolboard/0",
+      icon: <SmileOutlined />,
+      label: "자유게시판",
+      onClick: () => {
+        navigate("/schoolboard/0");
+        // if (!me) {
+        //   needLoginError("글쓰기는 로그인 후에 가능합니다.", navigate);
+        // } else {
+        //   navigate("/schoolboard/0");
+        // }
+      },
+    },
+    {
+      key: "/schoolboard/1",
+      icon: <SearchOutlined />,
+      label: "질문게시판",
+      onClick: () => {
+        navigate("/schoolboard/1");
+        // if (!me) {
+        //   needLoginError("글쓰기는 로그인 후에 가능합니다.", navigate);
+        // } else {
+        //   navigate("/schoolboard/1");
+        // }
+      },
+    },
+    {
+      key: "/schoolboard/2",
+      icon: <TeamOutlined />,
+      label: "프로젝트 모집",
+      onClick: () => {
+        navigate("/schoolboard/2");
+        // if (!me) {
+        //   needLoginError("글쓰기는 로그인 후에 가능합니다.", navigate);
+        // } else {
+        //   navigate("/schoolboard/2");
+        // }
+      },
+    },
+    {
+      key: "/schoolboard/10",
+      icon: <TeamOutlined />,
+      label: "잼민",
+      onClick: () => navigate("/schoolboard/10"),
+    },
+    ...(me?.tag
+      ? me.tag.map((t) => ({
+          key: `/schoolboard/${t.tagCode}`,
+          label: `${t.tagName} 커뮤니티`,
+          onClick: () => navigate(`/schoolboard/${t.tagCode}`),
+        }))
+      : []),
+  ];
   return (
-    <Col xs={24} md={11}>
-      <Input
-        placeholder="궁금한 내용을 찾아보세요"
-        style={{ padding: "1rem", marginBottom: "1rem" }}
-        onChange={(e) => setSearchText(e.target.value)}
-        value={searchText}
-        onKeyPress={(e) => {
-          if (e.key === "Enter") {
-            setSearchText(e.target.value);
-          }
-        }}
-      />
-      <div style={{ textAlign: "left", marginBottom: "1rem" }}>
-        <Button
-          type="text"
+    <>
+      <Col xs={24} md={4}>
+        <Menu
+          className="custom-menu"
+          selectedKeys={location.pathname}
           style={{
-            borderRadius: "50px",
-            background: sortOrder === "latest" ? "#8282ff" : "transparent",
-            color: sortOrder === "latest" ? "white" : "black",
+            paddingBottom: "1rem",
+            border: "0",
+            backgroundColor: "white",
+            borderRadius: "10px",
           }}
-          onClick={() => handleSortOrder("latest")}
+          items={menuItems}
+        />
+        <div
+          style={{
+            backgroundColor: "#f2f2f2",
+            padding: "1rem",
+            borderRadius: "10px",
+            fontWeight: "500",
+            color: "#a1a1a1",
+          }}
         >
-          최신순
-        </Button>
-      </div>
-
-      <List
-        itemLayout="vertical"
-        size="large"
-        dataSource={filteredData}
-        grid={{
-          gutter: 0,
-          column: 2,
-        }}
-        renderItem={(item, index) => (
-          <div
+          커뮤니티는 학교별 태그에 따라 생겨요
+        </div>
+      </Col>
+      <Col xs={24} md={11}>
+        <Input
+          placeholder="궁금한 내용을 찾아보세요"
+          style={{ padding: "1rem", marginBottom: "1rem" }}
+          onChange={(e) => setSearchText(e.target.value)}
+          value={searchText}
+          onKeyPress={(e) => {
+            if (e.key === "Enter") {
+              setSearchText(e.target.value);
+            }
+          }}
+        />
+        <div style={{ textAlign: "left", marginBottom: "1rem" }}>
+          <Button
+            type="text"
             style={{
-              borderTop: "1px solid #f2f2f2",
-              paddingTop: "1rem",
-              paddingBottom: "1rem",
+              borderRadius: "50px",
+              background: sortOrder === "latest" ? "#8282ff" : "transparent",
+              color: sortOrder === "latest" ? "white" : "black",
             }}
+            onClick={() => handleSortOrder("latest")}
           >
-            <Link to={`/schoolboard/${item.category}/${item.id}`}>
-              <List.Item
-                key={item.title}
-                onMouseEnter={() => setHoveredItem(index)}
-                onMouseLeave={() => setHoveredItem(null)}
-                style={{
-                  textAlign: "left",
-                  borderRadius: "10px",
-                  padding: "1rem",
-                  alignItems: "center",
-                  background: hoveredItem === index ? "#f5f5f5" : "transparent",
-                  transition: "background 0.3s",
-                }}
-              >
-                <span style={{ color: "gray" }}>{changeCategory(item.category)}</span>
-                <List.Item.Meta
-                  title={item.title}
-                  description={
-                    <div
-                      style={{
-                        height: "40px",
-                        maxHeight: "40px",
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
-                        display: "-webkit-box",
-                        WebkitBoxOrient: "vertical",
-                        WebkitLineClamp: 1,
-                      }}
-                    >
-                      <span
-                        dangerouslySetInnerHTML={{
-                          __html: formatContent(item?.content, MAX_CONTENT_LENGTH),
-                        }}
-                      ></span>
-                    </div>
-                  }
-                />
-                <div
+            최신순
+          </Button>
+        </div>
+
+        <List
+          itemLayout="vertical"
+          size="large"
+          dataSource={filteredData}
+          grid={{
+            gutter: 0,
+            column: 2,
+          }}
+          renderItem={(item, index) => (
+            <div
+              style={{
+                borderTop: "1px solid #f2f2f2",
+                paddingTop: "1rem",
+                paddingBottom: "1rem",
+              }}
+            >
+              <Link to={`/schoolboard/${item.category}/${item.id}`}>
+                <List.Item
+                  key={item.title}
+                  onMouseEnter={() => setHoveredItem(index)}
+                  onMouseLeave={() => setHoveredItem(null)}
                   style={{
-                    position: "absolute",
-                    bottom: 16,
-                    right: 16,
-                    textAlign: "right",
-                    color: "#a2a2a2",
+                    textAlign: "left",
+                    borderRadius: "10px",
+                    padding: "1rem",
+                    alignItems: "center",
+                    background: hoveredItem === index ? "#f5f5f5" : "transparent",
+                    transition: "background 0.3s",
                   }}
                 >
-                  {formatDate(item.modifiedDate)}
-                </div>
-              </List.Item>
-            </Link>
-          </div>
-        )}
-      />
-    </Col>
+                  <span style={{ color: "gray" }}>{changeCategory(item.category)}</span>
+                  <List.Item.Meta
+                    title={item.title}
+                    description={
+                      <div
+                        style={{
+                          height: "40px",
+                          maxHeight: "40px",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                          display: "-webkit-box",
+                          WebkitBoxOrient: "vertical",
+                          WebkitLineClamp: 1,
+                        }}
+                      >
+                        <span
+                          dangerouslySetInnerHTML={{
+                            __html: formatContent(item?.content, MAX_CONTENT_LENGTH),
+                          }}
+                        ></span>
+                      </div>
+                    }
+                  />
+                  <div
+                    style={{
+                      position: "absolute",
+                      bottom: 16,
+                      right: 16,
+                      textAlign: "right",
+                      color: "#a2a2a2",
+                    }}
+                  >
+                    {formatDate(item.modifiedDate)}
+                  </div>
+                </List.Item>
+              </Link>
+            </div>
+          )}
+        />
+      </Col>
+    </>
   );
 };
 

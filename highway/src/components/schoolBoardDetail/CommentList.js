@@ -127,7 +127,7 @@ const CommentList = () => {
             title={
               <div>
                 <span>{userId}</span>
-                <span style={{ position: "absolute", right: 0 }}>
+                <span style={{ position: "absolute", right: "1rem" }}>
                   {canEditOrDelete && (
                     <Dropdown
                       placement="bottomLeft"
@@ -246,7 +246,7 @@ const CommentList = () => {
   );
 
   return (
-    <Col xs={{ span: 24, offset: 0 }} md={{ span: 11, offset: 4 }} style={{ marginBottom: "3rem" }}>
+    <Col xs={{ span: 24, offset: 0 }} md={{ span: 15 }} style={{ marginBottom: "3rem" }}>
       {filteredComments.length !== 0 ? (
         <List
           itemLayout="vertical"
