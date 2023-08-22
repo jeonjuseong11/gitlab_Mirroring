@@ -19,7 +19,7 @@ export const LoginForm = styled(Form)`
   padding: 2rem;
   border-radius: 10px;
   background-color: white;
-  margin-bottom: 18.4rem;
+  margin-bottom: 16.2rem;
 `;
 export const LoginFormTitle = styled.h1`
   text-align: center;
@@ -49,6 +49,6 @@ export const LoginMenuItem = styled(Link)`
   vertical-align: baseline;
   margin-right: 1rem;
 `;
-export const LoginTitleImage = styled.image`
+export const LoginTitleImage = styled.img`
   width: 10rem;
 `;
