@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import videoList from "../../utils/VideoDummyData";
 import { Button, Col, List, Row } from "antd";
 import {
@@ -34,6 +34,7 @@ const PromotionVideoDetail = () => {
   const [autoPlay, setAutoPlay] = useState(0);
   const [mouseOver, setMouseOver] = useState(false);
   const [checkAutoPlay, setCheckAutoPlay] = useState();
+  const navigator = useNavigate();
 
   const onMouse = () => {
     setTimeout(() => {
@@ -123,6 +124,9 @@ const PromotionVideoDetail = () => {
                               {checkAutoPlay == item.id ? (
                                 <>
                                   <PromotionVideoIframe
+                                    onClick={() => {
+                                      navigator("/");
+                                    }}
                                     onMouseLeave={() => {
                                       setCheckAutoPlay();
                                       setAutoPlay(0);

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import videoList from "../../utils/VideoDummyData";
 import { Button, Col, List, Row } from "antd";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { DownOutlined } from "@ant-design/icons";
 import {
   MoreVideosButton,
@@ -20,6 +20,7 @@ const PromotionVideos = () => {
   const [autoPlay, setAutoPlay] = useState(0);
   const [mouseOver, setMouseOver] = useState(false);
   const [checkAutoPlay, setCheckAutoPlay] = useState();
+  const navigator = useNavigate();
 
   const onMouse = () => {
     setTimeout(() => {
@@ -68,6 +69,9 @@ const PromotionVideos = () => {
                           {checkAutoPlay == item.id ? (
                             <>
                               <PromotionVideoIframe
+                                onClick={() => {
+                                  navigator("/");
+                                }}
                                 onMouseLeave={() => {
                                   setCheckAutoPlay();
                                   setAutoPlay(0);
