@@ -123,6 +123,7 @@ export const PromotionVideosListItem = styled(List.Item)`
   }
 `;
 export const PromotionVideosImage = styled.img`
+  width: 12rem;
   height: 9rem;
   border-radius: 10px;
   transition: filter 0.3s ease;
