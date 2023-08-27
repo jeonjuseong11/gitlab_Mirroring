@@ -17,7 +17,6 @@ const SlideItem = styled.div`
     ${(props) => props.backgroundColor || "#ffffff"} 50%,
     ${(props) => props.secondBackgroundColor || "#ffffff"} 50%
   );
-  border: 1px solid #f2f2f2;
   display: flex;
 `;
 function AdSlider() {
@@ -49,7 +48,7 @@ function AdSlider() {
   return (
     <div>
       <Slider {...settings}>
-        <Link to={`/schoolboard/0`}>
+        <Link to={`/schoolRanking`}>
           <SlideItem backgroundColor="#f5efd0">
             <img src={banner1} style={{ height: "100%", margin: "0 auto" }} />
           </SlideItem>
@@ -60,7 +59,7 @@ function AdSlider() {
           </SlideItem>
         </Link>
         <Link to={`/schoolboard/0`}>
-          <SlideItem backgroundColor="#d0e3f7" secondBackgroundColor="#d0e3f7">
+          <SlideItem backgroundColor="#a6d8ba" secondBackgroundColor="#81cc9f">
             <img src={banner3} style={{ height: "100%", margin: "0 auto" }} />
           </SlideItem>
         </Link>

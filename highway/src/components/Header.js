@@ -79,7 +79,7 @@ const Header = () => {
               </Button>
             </>
           ) : (
-            <div style={{ marginTop: "0.5rem" }}>
+            <div style={{ marginTop: "1rem" }}>
               <Link to="/login" style={{ marginRight: "1rem", color: "black" }}>
                 로그인
               </Link>
