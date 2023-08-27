@@ -15,12 +15,12 @@ export const validateId = (_, value, isIdValid) => {
 
 // password 유효성 검사
 export const validatePassword = (_, value) => {
-  const regExp = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[~`!@#$%&*()-+=]).{8,50}$/;
+  const regExp = /^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d]{8,50}$/;
   if (!value) {
     return Promise.reject(new Error("비밀번호는 필수 항목입니다."));
   }
   if (!regExp.test(value)) {
-    return Promise.reject(new Error("영문 소문자, 대문자, 숫자, 특수문자를 모두 포함해야 합니다"));
+    return Promise.reject(new Error("영문자와 숫자를 모두 포함해야 합니다."));
   }
   return Promise.resolve();
 };

@@ -1,17 +1,7 @@
-import {
-  AutoComplete,
-  Button,
-  Checkbox,
-  Divider,
-  Form,
-  Modal,
-  Radio,
-  Select,
-  Space,
-} from "antd";
+import { AutoComplete, Button, Checkbox, Divider, Form, Modal, Radio, Select, Space } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   CHECK_DUPLICATE_ID_REQUEST,
   LOAD_SCHOOL_LIST_REQUEST,
@@ -60,20 +50,18 @@ const SignUp = () => {
   const [youngChecked, setYoungChecked] = useState(false);
   const [termChecked, setTermChecked] = useState(false);
 
-  const { schools, idValid, checkIdLoading, checkIdDone, me } = useSelector(
-    (state) => ({
-      schools: state.school.schools,
-      idValid: state.user.idValid,
-      checkIdLoading: state.user.checkIdLoading,
-      checkIdDone: state.user.checkIdDone,
-      me: state.user.me,
-    })
-  );
+  const { schools, idValid, checkIdLoading, checkIdDone, me } = useSelector((state) => ({
+    schools: state.school.schools,
+    idValid: state.user.idValid,
+    checkIdLoading: state.user.checkIdLoading,
+    checkIdDone: state.user.checkIdDone,
+    me: state.user.me,
+  }));
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { role } = useParams();
   const [form] = Form.useForm();
-  const [role, setRole] = useState("");
 
   useEffect(() => {
     if (me) {
@@ -100,9 +88,10 @@ const SignUp = () => {
   };
 
   const onFinish = (values) => {
+    // console.log({ ...values, role: parseInt(role) });
     dispatch({
       type: SIGNUP_REQUEST,
-      data: values,
+      data: { ...values, role: parseInt(role) },
     });
     info("회원가입 성공! 로그인창으로 이동합니다");
     navigate("/login");
@@ -143,9 +132,7 @@ const SignUp = () => {
       setAutoCompleteResult([]);
     } else {
       setAutoCompleteResult(
-        ["@gmail.com", "@naver.com", "@hanmail.net"].map(
-          (domain) => `${value}${domain}`
-        )
+        ["@gmail.com", "@naver.com", "@hanmail.net"].map((domain) => `${value}${domain}`)
       );
     }
   };
@@ -180,9 +167,7 @@ const SignUp = () => {
       setSelectedSchool(null);
     } else {
       setShowSchoolOptions(false);
-      const selectedSchool = schools.find(
-        (school) => school.schoolId === value
-      );
+      const selectedSchool = schools.find((school) => school.schoolId === value);
       // console.log(selectedSchool);
       setSelectedSchool(selectedSchool?.label);
       form.setFieldsValue({ schoolId: value });
@@ -207,16 +192,10 @@ const SignUp = () => {
           tooltip="아이디는 영어로 시작하여 숫자와 조합으로 작성해주세요"
           rules={[{ validator: validateId }]}
           hasFeedback
-          validateStatus={
-            isIdValid === null ? "error" : isIdValid ? "success" : "error"
-          }
+          validateStatus={isIdValid === null ? "error" : isIdValid ? "success" : "error"}
         >
           <Space.Compact style={{ width: "100%" }}>
-            <SignUpInput
-              allowClear
-              placeholder="아이디를 입력해주세요"
-              disabled={isIdValid}
-            />
+            <SignUpInput allowClear placeholder="아이디를 입력해주세요" disabled={isIdValid} />
             <DoubleCheckButton
               loading={isCheckingId}
               onClick={onCheckUserId}
@@ -226,12 +205,8 @@ const SignUp = () => {
             </DoubleCheckButton>
           </Space.Compact>
         </Form.Item>
-        {isIdValid === true && (
-          <IdValidTrueP>사용 가능한 아이디입니다</IdValidTrueP>
-        )}
-        {isIdValid === false && (
-          <IdValidFalseP>이미 사용 중인 아이디입니다</IdValidFalseP>
-        )}
+        {isIdValid === true && <IdValidTrueP>사용 가능한 아이디입니다</IdValidTrueP>}
+        {isIdValid === false && <IdValidFalseP>이미 사용 중인 아이디입니다</IdValidFalseP>}
         <label>비밀번호</label>
         <Form.Item
           name="pwd"
@@ -242,10 +217,7 @@ const SignUp = () => {
           ]}
           hasFeedback
         >
-          <SignUpInputPassword
-            allowClear
-            placeholder="비밀번호를 입력해주세요(8~50)"
-          />
+          <SignUpInputPassword allowClear placeholder="비밀번호를 입력해주세요(8~50)" />
         </Form.Item>
         <label>비밀번호 확인</label>
         <Form.Item
@@ -261,17 +233,12 @@ const SignUp = () => {
                 if (getFieldValue("pwd") === value) {
                   return Promise.resolve();
                 }
-                return Promise.reject(
-                  new Error("비밀번호가 일치하지 않습니다.")
-                );
+                return Promise.reject(new Error("비밀번호가 일치하지 않습니다."));
               },
             }),
           ]}
         >
-          <SignUpInputPassword
-            allowClear
-            placeholder="비밀번호를 입력해주세요"
-          />
+          <SignUpInputPassword allowClear placeholder="비밀번호를 입력해주세요" />
         </Form.Item>
         <label>닉네임</label>
         <Form.Item name="name" rules={[{ validator: validateNickname }]}>
@@ -304,7 +271,7 @@ const SignUp = () => {
             </Radio.Group>
           </Form.Item>
         </GenderValidWrapper>
-        <label>역할</label>
+        {/* <label>역할</label>
         <Form.Item name="role" rules={[{ validator: roleValidate }]}>
           <Select
             onSelect={(value) => {
@@ -338,9 +305,9 @@ const SignUp = () => {
               },
             ]}
           />
-        </Form.Item>
+        </Form.Item> */}
         <CSSTransition
-          in={role === 1 || role === 2}
+          in={parseInt(role) === 1 || parseInt(role) === 2}
           timeout={500}
           classNames="loading"
           unmountOnExit
@@ -353,9 +320,7 @@ const SignUp = () => {
                 placeholder="학교를 선택해주세요"
                 optionFilterProp="children"
                 filterOption={(input, option) =>
-                  (option?.label ?? "")
-                    .toLowerCase()
-                    .indexOf(input.toLowerCase()) >= 0
+                  (option?.label ?? "").toLowerCase().indexOf(input.toLowerCase()) >= 0
                 }
                 filterSort={(optionA, optionB) =>
                   (optionA?.label ?? "")
@@ -370,10 +335,7 @@ const SignUp = () => {
           </>
         </CSSTransition>
         <label>약관 동의</label>
-        <TermsCheckWrapper
-          value={serviceChecked}
-          onClick={() => setServiceOpen(true)}
-        >
+        <TermsCheckWrapper value={serviceChecked} onClick={() => setServiceOpen(true)}>
           이용약관(필수)
           {!serviceChecked ? <RightOutlined /> : <CheckOutlined />}
         </TermsCheckWrapper>
@@ -392,10 +354,7 @@ const SignUp = () => {
         >
           <TermsService />
         </Modal>
-        <TermsCheckWrapper
-          value={privateChecked}
-          onClick={() => setPrivageOpen(true)}
-        >
+        <TermsCheckWrapper value={privateChecked} onClick={() => setPrivageOpen(true)}>
           개인정보 동의(필수)
           {!privateChecked ? <RightOutlined /> : <CheckOutlined />}
         </TermsCheckWrapper>
@@ -414,10 +373,7 @@ const SignUp = () => {
         >
           <TermPravate />
         </Modal>
-        <TermsCheckWrapper
-          value={youngChecked}
-          onClick={() => setYoungOpen(true)}
-        >
+        <TermsCheckWrapper value={youngChecked} onClick={() => setYoungOpen(true)}>
           청소년 개인정보 동의(필수)
           {!youngChecked ? <RightOutlined /> : <CheckOutlined />}
         </TermsCheckWrapper>
@@ -437,11 +393,7 @@ const SignUp = () => {
           <TermYoungPrivate />
         </Modal>
         <Divider />
-        <Form.Item
-          name="agreement"
-          valuePropName="checked"
-          rules={[{ validator: agreeValidate }]}
-        >
+        <Form.Item name="agreement" valuePropName="checked" rules={[{ validator: agreeValidate }]}>
           <Checkbox>약관 동의하기</Checkbox>
         </Form.Item>
         <Form.Item>

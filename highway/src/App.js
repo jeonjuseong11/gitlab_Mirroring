@@ -14,6 +14,7 @@ import Promotion from "./pages/Promotion";
 import SchoolRanking from "./pages/SchoolRanking";
 import Search from "./pages/Search";
 import SignUp from "./pages/SignUp";
+import RoleSelctor from "./pages/RoleSelector";
 import UserProfile from "./pages/UserProfile";
 import PromotionNews from "./components/Promotion/PromotionNews";
 import PromotionVideos from "./components/Promotion/PromotionVideos";
@@ -93,7 +94,8 @@ function App() {
             <Route exact path="/" element={<Home />} />
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/search" element={<Search />} />
-            <Route exact path="/signup" element={<SignUp />} />
+            <Route exact path="/signup" element={<RoleSelctor />} />
+            <Route exact path="/signup/:role" element={<SignUp />} />
             <Route element={<UserProfile />}>
               <Route exact path="/profile/" element={<ProfileRecentRecord />} />
             </Route>

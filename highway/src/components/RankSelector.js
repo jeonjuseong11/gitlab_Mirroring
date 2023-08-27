@@ -89,7 +89,12 @@ export const RankTopic = [
   },
   {
     icon: <TeamOutlined />,
-    content: <div>인문사회과학</div>,
+    content: (
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <span>인문사회</span>
+        <span style={{ marginTop: "-.5rem" }}>과학</span>
+      </div>
+    ),
     value: ["역사", "경제", "정치", "사회", "심리"],
   },
   {
