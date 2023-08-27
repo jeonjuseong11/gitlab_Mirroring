@@ -53,6 +53,7 @@ const SearchForm = ({ setFilterValue, filterValue }) => {
       setFilterValue(value);
       setActiveButton(value);
     }
+    setSliderIndex(0); // 버튼이 클릭되면 슬라이더 인덱스를 초기화합니다.
   };
 
   const handleSliderChange = (currentIndex) => {
@@ -61,8 +62,7 @@ const SearchForm = ({ setFilterValue, filterValue }) => {
 
   const handleResize = () => {
     const screenWidth = window.innerWidth;
-    // Adjust the number of buttons per slide based on screen width
-    if (screenWidth <= 768) {
+    if (screenWidth <= 576) {
       setButtonsPerSlide(3);
     } else {
       setButtonsPerSlide(5);
@@ -70,9 +70,7 @@ const SearchForm = ({ setFilterValue, filterValue }) => {
   };
 
   useEffect(() => {
-    // Add event listener for window resize
     window.addEventListener("resize", handleResize);
-    // Initial adjustment based on window width
     handleResize();
     return () => {
       // Remove event listener when component unmounts
@@ -85,8 +83,8 @@ const SearchForm = ({ setFilterValue, filterValue }) => {
     (sliderIndex + 1) * buttonsPerSlide
   );
 
-  const isPrevButtonDisabled = sliderIndex === 0;
-  const isNextButtonDisabled = (sliderIndex + 1) * buttonsPerSlide >= RankTopic.length;
+  // const isPrevButtonDisabled = sliderIndex === 0;
+  // const isNextButtonDisabled = (sliderIndex + 1) * buttonsPerSlide >= RankTopic.length;
 
   return (
     <Container>
@@ -114,7 +112,7 @@ const SearchForm = ({ setFilterValue, filterValue }) => {
                 shape="square"
                 isActive={item.value === activeButton}
               >
-                <span style={{ marginBottom: ".5rem" }}>{item.icon}</span>
+                <span style={{ marginBottom: ".5rem", marginTop: ".5rem" }}>{item.icon}</span>
                 {item.content}
               </SearchButton>
             ))}
@@ -124,8 +122,8 @@ const SearchForm = ({ setFilterValue, filterValue }) => {
           totalCount={Math.ceil(RankTopic.length / buttonsPerSlide)}
           currentIndex={sliderIndex}
           onChange={handleSliderChange}
-          isPrevButtonDisabled={isPrevButtonDisabled}
-          isNextButtonDisabled={isNextButtonDisabled}
+          // isPrevButtonDisabled={isPrevButtonDisabled}
+          // isNextButtonDisabled={isNextButtonDisabled}
         />
       </ContentContainer>
     </Container>
