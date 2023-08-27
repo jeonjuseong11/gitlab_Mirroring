@@ -29,7 +29,7 @@ const SchoolDetailInfo = ({ rateAverages, roundedTotalRate, reviewCount }) => {
   return (
     <SubPageWrapper>
       <Row justify="center" gutter={[16, 16]} style={{ marginBottom: "1rem" }}>
-        <Col xs={22} md={6} style={{ minWidth: "15rem" }}>
+        <Col xs={22} md={6}>
           <QuestionWrapper style={{ textAlign: "left", padding: "2rem" }}>
             <h3 style={{ margin: "0" }}>학교 정보</h3>
             <h4>주소</h4>
@@ -51,7 +51,7 @@ const SchoolDetailInfo = ({ rateAverages, roundedTotalRate, reviewCount }) => {
             </a>
           </QuestionWrapper>
         </Col>
-        <Col xs={22} md={9} style={{ minWidth: "30rem" }}>
+        <Col xs={22} md={9}>
           <QuestionWrapper style={{ padding: "2rem", textAlign: "left" }}>
             <h3 style={{ margin: "0", marginBottom: "0.5rem" }}>학과소개</h3>
             <Tabs

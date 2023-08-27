@@ -13,7 +13,6 @@ export const StarRateWrapper = styled.div`
   padding: 2rem;
   text-align: left;
   display: flex;
-  min-width: 30rem;
   justify-content: space-between;
 `;
 export const OneLineReviewWrapper = styled.div`

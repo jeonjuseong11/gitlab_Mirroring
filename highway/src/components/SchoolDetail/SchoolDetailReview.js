@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Col, Rate, Row } from "antd";
 import { StarRateWrapper } from "./SchoolDetailStyle";
-import OneLineReview from "./OneLineReview";
+// import OneLineReview from "./OneLineReview";
 import ReviewDetail from "../ReviewDetail";
 
 const SchoolDetailReview = ({ reviewCount, rateAverages, roundedTotalRate }) => {
   return (
     <Row gutter={[16, 16]} justify="center">
-      <Col xs={22} md={10} style={{ minWidth: "30rem" }}>
+      <Col xs={22} md={10}>
         <StarRateWrapper>
           <div>
-            <p style={{ margin: "0" }}>전체 리뷰 통계 ({reviewCount})</p>
+            <p style={{ margin: "0", fontSize: "100%" }}>전체 리뷰 통계 ({reviewCount})</p>
             {reviewCount === 0 ? (
-              <p style={{ fontSize: "1rem" }}>리뷰가 없습니다.</p>
+              <p style={{ fontSize: "100%" }}>리뷰가 없습니다.</p>
             ) : (
               <>
                 <h1
@@ -28,7 +28,7 @@ const SchoolDetailReview = ({ reviewCount, rateAverages, roundedTotalRate }) => 
                   allowHalf
                   value={roundedTotalRate}
                   style={{
-                    fontSize: "2rem",
+                    fontSize: "100%",
                   }}
                 />
               </>
@@ -36,12 +36,8 @@ const SchoolDetailReview = ({ reviewCount, rateAverages, roundedTotalRate }) => 
           </div>
           <div
             style={{
-              height: "100%",
-              paddingLeft: "3rem",
               display: "flex",
               flexDirection: "column",
-              width: "15rem",
-
               gap: "5px",
             }}
           >
@@ -69,7 +65,7 @@ const SchoolDetailReview = ({ reviewCount, rateAverages, roundedTotalRate }) => 
         </StarRateWrapper>
         <ReviewDetail />
       </Col>
-      <Col xs={22} md={5} style={{ minWidth: "15rem" }}>
+      <Col xs={22} md={5}>
         {/* <OneLineReview /> */}
       </Col>
     </Row>

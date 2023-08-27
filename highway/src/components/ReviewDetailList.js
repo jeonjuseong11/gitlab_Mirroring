@@ -20,9 +20,7 @@ import {
 } from "../styles/ReviewDetailStyle";
 
 const ReviewDetailList = ({ setWrite, setEditing, setEditContent }) => {
-  const { schoolReviews, loadSchoolReviewsLoading } = useSelector(
-    (state) => state.school
-  );
+  const { schoolReviews, loadSchoolReviewsLoading } = useSelector((state) => state.school);
   const { me } = useSelector((state) => state.user);
   const userinfo = JSON.parse(localStorage.getItem("USERINFO"));
   const dispatch = useDispatch();
@@ -68,9 +66,7 @@ const ReviewDetailList = ({ setWrite, setEditing, setEditContent }) => {
                     <>
                       <DetailReviewAvatarWrapper>
                         <DetailReviewAvatar size={50}>
-                          {item?.userName && item.userName.length > 0
-                            ? item.userName[0]
-                            : ""}
+                          {item?.userName && item.userName.length > 0 ? item.userName[0] : ""}
                         </DetailReviewAvatar>
                         <AverageReviewWrapper>
                           <h3>{item?.userName}</h3>
@@ -92,13 +88,8 @@ const ReviewDetailList = ({ setWrite, setEditing, setEditContent }) => {
                                 placement="bottomLeft"
                                 overlay={
                                   <Menu>
-                                    <Menu.Item onClick={() => handleEdit(item)}>
-                                      수정하기
-                                    </Menu.Item>
-                                    <Menu.Item
-                                      danger
-                                      onClick={() => removeReview(item.id)}
-                                    >
+                                    <Menu.Item onClick={() => handleEdit(item)}>수정하기</Menu.Item>
+                                    <Menu.Item danger onClick={() => removeReview(item.id)}>
                                       삭제하기
                                     </Menu.Item>
                                   </Menu>
@@ -112,9 +103,7 @@ const ReviewDetailList = ({ setWrite, setEditing, setEditContent }) => {
                         )}
                       </DetailReviewAvatarWrapper>
                       <DetailReviewUserTagsWrapper>
-                        <TagsItem style={{ marginLeft: "1rem" }}>
-                          {item?.tags}
-                        </TagsItem>
+                        <TagsItem style={{ marginLeft: "1rem" }}>{item?.tags}</TagsItem>
                       </DetailReviewUserTagsWrapper>
                     </>
                   }
@@ -122,35 +111,15 @@ const ReviewDetailList = ({ setWrite, setEditing, setEditContent }) => {
                     <>
                       <DetailReviewsWrapper>
                         <DetailReviewP>교통</DetailReviewP>
-                        <DetailReviewRate
-                          disabled
-                          allowHalf
-                          value={item.trafficRate}
-                        />
+                        <DetailReviewRate disabled allowHalf value={item.trafficRate} />
                         <DetailReviewP>시설만족도</DetailReviewP>
-                        <DetailReviewRate
-                          disabled
-                          allowHalf
-                          value={item?.facilityRate}
-                        />
+                        <DetailReviewRate disabled allowHalf value={item?.facilityRate} />
                         <DetailReviewP>급식</DetailReviewP>
-                        <DetailReviewRate
-                          disabled
-                          allowHalf
-                          value={item?.cafeteriaRate}
-                        />
+                        <DetailReviewRate disabled allowHalf value={item?.cafeteriaRate} />
                         <DetailReviewP>수업만족도</DetailReviewP>
-                        <DetailReviewRate
-                          disabled
-                          allowHalf
-                          value={item?.educationRate}
-                        />
+                        <DetailReviewRate disabled allowHalf value={item?.educationRate} />
                         <DetailReviewP>취업</DetailReviewP>
-                        <DetailReviewRate
-                          disabled
-                          allowHalf
-                          value={item?.employmentRate}
-                        />
+                        <DetailReviewRate disabled allowHalf value={item?.employmentRate} />
                       </DetailReviewsWrapper>
                       <DetailReviewContentWrapper>
                         {item?.content.split("\n").map((line, index) => (
@@ -168,7 +137,9 @@ const ReviewDetailList = ({ setWrite, setEditing, setEditContent }) => {
           )}
         />
       ) : (
-        <></>
+        <div style={{ marginBottom: "1rem" }}>
+          <h2 style={{ fontWeight: "400" }}>첫번째 리뷰를 작성해주세요</h2>
+        </div>
       )}
     </>
   );
