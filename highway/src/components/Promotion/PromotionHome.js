@@ -3,7 +3,6 @@ import { Outlet, useLocation } from "react-router-dom";
 import { NewsDummyData as newsList } from "../../utils/NewsDummyData";
 import PromotionHomeItem from "./PromotionHomeItem";
 import { Col, Menu, Row } from "antd";
-import RecommendList from "./RecommendList";
 import { items } from "../../utils/PromotionList";
 import { PromotionHomeUl, SideBarDiv } from "../../styles/PromotionStyle";
 import { VideoDummyData as videoList } from "../../utils/VideoDummyData";

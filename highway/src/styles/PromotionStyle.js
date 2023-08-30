@@ -199,7 +199,7 @@ export const RecommnedListVideo = styled.div`
 `;
 export const RecommendMainImg = styled.img`
   width: 100%;
-  height: 100%;
+  height: 22vw;
   border-radius: 10px;
   transition: transform 0.3s ease;
   &:hover {
