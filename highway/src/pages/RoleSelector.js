@@ -26,15 +26,18 @@ const fadeInUp = keyframes`
 
 const AnimatedButton = styled(Button)`
   display: flex;
-  padding-top: 1rem;
+  padding-top: 1.5rem;
   justify-content: center;
   flex-direction: column;
   align-items: center;
   opacity: 0;
   animation: ${fadeInUp} 0.5s ease forwards;
-  width: 6rem;
-  height: 6rem;
+  width: 20vw;
+  max-width: 8rem;
+  height: 20vw;
+  max-height: 8rem;
   text-align: center;
+  font-size: 1.2rem;
 
   &:nth-child(1) {
     animation-delay: 0.2s;

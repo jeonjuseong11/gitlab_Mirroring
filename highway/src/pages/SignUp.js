@@ -1,4 +1,4 @@
-import { AutoComplete, Button, Checkbox, Divider, Form, Modal, Radio, Select, Space } from "antd";
+import { AutoComplete, Checkbox, Divider, Form, Modal, Radio, Space } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -26,7 +26,6 @@ import {
 import {
   agreeValidate,
   idRegExp,
-  roleValidate,
   schoolValidate,
   validateAge,
   validateEmail,
@@ -48,7 +47,6 @@ const SignUp = () => {
   const [serviceChecked, setServiceChecked] = useState(false);
   const [privateChecked, setPrivateChecked] = useState(false);
   const [youngChecked, setYoungChecked] = useState(false);
-  const [termChecked, setTermChecked] = useState(false);
 
   const { schools, idValid, checkIdLoading, checkIdDone, me } = useSelector((state) => ({
     schools: state.school.schools,
@@ -123,9 +121,7 @@ const SignUp = () => {
       value: it.schoolId,
       label: it.schoolName,
     }));
-  useEffect(() => {
-    // console.log(schoolsInfo);
-  }, [schoolsInfo]);
+
   const [autoCompleteResult, setAutoCompleteResult] = useState([]);
   const onEmailChange = (value) => {
     if (!value) {
@@ -271,41 +267,6 @@ const SignUp = () => {
             </Radio.Group>
           </Form.Item>
         </GenderValidWrapper>
-        {/* <label>역할</label>
-        <Form.Item name="role" rules={[{ validator: roleValidate }]}>
-          <Select
-            onSelect={(value) => {
-              if (value === 1) {
-                setRole(1);
-              } else if (value === 2) {
-                setRole(2);
-              } else if (value === 3) {
-                setRole(3);
-              } else if (value === 4) {
-                setRole("예비 재학생");
-              }
-            }}
-            placeholder="선택해주세요"
-            options={[
-              {
-                value: 1,
-                label: "학생",
-              },
-              {
-                value: 2,
-                label: "선생님",
-              },
-              {
-                value: 3,
-                label: "부모님",
-              },
-              {
-                value: 4,
-                label: "예비 재학생",
-              },
-            ]}
-          />
-        </Form.Item> */}
         <CSSTransition
           in={parseInt(role) === 1 || parseInt(role) === 2}
           timeout={500}
