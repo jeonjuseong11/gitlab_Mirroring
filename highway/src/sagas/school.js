@@ -38,7 +38,7 @@ function* loadSchoolList() {
   try {
     yield put({
       type: LOAD_SCHOOL_LIST_SUCCESS,
-      data: result.data.data.data,
+      data: result.data.data,
     });
   } catch (err) {
     console.error(err);
