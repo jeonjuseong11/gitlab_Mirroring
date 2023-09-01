@@ -1,6 +1,6 @@
 import { Button, Col, Row } from "antd";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
-import { EditOutlined, SearchOutlined, SmileOutlined, TeamOutlined } from "@ant-design/icons";
+import { EditOutlined } from "@ant-design/icons";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { needLoginError } from "../utils/Message";
@@ -18,11 +18,11 @@ const SchoolBoard = () => {
   // }, []);
 
   useEffect(() => {
-    if (category == "0") {
+    if (category === "0") {
       setTItle("자유게시판");
-    } else if (category == "1") {
+    } else if (category === "1") {
       setTItle("질문게시판");
-    } else if (category == "2") {
+    } else if (category === "2") {
       setTItle("프로젝트 모집");
     }
   }, [category]);

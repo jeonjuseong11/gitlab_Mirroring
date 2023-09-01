@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { LeftOutlined, LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Checkbox, Form, Modal } from "antd";
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import { Form } from "antd";
 import {
   LoginBtn,
   LoginWrapper,
@@ -18,7 +18,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 const imgUrl = `${process.env.PUBLIC_URL}/assets/TitleIcon.png`;
 const Login = () => {
-  const { me, logInError } = useSelector((state) => state.user);
+  const { me } = useSelector((state) => state.user);
   const access = localStorage.getItem("ACCESSTOKEN");
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -36,7 +36,7 @@ const Login = () => {
     if (access) {
       navigate("/");
     }
-  }, [me, navigate]);
+  }, [access, me, navigate]);
 
   return (
     <LoginWrapper>

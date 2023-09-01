@@ -20,7 +20,7 @@ const UserProfile = () => {
     if (access === null) {
       navigate("/");
     }
-  }, [me]);
+  }, [access, me, navigate]);
   const renderUserRole = () => {
     if (me?.userRole === 1) {
       return " 학생";
@@ -64,12 +64,6 @@ const UserProfile = () => {
               </tbody>
             </ProfileTable>
           </ProfileUserWrapper>
-          {/* <Menu.Item key="/profile">
-              <NavLink to="/profile">회원 정보</NavLink>
-            </Menu.Item>
-            <Menu.Item key="/profile/recentrecord">
-              <NavLink to="/profile/recentrecord">나의 관심</NavLink>
-            </Menu.Item> */}
         </Col>
         <Outlet />
       </ProfileRow>

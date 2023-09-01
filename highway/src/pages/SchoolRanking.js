@@ -35,11 +35,11 @@ const SchoolRanking = () => {
     const copiedData = schools.slice();
     const rankedData = copiedData.map((item, index) => ({
       ...item,
-      rank: index,
+      rank: index + 1,
       reviews: schoolReviews.length,
     }));
     setRankData(rankedData.filter((item) => item.schoolId !== 0));
-  }, [schools]);
+  }, [schoolReviews.length, schools]);
 
   useEffect(() => {
     setSelectedSchool(rankData[0]);
@@ -61,7 +61,7 @@ const SchoolRanking = () => {
   });
   useEffect(() => {
     setSelectedSchool(filteredData[0]);
-  }, [filterValue]);
+  }, [filterValue, filteredData]);
   const columns = [
     {
       title: "랭킹",
@@ -75,7 +75,7 @@ const SchoolRanking = () => {
             textDecoration: "none",
             color: "black",
           }}
-          onClick={() => handleSchoolSelect(record)}
+          onClik={() => handleSchoolSelect(record)}
         >
           {text}
         </a>

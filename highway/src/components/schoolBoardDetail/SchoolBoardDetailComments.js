@@ -1,5 +1,5 @@
-import { Button, Col, Input, List, Modal } from "antd";
-import React, { useCallback, useEffect, useState } from "react";
+import { Col, Input, List } from "antd";
+import React, { useCallback, useState } from "react";
 import SchoolBoardDetailReplys from "./SchoolBoardDetailReplys";
 import {
   ADD_POST_COMMENT_REPLY_REQUEST,

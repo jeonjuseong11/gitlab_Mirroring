@@ -1,10 +1,9 @@
-import { StarOutlined, UserOutlined } from "@ant-design/icons";
-import { Card, Col, List } from "antd";
+import { UserOutlined } from "@ant-design/icons";
+import { Card, List } from "antd";
 import Meta from "antd/es/card/Meta";
 import React from "react";
 import { Link } from "react-router-dom";
 import { CardItem, IconText, TagsItem } from "../components/Card/CardStyle";
-import DepartsTags from "../components/DepartsTags";
 
 const SchoolList = ({ schools }) => {
   return (

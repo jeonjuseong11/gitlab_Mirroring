@@ -22,9 +22,6 @@ import {
   LOAD_SAVED_SCHOOL_FAILURE,
   LOAD_SAVED_SCHOOL_SUCCESS,
   LOAD_SAVED_SCHOOL_REQUEST,
-  UPDATE_POST_COMMENT_FAILURE,
-  LOAD_POST_COMMENTS_REQUEST,
-  UPDATE_POST_COMMENT_SUCCESS,
   ADD_SAVED_SCHOOL_REQUEST,
   ADD_SAVED_SCHOOL_SUCCESS,
   ADD_SAVED_SCHOOL_FAILURE,
@@ -158,26 +155,7 @@ function* loadSchoolReviews(action) {
     });
   }
 }
-// const loadSchoolAPI = (data) => {
-//   // console.log(data);
-//   return axios.get(`/school/loadSchoolApi?schoolid=${data}`);
-// };
-// function* loadSchool(action) {
-//   try {
-//     // console.log(action.data);
-//     const result = yield call(loadSchoolAPI, action.data);
-//     yield put({
-//       type: CHECK_DUPLICATE_ID_SUCCESS,
-//       data: result.data,
-//     });
-//   } catch (err) {
-//     console.error(err);
-//     yield put({
-//       type: CHECK_DUPLICATE_ID_FAILURE,
-//       error: err.response.data,
-//     });
-//   }
-// }
+
 function addSchoolReviewAPI(data) {
   return axios.post(`/review`, data);
 }
@@ -252,34 +230,6 @@ function* updateSchoolReview(action) {
     });
   }
 }
-
-function updatePostCommentAPI(data) {
-  // 게시물 댓글 수정
-  return axios.put(`/comment/?id=${data.id}&content=${data.content}`, data);
-}
-
-function* updatePostComment(action) {
-  try {
-    const result = yield call(updatePostCommentAPI, action.data);
-    yield put({
-      type: UPDATE_POST_COMMENT_SUCCESS,
-      data: result.data,
-    });
-    yield put({
-      type: LOAD_POST_COMMENTS_REQUEST,
-      data: { boardId: action.data.boardId },
-    });
-  } catch (err) {
-    console.error(err);
-    yield put({
-      type: UPDATE_POST_COMMENT_FAILURE,
-      error: err.response.data,
-    });
-  }
-}
-// function* watchLoadSchool() {
-//   yield takeLatest(CHECK_DUPLICATE_ID_REQUEST, loadSchool);
-// }
 
 function* watchLoadSchoolList() {
   // yield throttle(5000, LOAD_SCHOOL_LIST_REQUEST, loadSchoolList);

@@ -1,14 +1,7 @@
-import {
-  LikeOutlined,
-  MessageOutlined,
-  SearchOutlined,
-  SmileOutlined,
-  TeamOutlined,
-} from "@ant-design/icons";
+import { SearchOutlined, SmileOutlined, TeamOutlined } from "@ant-design/icons";
 import { Button, Col, Input, List, Menu } from "antd";
 import React, { useEffect, useState } from "react";
 import moment from "moment";
-import { IconText } from "../../components/Card/CardStyle";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { LOAD_POSTS_REQUEST } from "../../constants/actionTypes";
@@ -40,15 +33,15 @@ export const formatDate = (dateString) => {
 };
 
 export const changeCategory = (category) => {
-  if (category == 0) {
+  if (category === 0) {
     return "자유게시판";
-  } else if (category == 1) {
+  } else if (category === 1) {
     return "질문게시판";
-  } else if (category == 2) {
+  } else if (category === 2) {
     return "프로젝트 모집";
-  } else if (category == 3) {
+  } else if (category === 3) {
     return "IT";
-  } else if (category == 4) {
+  } else if (category === 4) {
     return "경영";
   }
 };

@@ -1,5 +1,4 @@
-import { Button, message, Modal } from "antd";
-import { useNavigate } from "react-router-dom";
+import { message, Modal } from "antd";
 
 export const info = (props) => {
   message.info(props);

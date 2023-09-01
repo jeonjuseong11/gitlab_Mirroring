@@ -156,8 +156,6 @@ const reducer = (state = initialState, action) =>
         draft.addSavedSchoolLoading = false;
         draft.addSavedSchoolError = action.error;
         break;
-
-        return state;
     }
   });
 

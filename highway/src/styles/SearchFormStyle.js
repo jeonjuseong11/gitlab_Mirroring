@@ -1,5 +1,5 @@
 import { SearchOutlined } from "@ant-design/icons";
-import { Button, Col, Input, Row } from "antd";
+import { Button, Input, Row } from "antd";
 import styled from "styled-components";
 
 export const SearchInput = styled(Input)`

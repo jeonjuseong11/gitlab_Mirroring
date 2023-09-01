@@ -1,11 +1,10 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { Form, Input, Button, Row, Col, Select, message } from "antd";
+import React, { useEffect, useState } from "react";
+import { Form, Input, Row } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 import { UPDATE_POST_REQUEST } from "../../constants/actionTypes";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { changeCategory } from "../../pages/Board/BoardMain";
-import ReactQuill from "react-quill";
 import styled from "styled-components";
 import {
   BoardDetailUpdateReactQuill,
@@ -15,18 +14,14 @@ import {
   UpdateBoardDetailButton,
 } from "../../styles/BoardDetailUpdateStyle";
 
-const { TextArea } = Input;
-
 const CustomQuillWrapper = styled(Form.Item)`
   .ql-container {
-    border-color: ${(props) =>
-      props.isFocused ? "#a8a8fe !important" : "#f2f2f2 !important"};
+    border-color: ${(props) => (props.isFocused ? "#a8a8fe !important" : "#f2f2f2 !important")};
     border-radius: 0 0 10px 10px;
   }
 
   .ql-toolbar {
-    border-color: ${(props) =>
-      props.isFocused ? "#a8a8fe !important" : "#f2f2f2 !important"};
+    border-color: ${(props) => (props.isFocused ? "#a8a8fe !important" : "#f2f2f2 !important")};
     border-radius: 10px 10px 0 0;
   }
   .ql-container::placeholder {
@@ -49,9 +44,7 @@ const BoardDetailUptadeForm = () => {
   const [isEditorFocused, setIsEditorFocused] = useState(false);
   const navigator = useNavigate();
   const [title, setTitle] = useState(schoolBoardPost?.board.title);
-  const [content, setContent] = useState(
-    schoolBoardPost?.board.content.replace(/<[^>]*>?/g, "")
-  );
+  const [content, setContent] = useState(schoolBoardPost?.board.content.replace(/<[^>]*>?/g, ""));
   const [category, setCategory] = useState(schoolBoardPost?.board.category);
   console.log(title);
   console.log(content);
@@ -129,12 +122,7 @@ const BoardDetailUptadeForm = () => {
                 toolbar: [
                   [{ header: [1, 2, 3, 4, 5, 6] }, { font: [] }],
                   ["bold", "italic", "underline", "strike", "blockquote"],
-                  [
-                    { list: "ordered" },
-                    { list: "bullet" },
-                    { indent: "-1" },
-                    { indent: "+1" },
-                  ],
+                  [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }],
                   ["link", "image", "video"],
                   [{ direction: "rtl" }],
                   [{ color: [] }, { background: [] }],

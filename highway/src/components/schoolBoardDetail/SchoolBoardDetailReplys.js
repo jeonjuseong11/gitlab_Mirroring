@@ -2,15 +2,11 @@ import { List, Input } from "antd";
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { formatDate } from "../../pages/Board/BoardMain";
-import {
-  REMOVE_POST_COMMENT_REQUEST,
-  UPDATE_POST_COMMENT_REQUEST,
-} from "../../constants/actionTypes";
+
 import { CommentSpan } from "./SchoolBoardDetailComments";
 
 const SchoolBoardDetailReplys = ({ info, updatePostComment, removePostComment }) => {
   const { me } = useSelector((state) => state.user);
-  const dispatch = useDispatch();
   const [editingCommentId, setEditingCommentId] = useState("");
   const [editedComment, setEditedComment] = useState("");
 

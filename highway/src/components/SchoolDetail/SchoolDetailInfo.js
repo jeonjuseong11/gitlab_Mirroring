@@ -33,21 +33,18 @@ const SchoolDetailInfo = ({ rateAverages, roundedTotalRate, reviewCount }) => {
           <QuestionWrapper style={{ textAlign: "left", padding: "2rem" }}>
             <h3 style={{ margin: "0" }}>학교 정보</h3>
             <h4>주소</h4>
-            <p>{singleSchool?.sch?.schoolStreetAddress}</p>
+            <p>{singleSchool?.sch?.streetAddress}</p>
             <h4>연락처</h4>
-            <p style={{ margin: "0" }}>{singleSchool?.sch?.telephoneNumber}</p>
-            {singleSchool?.sch?.administrationPhoneNumber == -1 ? null : (
-              <p style={{ margin: "0" }}>{singleSchool?.sch?.administrationPhoneNumber}(행정실)</p>
+            <p style={{ margin: "0" }}>{singleSchool?.sch?.phoneNumber}</p>
+            {singleSchool?.sch?.adminPhone == -1 ? null : (
+              <p style={{ margin: "0" }}>{singleSchool?.sch?.adminPhone}(행정실)</p>
             )}
-            {singleSchool?.sch?.officePhoneNumber == -1 ? null : (
-              <p style={{ margin: "0" }}>{singleSchool?.sch?.officePhoneNumber}(교무실)</p>
+            {singleSchool?.sch?.officePhone == -1 ? null : (
+              <p style={{ margin: "0" }}>{singleSchool?.sch?.officePhone}(교무실)</p>
             )}
             <h4>홈페이지</h4>
-            <a
-              style={{ color: "black", textDecoration: "none" }}
-              href={singleSchool?.sch?.websiteAddress}
-            >
-              {singleSchool?.sch?.websiteAddress}
+            <a style={{ color: "black", textDecoration: "none" }} href={singleSchool?.sch?.website}>
+              {singleSchool?.sch?.website}
             </a>
           </QuestionWrapper>
         </Col>

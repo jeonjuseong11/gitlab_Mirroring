@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Col, Breadcrumb, Button, Avatar, Menu, Dropdown } from "antd";
+import { Col, Breadcrumb, Avatar, Menu, Dropdown } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { LOAD_POST_REQUEST, REMOVE_POST_REQUEST } from "../../constants/actionTypes";
 import { useNavigate, useParams } from "react-router-dom";
@@ -14,6 +14,7 @@ const SchoolBoardDetail = () => {
   const { schoolBoardPost } = useSelector((state) => state.post);
   const { postId, category } = useParams();
   const canEditOrDelete = me?.userNo === schoolBoardPost?.userNo;
+
   const removePost = () => {
     dispatch({
       type: REMOVE_POST_REQUEST,
@@ -22,6 +23,7 @@ const SchoolBoardDetail = () => {
       },
     });
   };
+
   const loadPost = (postId) => {
     dispatch({
       type: LOAD_POST_REQUEST,

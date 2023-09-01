@@ -5,7 +5,7 @@ import {
   QuestionCircleOutlined,
 } from "@ant-design/icons";
 import { Avatar, Button, Col, FloatButton, Row } from "antd";
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -24,7 +24,7 @@ const Header = () => {
   const { me } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const userInfo = localStorage.getItem("USERINFO");
+  // const userInfo = localStorage.getItem("USERINFO");
   const onLogOut = () => {
     info("로그아웃");
     dispatch({
@@ -34,10 +34,6 @@ const Header = () => {
     window.localStorage.clear();
     window.location.replace(`/`);
   };
-
-  useEffect(() => {
-    // console.log(me);
-  }, [me]);
 
   const handleProfileClick = () => {
     navigate("/profile");

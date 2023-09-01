@@ -1,4 +1,4 @@
-import { Button, Col, Form, Input, Select } from "antd";
+import { Button, Col, Form, Select } from "antd";
 import ReactQuill from "react-quill";
 import styled from "styled-components";
 

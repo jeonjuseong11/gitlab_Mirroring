@@ -1,5 +1,4 @@
-import { Button, Col, Input, List, Select } from "antd";
-import ReactQuill from "react-quill";
+import { Input, List } from "antd";
 import styled from "styled-components";
 
 export const SchoolBoardDetailCommentListItem = styled(List.Item)`
