@@ -34,6 +34,10 @@ const SlideItem = styled.div`
   );
   display: flex;
 `;
+const SlideImage = styled.img`
+  height: 100%;
+  margin: 0 auto;
+`;
 function AdSlider() {
   const settings = {
     centerMode: true,
@@ -48,7 +52,7 @@ function AdSlider() {
     dots: true,
     responsive: [
       {
-        breakpoint: 768,
+        breakpoint: 900,
         settings: {
           slidesToShow: 1,
         },
@@ -78,34 +82,22 @@ function AdSlider() {
       <Slider {...settings}>
         <Link to={`/schoolRanking`}>
           <SlideItem backgroundColor="#f5efd0">
-            <img
-              src={windowWidth <= 1200 ? banner1.small : banner1.large}
-              style={{ height: "100%", margin: "0 auto" }}
-            />
+            <SlideImage src={windowWidth <= 1392 ? banner1.small : banner1.large} />
           </SlideItem>
         </Link>
         <Link to={`/schoolboard/0`}>
           <SlideItem backgroundColor="#d0e3f7" secondBackgroundColor="#d0e3f7">
-            <img
-              src={windowWidth <= 1200 ? banner2.small : banner2.large}
-              style={{ height: "100%", margin: "0 auto" }}
-            />
+            <SlideImage src={windowWidth <= 1392 ? banner2.small : banner2.large} />
           </SlideItem>
         </Link>
         <Link to={`/schoolboard/0`}>
           <SlideItem backgroundColor="#a6d8ba" secondBackgroundColor="#81cc9f">
-            <img
-              src={windowWidth <= 1200 ? banner3.small : banner3.large}
-              style={{ height: "100%", margin: "0 auto" }}
-            />
+            <SlideImage src={windowWidth <= 1392 ? banner3.small : banner3.large} />
           </SlideItem>
         </Link>
         <Link to={`/schoolboard/0`}>
           <SlideItem backgroundColor="#d1c4db" secondBackgroundColor="#ba8bc7">
-            <img
-              src={windowWidth <= 1200 ? banner4.small : banner4.large}
-              style={{ height: "100%", margin: "0 auto" }}
-            />
+            <SlideImage src={windowWidth <= 1392 ? banner4.small : banner4.large} />
           </SlideItem>
         </Link>
       </Slider>

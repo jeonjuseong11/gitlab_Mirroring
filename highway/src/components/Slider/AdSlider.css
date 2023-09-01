@@ -25,14 +25,15 @@
 .slick-center {
   transform: translateX(-25%);
 }
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .slick-slide {
     width: 100%;
     margin: 0 auto;
-    margin-top: 4rem;
+    height: 100%; /* 모바일 화면에서 슬라이드 아이템의 높이를 자동 조절 */
   }
 
   .slick-slide.slick-active.slick-center.slick-current div {
+    transform: scale(1);
     position: relative;
     border-radius: 5px;
     width: 100%;
