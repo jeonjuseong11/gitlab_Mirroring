@@ -16,7 +16,7 @@ import { SearchInput, SearchInputIcon } from "../../styles/SearchFormStyle";
 import PromotionVideoItem from "./PromotionVideoItem";
 
 const PromotionVideosVer2 = () => {
-  const [count, setCount] = useState(3);
+  const [count, setCount] = useState(6);
   const [disable, setDisable] = useState(false);
   const location = useLocation();
   const [autoPlay, setAutoPlay] = useState(0);
@@ -50,7 +50,6 @@ const PromotionVideosVer2 = () => {
       setDisable(false);
     }
   }, [count]);
-  console.log(result);
   return (
     <>
       <Input
@@ -71,29 +70,35 @@ const PromotionVideosVer2 = () => {
         placeholder="검색"
         prefix={<SearchInputIcon />}
       />
-      <Row justify="center">
+      <Row>
         <List
           dataSource={result}
           renderItem={(item) => {
-            const randomOne = Math.floor(Math.random() * result.length);
-            const randomTwo = Math.floor(Math.random() * result.length);
-            const randomThree = Math.floor(Math.random() * result.length);
-            return (
-              <List.Item>
-                <Col xs={20} md={6}>
-                  <PromotionVideoItem item={result[randomOne]} />
-                </Col>
-                <Col style={{ marginLeft: "2rem" }} xs={20} md={6}>
-                  <PromotionVideoItem item={result[randomTwo]} />
-                </Col>
-                <Col style={{ marginLeft: "2rem" }} xs={20} md={6}>
-                  <PromotionVideoItem item={result[randomThree]} />
-                </Col>
-                <Col style={{ marginLeft: "2rem" }} xs={20} md={6}>
-                  <PromotionVideoItem item={result[randomOne]} />
-                </Col>
-              </List.Item>
-            );
+            if (item.it.id < count) {
+              return (
+                <Row style={{ float: "left" }}>
+                  <ul
+                    style={{
+                      marginLeft: "15rem",
+                      width: "10rem",
+
+                      listStyle: "none",
+                      textAlign: "left",
+                    }}
+                  >
+                    <li>
+                      <iframe src={item.it.src} />
+                    </li>
+                    <li style={{ width: "19rem", marginTop: "-1rem" }}>
+                      <h3>{item.it.title}</h3>
+                    </li>
+                    <li style={{ width: "19rem", marginTop: "-1rem" }}>
+                      <p>{item.it.content}</p>
+                    </li>
+                  </ul>
+                </Row>
+              );
+            }
           }}
         />
       </Row>
