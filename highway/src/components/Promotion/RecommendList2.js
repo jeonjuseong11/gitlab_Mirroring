@@ -16,17 +16,19 @@ const RecommendList2 = ({ type, infoData }) => {
   const randomThree = Math.floor(Math.random() * videosItems.length);
 
   return (
-    <>
-      <Col xs={23} md={8} justify="center">
-        <h2 style={{ color: "black" }}>{videosItems[randomOne].title}</h2>
+    <Row justify="center">
+      <Col xs={23} md={14} justify="center">
         <Link to={`${type}/${randomOne}`}>
           {/* <RecommnedListCol xs={23} md={23} src={`${infoData[random].src}`} /> */}
           <Col xs={23} md={23}>
-            <RecommendMainImg src={videosItems[randomOne].image} />
+            <img
+              style={{ width: "100%", marginTop: "2rem", marginLeft: "1rem" }}
+              src={videosItems[randomOne].image}
+            />
           </Col>
         </Link>
       </Col>
-    </>
+    </Row>
   );
 };
 
