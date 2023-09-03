@@ -23,7 +23,7 @@ const ReviewPost = () => {
   const [editContent, setEditContent] = useState("");
   useEffect(() => {
     if (me) {
-      const isUserReviewExist = filteredReviews.some((review) => review.userName === me.userId);
+      const isUserReviewExist = filteredReviews.some((review) => review.userName == me.userId);
       setReviewWrite(isUserReviewExist);
     }
   }, [filteredReviews, me]);

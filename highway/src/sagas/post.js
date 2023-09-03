@@ -48,17 +48,28 @@ import {
 import { REMOVE_POST_OF_ME } from "../constants/actionTypes";
 
 function uploadImagesAPI(data) {
-  //이미지 업로드
-  return axios.post("", data);
+  // for (const pair of data.entries()) {
+  //   console.log(pair[0], pair[1]);
+  // }
+  //이미지 업로드]
+  const localAccessToken = localStorage.getItem("ACCESSTOKEN");
+  return axios.post("http://highway-lb-1879269947.ap-northeast-2.elb.amazonaws.com/image", data, {
+    headers: {
+      "Content-Type": "multiparts/form-data",
+      ACCESS_TOKEN: ` ${localAccessToken}`, // ACCESS_TOKEN을 헤더에 추가
+    },
+  });
 }
 
 function* uploadImages(action) {
   try {
     const result = yield call(uploadImagesAPI, action.data);
+
     yield put({
       type: UPLOAD_IMAGES_SUCCESS,
-      data: result.data,
+      data: result.data.data,
     });
+    console.log(result.data);
   } catch (err) {
     console.error(err);
     yield put({
@@ -184,7 +195,7 @@ function* loadTagPosts(action) {
 }
 
 function loadPostsAPI(data) {
-  return axios.get(`/board/list/${data.schoolId}?cateNo=${data.category}`);
+  return axios.get(`/board/list/${data.category}/${data.schoolId}`);
 }
 
 function* loadPosts(action) {
@@ -205,8 +216,10 @@ function* loadPosts(action) {
 
 function addPostAPI(data) {
   //게시글 작성
+  console.log(data);
   return axios.post(
-    `/board?title=${data.title}&content=${data.content}&category=${data.category}`,
+    // `/board?title=${data.title}&content=${data.content}&category=${data.category}`,
+    `/board`,
     data
   );
 }

@@ -3,10 +3,7 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  LOAD_USER_REQUEST,
-  REFRESH_TOKEN_REQUEST,
-} from "./constants/actionTypes";
+import { LOAD_USER_REQUEST, REFRESH_TOKEN_REQUEST } from "./constants/actionTypes";
 
 import TopMenu from "./components/Menu/TopMenu";
 import SchoolDetail from "./pages/SchoolDetail";
@@ -105,53 +102,21 @@ function App() {
             </Route>
             <Route element={<SchoolBoard />}>
               <Route exact path="/schoolboard/" element={<BoardMain />} />
-              <Route
-                exact
-                path="/schoolboard/:category"
-                element={<BoardMain />}
-              />
-              <Route
-                exact
-                path="/schoolboard/:category/:postId"
-                element={<SchoolBoardDetail />}
-              />
+              <Route exact path="/schoolboard/:category" element={<BoardMain />} />
             </Route>
+            <Route exact path="/schoolboard/:category/:postId" element={<SchoolBoardDetail />} />
             <Route exact path="/schoolboard/post" element={<BoardPostForm />} />
-            <Route
-              exact
-              path="/schoolboard/:postId/update"
-              element={<BoardDetailUptadeForm />}
-            />
+            <Route exact path="/schoolboard/:postId/update" element={<BoardDetailUptadeForm />} />
             <Route exact path="/promotion" element={<Promotion />}>
               <Route exact path="/promotion" element={<PromotionHome />} />
               <Route exact path="/promotion/news" element={<PromotionNews />} />
-              <Route
-                exact
-                path="/promotion/videos"
-                element={<PromotionVideos />}
-              />
-              <Route
-                exact
-                path="/promotion/videos2"
-                element={<PromotionVideosVer2 />}
-              />
+              <Route exact path="/promotion/videos" element={<PromotionVideos />} />
+              <Route exact path="/promotion/videos2" element={<PromotionVideosVer2 />} />
             </Route>
-            <Route
-              exact
-              path="/promotion/news/:newsId"
-              element={<PromotionNewsDetail />}
-            />
-            <Route
-              exact
-              path="/promotion/videos/:videoId"
-              element={<PromotionVideoDetail />}
-            />
+            <Route exact path="/promotion/news/:newsId" element={<PromotionNewsDetail />} />
+            <Route exact path="/promotion/videos/:videoId" element={<PromotionVideoDetail />} />
             <Route exact path="/schoolranking" element={<SchoolRanking />} />
-            <Route
-              exact
-              path="/schooldetail/:schoolId"
-              element={<SchoolDetail />}
-            />
+            <Route exact path="/schooldetail/:schoolId" element={<SchoolDetail />} />
           </Route>
         </Routes>
       </div>
