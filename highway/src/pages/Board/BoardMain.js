@@ -1,5 +1,5 @@
 import { SearchOutlined, SmileOutlined, TeamOutlined } from "@ant-design/icons";
-import { Button, Col, Input, List, Menu } from "antd";
+import { Button, Col, Input, List, Menu, Spin } from "antd";
 import React, { useEffect, useState } from "react";
 import moment from "moment";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
@@ -56,7 +56,7 @@ const BoardMain = () => {
   const MAX_CONTENT_LENGTH = 20; // 최대 글자수
   const { category } = useParams();
   const dispatch = useDispatch();
-  const { schoolBoardPosts } = useSelector((state) => state.post);
+  const { schoolBoardPosts, loadPostsLoading } = useSelector((state) => state.post);
   const me = JSON.parse(localStorage.getItem("USERINFO"));
   const [hoveredItem, setHoveredItem] = useState(null);
   const [sortOrder, setSortOrder] = useState("latest");
@@ -209,76 +209,94 @@ const BoardMain = () => {
             최신순
           </Button>
         </div>
-
-        <List
-          itemLayout="vertical"
-          size="large"
-          dataSource={filteredData}
-          grid={{
-            gutter: 0,
-            column: 2,
-          }}
-          renderItem={(item, index) => (
-            <div
-              style={{
-                borderTop: "1px solid #f2f2f2",
-                paddingTop: "1rem",
-                paddingBottom: "1rem",
-              }}
-            >
-              <Link to={`/schoolboard/${item.category}/${item.id}`}>
-                <List.Item
-                  key={item.title}
-                  onMouseEnter={() => setHoveredItem(index)}
-                  onMouseLeave={() => setHoveredItem(null)}
-                  style={{
-                    textAlign: "left",
-                    borderRadius: "10px",
-                    padding: "1rem",
-                    alignItems: "center",
-                    background: hoveredItem === index ? "#f5f5f5" : "transparent",
-                    transition: "background 0.3s",
-                  }}
-                >
-                  <span style={{ color: "gray" }}>{changeCategory(item.category)}</span>
-                  <List.Item.Meta
-                    title={item.title}
-                    description={
-                      <div
-                        style={{
-                          height: "40px",
-                          maxHeight: "40px",
-                          overflow: "hidden",
-                          textOverflow: "ellipsis",
-                          display: "-webkit-box",
-                          WebkitBoxOrient: "vertical",
-                          WebkitLineClamp: 1,
-                        }}
-                      >
-                        <span
-                          dangerouslySetInnerHTML={{
-                            __html: formatContent(item?.content, MAX_CONTENT_LENGTH),
-                          }}
-                        ></span>
-                      </div>
-                    }
-                  />
-                  <div
+        {loadPostsLoading ? (
+          <Spin />
+        ) : (
+          <List
+            itemLayout="vertical"
+            size="large"
+            dataSource={filteredData}
+            grid={{
+              gutter: 0,
+              column: 2,
+            }}
+            renderItem={(item, index) => (
+              <div
+                style={{
+                  borderTop: "1px solid #f2f2f2",
+                  paddingTop: "1rem",
+                  paddingBottom: "1rem",
+                }}
+              >
+                <Link to={`/schoolboard/${item?.board?.category}/${item?.board?.id}`}>
+                  <List.Item
+                    key={item?.board?.title}
+                    onMouseEnter={() => setHoveredItem(index)}
+                    onMouseLeave={() => setHoveredItem(null)}
                     style={{
-                      position: "absolute",
-                      bottom: 16,
-                      right: 16,
-                      textAlign: "right",
-                      color: "#a2a2a2",
+                      textAlign: "left",
+                      borderRadius: "10px",
+                      padding: "1rem",
+                      alignItems: "center",
+                      background: hoveredItem === index ? "#f5f5f5" : "transparent",
+                      transition: "background 0.3s",
                     }}
                   >
-                    {formatDate(item.modifiedDate)}
-                  </div>
-                </List.Item>
-              </Link>
-            </div>
-          )}
-        />
+                    <span style={{ color: "gray" }}>{changeCategory(item?.board?.category)}</span>
+                    <List.Item.Meta
+                      title={item?.board?.title}
+                      description={
+                        <div
+                          style={{
+                            height: "40px",
+                            maxHeight: "40px",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            display: "-webkit-box",
+                            WebkitBoxOrient: "vertical",
+                            WebkitLineClamp: 1,
+                          }}
+                        >
+                          <span
+                            dangerouslySetInnerHTML={{
+                              __html: formatContent(item?.board?.content, MAX_CONTENT_LENGTH),
+                            }}
+                          ></span>
+                          {item?.imageUrls?.length > 0 && (
+                            <img
+                              src={item?.imageUrls[0]} // 첫 번째 이미지 URL
+                              alt={`게시글 이미지 - ${item?.board?.title}`}
+                              style={{
+                                width: "5vw",
+                                height: "5vw",
+                                float: "right",
+                                position: "absolute",
+                                top: 16,
+                                right: 16,
+                              }}
+                            />
+                          )}
+                        </div>
+                      }
+                    />
+
+                    <div
+                      style={{
+                        position: "absolute",
+                        bottom: 16,
+                        right: 16,
+                        textAlign: "right",
+                        color: "#a2a2a2",
+                      }}
+                    >
+                      {formatDate(item.modifiedDate)}
+                    </div>
+                  </List.Item>
+                </Link>
+              </div>
+            )}
+          />
+        )}
       </Col>
     </>
   );
