@@ -1,6 +1,6 @@
 import { UploadOutlined } from "@ant-design/icons";
-import { Modal, Spin, Upload } from "antd";
-import { useState } from "react";
+import { Modal, Upload } from "antd";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { REMOVE_IMAGE, UPLOAD_IMAGES_REQUEST } from "../constants/actionTypes";
 
@@ -9,34 +9,37 @@ const ImageUpload = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const dispatch = useDispatch();
   const uploadImagesLoading = useSelector((state) => state.post.uploadImagesLoading);
+  const { imagePaths } = useSelector((state) => state.post);
 
   const handleCloseModal = () => {
     setModalVisible(false);
   };
 
-  const handleFileChange = ({ fileList }) => {
-    // 이미지 파일만 필터링하여 업로드합니다.
-    const selectedImages = fileList.filter(
-      (file) => file.status === "done" || file.status === "uploading"
-    );
+  useEffect(() => {
+    console.log(uploadImagesLoading);
+  }, [uploadImagesLoading]);
 
-    if (selectedImages.length === 0) {
+  const handleFileChange = (file) => {
+    // 이미지 파일만 필터링하여 업로드합니다.
+    console.log(file);
+    const isSizeValid = file.size <= 10 * 1024 * 1024; // 10MB
+
+    if (!isSizeValid) {
+      setModalVisible(true);
       return;
     }
 
-    setFileList(selectedImages); // 이미지 파일만 선택된 fileList로 업데이트
-
-    const imageFormData = new FormData();
-
-    for (let i = 0; i < selectedImages.length; i++) {
-      imageFormData.append("image", selectedImages[i].originFileObj, selectedImages[i].name);
-    }
-
     // 이미지 업로드 액션을 디스패치합니다.
+    const imageFormData = new FormData();
+    imageFormData.append("image", file, file.name); // 파일 객체를 직접 사용
+
     dispatch({
       type: UPLOAD_IMAGES_REQUEST,
       data: imageFormData,
     });
+
+    // 이미지를 fileList에 추가합니다.
+    setFileList([...fileList, file]);
   };
 
   const handleRemove = (file) => {
@@ -45,7 +48,15 @@ const ImageUpload = () => {
       type: REMOVE_IMAGE,
       data: fileList.indexOf(file),
     });
+
+    // 이미지를 fileList에서 제거합니다.
+    const newFileList = fileList.filter((item) => item !== file);
+    setFileList(newFileList);
   };
+
+  useEffect(() => {
+    console.log(imagePaths);
+  }, [imagePaths]);
 
   const beforeUploadCheck = (file) => {
     const isImage = file.type.startsWith("image/");
@@ -62,7 +73,7 @@ const ImageUpload = () => {
         fileList={fileList}
         multiple
         listType="picture-card"
-        onChange={handleFileChange}
+        customRequest={({ file }) => handleFileChange(file)} // 파일 하나로 수정
         onRemove={handleRemove}
         beforeUpload={beforeUploadCheck}
       >
@@ -74,13 +85,8 @@ const ImageUpload = () => {
         )}
       </Upload>
       <Modal visible={modalVisible} onCancel={handleCloseModal} onOk={handleCloseModal} centered>
-        <p>이미지 파일만 올릴 수 있습니다</p>
+        <p>이미지 파일은 10MB 이하만 업로드 가능합니다.</p>
       </Modal>
-      {uploadImagesLoading && (
-        <div style={{ textAlign: "center", marginTop: 16 }}>
-          <Spin size="large" />
-        </div>
-      )}
     </>
   );
 };
