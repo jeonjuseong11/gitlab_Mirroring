@@ -7,20 +7,21 @@ import { REMOVE_IMAGE, UPLOAD_IMAGES_REQUEST } from "../constants/actionTypes";
 const ImageUpload = () => {
   const [fileList, setFileList] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
+  const [sizeModalVisible, setSizeModalVisible] = useState(false);
   const [previewVisible, setPreviewVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const dispatch = useDispatch();
-  const uploadImagesLoading = useSelector((state) => state.post.uploadImagesLoading);
-  const { imagePaths } = useSelector((state) => state.post);
+  const { imagePaths, uploadImagesLoading, uploadImagesError } = useSelector((state) => state.post);
 
   const handleCloseModal = () => {
     setModalVisible(false);
+    setSizeModalVisible(false);
   };
 
   const handlePreview = (file) => {
     const index = fileList.indexOf(file);
     if (index !== -1) {
-      setPreviewImage(imagePaths[index]);
+      setPreviewImage(imagePaths[index].imageUrl[0]);
       setPreviewVisible(true);
     }
   };
@@ -30,7 +31,6 @@ const ImageUpload = () => {
   }, [uploadImagesLoading]);
 
   const handleFileChange = (file) => {
-    console.log(file);
     const isSizeValid = file.size <= 10 * 1024 * 1024; // 10MB
 
     if (!isSizeValid) {
@@ -44,13 +44,8 @@ const ImageUpload = () => {
 
     dispatch({
       type: UPLOAD_IMAGES_REQUEST,
-      data: imageFormData,
+      data: { imageFormData: imageFormData, newUrl: URL.createObjectURL(file) },
     });
-
-    // 이미지를 fileList에 추가합니다.
-    const newFile = { ...file };
-    newFile.url = URL.createObjectURL(file); // 이미지 파일의 url 속성 설정
-    setFileList([...fileList, newFile]); // 수정된 파일 객체를 추가
   };
 
   const handleRemove = (file) => {
@@ -60,25 +55,34 @@ const ImageUpload = () => {
         type: REMOVE_IMAGE,
         data: index,
       });
-
-      const newFileList = fileList.filter((item) => item !== file);
-      setFileList(newFileList);
     }
   };
 
   useEffect(() => {
     console.log(imagePaths);
+    // imagePaths 배열에서 각 이미지에 대한 URL을 생성하여 fileList에 추가
+    const newFileList = imagePaths.map((imagePath, index) => ({
+      uid: index,
+      name: `images${index}`,
+      status: "done",
+      url: imagePath.file, // 이미지 URL에 쿼리 스트링 추가
+    }));
+    setFileList(newFileList);
   }, [imagePaths]);
 
   const beforeUploadCheck = (file) => {
     const isImage = file.type.startsWith("image/");
     if (!isImage) {
-      setModalVisible(true);
+      setSizeModalVisible(true);
       return false;
     }
     return true;
   };
-
+  useEffect(() => {
+    if (uploadImagesError) {
+      alert("이미지 업로드 실패");
+    }
+  }, [uploadImagesError]);
   return (
     <>
       <Upload
@@ -101,7 +105,14 @@ const ImageUpload = () => {
       <Modal visible={modalVisible} onCancel={handleCloseModal} onOk={handleCloseModal} centered>
         <p>이미지 파일은 10MB 이하만 업로드 가능합니다.</p>
       </Modal>
-
+      <Modal
+        visible={sizeModalVisible}
+        onCancel={handleCloseModal}
+        onOk={handleCloseModal}
+        centered
+      >
+        <p>이미지 파일만 올릴 수 있습니다</p>
+      </Modal>
       <Modal
         visible={previewVisible}
         onCancel={() => setPreviewVisible(false)}

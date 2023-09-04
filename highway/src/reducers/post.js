@@ -107,12 +107,14 @@ const reducer = (state = initialState, action) =>
         draft.uploadImagesError = null;
         break;
       case UPLOAD_IMAGES_SUCCESS: {
-        draft.imagePaths = [...draft.imagePaths, ...action.data];
+        draft.imagePaths = [...draft.imagePaths, action.data];
         draft.uploadImagesLoading = false;
         draft.uploadImagesDone = true;
         break;
       }
       case UPLOAD_IMAGES_FAILURE:
+        draft.imagePaths = draft.imagePaths.filter((v, i) => i !== action.data);
+
         draft.uploadImagesLoading = false;
         draft.uploadImagesError = action.error;
         break;
@@ -174,6 +176,7 @@ const reducer = (state = initialState, action) =>
         draft.loadPostsLoading = false;
         draft.loadPostsDone = true;
         draft.schoolBoardPosts = action.data;
+        draft.schoolBoardPost = null;
         // draft.hasMorePosts = action.data.length === 10;
         break;
       case LOAD_USER_POSTS_FAILURE:
@@ -190,6 +193,7 @@ const reducer = (state = initialState, action) =>
       case ADD_POST_SUCCESS:
         draft.addPostLoading = false;
         draft.addPostDone = true;
+        draft.schoolBoardPost = action.data;
         draft.schoolBoardPosts.unshift(action.data);
         draft.imagePaths = [];
         break;

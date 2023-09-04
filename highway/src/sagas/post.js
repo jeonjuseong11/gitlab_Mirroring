@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { all, fork, put, takeLatest, throttle, call } from "redux-saga/effects";
 
 import {
@@ -63,13 +64,12 @@ function uploadImagesAPI(data) {
 
 function* uploadImages(action) {
   try {
-    const result = yield call(uploadImagesAPI, action.data);
+    const result = yield call(uploadImagesAPI, action.data.imageFormData);
 
     yield put({
       type: UPLOAD_IMAGES_SUCCESS,
-      data: result.data.data,
+      data: { imageUrl: result.data.data, file: action.data.newUrl },
     });
-    console.log(result.data);
   } catch (err) {
     console.error(err);
     yield put({
@@ -216,7 +216,6 @@ function* loadPosts(action) {
 
 function addPostAPI(data) {
   //게시글 작성
-  console.log(data);
   return axios.post(
     // `/board?title=${data.title}&content=${data.content}&category=${data.category}`,
     `/board`,
@@ -229,8 +228,10 @@ function* addPost(action) {
     const result = yield call(addPostAPI, action.data);
     yield put({
       type: ADD_POST_SUCCESS,
-      data: result.data,
+      data: result.data.data,
     });
+    // console.log(result.data.data);
+
     yield put({
       type: LOAD_POSTS_REQUEST,
       data: { category: action.data.category, schoolId: action.data.schoolId },

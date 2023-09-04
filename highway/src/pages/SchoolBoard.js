@@ -20,9 +20,9 @@ const SchoolBoard = () => {
   useEffect(() => {
     if (category === "0") {
       setTItle("자유게시판");
-    } else if (category === "1") {
+    } else if (category === "01") {
       setTItle("질문게시판");
-    } else if (category === "2") {
+    } else if (category === "02") {
       setTItle("프로젝트 모집");
     }
   }, [category]);

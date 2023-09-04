@@ -40,11 +40,11 @@ const SchoolBoardDetail = () => {
       data: postId,
     });
   };
-
   useEffect(() => {
-    loadPost(postId);
-    // console.log(category);
-  }, [postId, category]);
+    if (postId && category) {
+      loadPost(postId);
+    }
+  }, []);
 
   return (
     <Row gutter={[16, 16]} justify="center" style={{ paddingTop: "1rem" }}>

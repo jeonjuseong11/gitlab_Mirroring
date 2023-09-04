@@ -65,11 +65,13 @@ const BoardMain = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const loadPosts = (category) => {
-    let schoolId = parseInt(category) === 10 ? 0 : me && me.schoolId ? me.schoolId : 0;
-    dispatch({
-      type: LOAD_POSTS_REQUEST,
-      data: { category, schoolId },
-    });
+    if (me) {
+      let schoolId = parseInt(category) === 10 ? 0 : me && me.schoolId ? me.schoolId : 0;
+      dispatch({
+        type: LOAD_POSTS_REQUEST,
+        data: { category, schoolId },
+      });
+    }
   };
 
   useEffect(() => {
@@ -119,11 +121,11 @@ const BoardMain = () => {
       },
     },
     {
-      key: "/schoolboard/1",
+      key: "/schoolboard/01",
       icon: <SearchOutlined />,
       label: "질문게시판",
       onClick: () => {
-        navigate("/schoolboard/1");
+        navigate("/schoolboard/01");
         // if (!me) {
         //   needLoginError("글쓰기는 로그인 후에 가능합니다.", navigate);
         // } else {
@@ -132,11 +134,11 @@ const BoardMain = () => {
       },
     },
     {
-      key: "/schoolboard/2",
+      key: "/schoolboard/02",
       icon: <TeamOutlined />,
       label: "프로젝트 모집",
       onClick: () => {
-        navigate("/schoolboard/2");
+        navigate("/schoolboard/02");
         // if (!me) {
         //   needLoginError("글쓰기는 로그인 후에 가능합니다.", navigate);
         // } else {
@@ -230,7 +232,7 @@ const BoardMain = () => {
               >
                 <Link to={`/schoolboard/${item?.board?.category}/${item?.board?.id}`}>
                   <List.Item
-                    key={item?.board?.title}
+                    key={item?.board?.id}
                     onMouseEnter={() => setHoveredItem(index)}
                     onMouseLeave={() => setHoveredItem(null)}
                     style={{
@@ -270,6 +272,8 @@ const BoardMain = () => {
                                 width: "5vw",
                                 height: "5vw",
                                 float: "right",
+                                minWidth: "3rem",
+                                minHeight: "3rem",
                                 position: "absolute",
                                 top: 16,
                                 right: 16,
