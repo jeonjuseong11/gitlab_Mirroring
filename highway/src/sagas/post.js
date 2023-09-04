@@ -45,6 +45,9 @@ import {
   REMOVE_POST_COMMENT_REQUEST,
   REMOVE_POST_COMMENT_SUCCESS,
   REMOVE_POST_COMMENT_FAILURE,
+  LOAD_WROTE_POSTS_REQUEST,
+  LOAD_WROTE_POSTS_SUCCESS,
+  LOAD_WROTE_POSTS_FAILURE,
 } from "../constants/actionTypes";
 import { REMOVE_POST_OF_ME } from "../constants/actionTypes";
 
@@ -54,12 +57,16 @@ function uploadImagesAPI(data) {
   // }
   //이미지 업로드]
   const localAccessToken = localStorage.getItem("ACCESSTOKEN");
-  return axios.post("http://highway-lb-1879269947.ap-northeast-2.elb.amazonaws.com/image", data, {
-    headers: {
-      "Content-Type": "multiparts/form-data",
-      ACCESS_TOKEN: ` ${localAccessToken}`, // ACCESS_TOKEN을 헤더에 추가
-    },
-  });
+  return axios.post(
+    "http://highway-lb-1879269947.ap-northeast-2.elb.amazonaws.com/image",
+    data,
+    {
+      headers: {
+        "Content-Type": "multiparts/form-data",
+        ACCESS_TOKEN: ` ${localAccessToken}`, // ACCESS_TOKEN을 헤더에 추가
+      },
+    }
+  );
 }
 
 function* uploadImages(action) {
@@ -341,6 +348,27 @@ function* loadPostComments(action) {
   }
 }
 
+function loadWrotePostsAPI(data) {
+  //내가 작성한 게시글 조회
+  return axios.get(`/board/user`);
+}
+
+function* loadWrotePosts(action) {
+  try {
+    const result = yield call(loadWrotePostsAPI, action.data);
+    yield put({
+      type: LOAD_WROTE_POSTS_SUCCESS,
+      data: result.data.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: LOAD_WROTE_POSTS_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
 function removePostCommentAPI(data) {
   // 게시물 댓글 삭제
   return axios.put(`/comment/delete`, data);
@@ -449,6 +477,9 @@ function* watchUpdatePostComment() {
 function* watchRemovePostComment() {
   yield takeLatest(REMOVE_POST_COMMENT_REQUEST, removePostComment);
 }
+function* watchLoadWrotePosts() {
+  yield takeLatest(LOAD_WROTE_POSTS_REQUEST, loadWrotePosts);
+}
 
 export default function* postSaga() {
   yield all([
@@ -466,5 +497,6 @@ export default function* postSaga() {
     fork(watchLoadPostComments),
     fork(watchUpdatePostComment),
     fork(watchRemovePostComment),
+    fork(watchLoadWrotePosts),
   ]);
 }
