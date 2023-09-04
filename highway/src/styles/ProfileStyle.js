@@ -50,3 +50,14 @@ export const LikePostList = styled(List)`
 export const ProfileTitle = styled.h3`
   margin: 0;
 `;
+
+export const WrotePost = styled.div`
+  background-color: white;
+  border-radius: 10px;
+  text-align: left;
+  padding: 2rem;
+  margin-bottom: 7.7rem;
+  &:after {
+    color: red;
+  }
+`;

@@ -46,6 +46,9 @@ import {
   ADD_POST_COMMENT_REPLY_FAILURE,
   ADD_POST_COMMENT_REPLY_REQUEST,
   ADD_POST_COMMENT_REPLY_SUCCESS,
+  LOAD_WROTE_POSTS_REQUEST,
+  LOAD_WROTE_POSTS_SUCCESS,
+  LOAD_WROTE_POSTS_FAILURE,
 } from "../constants/actionTypes";
 
 export const initialState = {
@@ -53,9 +56,13 @@ export const initialState = {
   schoolBoardPosts: [], //게시글 리스트
   schoolBoardPost: null, //단일 게시글
   schoolBoardPostComments: [], // 게시글 댓글
+  wrotePosts: [], // 내가 작성한 게시글
   loadPostsLoading: false, //게시글 리스트
   loadPostsDone: false,
   loadPostsError: null,
+  loadWrotePostsLoading: false, //내가 작성한 게시글
+  loadWrotePostsDone: false,
+  loadWrotePostsError: null,
   loadPostLoading: false, //단일 게시글
   loadPostDone: false,
   loadPostError: null,
@@ -138,7 +145,9 @@ const reducer = (state = initialState, action) =>
         draft.unlikePostError = null;
         break;
       case UNLIKE_POST_SUCCESS: {
-        draft.Likers = draft.Likers.filter((liker) => liker.id !== action.data.heartId);
+        draft.Likers = draft.Likers.filter(
+          (liker) => liker.id !== action.data.heartId
+        );
         draft.unlikePostLoading = false;
         draft.unlikePostDone = true;
         break;
@@ -205,8 +214,9 @@ const reducer = (state = initialState, action) =>
       case UPDATE_POST_SUCCESS:
         draft.updatePostLoading = false;
         draft.updatePostDone = true;
-        draft.schoolBoardPostComments.find((v) => v.id === action.data.PostId).content =
-          action.data.content;
+        draft.schoolBoardPostComments.find(
+          (v) => v.id === action.data.PostId
+        ).content = action.data.content;
         break;
       case UPDATE_POST_FAILURE:
         draft.updatePostLoading = false;
@@ -220,7 +230,9 @@ const reducer = (state = initialState, action) =>
       case REMOVE_POST_SUCCESS:
         draft.removePostLoading = false;
         draft.removePostDone = true;
-        draft.mainPosts = draft.schoolBoardPosts.filter((v) => v.id !== action.data.PostId);
+        draft.mainPosts = draft.schoolBoardPosts.filter(
+          (v) => v.id !== action.data.PostId
+        );
         break;
       case REMOVE_POST_FAILURE:
         draft.removePostLoading = false;
@@ -297,6 +309,21 @@ const reducer = (state = initialState, action) =>
       case ADD_POST_COMMENT_REPLY_FAILURE:
         draft.addPostCommentReplyLoading = false;
         draft.addPostCommentReplyError = action.error;
+        break;
+      case LOAD_WROTE_POSTS_REQUEST:
+        draft.loadWrotePostsLoading = true;
+        draft.loadWrotePostsDone = false;
+        draft.loadWrotePostsError = null;
+        break;
+      case LOAD_WROTE_POSTS_SUCCESS: {
+        draft.wrotePosts = action.data;
+        draft.loadWrotePostsLoading = false;
+        draft.loadWrotePostsDone = true;
+        break;
+      }
+      case LOAD_WROTE_POSTS_FAILURE:
+        draft.loadWrotePostsLoading = false;
+        draft.loadWrotePostsError = action.error;
         break;
       default:
         return state;
