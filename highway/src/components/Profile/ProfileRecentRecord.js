@@ -121,7 +121,7 @@ const ProfileRecentRecord = () => {
           </LikePostWrapper>
         </Col>
       ) : (
-        <Col xs={24} md={11} offset={4}>
+        <Col xs={{ span: 24, offset: 0 }} md={{ span: 11, offset: 4 }}>
           <WrotePost>
             <ProfileTitle>
               내가 작성한 게시글
