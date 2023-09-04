@@ -59,7 +59,7 @@ const ProfileRecentRecord = () => {
           </div>
         </SchoolWrapper>
       </Col>
-      <Col xs={24} md={11} offset={4}>
+      <Col xs={{ span: 24, offset: 0 }} md={{ span: 11, offset: 4 }}>
         <LikePostWrapper>
           <ProfileTitle>좋아요 누른 게시물</ProfileTitle>
           <LikePostList
