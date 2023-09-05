@@ -241,3 +241,15 @@ export const RecommnedSideBottomDiv = styled.div`
     text-decoration-line: underline;
   }
 `;
+
+// PromotionVideoVer2
+
+export const PromotionVideosVerVideoList = styled.ul`
+margin-left: 13.5vw
+width: 10rem;
+list-style: none;
+text-align: left;
+  @media screen and (max-width: 548px) {
+    margin-left: 1rem;
+  }
+`;

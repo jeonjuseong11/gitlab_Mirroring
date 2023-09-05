@@ -10,6 +10,7 @@ import {
   PromotionVideosImage,
   PromotionVideosListItem,
   PromotionVideosTitle,
+  PromotionVideosVerVideoList,
   PromotionVideosWriter,
 } from "../../styles/PromotionStyle";
 import { SearchInput, SearchInputIcon } from "../../styles/SearchFormStyle";
@@ -61,7 +62,7 @@ const PromotionVideosVer2 = () => {
         style={{
           marginTop: "2rem",
           marginBottom: "2rem",
-          width: "40%",
+          width: "40remm",
           backgroundColor: "#f2f2f2",
           borderRadius: "10px",
           border: " #f2f2f2",
@@ -77,25 +78,17 @@ const PromotionVideosVer2 = () => {
             if (item.it.id < count) {
               return (
                 <Row style={{ float: "left" }}>
-                  <ul
-                    style={{
-                      marginLeft: "15rem",
-                      width: "10rem",
-
-                      listStyle: "none",
-                      textAlign: "left",
-                    }}
-                  >
+                  <PromotionVideosVerVideoList>
                     <li>
                       <iframe src={item.it.src} />
                     </li>
-                    <li style={{ width: "19rem", marginTop: "-1rem" }}>
+                    <li style={{ marginTop: "-1rem" }}>
                       <h3>{item.it.title}</h3>
                     </li>
-                    <li style={{ width: "19rem", marginTop: "-1rem" }}>
+                    <li style={{ marginTop: "-1rem" }}>
                       <p>{item.it.content}</p>
                     </li>
-                  </ul>
+                  </PromotionVideosVerVideoList>
                 </Row>
               );
             }
