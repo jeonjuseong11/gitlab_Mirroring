@@ -81,14 +81,14 @@ const Header = () => {
               </Button>
             </>
           ) : (
-            <div style={{ marginTop: "1rem" }}>
+            <>
               <Link to="/login" style={{ marginRight: "1rem", color: "black" }}>
                 로그인
               </Link>
               <Link to="/signup" style={{ color: "black" }}>
                 회원가입
               </Link>
-            </div>
+            </>
           )}
         </Col>
       </Row>

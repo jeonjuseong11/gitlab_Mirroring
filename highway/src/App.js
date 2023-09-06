@@ -1,7 +1,7 @@
 import { ConfigProvider, message } from "antd";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { LOAD_USER_REQUEST, REFRESH_TOKEN_REQUEST } from "./constants/actionTypes";
 
@@ -30,11 +30,12 @@ import ProfileRecentRecord from "./components/Profile/ProfileRecentRecord";
 import BoardMain from "./pages/Board/BoardMain";
 import BoardPostForm from "./components/Board/BoardPostForm";
 import { info } from "./utils/Message";
-import BoardDetailUptadeForm from "./components/Board/BoardDetailUptadeForm";
+import BoardDetailUpdateForm from "./components/Board/BoardDetailUpdateForm";
 import PromotionVideosVer2 from "./components/Promotion/PromotionVideosVer2";
 
 function App() {
   const dispatch = useDispatch();
+  const [hasShownWelcomeMessage, setHasShownWelcomeMessage] = useState(false);
   const access = localStorage.getItem("ACCESSTOKEN");
   const expire = localStorage.getItem("EXPIRES");
   const navigate = useNavigate();
@@ -81,12 +82,23 @@ function App() {
     }
   }, [access, expire]);
   useEffect(() => {
-    if (me) {
-      // console.log(me);
+    if (me && !hasShownWelcomeMessage) {
       info(`${me.userName}님 환영합니다.`);
       localStorage.setItem("USERINFO", JSON.stringify(me));
+      setHasShownWelcomeMessage(true);
+
+      // 사용자가 로그인 성공 후에만 한 번 환영 메시지를 표시하도록 설정
+      localStorage.setItem("HAS_SHOWN_WELCOME_MESSAGE", "true");
     }
-  }, [me]);
+  }, [me, hasShownWelcomeMessage]);
+
+  // 새로고침을 해도 환영 메시지가 더 이상 나타나지 않도록 체크
+  useEffect(() => {
+    const hasShownMessage = localStorage.getItem("HAS_SHOWN_WELCOME_MESSAGE");
+    if (hasShownMessage === "true") {
+      setHasShownWelcomeMessage(true);
+    }
+  }, []);
   return (
     <ConfigProvider theme={{ token: { colorPrimary: "#8282ff" } }}>
       <div className="App">
@@ -106,7 +118,7 @@ function App() {
             </Route>
             <Route exact path="/schoolboard/:category/:postId" element={<SchoolBoardDetail />} />
             <Route exact path="/schoolboard/post" element={<BoardPostForm />} />
-            <Route exact path="/schoolboard/:postId/update" element={<BoardDetailUptadeForm />} />
+            <Route exact path="/schoolboard/:postId/update" element={<BoardDetailUpdateForm />} />
             <Route exact path="/promotion" element={<Promotion />}>
               <Route exact path="/promotion" element={<PromotionHome />} />
               <Route exact path="/promotion/news" element={<PromotionNews />} />
