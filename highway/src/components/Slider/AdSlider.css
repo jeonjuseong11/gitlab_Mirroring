@@ -7,7 +7,7 @@
 
 .slick-slide div {
   transition: all ease-in-out 0.3s;
-  height: 20rem;
+  height: 18rem;
 }
 
 .slick-slide.slick-active.slick-center.slick-current div {
@@ -30,6 +30,10 @@
     width: 100%;
     margin: 0 auto;
     height: 100%; /* 모바일 화면에서 슬라이드 아이템의 높이를 자동 조절 */
+  }
+  .slick-slide div {
+    transition: all ease-in-out 0.3s;
+    height: 15rem;
   }
 
   .slick-slide.slick-active.slick-center.slick-current div {

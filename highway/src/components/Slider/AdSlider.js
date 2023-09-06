@@ -45,7 +45,7 @@ function AdSlider() {
     arrows: false,
     infinite: true,
     lazyLoad: true,
-    speed: 500,
+    speed: 300,
     slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
