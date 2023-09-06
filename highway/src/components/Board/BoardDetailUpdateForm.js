@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Form, Input, Row } from "antd";
 import { EditOutlined } from "@ant-design/icons";
-import { UPDATE_POST_REQUEST } from "../../constants/actionTypes";
+import { LOAD_POST_REQUEST, UPDATE_POST_REQUEST } from "../../constants/actionTypes";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { changeCategory } from "../../pages/Board/BoardMain";
 import styled from "styled-components";
 import {
   BoardDetailUpdateReactQuill,
   BoardDetailUpdateCol,
   BoardDetailUpdateSelect,
-  CancelUpdateBoardDetalilButton,
+  CancelUpdateBoardDetailButton,
   UpdateBoardDetailButton,
 } from "../../styles/BoardDetailUpdateStyle";
+import ImageUpload from "../ImageUpload"; // ImageUpload 컴포넌트를 가져옵니다.
 
 const CustomQuillWrapper = styled(Form.Item)`
   .ql-container {
@@ -33,31 +33,44 @@ const CustomQuillWrapper = styled(Form.Item)`
   }
 `;
 
-const BoardDetailUptadeForm = () => {
+const BoardDetailUpdateForm = () => {
   const { schoolBoardPost } = useSelector((state) => state.post);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [form] = Form.useForm();
-  const [fileList, setFileList] = useState([]);
   const { me } = useSelector((state) => state.user);
   const accessToken = localStorage.getItem("ACCESSTOKEN");
   const [isEditorFocused, setIsEditorFocused] = useState(false);
   const navigator = useNavigate();
-  const [title, setTitle] = useState(schoolBoardPost?.board.title);
-  const [content, setContent] = useState(schoolBoardPost?.board.content.replace(/<[^>]*>?/g, ""));
-  const [category, setCategory] = useState(schoolBoardPost?.board.category);
-  console.log(title);
-  console.log(content);
-  console.log(category);
+
+  const { postId } = useParams();
+
+  // 컴포넌트가 마운트될 때 게시물 데이터를 불러옵니다.
   useEffect(() => {
-    // 새로고침 시 로컬 스토리지에서 로그인 정보 가져오기
-    if (accessToken) {
-    } else {
+    if (postId) {
+      dispatch({
+        type: LOAD_POST_REQUEST,
+        data: postId,
+      });
+    }
+  }, [dispatch, postId]);
+
+  // 인증되지 않은 경우 리디렉션합니다.
+  useEffect(() => {
+    if (!accessToken) {
       navigate(-1);
     }
   }, [navigate, accessToken]);
-  const { postId } = useParams();
 
+  // 게시물 데이터를 기반으로 폼 필드의 초기값을 설정합니다.
+  const initialValues = {
+    category: schoolBoardPost?.board.category,
+    title: schoolBoardPost?.board.title,
+    content: schoolBoardPost?.board.content.replace(/<[^>]*>?/g, ""),
+    imageList: schoolBoardPost?.board.imageList || [],
+  };
+
+  // 폼 제출을 처리합니다.
   const onFinish = (values) => {
     dispatch({
       type: UPDATE_POST_REQUEST,
@@ -66,16 +79,14 @@ const BoardDetailUptadeForm = () => {
         content: values.content,
         category: values.category,
         id: postId,
+        imageList: values.imageList, // 여기에 업데이트된 이미지 목록을 포함합니다.
       },
     });
-    console.log(category);
-    window.location.replace(`/schoolboard/${category}`);
+    navigate(`/schoolboard/${values.category}/${postId}`);
   };
 
-  const handleChange = ({ fileList }) => {
-    setFileList(fileList);
-  };
-  const [options, setOptions] = useState();
+  const [options, setOptions] = useState([]);
+
   useEffect(() => {
     if (me?.tag) {
       const newOptions = [
@@ -92,29 +103,15 @@ const BoardDetailUptadeForm = () => {
   return (
     <Row gutter={[16, 16]} justify="center">
       <BoardDetailUpdateCol xs={24} md={15}>
-        <Form form={form} onFinish={onFinish}>
+        <Form form={form} onFinish={onFinish} initialValues={initialValues}>
           <Form.Item name="category">
-            <BoardDetailUpdateSelect
-              placeholder={changeCategory(schoolBoardPost?.board.category)}
-              onChange={(e) => {
-                setCategory(e);
-              }}
-              value={category}
-              options={options}
-            />
+            <BoardDetailUpdateSelect value={initialValues.category} options={options} />
           </Form.Item>
           <Form.Item name="title">
-            <Input
-              className="custom-input"
-              placeholder={`${schoolBoardPost?.board.title}`}
-              value={title}
-            />
+            <Input className="custom-input" />
           </Form.Item>
           <CustomQuillWrapper isFocused={isEditorFocused} name="content">
             <BoardDetailUpdateReactQuill
-              placeholder={content}
-              value={content}
-              onChange={handleChange}
               theme="snow"
               onFocus={() => setIsEditorFocused(true)}
               onBlur={() => setIsEditorFocused(false)}
@@ -123,28 +120,29 @@ const BoardDetailUptadeForm = () => {
                   [{ header: [1, 2, 3, 4, 5, 6] }, { font: [] }],
                   ["bold", "italic", "underline", "strike", "blockquote"],
                   [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }],
-                  ["link", "image", "video"],
+                  ["link", "video"], // 이미지를 툴바에 포함합니다.
                   [{ direction: "rtl" }],
                   [{ color: [] }, { background: [] }],
                   [{ align: [] }],
                   ["clean"],
                 ],
                 clipboard: {
-                  // toggle to add extra line breaks when pasting HTML:
                   matchVisual: false,
                 },
               }}
             />
           </CustomQuillWrapper>
+          <Form.Item name="imageList">
+            <ImageUpload imageList={initialValues.imageList} />
+          </Form.Item>
           <Form.Item>
-            <CancelUpdateBoardDetalilButton
+            <CancelUpdateBoardDetailButton
               onClick={() => {
-                // navigator(`/schoolboard/${values.category}`) // 카테고리로 돌아갈려면
-                navigator(-1);
+                navigate(`/schoolboard/${initialValues.category}/${postId}`);
               }}
             >
               취소
-            </CancelUpdateBoardDetalilButton>
+            </CancelUpdateBoardDetailButton>
             <UpdateBoardDetailButton type="primary" htmlType="submit">
               수정하기 <EditOutlined />
             </UpdateBoardDetailButton>
@@ -155,4 +153,4 @@ const BoardDetailUptadeForm = () => {
   );
 };
 
-export default BoardDetailUptadeForm;
+export default BoardDetailUpdateForm;

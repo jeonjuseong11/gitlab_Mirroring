@@ -3,9 +3,10 @@ import { HeartOutlined, HeartTwoTone, MessageOutlined, MessageTwoTone } from "@a
 import { Button, Col } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { LIKE_POST_REQUEST, UNLIKE_POST_REQUEST } from "../../constants/actionTypes";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-const ToggleGoodAndCommentBtn = ({ toggle, setToggle }) => {
+const ToggleGoodAndCommentBtn = () => {
+  const navigate = useNavigate();
   const { schoolBoardPost } = useSelector((state) => state.post);
 
   const dispatch = useDispatch();
@@ -35,7 +36,10 @@ const ToggleGoodAndCommentBtn = ({ toggle, setToggle }) => {
     });
     setGood(false);
   };
-
+  const handleButtonClick = () => {
+    // 이 버튼을 클릭할 때 원하는 페이지로 이동하도록 navigate 함수를 호출합니다.
+    navigate(`/schoolboard/${schoolBoardPost?.board.category}`); // '/your-desired-route'는 이동하고 싶은 경로에 맞게 변경하세요.
+  };
   return (
     <>
       <Col xs={{ span: 24, offset: 0 }} md={{ span: 15 }} style={{ textAlign: "left" }}>
@@ -49,36 +53,12 @@ const ToggleGoodAndCommentBtn = ({ toggle, setToggle }) => {
             <HeartOutlined key="heart" /> 좋아요
           </Button>
         )}
-        {!toggle ? (
-          <Button
-            style={{ marginLeft: "1rem" }}
-            type="text"
-            onClick={() => {
-              setToggle(!toggle);
-            }}
-            icon={<MessageOutlined />}
-          >
-            댓글 {filteredComments.length}
-          </Button>
-        ) : (
-          <Button
-            style={{ marginLeft: "1rem" }}
-            type="text"
-            onClick={() => {
-              setToggle(!toggle);
-            }}
-            icon={<MessageTwoTone twoToneColor="#8282ff" />}
-          >
-            <span
-              style={{
-                color: !toggle ? "black" : "#8282ff",
-                fontWeight: !toggle ? "" : "700",
-              }}
-            >
-              댓글 {filteredComments.length}
-            </span>
-          </Button>
-        )}
+        <Button style={{ marginLeft: "1rem" }} type="text" icon={<MessageOutlined />}>
+          댓글 {filteredComments.length}
+        </Button>
+        <Button style={{ float: "right" }} onClick={handleButtonClick}>
+          목록
+        </Button>
       </Col>
     </>
   );

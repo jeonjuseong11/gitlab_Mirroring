@@ -66,6 +66,9 @@ const SchoolBoardDetail = () => {
             <Breadcrumb
               items={[
                 {
+                  title: <a href={`/schoolboard/0`}>커뮤니티</a>,
+                },
+                {
                   title: (
                     <>
                       <a href={`/schoolboard/${category}`}>
@@ -76,14 +79,12 @@ const SchoolBoardDetail = () => {
                 },
               ]}
             />
-            <div>
+            <div style={{ borderBottom: "1px solid #f2f2f2" }}>
               <div style={{ borderBottom: "1px solid #f2f2f2" }}>
                 <h2>{schoolBoardPost?.board?.title}</h2>
-                <Avatar
-                  style={{ marginTop: "-1rem", backgroundColor: "#d2d2d2" }}
-                  size={32}
-                  icon={<UserOutlined />}
-                />
+                <Avatar style={{ marginTop: "-1rem", backgroundColor: "#d2d2d2" }} size={32}>
+                  {schoolBoardPost?.userName[0]}
+                </Avatar>
                 <div style={{ marginLeft: "1rem", display: "inline-block" }}>
                   <span style={{ fontWeight: "600" }}>{schoolBoardPost?.userName}</span>
                   <br></br>

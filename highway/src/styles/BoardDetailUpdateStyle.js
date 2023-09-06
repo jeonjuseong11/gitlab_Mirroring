@@ -25,7 +25,7 @@ export const UpdateBoardDetailButton = styled(Button)`
   border-radius: 50px;
   float: right;
 `;
-export const CancelUpdateBoardDetalilButton = styled(Button)`
+export const CancelUpdateBoardDetailButton = styled(Button)`
   width: 10rem;
   height: 3rem;
   margin-top: 2rem;

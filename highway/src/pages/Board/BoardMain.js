@@ -181,6 +181,7 @@ const BoardMain = () => {
             borderRadius: "10px",
             fontWeight: "500",
             color: "#a1a1a1",
+            wordBreak: "keep-all",
           }}
         >
           커뮤니티는 학교별 태그에 따라 생겨요
@@ -220,7 +221,12 @@ const BoardMain = () => {
             dataSource={filteredData}
             grid={{
               gutter: 0,
-              column: 2,
+              xs: 1,
+              sm: 2,
+              md: 2,
+              lg: 2,
+              xl: 2,
+              xxl: 2,
             }}
             renderItem={(item, index) => (
               <div
