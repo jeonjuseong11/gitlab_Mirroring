@@ -140,21 +140,21 @@ const reducer = (state = initialState, action) =>
         draft.addSavedSchoolError = action.error;
         break;
       case REMOVE_SAVED_SCHOOL_REQUEST:
-        draft.addSavedSchoolLoading = true;
+        draft.removeSavedSchoolLoading = true;
         draft.followList = draft.followList.filter((v) => v.heartId !== action.data.heartId);
 
-        draft.addSavedSchoolDone = false;
-        draft.addSavedSchoolError = null;
+        draft.removeSavedSchoolDone = false;
+        draft.removeSavedSchoolError = null;
         break;
       case REMOVE_SAVED_SCHOOL_SUCCESS:
         // console.log(action.data);
         // draft.followList = draft.followList.filter((v) => v.heartId !== action.data.heartId);
-        draft.addSavedSchoolLoading = false;
-        draft.addSavedSchoolDone = true;
+        draft.removeSavedSchoolLoading = false;
+        draft.removeSavedSchoolDone = true;
         break;
       case REMOVE_SAVED_SCHOOL_FAILURE:
-        draft.addSavedSchoolLoading = false;
-        draft.addSavedSchoolError = action.error;
+        draft.removeSavedSchoolLoading = false;
+        draft.removeSavedSchoolError = action.error;
         break;
     }
   });
