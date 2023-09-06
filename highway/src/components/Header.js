@@ -12,7 +12,7 @@ import styled from "styled-components";
 import { LOGOUT_REQUEST } from "../constants/actionTypes";
 import { info } from "../utils/Message";
 
-const imgUrl = `/assets/TitleIcon.png`;
+const imgUrl = { large: `/assets/TitleIcon.png`, small: `/assets/SmallLogo.png` };
 
 const Title = styled(Link)`
   text-decoration: none;
@@ -44,13 +44,18 @@ const Header = () => {
       <Row justify="center" gutter={[16, 16]} style={{ marginTop: "0.5rem", display: "flex" }}>
         <Col xs={6} md={6} style={{ textAlign: "left" }}>
           <Title to="/">
-            <img src={imgUrl} alt="Logo" style={{ width: "10rem" }} />
+            <img
+              src={window.innerWidth <= 900 ? imgUrl.small : imgUrl.large}
+              alt="Logo"
+              style={{ width: "100%", maxWidth: "10rem", minWidth: "7rem" }}
+            />
           </Title>
         </Col>
         <Col
           xs={16}
           md={9}
           style={{
+            display: "flex",
             justifyContent: "right",
             alignItems: "center",
             textAlign: "right",
@@ -65,6 +70,7 @@ const Header = () => {
                   color: "black",
                   justifyContent: "center",
                   alignItems: "center",
+                  display: "flex",
                 }}
               >
                 <Avatar size={28}>{me?.userName[0]}</Avatar>
