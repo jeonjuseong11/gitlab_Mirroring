@@ -6,7 +6,7 @@ export const SearchInput = styled(Input)`
   background-color: #f2f2f2;
   border-radius: 10px;
   border: #f2f2f2;
-  height: 3.5rem;
+  height: 3rem;
 `;
 
 export const SearchTitleRow = styled(Row)`
@@ -14,12 +14,15 @@ export const SearchTitleRow = styled(Row)`
   margin-bottom: 1rem;
 `;
 
-export const SearchTitle = styled.h2``;
+export const SearchTitle = styled.h2`
+  @media (max-width: 500px) {
+    font-size: 18px;
+  }
+`;
 
 export const SearchFormWrapper = styled.div`
   margin-bottom: 1rem;
   margin-top: 1rem;
-  min-width: 20rem;
 `;
 
 export const SearchButtonWrapper = styled.div`
@@ -27,7 +30,6 @@ export const SearchButtonWrapper = styled.div`
   overflow-x: auto;
   flex-direction: column;
   flex-wrap: nowrap;
-  min-width: 20rem;
 `;
 export const SearchInputIcon = styled(SearchOutlined)`
   color: black;
@@ -44,6 +46,12 @@ export const SearchButton = styled(Button)`
   font-size: 1rem;
   color: ${({ isActive }) => (isActive ? "#ffffff" : "")};
   background-color: ${({ isActive }) => (isActive ? "#8282ff" : "")};
+  @media (max-width: 330px) {
+    padding-top: 0rem;
+    height: 4rem;
+    width: 4rem;
+    font-size: 0.8rem;
+  }
 `;
 export const SearchButtonDiv = styled.div`
   margin-bottom: 1rem;

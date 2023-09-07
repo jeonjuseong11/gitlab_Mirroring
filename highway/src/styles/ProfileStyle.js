@@ -48,6 +48,7 @@ export const LikePostList = styled(List)`
   min-height: 13rem;
 `;
 export const ProfileTitle = styled.h3`
+  font-size: 18px;
   margin: 0;
 `;
 

@@ -25,7 +25,7 @@ const CardList = ({ filterValue }) => {
       <Col xs={24} md={15}>
         <List
           style={{ marginTop: "1rem" }}
-          grid={{ xs: 1, sm: 2, md: 3, lg: 4, xl: 5, xxl: 5 }}
+          grid={{ xs: 1, sm: 2, md: 3, lg: 4, xl: 4, xxl: 4 }}
           dataSource={filteredSchools}
           pagination={{
             pageSize: 5,
@@ -33,7 +33,7 @@ const CardList = ({ filterValue }) => {
             align: "center",
           }}
           renderItem={(item) => (
-            <List.Item key={item.schoolId} style={{ marginRight: "1rem" }}>
+            <List.Item key={item.schoolId}>
               <Link to={`/schooldetail/${item.schoolId}`}>
                 <Card
                   hoverable

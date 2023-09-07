@@ -41,13 +41,13 @@ const Header = () => {
 
   return (
     <>
-      <Row justify="center" gutter={[16, 16]} style={{ marginTop: "0.5rem", display: "flex" }}>
+      <Row justify="center" gutter={[16, 16]} style={{ display: "flex" }}>
         <Col xs={6} md={6} style={{ textAlign: "left" }}>
           <Title to="/">
             <img
               src={window.innerWidth <= 900 ? imgUrl.small : imgUrl.large}
               alt="Logo"
-              style={{ width: "100%", maxWidth: "10rem", minWidth: "7rem" }}
+              style={{ width: "100%", maxWidth: "10rem", minWidth: "7rem", marginTop: ".5rem" }}
             />
           </Title>
         </Col>

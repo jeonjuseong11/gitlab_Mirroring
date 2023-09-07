@@ -15,6 +15,7 @@ export const BoardDetailUpdateSelect = styled(Select)`
 `;
 export const BoardDetailUpdateReactQuill = styled(ReactQuill)`
   height: 20rem;
+  margin-bottom: 5rem;
 `;
 
 export const UpdateBoardDetailButton = styled(Button)`

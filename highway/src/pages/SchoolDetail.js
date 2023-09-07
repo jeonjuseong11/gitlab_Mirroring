@@ -120,6 +120,9 @@ const SchoolDetail = () => {
     loadSchoolReviews();
     loadSavedSchool();
   }, []);
+  useEffect(() => {
+    console.log(removeSaveSchoolLoading);
+  }, [removeSaveSchoolLoading]);
 
   useEffect(() => {
     const filteredReviews = schoolReviews.filter((item) => !item.deleted);

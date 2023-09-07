@@ -68,7 +68,7 @@ const ProfileRecentRecord = () => {
       <Col xs={24} md={11}>
         <SchoolWrapper>
           <ProfileTitle>찜한 학교들</ProfileTitle>
-          찜한 학교는 최대 10개까지 볼 수 있습니다.
+          <p>찜한 학교는 최대 10개까지 볼 수 있습니다.</p>
           <div>
             <SchoolList schools={followList} />
           </div>
