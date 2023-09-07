@@ -159,6 +159,7 @@ export const PromotionVideosDiv = styled.div`
   }
 `;
 export const PromotionVideosTitle = styled.h2`
+  word-break: keep-all;
   color: black;
   @media screen and (max-width: 768px) {
     width: 70%;
