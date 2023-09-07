@@ -8,11 +8,13 @@ import styled from "styled-components";
 import {
   BoardDetailUpdateReactQuill,
   BoardDetailUpdateCol,
-  BoardDetailUpdateSelect,
-  CancelUpdateBoardDetailButton,
-  UpdateBoardDetailButton,
 } from "../../styles/BoardDetailUpdateStyle";
 import ImageUpload from "../ImageUpload"; // ImageUpload 컴포넌트를 가져옵니다.
+import {
+  BoardDetailPostButton,
+  BoardDetailPostReactQuill,
+  BoardDetailPostSelect,
+} from "../../styles/BoardDetailPostFormStyle";
 
 const CustomQuillWrapper = styled(Form.Item)`
   .ql-container {
@@ -34,7 +36,7 @@ const CustomQuillWrapper = styled(Form.Item)`
 `;
 
 const BoardDetailUpdateForm = () => {
-  const { schoolBoardPost } = useSelector((state) => state.post);
+  const { schoolBoardPost, imagePaths, updatePostDone } = useSelector((state) => state.post);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [form] = Form.useForm();
@@ -54,7 +56,28 @@ const BoardDetailUpdateForm = () => {
       });
     }
   }, [dispatch, postId]);
-
+  useEffect(() => {
+    if (schoolBoardPost) {
+      const updatedInitialValues = {
+        category: schoolBoardPost.board.category,
+        title: schoolBoardPost.board.title,
+        content: schoolBoardPost.board.content.replace(/<[^>]*>?/g, ""),
+        imageList: imagePaths
+          .map((item) => {
+            if (typeof item === "string") {
+              // 이미지 주소인 경우 그대로 반환
+              return item;
+            } else if (item.imageUrl && item.imageUrl.length > 0) {
+              // 이미지 주소가 배열로 제공될 경우 첫 번째 이미지 주소 반환
+              return item.imageUrl[0];
+            }
+            return null;
+          })
+          .filter(Boolean),
+      };
+      form.setFieldsValue(updatedInitialValues);
+    }
+  }, [schoolBoardPost, form, imagePaths]);
   // 인증되지 않은 경우 리디렉션합니다.
   useEffect(() => {
     if (!accessToken) {
@@ -67,11 +90,27 @@ const BoardDetailUpdateForm = () => {
     category: schoolBoardPost?.board.category,
     title: schoolBoardPost?.board.title,
     content: schoolBoardPost?.board.content.replace(/<[^>]*>?/g, ""),
-    imageList: schoolBoardPost?.board.imageList || [],
+    imageList: imagePaths
+      .map((item) => {
+        if (typeof item === "string") {
+          // 이미지 주소인 경우 그대로 반환
+          return item;
+        } else if (item.imageUrl && item.imageUrl.length > 0) {
+          // 이미지 주소가 배열로 제공될 경우 첫 번째 이미지 주소 반환
+          return item.imageUrl[0];
+        }
+        return null;
+      })
+      .filter(Boolean),
   };
 
   // 폼 제출을 처리합니다.
   const onFinish = (values) => {
+    // console.log(`title:${values.title}
+    //   content:${values.content},
+    //   category: ${values.category},
+    //   id: ${postId},
+    //   imageList: ${values.imageList}`);
     dispatch({
       type: UPDATE_POST_REQUEST,
       data: {
@@ -82,9 +121,13 @@ const BoardDetailUpdateForm = () => {
         imageList: values.imageList, // 여기에 업데이트된 이미지 목록을 포함합니다.
       },
     });
-    navigate(`/schoolboard/${values.category}/${postId}`);
   };
-
+  useEffect(() => {
+    if (updatePostDone) {
+      // Navigate when updatePostDone becomes true
+      navigate(`/schoolboard/${initialValues.category}/${postId}`);
+    }
+  }, [updatePostDone, navigate, initialValues.category, postId]);
   const [options, setOptions] = useState([]);
 
   useEffect(() => {
@@ -105,13 +148,13 @@ const BoardDetailUpdateForm = () => {
       <BoardDetailUpdateCol xs={24} md={15}>
         <Form form={form} onFinish={onFinish} initialValues={initialValues}>
           <Form.Item name="category">
-            <BoardDetailUpdateSelect value={initialValues.category} options={options} />
+            <BoardDetailPostSelect value={initialValues.category} options={options} />
           </Form.Item>
           <Form.Item name="title">
             <Input className="custom-input" />
           </Form.Item>
           <CustomQuillWrapper isFocused={isEditorFocused} name="content">
-            <BoardDetailUpdateReactQuill
+            <BoardDetailPostReactQuill
               theme="snow"
               onFocus={() => setIsEditorFocused(true)}
               onBlur={() => setIsEditorFocused(false)}
@@ -136,16 +179,16 @@ const BoardDetailUpdateForm = () => {
             <ImageUpload imageList={initialValues.imageList} />
           </Form.Item>
           <Form.Item>
-            <CancelUpdateBoardDetailButton
+            <BoardDetailPostButton
               onClick={() => {
                 navigate(`/schoolboard/${initialValues.category}/${postId}`);
               }}
             >
               취소
-            </CancelUpdateBoardDetailButton>
-            <UpdateBoardDetailButton type="primary" htmlType="submit">
+            </BoardDetailPostButton>
+            <BoardDetailPostButton type="primary" htmlType="submit">
               수정하기 <EditOutlined />
-            </UpdateBoardDetailButton>
+            </BoardDetailPostButton>
           </Form.Item>
         </Form>
       </BoardDetailUpdateCol>

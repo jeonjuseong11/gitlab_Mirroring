@@ -49,6 +49,7 @@ import {
   LOAD_WROTE_POSTS_REQUEST,
   LOAD_WROTE_POSTS_SUCCESS,
   LOAD_WROTE_POSTS_FAILURE,
+  SET_IMAGES_REQUEST,
 } from "../constants/actionTypes";
 
 export const initialState = {
@@ -125,6 +126,9 @@ const reducer = (state = initialState, action) =>
         draft.uploadImagesLoading = false;
         draft.uploadImagesError = action.error;
         break;
+      case SET_IMAGES_REQUEST:
+        draft.imagePaths = action.data;
+        break;
       case LIKE_POST_REQUEST:
         draft.likePostLoading = true;
         draft.likePostDone = false;
@@ -147,9 +151,7 @@ const reducer = (state = initialState, action) =>
         draft.unlikePostError = null;
         break;
       case UNLIKE_POST_SUCCESS: {
-        draft.Likers = draft.Likers.filter(
-          (liker) => liker.id !== action.data.heartId
-        );
+        draft.Likers = draft.Likers.filter((liker) => liker.id !== action.data.heartId);
         draft.unlikePostLoading = false;
         draft.unlikePostDone = true;
         break;
@@ -167,6 +169,7 @@ const reducer = (state = initialState, action) =>
         draft.loadPostLoading = false;
         draft.loadPostDone = true;
         draft.schoolBoardPost = action.data;
+        draft.imagePaths = action.data.imageUrls;
         break;
       case LOAD_POST_FAILURE:
         draft.loadPostLoading = false;
@@ -218,9 +221,6 @@ const reducer = (state = initialState, action) =>
       case UPDATE_POST_SUCCESS:
         draft.updatePostLoading = false;
         draft.updatePostDone = true;
-        draft.schoolBoardPostComments.find(
-          (v) => v.id === action.data.PostId
-        ).content = action.data.content;
         break;
       case UPDATE_POST_FAILURE:
         draft.updatePostLoading = false;
@@ -234,9 +234,7 @@ const reducer = (state = initialState, action) =>
       case REMOVE_POST_SUCCESS:
         draft.removePostLoading = false;
         draft.removePostDone = true;
-        draft.mainPosts = draft.schoolBoardPosts.filter(
-          (v) => v.id !== action.data.PostId
-        );
+        draft.mainPosts = draft.schoolBoardPosts.filter((v) => v.id !== action.data.PostId);
         break;
       case REMOVE_POST_FAILURE:
         draft.removePostLoading = false;

@@ -48,25 +48,34 @@ import {
   LOAD_WROTE_POSTS_REQUEST,
   LOAD_WROTE_POSTS_SUCCESS,
   LOAD_WROTE_POSTS_FAILURE,
+  SET_IMAGES_REQUEST,
 } from "../constants/actionTypes";
 import { REMOVE_POST_OF_ME } from "../constants/actionTypes";
 
+function* setImages(action) {
+  try {
+    // You can put additional logic here if needed
+    yield put({
+      type: SET_IMAGES_REQUEST,
+      data: action.data, // This data should contain the new imagePaths
+    });
+  } catch (err) {
+    console.error(err);
+    // Handle any errors here
+  }
+}
 function uploadImagesAPI(data) {
   // for (const pair of data.entries()) {
   //   console.log(pair[0], pair[1]);
   // }
   //이미지 업로드]
   const localAccessToken = localStorage.getItem("ACCESSTOKEN");
-  return axios.post(
-    "http://highway-lb-1879269947.ap-northeast-2.elb.amazonaws.com/image",
-    data,
-    {
-      headers: {
-        "Content-Type": "multiparts/form-data",
-        ACCESS_TOKEN: ` ${localAccessToken}`, // ACCESS_TOKEN을 헤더에 추가
-      },
-    }
-  );
+  return axios.post("http://highway-lb-1879269947.ap-northeast-2.elb.amazonaws.com/image", data, {
+    headers: {
+      "Content-Type": "multiparts/form-data",
+      ACCESS_TOKEN: ` ${localAccessToken}`, // ACCESS_TOKEN을 헤더에 추가
+    },
+  });
 }
 
 function* uploadImages(action) {
@@ -422,7 +431,9 @@ function* updatePostComment(action) {
 function* watchUploadImages() {
   yield takeLatest(UPLOAD_IMAGES_REQUEST, uploadImages);
 }
-
+function* watchSetImages() {
+  yield takeLatest(SET_IMAGES_REQUEST, setImages);
+}
 function* watchLikePost() {
   yield throttle(5000, LIKE_POST_REQUEST, likePost);
   // yield takeLatest(LIKE_POST_REQUEST, likePost);
@@ -483,6 +494,7 @@ function* watchLoadWrotePosts() {
 
 export default function* postSaga() {
   yield all([
+    fork(watchSetImages),
     fork(watchUploadImages),
     fork(watchLikePost),
     fork(watchUnlikePost),

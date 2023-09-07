@@ -130,7 +130,7 @@ const SchoolBoardDetail = () => {
                 }}
               />
               <div style={{ display: "flex" }}>
-                {schoolBoardPost?.imageUrls.map((imageUrl, index) => (
+                {schoolBoardPost?.imageUrls?.map((imageUrl, index) => (
                   <div
                     style={{
                       border: "1px solid #c2c2c2",
@@ -212,32 +212,32 @@ const SchoolBoardDetail = () => {
                   style={{
                     fontSize: "24px",
                     color:
-                      clickedImageIndex === schoolBoardPost?.imageUrls.length - 1
+                      clickedImageIndex === schoolBoardPost?.imageUrls?.length - 1
                         ? "#ccc"
                         : "#8282ff",
                     cursor:
-                      clickedImageIndex === schoolBoardPost?.imageUrls.length - 1
+                      clickedImageIndex === schoolBoardPost?.imageUrls?.length - 1
                         ? "not-allowed"
                         : "pointer", // disable 상태일 때 커서를 not-allowed로 변경
                     transition: "color 0.3s ease",
                     transform:
-                      clickedImageIndex === schoolBoardPost?.imageUrls.length - 1
+                      clickedImageIndex === schoolBoardPost?.imageUrls?.length - 1
                         ? "scale(1)"
                         : "scale(1.15)", // disable 상태와 hover 효과에 따른 스케일 조정
                   }}
                   onClick={() => {
-                    if (clickedImageIndex < schoolBoardPost?.imageUrls.length - 1) {
+                    if (clickedImageIndex < schoolBoardPost?.imageUrls?.length - 1) {
                       setClickedImageIndex(clickedImageIndex + 1);
                     }
                   }}
-                  disabled={clickedImageIndex === schoolBoardPost?.imageUrls.length - 1}
+                  disabled={clickedImageIndex === schoolBoardPost?.imageUrls?.length - 1}
                   onMouseOver={(e) => {
-                    if (clickedImageIndex !== schoolBoardPost?.imageUrls.length - 1) {
+                    if (clickedImageIndex !== schoolBoardPost?.imageUrls?.length - 1) {
                       e.currentTarget.style.transform = "scale(1.15)";
                     }
                   }}
                   onMouseOut={(e) => {
-                    if (clickedImageIndex !== schoolBoardPost?.imageUrls.length - 1) {
+                    if (clickedImageIndex !== schoolBoardPost?.imageUrls?.length - 1) {
                       e.currentTarget.style.transform = "scale(1)";
                     }
                   }}

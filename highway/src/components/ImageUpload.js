@@ -2,9 +2,9 @@ import { UploadOutlined } from "@ant-design/icons";
 import { Modal, Upload } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { REMOVE_IMAGE, UPLOAD_IMAGES_REQUEST } from "../constants/actionTypes";
+import { REMOVE_IMAGE, SET_IMAGES_REQUEST, UPLOAD_IMAGES_REQUEST } from "../constants/actionTypes";
 
-const ImageUpload = () => {
+const ImageUpload = ({ imageList }) => {
   const [fileList, setFileList] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [sizeModalVisible, setSizeModalVisible] = useState(false);
@@ -59,7 +59,7 @@ const ImageUpload = () => {
   };
 
   useEffect(() => {
-    console.log(imagePaths);
+    // console.log(imagePaths);
     // imagePaths 배열에서 각 이미지에 대한 URL을 생성하여 fileList에 추가
     const newFileList = imagePaths.map((imagePath, index) => ({
       uid: index,
