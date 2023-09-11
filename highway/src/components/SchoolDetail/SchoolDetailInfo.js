@@ -1,4 +1,4 @@
-import { Col, Row, Tabs } from "antd";
+import { Button, Col, Row, Tabs } from "antd";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -37,13 +37,20 @@ const SchoolDetailInfo = ({ rateAverages, roundedTotalRate, reviewCount }) => {
             <h4>연락처</h4>
             <p style={{ margin: "0" }}>{singleSchool?.sch?.phoneNumber}</p>
             {singleSchool?.sch?.adminPhone == -1 ? null : (
-              <p style={{ margin: "0" }}>{singleSchool?.sch?.adminPhone}(행정실)</p>
+              <p style={{ margin: "0" }}>
+                {singleSchool?.sch?.adminPhone}(행정실)
+              </p>
             )}
             {singleSchool?.sch?.officePhone == -1 ? null : (
-              <p style={{ margin: "0" }}>{singleSchool?.sch?.officePhone}(교무실)</p>
+              <p style={{ margin: "0" }}>
+                {singleSchool?.sch?.officePhone}(교무실)
+              </p>
             )}
             <h4>홈페이지</h4>
-            <a style={{ color: "black", textDecoration: "none" }} href={singleSchool?.sch?.website}>
+            <a
+              style={{ color: "black", textDecoration: "none" }}
+              href={singleSchool?.sch?.website}
+            >
               {singleSchool?.sch?.website}
             </a>
           </QuestionWrapper>
