@@ -28,6 +28,9 @@ import {
   REMOVE_SAVED_SCHOOL_SUCCESS,
   REMOVE_SAVED_SCHOOL_FAILURE,
   REMOVE_SAVED_SCHOOL_REQUEST,
+  LOAD_SCHOOL_CURRIS_SUCCESS,
+  LOAD_SCHOOL_CURRIS_FAILURE,
+  LOAD_SCHOOL_CURRIS_REQUEST,
 } from "../constants/actionTypes";
 
 const loadSchoolListAPI = () => {
@@ -231,6 +234,44 @@ function* updateSchoolReview(action) {
   }
 }
 
+const loadSchoolCurrisAPI = (data) => {
+  return axios.get(`/school/curri/list/${data.id}`);
+};
+function* loadSchoolCurris(action) {
+  const result = yield call(loadSchoolCurrisAPI, action.data);
+  try {
+    yield put({
+      type: LOAD_SCHOOL_CURRIS_SUCCESS,
+      data: result.data.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: LOAD_SCHOOL_CURRIS_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+// const loadSchoolCurrisAPI = (data) => {
+//   return axios.get(`/school/curri/list/${data.id}`);
+// };
+// function* loadSchoolCurris() {
+//   const result = yield call(loadSchoolCurrisAPI);
+//   try {
+//     yield put({
+//       type: LOAD_SCHOOL_CURRIS_SUCCESS,
+//       data: result.data.data,
+//     });
+//   } catch (err) {
+//     console.error(err);
+//     yield put({
+//       type: LOAD_SCHOOL_CURRIS_FAILURE,
+//       error: err.response.data,
+//     });
+//   }
+// }
+
 function* watchLoadSchoolList() {
   // yield throttle(5000, LOAD_SCHOOL_LIST_REQUEST, loadSchoolList);
   yield takeLatest(LOAD_SCHOOL_LIST_REQUEST, loadSchoolList);
@@ -260,6 +301,9 @@ function* watchRemoveSavedSchool() {
 function* watchUpdateSchoolReview() {
   yield takeLatest(UPDATE_SCHOOL_REVIEW_REQUEST, updateSchoolReview);
 }
+function* watchLoadSchoolCurris() {
+  yield takeLatest(LOAD_SCHOOL_CURRIS_REQUEST, loadSchoolCurris);
+}
 
 export default function* userSaga() {
   yield all([
@@ -272,5 +316,6 @@ export default function* userSaga() {
     fork(watchRemoveSavedSchool),
     fork(watchRemoveSchoolReview),
     fork(watchUpdateSchoolReview),
+    fork(watchLoadSchoolCurris),
   ]);
 }

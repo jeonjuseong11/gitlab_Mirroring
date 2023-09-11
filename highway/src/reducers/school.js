@@ -21,6 +21,9 @@ import {
   REMOVE_SAVED_SCHOOL_FAILURE,
   REMOVE_SAVED_SCHOOL_REQUEST,
   REMOVE_SAVED_SCHOOL_SUCCESS,
+  LOAD_SCHOOL_CURRIS_FAILURE,
+  LOAD_SCHOOL_CURRIS_REQUEST,
+  LOAD_SCHOOL_CURRIS_SUCCESS,
 } from "../constants/actionTypes";
 export const initialState = {
   loadSchoolListLoading: false, //학교 리스트 로딩
@@ -44,10 +47,14 @@ export const initialState = {
   removeSavedSchoolLoading: false, //학교 찜하기 삭제
   removeSavedSchoolDone: false,
   removeSavedSchoolError: false,
+  loadSchoolCurrisLoading: false, //학교 커리큘럼 로딩
+  loadSchoolCurrisDone: false,
+  loadSchoolCurrisError: null,
   schools: [],
   singleSchool: [],
   schoolReviews: [],
   followList: [],
+  schoolCurris: [],
 };
 
 const reducer = (state = initialState, action) =>
@@ -141,7 +148,9 @@ const reducer = (state = initialState, action) =>
         break;
       case REMOVE_SAVED_SCHOOL_REQUEST:
         draft.removeSavedSchoolLoading = true;
-        draft.followList = draft.followList.filter((v) => v.heartId !== action.data.heartId);
+        draft.followList = draft.followList.filter(
+          (v) => v.heartId !== action.data.heartId
+        );
 
         draft.removeSavedSchoolDone = false;
         draft.removeSavedSchoolError = null;
@@ -155,6 +164,20 @@ const reducer = (state = initialState, action) =>
       case REMOVE_SAVED_SCHOOL_FAILURE:
         draft.removeSavedSchoolLoading = false;
         draft.removeSavedSchoolError = action.error;
+        break;
+      case LOAD_SCHOOL_CURRIS_REQUEST:
+        draft.loadSchoolCurrisLoading = true;
+        draft.loadSchoolCurrisDone = false;
+        draft.loadSchoolCurrisError = null;
+        break;
+      case LOAD_SCHOOL_CURRIS_SUCCESS:
+        draft.schoolCurris = action.data;
+        draft.loadSchoolCurrisLoading = false;
+        draft.loadSchoolCurrisDone = true;
+        break;
+      case LOAD_SCHOOL_CURRIS_FAILURE:
+        draft.loadSchoolCurrisLoading = false;
+        draft.loadSchoolCurrisError = action.error;
         break;
     }
   });
