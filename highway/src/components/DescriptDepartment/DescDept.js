@@ -222,13 +222,32 @@ const DescDept = () => {
       public: item.choose,
     };
   });
+  // 공통 교과인지 선택 교과인지 판단(사용 미정))
   const selectChoose = selectDepart.map((item) => {
     return {
       label: item.public,
       value: item.public,
     };
   });
-  console.log(selectDepart);
+
+  // const testRender = (value, f) => {
+  //   console.log(value[0].grade[f - 1]);
+  // };
+  const chooseDepart = testItem[0].grade[grade - 1].depart;
+
+  const testRender = chooseDepart.map((item) => {
+    console.log(`item:${item.departTitle}`);
+    console.log(`departTitle${departTitle}`);
+    if (item.departTitle === departTitle) {
+      console.log(item);
+      return (
+        <div>
+          <div>{item.departTitle}</div>
+        </div>
+      );
+    }
+  });
+
   const loadSchoolCurris = () => {
     dispatch({
       type: LOAD_SCHOOL_CURRIS_REQUEST,
@@ -249,13 +268,14 @@ const DescDept = () => {
             width: 120,
           }}
           onChange={(e) => {
+            setDepartTitle();
             setGrade(e);
           }}
           defaultValue={0}
           options={[
-            { label: "1학년", value: 0 },
-            { label: "2학년", value: 1 },
-            { label: "3학년", value: 2 },
+            { label: "1학년", value: 1 },
+            { label: "2학년", value: 2 },
+            { label: "3학년", value: 3 },
           ]}
         />
         <Select
@@ -263,7 +283,7 @@ const DescDept = () => {
             width: 120,
           }}
           onChange={(e) => {
-            setChoose(e);
+            setDepartTitle(e);
           }}
           options={selectDepart}
         />
@@ -274,6 +294,7 @@ const DescDept = () => {
           options={selectChoose}
         /> */}
       </Space>
+      <div>{testRender}</div>
     </div>
   );
 };
