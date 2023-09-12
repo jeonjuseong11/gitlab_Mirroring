@@ -201,19 +201,22 @@ const DescDept = () => {
   const dispatch = useDispatch();
   const [grade, setGrade] = useState(1);
   const [departTitle, setDepartTitle] = useState();
-  const [choose, setChoose] = useState();
+  const [choose, setChoose] = useState(); // 공통 과목인지 선택 과목인지 판단하기 위한 변수
 
-  const testCurri = testItem[0].grade;
+  const testCurri = testItem[0].grade; // 학년별 객체
 
+  // 학년별 map
   const testCurriGradeMap = testCurri.map((item) => {
     return item;
   });
+  // 학년별 현재 학년과 맞는지 비교 후 객체 반환(undefined 포함)
   const testCurriDepartMap = testCurriGradeMap.map((item) => {
     const gradeDepart = item.depart;
     if (item.grade == grade) {
       return gradeDepart;
     }
   });
+  // undefined값 제거
   const mapDepart = testCurriDepartMap.filter((data) => data !== undefined);
   const selectDepart = mapDepart[0].map((item) => {
     return {
@@ -233,8 +236,11 @@ const DescDept = () => {
   // const testRender = (value, f) => {
   //   console.log(value[0].grade[f - 1]);
   // };
+
+  // 과목별 객체[
   const chooseDepart = testItem[0].grade[grade - 1].depart;
 
+  // 과목별 객체 map
   const testRender = chooseDepart.map((item) => {
     console.log(`item:${item.departTitle}`);
     console.log(`departTitle${departTitle}`);
