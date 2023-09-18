@@ -249,8 +249,8 @@ function* addPost(action) {
     // console.log(result.data.data);
 
     yield put({
-      type: LOAD_POSTS_REQUEST,
-      data: { category: action.data.category, schoolId: action.data.schoolId },
+      type: LOAD_POST_REQUEST,
+      data: action.data.schoolId,
     });
   } catch (err) {
     console.error(err);
