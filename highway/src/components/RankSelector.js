@@ -64,7 +64,12 @@ export const RankTopic = [
   },
   {
     icon: <SettingOutlined />,
-    content: <div>공학 및 기술</div>,
+    content: (
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <span>공학 및</span>
+        <span style={{ marginTop: "-.5rem" }}>기술</span>
+      </div>
+    ),
     value: ["건축", "기계", "전자", "컴퓨터"],
   },
   {
@@ -99,17 +104,32 @@ export const RankTopic = [
   },
   {
     icon: <TranslationOutlined />,
-    content: <div>언어 및 문학</div>,
+    content: (
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <span>언어 및</span>
+        <span style={{ marginTop: "-.5rem" }}>문학</span>
+      </div>
+    ),
     value: ["한국어", "영어", "독일어", "중국어", "일본어", "프랑스어"],
   },
   {
     icon: <LineChartOutlined />,
-    content: <div>경제 및 경학</div>,
+    content: (
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <span>경제 및</span>
+        <span style={{ marginTop: "-.5rem" }}>경영</span>
+      </div>
+    ),
     value: ["경제 ", "경학", "경영"],
   },
   {
     icon: <MedicineBoxOutlined />,
-    content: <div>의학 및 보건</div>,
+    content: (
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <span>의학 및</span>
+        <span style={{ marginTop: "-.5rem" }}>보건</span>
+      </div>
+    ),
     value: ["의학", "보건"],
   },
   {

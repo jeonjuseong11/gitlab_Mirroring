@@ -11,7 +11,10 @@ const CardList = ({ filterValue }) => {
     if (school?.schoolId === 0) {
       return false;
     }
-    if (filterValue.length === 0 || (filterValue.length === 1 && filterValue[0] === "")) {
+    if (
+      filterValue.length === 0 ||
+      (filterValue.length === 1 && filterValue[0] === "")
+    ) {
       return true;
     }
     return (
@@ -37,9 +40,9 @@ const CardList = ({ filterValue }) => {
               <Link to={`/schooldetail/${item.schoolId}`}>
                 <Card
                   hoverable
-                  bodyStyle={{
-                    padding: "1rem",
+                  style={{
                     textAlign: "left",
+                    marginRight: "15px",
                   }}
                   cover={
                     <img

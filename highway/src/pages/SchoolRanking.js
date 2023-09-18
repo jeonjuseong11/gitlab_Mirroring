@@ -41,10 +41,6 @@ const SchoolRanking = () => {
     setRankData(rankedData.filter((item) => item.schoolId !== 0));
   }, [schoolReviews.length, schools]);
 
-  useEffect(() => {
-    setSelectedSchool(rankData[0]);
-  }, [rankData]);
-
   const handleSchoolSelect = (school) => {
     setSelectedSchool(school);
   };
@@ -145,7 +141,11 @@ const SchoolRanking = () => {
           <RankSelector setFilterValue={handleFilterValueChange} />
         </Col>
       </Row>
-      <Row gutter={[16, 16]} justify="center" style={{ textAlign: "left", marginTop: "1rem" }}>
+      <Row
+        gutter={[16, 16]}
+        justify="center"
+        style={{ textAlign: "left", marginTop: "1rem" }}
+      >
         <Col xs={24} md={10}>
           <StyledTable
             style={{ minWidth: "14rem" }}
