@@ -2,199 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { LOAD_SCHOOL_CURRIS_REQUEST } from "../../constants/actionTypes";
 import { Select, Space } from "antd";
-
-const testItem = [
-  {
-    schoolId: 2,
-    grade: [
-      {
-        grade: 1,
-        depart: [
-          {
-            departTitle: "컴퓨터 그래픽",
-            choose: "Public",
-            chapter: [
-              { step1: "title1", content: "content" },
-              { step2: "title2", content: "content" },
-              { step3: "title3", content: "content" },
-              { step4: "title4", content: "content" },
-            ],
-          },
-          {
-            departTitle: "컴퓨터 시스템 일반",
-            choose: "Public",
-            chapter: [
-              { step1: "title1", content: "content" },
-              { step2: "title2", content: "content" },
-              { step3: "title3", content: "content" },
-              { step4: "title4", content: "content" },
-            ],
-          },
-          {
-            departTitle: "프로그래밍",
-            choose: "Public",
-            chapter: [
-              { step1: "title1", content: "content" },
-              { step2: "title2", content: "content" },
-              { step3: "title3", content: "content" },
-              { step4: "title4", content: "content" },
-            ],
-          },
-        ],
-      },
-      {
-        grade: 2,
-        depart: [
-          {
-            departTitle: "자료구조",
-            choose: "Public",
-            chapter: [
-              { step1: "title1", content: "content" },
-              { step2: "title2", content: "content" },
-              { step3: "title3", content: "content" },
-              { step4: "title4", content: "content" },
-            ],
-          },
-          {
-            departTitle: "정보 처리와 관리",
-            choose: "Public",
-            chapter: [
-              { step1: "title1", content: "content" },
-              { step2: "title2", content: "content" },
-              { step3: "title3", content: "content" },
-              { step4: "title4", content: "content" },
-            ],
-          },
-          {
-            departTitle: "응용 프로그래밍 화면 구현",
-            choose: "Public",
-            chapter: [
-              { step1: "title1", content: "content" },
-              { step2: "title2", content: "content" },
-              { step3: "title3", content: "content" },
-              { step4: "title4", content: "content" },
-            ],
-          },
-          {
-            departTitle: "응용 프로그래밍 개발",
-            choose: "소프트웨어 개발 코스",
-            chapter: [
-              { step1: "title1", content: "content" },
-              { step2: "title2", content: "content" },
-              { step3: "title3", content: "content" },
-              { step4: "title4", content: "content" },
-            ],
-          },
-          {
-            departTitle: "미디어 콘텐츠 일반",
-            choose: "웹 제작 코스",
-            chapter: [
-              { step1: "title1", content: "content" },
-              { step2: "title2", content: "content" },
-              { step3: "title3", content: "content" },
-              { step4: "title4", content: "content" },
-            ],
-          },
-        ],
-      },
-      {
-        grade: 3,
-        depart: [
-          {
-            departTitle: "응용 프로그래밍 화면 구현",
-            choose: "Public",
-            chapter: [
-              { step1: "title1", content: "content" },
-              { step2: "title2", content: "content" },
-              { step3: "title3", content: "content" },
-              { step4: "title4", content: "content" },
-            ],
-          },
-          {
-            departTitle: "데이터베이스 프로그래밍",
-            choose: "Public",
-            chapter: [
-              { step1: "title1", content: "content" },
-              { step2: "title2", content: "content" },
-              { step3: "title3", content: "content" },
-              { step4: "title4", content: "content" },
-            ],
-          },
-          {
-            departTitle: "스마트 문화 앱 콘텐츠 제작",
-            choose: "Public",
-            chapter: [
-              { step1: "title1", content: "content" },
-              { step2: "title2", content: "content" },
-              { step3: "title3", content: "content" },
-              { step4: "title4", content: "content" },
-            ],
-          },
-          {
-            departTitle: "응용 프로그래밍 개발",
-            choose: "소프트웨어 개발 코스",
-            chapter: [
-              { step1: "title1", content: "content" },
-              { step2: "title2", content: "content" },
-              { step3: "title3", content: "content" },
-              { step4: "title4", content: "content" },
-            ],
-          },
-          {
-            departTitle: "전자 상거래 실무",
-            choose: "웹 제작 코스",
-            chapter: [
-              { step1: "title1", content: "content" },
-              { step2: "title2", content: "content" },
-              { step3: "title3", content: "content" },
-              { step4: "title4", content: "content" },
-            ],
-          },
-          {
-            departTitle: "기업과 경영",
-            choose: "Public",
-            chapter: [
-              { step1: "title1", content: "content" },
-              { step2: "title2", content: "content" },
-              { step3: "title3", content: "content" },
-              { step4: "title4", content: "content" },
-            ],
-          },
-          {
-            departTitle: "빅데이터 분석",
-            choose: "Public",
-            chapter: [
-              { step1: "title1", content: "content" },
-              { step2: "title2", content: "content" },
-              { step3: "title3", content: "content" },
-              { step4: "title4", content: "content" },
-            ],
-          },
-          {
-            departTitle: "매장 판매",
-            choose: "Public",
-            chapter: [
-              { step1: "title1", content: "content" },
-              { step2: "title2", content: "content" },
-              { step3: "title3", content: "content" },
-              { step4: "title4", content: "content" },
-            ],
-          },
-          {
-            departTitle: "패션 상품 유통 관리",
-            choose: "Public",
-            chapter: [
-              { step1: "title1", content: "content" },
-              { step2: "title2", content: "content" },
-              { step3: "title3", content: "content" },
-              { step4: "title4", content: "content" },
-            ],
-          },
-        ],
-      },
-    ],
-  },
-];
+import { descCurri } from "../../utils/Curri";
+import { TestSchoolCurriDiv } from "../../styles/DescCurriStyled";
 
 const DescDept = () => {
   const { schoolCurris } = useSelector((state) => state.school);
@@ -203,7 +12,29 @@ const DescDept = () => {
   const [departTitle, setDepartTitle] = useState();
   const [choose, setChoose] = useState(); // 공통 과목인지 선택 과목인지 판단하기 위한 변수
 
-  const testCurri = testItem[0].grade; // 학년별 객체
+  const testDescDesign = schoolCurris.패션산업디자인과;
+  console.log(testDescDesign);
+
+  const testDescDesignMap = testDescDesign?.map((item) => {
+    console.log(item);
+    if (item.grade == grade) {
+      return (
+        <TestSchoolCurriDiv
+          dangerouslySetInnerHTML={{ __html: item.content }}
+        ></TestSchoolCurriDiv>
+      );
+    }
+  });
+
+  // const testDescDesignMap = testDescDesign.map((item) => {
+  //   console.log(item);
+  // });
+
+  // const schoolCurriMap = schoolCurris.map((item) => {
+  //   console.log(item);
+  // });
+
+  const testCurri = descCurri[0].desc[0].grade; // 학년별 객체
 
   // 학년별 map
   const testCurriGradeMap = testCurri.map((item) => {
@@ -233,19 +64,12 @@ const DescDept = () => {
     };
   });
 
-  // const testRender = (value, f) => {
-  //   console.log(value[0].grade[f - 1]);
-  // };
-
   // 과목별 객체[
-  const chooseDepart = testItem[0].grade[grade - 1].depart;
+  const chooseDepart = descCurri[0].desc[0].grade[grade - 1].depart;
 
   // 과목별 객체 map
   const testRender = chooseDepart.map((item) => {
-    console.log(`item:${item.departTitle}`);
-    console.log(`departTitle${departTitle}`);
     if (item.departTitle === departTitle) {
-      console.log(item);
       return (
         <div>
           <div>{item.departTitle}</div>
@@ -267,7 +91,8 @@ const DescDept = () => {
   return (
     <div>
       <h3>학교 커리큘럼 창입니다.</h3>
-      {testItem[0].grade.grade}
+
+      {/* {descCurri[0].desc[0].grade.grade} */}
       <Space wrap>
         <Select
           style={{
@@ -293,14 +118,9 @@ const DescDept = () => {
           }}
           options={selectDepart}
         />
-        {/* <Select
-          style={{
-            width: 120,
-          }}
-          options={selectChoose}
-        /> */}
       </Space>
-      <div>{testRender}</div>
+      {testDescDesignMap}
+      {/* <div>{testRender}</div> */}
     </div>
   );
 };
