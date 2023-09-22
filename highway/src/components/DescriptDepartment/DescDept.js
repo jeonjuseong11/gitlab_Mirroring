@@ -5,6 +5,8 @@ import { Select, Space } from "antd";
 import { descCurri } from "../../utils/Curri";
 import { TestSchoolCurriDiv } from "../../styles/DescCurriStyled";
 
+export const testStyle = {};
+
 const DescDept = () => {
   const { schoolCurris } = useSelector((state) => state.school);
   const dispatch = useDispatch();
@@ -47,6 +49,7 @@ const DescDept = () => {
       if (item.grade == grade) {
         return (
           <TestSchoolCurriDiv
+            style={{ textAlign: "left", marginLeft: "20rem" }}
             dangerouslySetInnerHTML={{ __html: item.content }}
           ></TestSchoolCurriDiv>
         );
