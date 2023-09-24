@@ -1,14 +1,23 @@
-import { Button, Col, Row, Tabs } from "antd";
+import { Button, Col, Modal, Row, Tabs } from "antd";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { LOAD_SCHOOL_INFO_REQUEST } from "../../constants/actionTypes";
 import SchoolDetailReview from "./SchoolDetailReview";
 import { QuestionWrapper, SubPageWrapper } from "./SchoolDetailStyle";
+import DescDept from "../DescriptDepartment/DescDept";
 
 const SchoolDetailInfo = ({ rateAverages, roundedTotalRate, reviewCount }) => {
   const { singleSchool } = useSelector((state) => state.school);
   const [departsList, setDepartsList] = useState([]);
+
+  const [open, setOpen] = useState(false);
+  const showModal = () => {
+    setOpen(true);
+  };
+  const hideModal = () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
     const departs = singleSchool?.dept;
@@ -58,6 +67,18 @@ const SchoolDetailInfo = ({ rateAverages, roundedTotalRate, reviewCount }) => {
         <Col xs={22} md={9}>
           <QuestionWrapper style={{ padding: "2rem", textAlign: "left" }}>
             <h3 style={{ margin: "0", marginBottom: "0.5rem" }}>학과소개</h3>
+            <Button type="primary" onClick={showModal}>
+              Modal
+            </Button>
+            <Modal
+              title="세부과목"
+              open={open}
+              onOk={hideModal}
+              onCancel={hideModal}
+              width={1000}
+            >
+              <DescDept />
+            </Modal>
             <Tabs
               activeKey={activeTab}
               onChange={onChange}

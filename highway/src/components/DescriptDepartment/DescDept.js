@@ -49,7 +49,7 @@ const DescDept = () => {
       if (item.grade == grade) {
         return (
           <TestSchoolCurriDiv
-            style={{ textAlign: "left", marginLeft: "20rem" }}
+            style={{ textAlign: "left", marginLeft: "0rem" }}
             dangerouslySetInnerHTML={{ __html: item.content }}
           ></TestSchoolCurriDiv>
         );
@@ -122,6 +122,7 @@ const DescDept = () => {
           onChange={(e) => {
             setTestDepart(e);
           }}
+          defaultValue={0}
           options={[
             { label: "마케팅경영과", value: 0 },
             { label: "베이커리카페과", value: 1 },
@@ -137,7 +138,7 @@ const DescDept = () => {
             setDepartTitle();
             setGrade(e);
           }}
-          defaultValue={0}
+          defaultValue={1}
           options={[
             { label: "1학년", value: 1 },
             { label: "2학년", value: 2 },
