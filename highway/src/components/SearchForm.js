@@ -53,7 +53,6 @@ const SearchForm = ({ setFilterValue, filterValue }) => {
       setFilterValue(value);
       setActiveButton(value);
     }
-    setSliderIndex(0); // 버튼이 클릭되면 슬라이더 인덱스를 초기화합니다.
   };
 
   const handleSliderChange = (currentIndex) => {
