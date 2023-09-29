@@ -11,10 +11,7 @@ const CardList = ({ filterValue }) => {
     if (school?.schoolId === 0) {
       return false;
     }
-    if (
-      filterValue.length === 0 ||
-      (filterValue.length === 1 && filterValue[0] === "")
-    ) {
+    if (filterValue.length === 0 || (filterValue.length === 1 && filterValue[0] === "")) {
       return true;
     }
     return (
@@ -46,8 +43,9 @@ const CardList = ({ filterValue }) => {
                   }}
                   cover={
                     <img
+                      style={{ width: "150px", height: "auto", margin: "10px auto" }}
                       alt="example"
-                      src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                      src={`/assets/School${item.schoolId}.png`}
                     />
                   }
                 >

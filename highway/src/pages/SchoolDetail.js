@@ -185,7 +185,7 @@ const SchoolDetail = () => {
           {singleSchool?.sch?.logoURL !== null ? (
             <SchoolLogo>
               <img
-                src={singleSchool?.sch?.logoURL}
+                src={`/assets/School${singleSchool?.sch?.id}.png`}
                 alt="학교로고"
                 style={{
                   width: "100%",
