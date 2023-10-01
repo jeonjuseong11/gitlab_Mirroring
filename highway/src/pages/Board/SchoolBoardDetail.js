@@ -5,11 +5,10 @@ import { LOAD_POST_REQUEST, REMOVE_POST_REQUEST } from "../../constants/actionTy
 import { useNavigate, useParams } from "react-router-dom";
 import ToggleComment from "../../components/schoolBoardDetail/ToggleComment";
 import { changeCategory, formatDate } from "./BoardMain";
-import { EllipsisOutlined, LeftOutlined, RightOutlined, UserOutlined } from "@ant-design/icons";
+import { EllipsisOutlined, LeftOutlined, RightOutlined } from "@ant-design/icons";
 import {
   AuthorInfo,
   AuthorName,
-  EditDeleteIcon,
   ImagePreview,
   ImagePreviewWrapper,
   PostContent,
@@ -23,13 +22,33 @@ import {
 
 const SchoolBoardDetail = () => {
   const dispatch = useDispatch();
-  const navigator = useNavigate();
+  const navigate = useNavigate();
   const { me } = useSelector((state) => state.user);
   const { schoolBoardPost, loadPostLoading } = useSelector((state) => state.post);
   const { postId, category } = useParams();
-  const canEditOrDelete = me?.userNo === schoolBoardPost?.userNo;
+  const [canEditOrDelete, setCanEditOrDelete] = useState(false);
   const [imageModalVisible, setImageModalVisible] = useState(false);
   const [clickedImageIndex, setClickedImageIndex] = useState(0);
+
+  const [isConfirmModalVisible, setIsConfirmModalVisible] = useState(false);
+  const [confirmAction, setConfirmAction] = useState(null); // 삭제 혹은 수정을 결정하는 state
+  const showConfirmModal = (action) => {
+    setConfirmAction(action); // 현재 액션(수정 혹은 삭제)을 상태로 저장
+    setIsConfirmModalVisible(true);
+  };
+
+  const handleOkConfirm = () => {
+    if (confirmAction === "edit") {
+      navigate(`/schoolboard/${schoolBoardPost?.board.id}/update`);
+    } else if (confirmAction === "delete") {
+      removePost();
+    }
+    setIsConfirmModalVisible(false);
+  };
+
+  const handleCancelConfirm = () => {
+    setIsConfirmModalVisible(false);
+  };
 
   const openImageModal = (index) => {
     setClickedImageIndex(index);
@@ -59,7 +78,9 @@ const SchoolBoardDetail = () => {
       loadPost(postId);
     }
   }, []);
-
+  useEffect(() => {
+    schoolBoardPost?.userNo === me?.userNo && setCanEditOrDelete(true);
+  }, [me, schoolBoardPost]);
   return (
     <Row gutter={[16, 16]} justify="center" style={{ paddingTop: "1rem" }}>
       <Col xs={23} md={15} style={{ textAlign: "left", padding: "1rem" }}>
@@ -102,8 +123,30 @@ const SchoolBoardDetail = () => {
                 <AuthorName>{schoolBoardPost?.userName}</AuthorName>
                 <br />
                 <PostDate>{formatDate(schoolBoardPost?.board?.modifiedDate)}</PostDate>
-                <EditDeleteIcon />
               </AuthorInfo>
+              {canEditOrDelete && (
+                <Dropdown
+                  placement="bottomLeft"
+                  overlay={
+                    <Menu>
+                      <Menu.Item
+                        onClick={() => showConfirmModal("edit")} // 액션 타입을 전달하여 모달을 띄웁니다.
+                      >
+                        수정하기
+                      </Menu.Item>
+                      <Menu.Item
+                        danger
+                        onClick={() => showConfirmModal("delete")} // 액션 타입을 전달하여 모달을 띄웁니다.
+                      >
+                        삭제하기
+                      </Menu.Item>
+                    </Menu>
+                  }
+                  trigger={["hover"]}
+                >
+                  <EllipsisOutlined style={{ float: "right" }} />
+                </Dropdown>
+              )}
             </PostHeader>
             <PostContent
               dangerouslySetInnerHTML={{
@@ -193,6 +236,24 @@ const SchoolBoardDetail = () => {
                   }}
                 />
               </div>
+            </Modal>
+            <Modal
+              title={confirmAction === "edit" ? "수정 확인" : "삭제 확인"}
+              visible={isConfirmModalVisible}
+              onOk={handleOkConfirm}
+              onCancel={handleCancelConfirm}
+              centered={true}
+              okButtonProps={{
+                danger: confirmAction === "delete",
+                style: confirmAction === "delete" ? { backgroundColor: "red" } : {},
+              }}
+              // okButtonProps를 사용하여 삭제 동작일 때 '확인' 버튼을 빨간색으로 만듭니다.
+            >
+              <p>
+                {confirmAction === "edit"
+                  ? "정말로 이 게시글을 수정하시겠습니까?"
+                  : "정말로 이 게시글을 삭제하시겠습니까?"}
+              </p>
             </Modal>
           </>
         )}
