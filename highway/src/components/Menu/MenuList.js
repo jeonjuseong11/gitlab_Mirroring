@@ -24,8 +24,6 @@ export const MenuLists = [
 // 현재 선택된 경로에 대한 key 값을 반환하는 함수
 export const getSelectedKey = () => {
   const currentPath = window.location.pathname;
-  const selectedMenuItem = MenuLists.find((item) =>
-    currentPath.startsWith(item.key)
-  );
+  const selectedMenuItem = MenuLists.find((item) => currentPath.startsWith(item.key));
   return selectedMenuItem ? selectedMenuItem.key : null;
 };

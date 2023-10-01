@@ -4,8 +4,8 @@ import {
   FileTextOutlined,
   QuestionCircleOutlined,
 } from "@ant-design/icons";
-import { Avatar, Button, Col, FloatButton, Row } from "antd";
-import React from "react";
+import { Avatar, Button, Col, FloatButton, Modal, Row } from "antd";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -21,6 +21,7 @@ const Title = styled(Link)`
 `;
 
 const Header = () => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const { me } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -32,11 +33,23 @@ const Header = () => {
     });
     // navigate(-1);
     window.localStorage.clear();
-    window.location.replace(`/`);
+    // window.location.replace(`/`);
   };
 
   const handleProfileClick = () => {
     navigate("/profile");
+  };
+  const showLogoutModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+    onLogOut();
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
   };
 
   return (
@@ -76,7 +89,7 @@ const Header = () => {
                 <Avatar size={28}>{me?.userName[0]}</Avatar>
                 <span style={{ marginLeft: "0.2rem" }}>{me?.userName}</span>
               </Button>
-              <Button onClick={onLogOut} danger>
+              <Button onClick={showLogoutModal} danger>
                 로그아웃
               </Button>
             </>
@@ -113,6 +126,16 @@ const Header = () => {
         />
         <FloatButton icon={<QuestionCircleOutlined />} tooltip={<div>버그 리포트</div>} />
       </FloatButton.Group>
+      <Modal
+        title="로그아웃 확인"
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        okButtonProps={{ style: { backgroundColor: "red", borderColor: "red" } }}
+        centered={true}
+      >
+        <p>정말 로그아웃하시겠습니까?</p>
+      </Modal>
     </>
   );
 };
