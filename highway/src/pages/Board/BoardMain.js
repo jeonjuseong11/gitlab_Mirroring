@@ -5,12 +5,83 @@ import moment from "moment";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { LOAD_POSTS_REQUEST } from "../../constants/actionTypes";
+import styled from "styled-components";
 
 moment.locale("ko"); // 한국어 로케일 설정
 
+const CustomMenu = styled(Menu)`
+  padding-bottom: 1rem;
+  border: 0;
+  background-color: white;
+`;
+const CommunityInfo = styled.div`
+  background-color: #f2f2f2;
+  padding: 1rem;
+  border-radius: 10px;
+  font-weight: 500;
+  color: #a1a1a1;
+  word-break: keep-all;
+`;
+const SearchInput = styled(Input)`
+  padding: 1rem;
+  margin-bottom: 1rem;
+`;
+const StyledButton = styled(Button)`
+  border-radius: 50px;
+  background: ${(props) => (props.active ? "#8282ff" : "transparent")};
+  color: ${(props) => (props.active ? "white" : "black")};
+`;
+
+const StyledListItem = styled(List.Item)`
+  text-align: left;
+  border-radius: 10px;
+  align-items: center;
+  background: ${(props) => (props.isHovered ? "#f5f5f5" : "transparent")};
+  transition: background 0.3s;
+`;
+
+const StyledItemDescription = styled.div`
+  height: 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+`;
+
+const StyledItemImg = styled.img`
+  width: 6vw;
+  height: 6vw;
+  float: right;
+  min-width: 3rem;
+  min-height: 3rem;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+`;
+
+const DateContainer = styled.div`
+  position: absolute;
+  bottom: 16px;
+  right: 20px;
+  text-align: right;
+  color: #a2a2a2;
+`;
+
+const SignUpLoginContainer = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 50%;
+`;
+
 export const formatDate = (dateString) => {
   const currentTime = moment();
-  const targetTime = moment.utc(dateString).local(); // UTC 시간을 한국 시간으로 변환
+  const targetTime = moment.utc(dateString).local();
   const duration = moment.duration(currentTime.diff(targetTime));
 
   if (duration.asSeconds() < 60) {
@@ -53,7 +124,7 @@ const stripTags = (html) => {
 };
 
 const BoardMain = () => {
-  const MAX_CONTENT_LENGTH = 20; // 최대 글자수
+  const MAX_CONTENT_LENGTH = 20;
   const { category } = useParams();
   const dispatch = useDispatch();
   const { schoolBoardPosts, loadPostsLoading } = useSelector((state) => state.post);
@@ -82,7 +153,7 @@ const BoardMain = () => {
 
   if (sortOrder === "latest") {
     sortedData.sort((a, b) => {
-      return new Date(b.modifiedDate) - new Date(a.modifiedDate);
+      return new Date(b?.board.modifiedDate) - new Date(a?.board.modifiedDate);
     });
   }
 
@@ -126,11 +197,6 @@ const BoardMain = () => {
       label: "질문게시판",
       onClick: () => {
         navigate("/schoolboard/01");
-        // if (!me) {
-        //   needLoginError("글쓰기는 로그인 후에 가능합니다.", navigate);
-        // } else {
-        //   navigate("/schoolboard/1");
-        // }
       },
     },
     {
@@ -139,11 +205,6 @@ const BoardMain = () => {
       label: "프로젝트 모집",
       onClick: () => {
         navigate("/schoolboard/02");
-        // if (!me) {
-        //   needLoginError("글쓰기는 로그인 후에 가능합니다.", navigate);
-        // } else {
-        //   navigate("/schoolboard/2");
-        // }
       },
     },
     {
@@ -163,34 +224,12 @@ const BoardMain = () => {
   return (
     <>
       <Col xs={24} md={4}>
-        <Menu
-          className="custom-menu"
-          selectedKeys={location.pathname}
-          style={{
-            paddingBottom: "1rem",
-            border: "0",
-            backgroundColor: "white",
-            borderRadius: "10px",
-          }}
-          items={menuItems}
-        />
-        <div
-          style={{
-            backgroundColor: "#f2f2f2",
-            padding: "1rem",
-            borderRadius: "10px",
-            fontWeight: "500",
-            color: "#a1a1a1",
-            wordBreak: "keep-all",
-          }}
-        >
-          커뮤니티는 학교별 태그에 따라 생겨요
-        </div>
+        <CustomMenu className="custom-menu" selectedKeys={location.pathname} items={menuItems} />
+        <CommunityInfo>커뮤니티는 학교별 태그에 따라 생겨요</CommunityInfo>
       </Col>
       <Col xs={24} md={11}>
-        <Input
+        <SearchInput
           placeholder="궁금한 내용을 찾아보세요"
-          style={{ padding: "1rem", marginBottom: "1rem" }}
           onChange={(e) => setSearchText(e.target.value)}
           value={searchText}
           onKeyPress={(e) => {
@@ -200,17 +239,13 @@ const BoardMain = () => {
           }}
         />
         <div style={{ textAlign: "left", marginBottom: "1rem" }}>
-          <Button
+          <StyledButton
             type="text"
-            style={{
-              borderRadius: "50px",
-              background: sortOrder === "latest" ? "#8282ff" : "transparent",
-              color: sortOrder === "latest" ? "white" : "black",
-            }}
+            active={sortOrder === "latest"}
             onClick={() => handleSortOrder("latest")}
           >
             최신순
-          </Button>
+          </StyledButton>
         </div>
         {loadPostsLoading ? (
           <Spin />
@@ -231,81 +266,56 @@ const BoardMain = () => {
             renderItem={(item, index) => (
               <div
                 style={{
-                  borderTop: "1px solid #f2f2f2",
                   paddingTop: "1rem",
-                  paddingBottom: "1rem",
+                  borderTop: "1px solid #f2f2f2",
+                  filter: !me ? "blur(4px)" : "none",
+                  pointerEvents: !me ? "none" : "auto",
                 }}
               >
                 <Link to={`/schoolboard/${item?.board?.category}/${item?.board?.id}`}>
-                  <List.Item
+                  <StyledListItem
                     key={item?.board?.id}
                     onMouseEnter={() => setHoveredItem(index)}
                     onMouseLeave={() => setHoveredItem(null)}
-                    style={{
-                      textAlign: "left",
-                      borderRadius: "10px",
-                      padding: "1rem",
-                      alignItems: "center",
-                      background: hoveredItem === index ? "#f5f5f5" : "transparent",
-                      transition: "background 0.3s",
-                    }}
+                    isHovered={hoveredItem === index}
+                    style={{ paddingTop: "16px" }}
                   >
                     <span style={{ color: "gray" }}>{changeCategory(item?.board?.category)}</span>
                     <List.Item.Meta
                       title={item?.board?.title}
                       description={
-                        <div
-                          style={{
-                            height: "40px",
-                            maxHeight: "40px",
-                            overflow: "hidden",
-                            textOverflow: "ellipsis",
-                            display: "-webkit-box",
-                            WebkitBoxOrient: "vertical",
-                            WebkitLineClamp: 1,
-                          }}
-                        >
+                        <StyledItemDescription>
                           <span
                             dangerouslySetInnerHTML={{
                               __html: formatContent(item?.board?.content, MAX_CONTENT_LENGTH),
                             }}
                           ></span>
                           {item?.imageUrls?.length > 0 && (
-                            <img
+                            <StyledItemImg
                               src={item?.imageUrls[0]} // 첫 번째 이미지 URL
                               alt={`게시글 이미지 - ${item?.board?.title}`}
-                              style={{
-                                width: "5vw",
-                                height: "5vw",
-                                float: "right",
-                                minWidth: "3rem",
-                                minHeight: "3rem",
-                                position: "absolute",
-                                top: 16,
-                                right: 16,
-                              }}
                             />
                           )}
-                        </div>
+                        </StyledItemDescription>
                       }
                     />
 
-                    <div
-                      style={{
-                        position: "absolute",
-                        bottom: 16,
-                        right: 16,
-                        textAlign: "right",
-                        color: "#a2a2a2",
-                      }}
-                    >
-                      {formatDate(item.modifiedDate)}
-                    </div>
-                  </List.Item>
+                    <DateContainer>{formatDate(item?.board?.modifiedDate)}</DateContainer>
+                  </StyledListItem>
                 </Link>
               </div>
             )}
           />
+        )}
+        {!me && (
+          <SignUpLoginContainer>
+            <Button onClick={() => navigate("/signup")} style={{ height: "3rem" }} type="primary">
+              회원가입
+            </Button>
+            <Button onClick={() => navigate("/signin")} style={{ height: "3rem" }} type="default">
+              로그인
+            </Button>
+          </SignUpLoginContainer>
         )}
       </Col>
     </>

@@ -6,6 +6,20 @@ import { useNavigate, useParams } from "react-router-dom";
 import ToggleComment from "../../components/schoolBoardDetail/ToggleComment";
 import { changeCategory, formatDate } from "./BoardMain";
 import { EllipsisOutlined, LeftOutlined, RightOutlined, UserOutlined } from "@ant-design/icons";
+import {
+  AuthorInfo,
+  AuthorName,
+  EditDeleteIcon,
+  ImagePreview,
+  ImagePreviewWrapper,
+  PostContent,
+  PostDate,
+  PostHeader,
+  PostTitle,
+  StyledAvatar,
+  StyledBreadcrumbWrapper,
+  StyledImage,
+} from "../../styles/BoardStyle";
 
 const SchoolBoardDetail = () => {
   const dispatch = useDispatch();
@@ -63,110 +77,46 @@ const SchoolBoardDetail = () => {
           </div>
         ) : (
           <>
-            <Breadcrumb
-              items={[
-                {
-                  title: <a href={`/schoolboard/0`}>커뮤니티</a>,
-                },
-                {
-                  title: (
-                    <>
-                      <a href={`/schoolboard/${category}`}>
-                        {changeCategory(schoolBoardPost?.board.category)}
-                      </a>
-                    </>
-                  ),
-                },
-              ]}
-            />
-            <div style={{ borderBottom: "1px solid #f2f2f2" }}>
-              <div style={{ borderBottom: "1px solid #f2f2f2" }}>
-                <h2>{schoolBoardPost?.board?.title}</h2>
-                <Avatar style={{ marginTop: "-1rem", backgroundColor: "#d2d2d2" }} size={32}>
-                  {schoolBoardPost?.userName[0]}
-                </Avatar>
-                <div style={{ marginLeft: "1rem", display: "inline-block" }}>
-                  <span style={{ fontWeight: "600" }}>{schoolBoardPost?.userName}</span>
-                  <br></br>
-                  <span style={{ fontSize: "0.5rem" }}>
-                    {formatDate(schoolBoardPost?.board?.modifiedDate)}
-                  </span>
-                  <span style={{ position: "absolute", right: "1rem" }}>
-                    {canEditOrDelete && (
-                      <Dropdown
-                        placement="bottomLeft"
-                        overlay={
-                          <Menu>
-                            <Menu.Item
-                              onClick={() => {
-                                navigator(`/schoolboard/${schoolBoardPost?.board.id}/update`);
-                              }}
-                            >
-                              수정하기
-                            </Menu.Item>
-                            <Menu.Item
-                              danger
-                              onClick={() => {
-                                removePost();
-                              }}
-                            >
-                              <a href={`/schoolboard/${category}`}>삭제하기</a>
-                            </Menu.Item>
-                          </Menu>
-                        }
-                        trigger={["hover"]}
-                      >
-                        <EllipsisOutlined />
-                      </Dropdown>
-                    )}
-                  </span>
-                </div>
-                <p style={{ marginLeft: "1rem" }}></p>
-              </div>
-              <div
-                style={{ height: "20rem", padding: "1rem" }}
-                dangerouslySetInnerHTML={{
-                  __html: schoolBoardPost?.board?.content,
-                }}
+            <StyledBreadcrumbWrapper>
+              <Breadcrumb
+                items={[
+                  {
+                    title: <a href={`/schoolboard/0`}>커뮤니티</a>,
+                  },
+                  {
+                    title: (
+                      <>
+                        <a href={`/schoolboard/${category}`}>
+                          {changeCategory(schoolBoardPost?.board.category)}
+                        </a>
+                      </>
+                    ),
+                  },
+                ]}
               />
-              <div style={{ display: "flex" }}>
-                {schoolBoardPost?.imageUrls?.map((imageUrl, index) => (
-                  <div
-                    style={{
-                      border: "1px solid #c2c2c2",
-                      borderRadius: "5px",
-                      width: "6rem",
-                      height: "6rem",
-                      marginRight: ".5rem",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      cursor: "pointer",
-                      transition: "0.3s ease",
-                    }}
-                    onClick={() => openImageModal(index)}
-                    onMouseOver={(e) => {
-                      e.currentTarget.style.borderColor = "#aaa";
-                      e.currentTarget.style.transform = "scale(1.15)"; // 커지는 효과 추가
-                    }}
-                    onMouseOut={(e) => {
-                      e.currentTarget.style.borderColor = "#c2c2c2";
-                      e.currentTarget.style.transform = "scale(1)"; // 원래 크기로 복원
-                    }}
-                  >
-                    <img
-                      key={index}
-                      src={imageUrl}
-                      alt={`게시글 이미지 - ${index}`}
-                      style={{
-                        maxWidth: "5rem",
-                        maxHeight: "5rem",
-                      }}
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
+            </StyledBreadcrumbWrapper>
+            <PostHeader>
+              <PostTitle>{schoolBoardPost?.board?.title}</PostTitle>
+              <StyledAvatar size={32}>{schoolBoardPost?.userName[0]}</StyledAvatar>
+              <AuthorInfo>
+                <AuthorName>{schoolBoardPost?.userName}</AuthorName>
+                <br />
+                <PostDate>{formatDate(schoolBoardPost?.board?.modifiedDate)}</PostDate>
+                <EditDeleteIcon />
+              </AuthorInfo>
+            </PostHeader>
+            <PostContent
+              dangerouslySetInnerHTML={{
+                __html: schoolBoardPost?.board?.content,
+              }}
+            />
+            <ImagePreviewWrapper>
+              {schoolBoardPost?.imageUrls?.map((imageUrl, index) => (
+                <ImagePreview onClick={() => openImageModal(index)}>
+                  <StyledImage key={index} src={imageUrl} alt={`게시글 이미지 - ${index}`} />
+                </ImagePreview>
+              ))}
+            </ImagePreviewWrapper>
             <Modal visible={imageModalVisible} onCancel={closeImageModal} footer={null} centered>
               <div
                 style={{

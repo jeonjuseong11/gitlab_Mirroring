@@ -50,17 +50,6 @@ function setAccessToken(accessToken, refreshToken, expiration) {
   localStorage.setItem("ACCESSTOKEN", accessToken);
   localStorage.setItem("EXPIRES", expiration);
   localStorage.setItem("REFRESHTOKEN", refreshToken);
-  // 현재 도메인의 쿠키에 accessToken을 설정
-  // document.cookie = `accessToken=${accessToken}; path=/; Secure; HttpOnly`;
-  // console.log(data.access_TOKEN_EXPIRATION);
-  // const expires = new Date(expiration);
-  // cookie.save("accessToken", token, {
-  //   path: "/",
-  //   expires,
-  //   // httpOnly: true,
-  //   // secure: true,
-  //   // sameSite: "strict",
-  // });
 }
 function* logIn(action) {
   try {
