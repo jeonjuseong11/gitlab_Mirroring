@@ -6,9 +6,11 @@ import { LOAD_SCHOOL_INFO_REQUEST } from "../../constants/actionTypes";
 import SchoolDetailReview from "./SchoolDetailReview";
 import { QuestionWrapper, SubPageWrapper } from "./SchoolDetailStyle";
 import DescDept from "../DescriptDepartment/DescDept";
+import { SearchOutlined } from "@ant-design/icons";
 
 const SchoolDetailInfo = ({ rateAverages, roundedTotalRate, reviewCount }) => {
   const { singleSchool } = useSelector((state) => state.school);
+  const { schoolCurris } = useSelector((state) => state.school);
   const [departsList, setDepartsList] = useState([]);
 
   const [open, setOpen] = useState(false);
@@ -34,6 +36,10 @@ const SchoolDetailInfo = ({ rateAverages, roundedTotalRate, reviewCount }) => {
   const onChange = (key) => {
     setActiveTab(key);
   };
+
+  useEffect(() => {
+    console.log(schoolCurris);
+  }, [schoolCurris]);
 
   return (
     <SubPageWrapper>
@@ -66,19 +72,42 @@ const SchoolDetailInfo = ({ rateAverages, roundedTotalRate, reviewCount }) => {
         </Col>
         <Col xs={22} md={9}>
           <QuestionWrapper style={{ padding: "2rem", textAlign: "left" }}>
-            <h3 style={{ margin: "0", marginBottom: "0.5rem" }}>학과소개</h3>
-            <Button type="primary" onClick={showModal}>
-              Modal
-            </Button>
-            <Modal
-              title="세부과목"
-              open={open}
-              onOk={hideModal}
-              onCancel={hideModal}
-              width={1000}
+            <p
+              style={{
+                float: "right",
+                height: "18px",
+                fontSize: "8px",
+                margin: "0px",
+                cursor: "pointer",
+              }}
+              type="text"
+              onClick={showModal}
             >
-              <DescDept />
-            </Modal>
+              <SearchOutlined />
+              자세히 보기
+            </p>
+            {schoolCurris.length != undefined ? (
+              <Modal
+                title="세부과목"
+                open={open}
+                onOk={hideModal}
+                onCancel={hideModal}
+                width={1000}
+              >
+                <DescDept />
+              </Modal>
+            ) : (
+              <Modal
+                title="아직 데이터가 준비되있지 않아요."
+                open={open}
+                onOk={hideModal}
+                onCancel={hideModal}
+                width={400}
+              >
+                :(
+              </Modal>
+            )}
+            <h3 style={{ margin: "0", marginBottom: "0.5rem" }}>학과소개</h3>
             <Tabs
               activeKey={activeTab}
               onChange={onChange}

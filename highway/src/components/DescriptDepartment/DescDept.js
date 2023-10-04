@@ -4,11 +4,11 @@ import { LOAD_SCHOOL_CURRIS_REQUEST } from "../../constants/actionTypes";
 import { Select, Space } from "antd";
 import { descCurri } from "../../utils/Curri";
 import { TestSchoolCurriDiv } from "../../styles/DescCurriStyled";
-
-export const testStyle = {};
+import { useParams } from "react-router-dom";
 
 const DescDept = () => {
   const { schoolCurris } = useSelector((state) => state.school);
+  const { schoolId } = useParams();
   const dispatch = useDispatch();
   const [grade, setGrade] = useState(1);
   const [departTitle, setDepartTitle] = useState();
@@ -103,7 +103,7 @@ const DescDept = () => {
   const loadSchoolCurris = () => {
     dispatch({
       type: LOAD_SCHOOL_CURRIS_REQUEST,
-      data: { id: 2 },
+      data: { id: schoolId },
     });
   };
 
@@ -113,7 +113,7 @@ const DescDept = () => {
 
   return (
     <div>
-      <h3>학교 커리큘럼 창입니다.</h3>
+      <h3>학교 커리큘럼</h3>
       <Space wrap>
         <Select
           style={{
