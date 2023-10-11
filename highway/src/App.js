@@ -36,6 +36,7 @@ import { info } from "./utils/Message";
 import BoardDetailUpdateForm from "./components/Board/BoardDetailUpdateForm";
 import PromotionVideosVer2 from "./components/Promotion/PromotionVideosVer2";
 import DescDept from "./components/DescriptDepartment/DescDept";
+import FeedBack from "./pages/FeedBack";
 
 function App() {
   const dispatch = useDispatch();
@@ -167,6 +168,7 @@ function App() {
               path="/schooldetail/:schoolId"
               element={<SchoolDetail />}
             />
+            <Route exact path="/feedback" element={<FeedBack />} />
           </Route>
         </Routes>
       </div>
