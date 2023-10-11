@@ -34,21 +34,24 @@ const postFeedbackAPI = (data) => {
   return axios.post(`/feedback`, data);
 };
 
-function* postFeedBack() {
+function* postFeedBack(action) {
   try {
-    const result = yield call(postFeedbackAPI);
+    const result = yield call(postFeedbackAPI, action.data);
     yield put({
       type: POST_FEEDBACK_SUCCESS,
       data: result.data.data,
     });
-    // console.log(result.data);
-  } catch (e) {
+
+    yield put({
+      type: LOAD_FEEDBACK_REQUEST,
+      data: action.data.schoolId,
+    });
+  } catch (err) {
+    console.error(err);
     yield put({
       type: POST_FEEDBACK_FAILURE,
-      data: e.response.data,
+      error: err.response.data,
     });
-    alert(e.response.data);
-    localStorage.clear();
   }
 }
 
