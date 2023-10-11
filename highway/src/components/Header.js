@@ -3,6 +3,7 @@ import {
   CustomerServiceOutlined,
   FileTextOutlined,
   QuestionCircleOutlined,
+  UnorderedListOutlined,
 } from "@ant-design/icons";
 import { Avatar, Button, Col, FloatButton, Modal, Row } from "antd";
 import React, { useState } from "react";
@@ -12,7 +13,10 @@ import styled from "styled-components";
 import { LOGOUT_REQUEST } from "../constants/actionTypes";
 import { info } from "../utils/Message";
 
-const imgUrl = { large: `/assets/TitleIcon.png`, small: `/assets/SmallLogo.png` };
+const imgUrl = {
+  large: `/assets/TitleIcon.png`,
+  small: `/assets/SmallLogo.png`,
+};
 
 const Title = styled(Link)`
   text-decoration: none;
@@ -25,6 +29,10 @@ const Header = () => {
   const { me } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false);
+
+  console.log(me);
+
   // const userInfo = localStorage.getItem("USERINFO");
   const onLogOut = () => {
     info("로그아웃");
@@ -52,6 +60,18 @@ const Header = () => {
     setIsModalVisible(false);
   };
 
+  const showFeedbackModal = () => {
+    setIsFeedbackModalOpen(true);
+  };
+
+  const handleFeedbackOk = () => {
+    setIsFeedbackModalOpen(false);
+  };
+
+  const handleFeedbackCancel = () => {
+    setIsFeedbackModalOpen(false);
+  };
+
   return (
     <>
       <Row justify="center" gutter={[16, 16]} style={{ display: "flex" }}>
@@ -60,7 +80,12 @@ const Header = () => {
             <img
               src={window.innerWidth <= 900 ? imgUrl.small : imgUrl.large}
               alt="Logo"
-              style={{ width: "100%", maxWidth: "10rem", minWidth: "7rem", marginTop: ".5rem" }}
+              style={{
+                width: "100%",
+                maxWidth: "10rem",
+                minWidth: "7rem",
+                marginTop: ".5rem",
+              }}
             />
           </Title>
         </Col>
@@ -120,18 +145,34 @@ const Header = () => {
         style={{ right: 40, bottom: 100 }}
         icon={<CustomerServiceOutlined />}
       >
-        <FloatButton
+        {/* <FloatButton
           icon={<CommentOutlined />}
           tooltip={<div>서비스에 대한 생각을 남겨주세요</div>}
+        /> */}
+        <FloatButton
+          icon={<QuestionCircleOutlined />}
+          tooltip={<div>버그 리포트 및 문의</div>}
         />
-        <FloatButton icon={<QuestionCircleOutlined />} tooltip={<div>버그 리포트</div>} />
+        {me?.userRole === 1 ? (
+          <FloatButton
+            onClick={() => {
+              navigate(`/feedback`);
+            }}
+            icon={<UnorderedListOutlined />}
+            tooltip={<div>문의 리스트</div>}
+          />
+        ) : (
+          <></>
+        )}
       </FloatButton.Group>
       <Modal
         title="로그아웃 확인"
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
-        okButtonProps={{ style: { backgroundColor: "red", borderColor: "red" } }}
+        okButtonProps={{
+          style: { backgroundColor: "red", borderColor: "red" },
+        }}
         centered={true}
       >
         <p>정말 로그아웃하시겠습니까?</p>
