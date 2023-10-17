@@ -1,4 +1,4 @@
-import { StarOutlined, UserOutlined } from "@ant-design/icons";
+import { UserOutlined } from "@ant-design/icons";
 import { Card, Col, List, Row } from "antd";
 import Meta from "antd/es/card/Meta";
 import { CardItem, IconText, TagsItem } from "./CardStyle";

@@ -124,7 +124,6 @@ const BoardDetailUpdateForm = () => {
   };
   useEffect(() => {
     if (updatePostDone) {
-      // Navigate when updatePostDone becomes true
       navigate(`/schoolboard/${initialValues.category}/${postId}`);
     }
   }, [updatePostDone, navigate, initialValues.category, postId]);

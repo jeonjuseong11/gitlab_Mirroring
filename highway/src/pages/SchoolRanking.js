@@ -56,8 +56,13 @@ const SchoolRanking = () => {
     return item.tag.some((tag) => filterValue.includes(tag));
   });
   useEffect(() => {
-    setSelectedSchool(filteredData[0]);
-  }, [filterValue, filteredData]);
+    if (
+      !selectedSchool ||
+      !filteredData.some((school) => school.schoolId === selectedSchool.schoolId)
+    ) {
+      setSelectedSchool(filteredData[0]);
+    }
+  }, [filterValue, filteredData, selectedSchool]);
   const columns = [
     {
       title: "랭킹",
@@ -71,7 +76,7 @@ const SchoolRanking = () => {
             textDecoration: "none",
             color: "black",
           }}
-          onClik={() => handleSchoolSelect(record)}
+          onClick={() => handleSchoolSelect(record)}
         >
           {text}
         </a>
@@ -141,11 +146,7 @@ const SchoolRanking = () => {
           <RankSelector setFilterValue={handleFilterValueChange} />
         </Col>
       </Row>
-      <Row
-        gutter={[16, 16]}
-        justify="center"
-        style={{ textAlign: "left", marginTop: "1rem" }}
-      >
+      <Row gutter={[16, 16]} justify="center" style={{ textAlign: "left", marginTop: "1rem" }}>
         <Col xs={24} md={10}>
           <StyledTable
             style={{ minWidth: "14rem" }}
