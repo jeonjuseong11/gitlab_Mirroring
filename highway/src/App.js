@@ -3,10 +3,7 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  LOAD_USER_REQUEST,
-  REFRESH_TOKEN_REQUEST,
-} from "./constants/actionTypes";
+import { LOAD_USER_REQUEST, REFRESH_TOKEN_REQUEST } from "./constants/actionTypes";
 
 import TopMenu from "./components/Menu/TopMenu";
 import SchoolDetail from "./pages/SchoolDetail";
@@ -85,12 +82,15 @@ function App() {
       loadUser();
     }
   }, [access, expire]);
-  useEffect(() => {
-    if (me && !hasShownWelcomeMessage) {
-      info(`${me.userName}님 환영합니다.`);
-      localStorage.setItem("USERINFO", JSON.stringify(me));
-      setHasShownWelcomeMessage(true);
 
+  useEffect(() => {
+    if (
+      me &&
+      !hasShownWelcomeMessage &&
+      localStorage.getItem("HAS_SHOWN_WELCOME_MESSAGE") !== "true"
+    ) {
+      info(`${me.userName}님 환영합니다.`);
+      setHasShownWelcomeMessage(true);
       // 사용자가 로그인 성공 후에만 한 번 환영 메시지를 표시하도록 설정
       localStorage.setItem("HAS_SHOWN_WELCOME_MESSAGE", "true");
     }
@@ -103,6 +103,7 @@ function App() {
       setHasShownWelcomeMessage(true);
     }
   }, []);
+
   return (
     <ConfigProvider theme={{ token: { colorPrimary: "#8282ff" } }}>
       <div className="App">
@@ -120,53 +121,21 @@ function App() {
             </Route>
             <Route element={<SchoolBoard />}>
               <Route exact path="/schoolboard/" element={<BoardMain />} />
-              <Route
-                exact
-                path="/schoolboard/:category"
-                element={<BoardMain />}
-              />
+              <Route exact path="/schoolboard/:category" element={<BoardMain />} />
             </Route>
-            <Route
-              exact
-              path="/schoolboard/:category/:postId"
-              element={<SchoolBoardDetail />}
-            />
+            <Route exact path="/schoolboard/:category/:postId" element={<SchoolBoardDetail />} />
             <Route exact path="/schoolboard/post" element={<BoardPostForm />} />
-            <Route
-              exact
-              path="/schoolboard/:postId/update"
-              element={<BoardDetailUpdateForm />}
-            />
+            <Route exact path="/schoolboard/:postId/update" element={<BoardDetailUpdateForm />} />
             <Route exact path="/promotion" element={<Promotion />}>
               <Route exact path="/promotion" element={<PromotionHome />} />
               <Route exact path="/promotion/news" element={<PromotionNews />} />
-              <Route
-                exact
-                path="/promotion/videos"
-                element={<PromotionVideos />}
-              />
-              <Route
-                exact
-                path="/promotion/videos2"
-                element={<PromotionVideosVer2 />}
-              />
+              <Route exact path="/promotion/videos" element={<PromotionVideos />} />
+              <Route exact path="/promotion/videos2" element={<PromotionVideosVer2 />} />
             </Route>
-            <Route
-              exact
-              path="/promotion/news/:newsId"
-              element={<PromotionNewsDetail />}
-            />
-            <Route
-              exact
-              path="/promotion/videos/:videoId"
-              element={<PromotionVideoDetail />}
-            />
+            <Route exact path="/promotion/news/:newsId" element={<PromotionNewsDetail />} />
+            <Route exact path="/promotion/videos/:videoId" element={<PromotionVideoDetail />} />
             <Route exact path="/schoolranking" element={<SchoolRanking />} />
-            <Route
-              exact
-              path="/schooldetail/:schoolId"
-              element={<SchoolDetail />}
-            />
+            <Route exact path="/schooldetail/:schoolId" element={<SchoolDetail />} />
           </Route>
         </Routes>
       </div>
