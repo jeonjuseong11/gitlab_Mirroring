@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { all, fork, put, takeLatest, throttle, call } from "redux-saga/effects";
 
 import {
@@ -103,13 +102,14 @@ function likePostAPI(data) {
 function* likePost(action) {
   try {
     const result = yield call(likePostAPI, action.data);
+    const resultLike = {
+      boardId: result.data.data.boardId,
+      heartId: result.data.data.id,
+      uid: result.data.data.uid,
+    };
     yield put({
       type: LIKE_POST_SUCCESS,
-      data: result.data.data,
-    });
-    yield put({
-      type: LOAD_POST_REQUEST,
-      data: action.data.boardId,
+      data: resultLike,
     });
   } catch (err) {
     console.error(err);
@@ -130,11 +130,7 @@ function* unlikePost(action) {
     const result = yield call(unlikePostAPI, action.data);
     yield put({
       type: UNLIKE_POST_SUCCESS,
-      data: { data: result.data.data, heartId: action.data.heartId },
-    });
-    yield put({
-      type: LOAD_POST_REQUEST,
-      data: action.data.boardId,
+      data: { heartId: action.data.heartId },
     });
   } catch (err) {
     console.error(err);
@@ -147,7 +143,7 @@ function* unlikePost(action) {
 
 function loadPostAPI(data) {
   //단일 게시글 로딩
-  return axios.get(`/board/detail/${data}`);
+  return axios.get(`board/detail/${data}`);
 }
 
 function* loadPost(action) {
@@ -157,6 +153,7 @@ function* loadPost(action) {
       type: LOAD_POST_SUCCESS,
       data: result.data.data,
     });
+    console.log(result.data);
   } catch (err) {
     console.error(err);
     yield put({
@@ -323,10 +320,6 @@ function* addPostComment(action) {
       type: ADD_POST_COMMENT_SUCCESS,
       data: result.data,
     });
-    yield put({
-      type: LOAD_POST_COMMENTS_REQUEST,
-      data: { boardId: action.data.boardId },
-    });
   } catch (err) {
     console.error(err);
     yield put({
@@ -388,11 +381,7 @@ function* removePostComment(action) {
     const result = yield call(removePostCommentAPI, action.data);
     yield put({
       type: REMOVE_POST_COMMENT_SUCCESS,
-      data: result.data,
-    });
-    yield put({
-      type: LOAD_POST_COMMENTS_REQUEST,
-      data: { boardId: action.data.boardId },
+      data: action.data.id,
     });
   } catch (err) {
     console.error(err);

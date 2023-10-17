@@ -67,12 +67,23 @@ const SchoolBoardDetail = () => {
     });
   };
 
+  const [loading, setLoading] = useState(false);
+
   const loadPost = (postId) => {
+    // 이미 요청이 진행 중이면 무시
+    if (loading) return;
+
+    setLoading(true); // 요청 시작 전에 로딩 상태를 true로 설정
     dispatch({
       type: LOAD_POST_REQUEST,
       data: postId,
     });
   };
+
+  useEffect(() => {
+    setLoading(false); // 요청이 끝나면 로딩 상태를 false로 설정
+  }, [schoolBoardPost]);
+
   useEffect(() => {
     if (postId && category) {
       loadPost(postId);

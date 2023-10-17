@@ -122,7 +122,6 @@ const reducer = (state = initialState, action) =>
       }
       case UPLOAD_IMAGES_FAILURE:
         draft.imagePaths = draft.imagePaths.filter((v, i) => i !== action.data);
-
         draft.uploadImagesLoading = false;
         draft.uploadImagesError = action.error;
         break;
@@ -135,10 +134,11 @@ const reducer = (state = initialState, action) =>
         draft.likePostError = null;
         break;
       case LIKE_POST_SUCCESS: {
-        // const post = draft.schoolBoardPosts.find((v) => v.id === action.data.PostId);
         draft.Likers.push(action.data);
+        draft.schoolBoardPost.boardHeartInfo.push(action.data);
         draft.likePostLoading = false;
         draft.likePostDone = true;
+        draft.schoolBoardPost.heartCount = draft.schoolBoardPost.heartCount + 1;
         break;
       }
       case LIKE_POST_FAILURE:
@@ -151,7 +151,11 @@ const reducer = (state = initialState, action) =>
         draft.unlikePostError = null;
         break;
       case UNLIKE_POST_SUCCESS: {
-        draft.Likers = draft.Likers.filter((liker) => liker.id !== action.data.heartId);
+        draft.Likers = draft.Likers.filter((liker) => liker.heartId !== action.data.heartId);
+        draft.schoolBoardPost.boardHeartInfo = draft.schoolBoardPost.boardHeartInfo.filter(
+          (liker) => liker.heartId !== action.data.heartId
+        );
+        draft.schoolBoardPost.heartCount = draft.schoolBoardPost.heartCount - 1;
         draft.unlikePostLoading = false;
         draft.unlikePostDone = true;
         break;
@@ -170,6 +174,7 @@ const reducer = (state = initialState, action) =>
         draft.loadPostDone = true;
         draft.schoolBoardPost = action.data;
         draft.imagePaths = action.data.imageUrls;
+        draft.Likers = action.data ? action.data.boardHeartInfo : null;
         break;
       case LOAD_POST_FAILURE:
         draft.loadPostLoading = false;
@@ -248,6 +253,7 @@ const reducer = (state = initialState, action) =>
       case ADD_POST_COMMENT_SUCCESS: {
         draft.addCommentLoading = false;
         draft.addCommentDone = true;
+        draft.schoolBoardPostComments.unshift(action.data.data);
         break;
       }
       case ADD_POST_COMMENT_FAILURE:
@@ -290,9 +296,9 @@ const reducer = (state = initialState, action) =>
       case REMOVE_POST_COMMENT_SUCCESS:
         draft.removePostCommentLoading = false;
         draft.removePostCommentDone = true;
-        // draft.schoolBoardPostComments = draft.schoolBoardPostComments.filter(
-        //   (v) => v.id !== action.data.PostId
-        // );
+        draft.schoolBoardPostComments = draft.schoolBoardPostComments.filter(
+          (v) => v.id !== action.data.id
+        );
         break;
       case REMOVE_POST_COMMENT_FAILURE:
         draft.removePostCommentLoading = false;

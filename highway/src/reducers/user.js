@@ -39,7 +39,7 @@ export const initialState = {
   loadUserDone: false,
   loadUserError: null,
   myNo: null, //로그인한 유저 번호(백엔드쪽)
-  me: null, //로그인한 유저 정보
+  me: JSON.parse(localStorage.getItem("USERINFO")) || null, //로그인한 유저 정보
   idValid: null,
   refreshToken: null, //jwt 토큰
   accessToken: null,

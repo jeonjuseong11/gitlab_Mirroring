@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { HeartOutlined, HeartTwoTone, MessageOutlined, MessageTwoTone } from "@ant-design/icons";
+import { HeartOutlined, HeartTwoTone, MessageOutlined } from "@ant-design/icons";
 import { Button, Col } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { LIKE_POST_REQUEST, UNLIKE_POST_REQUEST } from "../../constants/actionTypes";
@@ -7,21 +7,22 @@ import { useNavigate, useParams } from "react-router-dom";
 
 const ToggleGoodAndCommentBtn = () => {
   const navigate = useNavigate();
-  const { schoolBoardPost } = useSelector((state) => state.post);
+  const { me } = useSelector((state) => state.user);
+  const [good, setGood] = useState(false);
+  const { likePostLoading, unlikePostLoading, schoolBoardPostComments, schoolBoardPost, Likers } =
+    useSelector((state) => state.post);
+  useEffect(() => {
+    const isLikedByUser = Likers.some((liker) => {
+      return liker.uid === me.userId;
+    });
 
+    setGood(isLikedByUser);
+  }, [Likers, schoolBoardPost, me]);
   const dispatch = useDispatch();
-  const { likePostLoading, unlikePostLoading, schoolBoardPostComments } = useSelector(
-    (state) => state.post
-  );
   const filteredComments = schoolBoardPostComments.filter((item) => !item.isDeleted);
 
-  const [good, setGood] = useState(false);
   const { postId } = useParams();
-  useEffect(() => {
-    if (schoolBoardPost) {
-      setGood(schoolBoardPost.heart == null ? false : true);
-    }
-  }, [schoolBoardPost]);
+
   const likePost = () => {
     dispatch({
       type: LIKE_POST_REQUEST,
@@ -30,15 +31,17 @@ const ToggleGoodAndCommentBtn = () => {
     setGood(true);
   };
   const unlikePost = () => {
+    const userLiker = Likers.find((liker) => liker.uid === me.userId);
+    if (!userLiker) return; // 현재 사용자가 좋아요 목록에 없으면 함수 종료
+
     dispatch({
       type: UNLIKE_POST_REQUEST,
-      data: { boardId: postId, heartId: schoolBoardPost.heart.id },
+      data: { boardId: postId, heartId: userLiker.heartId },
     });
     setGood(false);
   };
   const handleButtonClick = () => {
-    // 이 버튼을 클릭할 때 원하는 페이지로 이동하도록 navigate 함수를 호출합니다.
-    navigate(`/schoolboard/${schoolBoardPost?.board.category}`); // '/your-desired-route'는 이동하고 싶은 경로에 맞게 변경하세요.
+    navigate(`/schoolboard/${schoolBoardPost?.board.category}`);
   };
   return (
     <>
@@ -46,11 +49,11 @@ const ToggleGoodAndCommentBtn = () => {
         {good ? (
           <Button type="text" onClick={unlikePost} loading={likePostLoading}>
             <HeartTwoTone twoToneColor="#eb2f96" key="heart" />
-            좋아요
+            좋아요 {Likers?.length}
           </Button>
         ) : (
           <Button type="text" onClick={likePost} loading={unlikePostLoading}>
-            <HeartOutlined key="heart" /> 좋아요
+            <HeartOutlined key="heart" /> 좋아요 {Likers?.length}
           </Button>
         )}
         <Button style={{ marginLeft: "1rem" }} type="text" icon={<MessageOutlined />}>
