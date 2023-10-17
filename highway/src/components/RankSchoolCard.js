@@ -1,4 +1,4 @@
-import { FileImageOutlined, SearchOutlined, UserOutlined } from "@ant-design/icons";
+import { SearchOutlined, UserOutlined } from "@ant-design/icons";
 import { Avatar, Card } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -18,7 +18,13 @@ const RankSchoolCard = ({ selectedSchool }) => {
         avatar={
           <Avatar
             style={{ backgroundColor: "white" }}
-            icon={<FileImageOutlined style={{ color: "gray" }} />}
+            icon={
+              <img
+                style={{ height: "auto", margin: "2px auto" }}
+                alt="example"
+                src={`/assets/School${selectedSchool.schoolId}.png`}
+              />
+            }
             size={64}
           ></Avatar>
         }

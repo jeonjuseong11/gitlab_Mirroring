@@ -5,12 +5,11 @@ import {
   HighlightOutlined,
   LineChartOutlined,
   MedicineBoxOutlined,
-  ProfileOutlined,
   SettingOutlined,
   TeamOutlined,
   TranslationOutlined,
 } from "@ant-design/icons";
-import { Avatar, Col, Row, Segmented, Space } from "antd";
+import { Col, Row, Segmented, Space } from "antd";
 import React from "react";
 
 export const RankTopic = [
@@ -54,6 +53,7 @@ export const RankTopic = [
       "독일어",
       "중국어",
       "일본어",
+      "1",
       "프랑스어",
     ],
   },
