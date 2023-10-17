@@ -33,6 +33,8 @@ import { info } from "./utils/Message";
 import BoardDetailUpdateForm from "./components/Board/BoardDetailUpdateForm";
 import PromotionVideosVer2 from "./components/Promotion/PromotionVideosVer2";
 import DescDept from "./components/DescriptDepartment/DescDept";
+import FeedBack from "./pages/FeedBack";
+import FeedbackPostForm from "./components/Feedback/FeedbackPostForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -136,6 +138,8 @@ function App() {
             <Route exact path="/promotion/videos/:videoId" element={<PromotionVideoDetail />} />
             <Route exact path="/schoolranking" element={<SchoolRanking />} />
             <Route exact path="/schooldetail/:schoolId" element={<SchoolDetail />} />
+            <Route exact path="/feedback" element={<FeedBack />} />
+            <Route exact path="/feedback/post" element={<FeedbackPostForm />} />
           </Route>
         </Routes>
       </div>
