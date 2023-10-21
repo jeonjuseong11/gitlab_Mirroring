@@ -25,7 +25,7 @@ import { needLoginError } from "../utils/Message";
 const SchoolDetail = () => {
   const { schoolId } = useParams();
   const accessToken = localStorage.getItem("ACCESSTOKEN");
-  const me = JSON.parse(localStorage.getItem("USERINFO"));
+  const me = useSelector((state) => state.user);
   const [averageRating, setAverageRating] = useState(0);
   const [reviewCount, setReviewCount] = useState(0);
   const [rateAverages, setRateAverages] = useState({

@@ -128,7 +128,7 @@ const BoardMain = () => {
   const { category } = useParams();
   const dispatch = useDispatch();
   const { schoolBoardPosts, loadPostsLoading } = useSelector((state) => state.post);
-  const me = JSON.parse(localStorage.getItem("USERINFO"));
+  const { me } = useSelector((state) => state.user);
   const [hoveredItem, setHoveredItem] = useState(null);
   const [sortOrder, setSortOrder] = useState("latest");
   const sortedData = [...schoolBoardPosts];
@@ -312,7 +312,7 @@ const BoardMain = () => {
             <Button onClick={() => navigate("/signup")} style={{ height: "3rem" }} type="primary">
               회원가입
             </Button>
-            <Button onClick={() => navigate("/signin")} style={{ height: "3rem" }} type="default">
+            <Button onClick={() => navigate("/login")} style={{ height: "3rem" }} type="default">
               로그인
             </Button>
           </SignUpLoginContainer>
