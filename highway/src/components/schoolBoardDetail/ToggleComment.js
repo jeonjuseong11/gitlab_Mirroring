@@ -1,5 +1,5 @@
 import { Col, Input } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ADD_POST_COMMENT_REQUEST } from "../../constants/actionTypes";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
@@ -7,7 +7,6 @@ import { useParams } from "react-router-dom";
 import ToggleGoodAndCommentBtn from "./ToggleGoodAndCommentBtn";
 import CommentList from "./CommentList";
 import "moment/locale/ko"; // 한국어 로케일 설정
-import Item from "antd/es/list/Item";
 
 moment.locale("ko"); // 한국어 로케일 설정
 
@@ -34,26 +33,25 @@ export const formatDate = (dateString) => {
     return `${months}달 전`;
   }
 };
-
 const ToggleComment = () => {
   const dispatch = useDispatch();
   const { me } = useSelector((state) => state.user);
+  const { addCommentDone } = useSelector((state) => state.post);
   const { postId } = useParams();
-  const [toggle, setToggle] = useState(false);
   const [commentValue, setCommentValue] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleAddComment = () => {
-    if (commentValue.trim() === "") {
-      alert("빈칸이 있습니다.");
-      return;
-    }
+  const inputRef = useRef(null);
+
+  const handleSubmitComment = () => {
     if (me === null) {
       alert("로그인이 필요한 기능입니다.");
       return;
     }
-
-    // 댓글 추가 요청 전에 toggle 값을 변경하여 중복 요청을 방지
-    setToggle(false);
+    if (commentValue.trim() === "") {
+      alert("빈칸이 있습니다.");
+      return;
+    }
 
     dispatch({
       type: ADD_POST_COMMENT_REQUEST,
@@ -63,20 +61,33 @@ const ToggleComment = () => {
         parentId: null,
       },
     });
+    setIsSubmitting(true);
 
-    setCommentValue(""); // 댓글 작성 후 입력 값 초기화
+    setCommentValue("");
   };
 
   const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && !e.shiftKey && !isSubmitting) {
       e.preventDefault();
-      if (me === null) {
-        alert("로그인이 필요한 기능입니다.");
-      } else {
-        handleAddComment();
-      }
+      handleSubmitComment();
     }
   };
+
+  const handleInputBlur = () => {
+    if (commentValue.trim() !== "" && !isSubmitting) {
+      handleSubmitComment();
+    }
+  };
+
+  useEffect(() => {
+    if (isSubmitting) {
+      setIsSubmitting(false);
+      if (inputRef.current) {
+        setCommentValue("");
+        inputRef.current.blur();
+      }
+    }
+  }, [isSubmitting, addCommentDone]);
 
   return (
     <>
@@ -89,7 +100,9 @@ const ToggleComment = () => {
             value={commentValue}
             onChange={(e) => setCommentValue(e.target.value)}
             onKeyDown={handleKeyDown}
+            onBlur={handleInputBlur}
             placeholder="댓글을 적어주세요.(100자 이내) &#13;&#10;작성 완료시 엔터키를 눌러주세요"
+            ref={inputRef}
           />
         </Col>
       </>
