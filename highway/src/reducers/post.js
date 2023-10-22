@@ -260,6 +260,29 @@ const reducer = (state = initialState, action) =>
         draft.addCommentLoading = false;
         draft.addCommentError = action.error;
         break;
+      case ADD_POST_COMMENT_REPLY_REQUEST:
+        draft.addPostCommentReplyLoading = true;
+        draft.addPostCommentReplyDone = false;
+        draft.addPostCommentReplyError = null;
+        break;
+      case ADD_POST_COMMENT_REPLY_SUCCESS: {
+        draft.addPostCommentReplyLoading = false;
+        draft.addPostCommentReplyDone = true;
+        draft.schoolBoardPostComments = draft.schoolBoardPostComments.map((comment) => {
+          if (comment.id === action.data.parentId) {
+            return {
+              ...comment,
+              children: [...comment.children, action.data],
+            };
+          }
+          return comment;
+        });
+        break;
+      }
+      case ADD_POST_COMMENT_REPLY_FAILURE:
+        draft.addPostCommentReplyLoading = false;
+        draft.addPostCommentReplyError = action.error;
+        break;
       case LOAD_POST_COMMENTS_REQUEST:
         draft.loadPostCommentsLoading = true;
         draft.loadPostCommentsDone = false;
@@ -283,6 +306,23 @@ const reducer = (state = initialState, action) =>
       case UPDATE_POST_COMMENT_SUCCESS:
         draft.updatePostCommentLoading = false;
         draft.updatePostCommentDone = true;
+        const comment = draft.schoolBoardPostComments.find(
+          (comment) => comment.id === action.data.id
+        );
+
+        if (comment) {
+          comment.content = action.data.content;
+          comment.modifiedDate = action.data.modifiedDate;
+        } else {
+          for (const otherComment of draft.schoolBoardPostComments) {
+            const reply = otherComment.children.find((reply) => reply.id === action.data.id);
+            if (reply) {
+              reply.content = action.data.content;
+              reply.modifiedDate = action.data.modifiedDate;
+              break;
+            }
+          }
+        }
         break;
       case UPDATE_POST_COMMENT_FAILURE:
         draft.updatePostCommentLoading = false;
@@ -296,27 +336,21 @@ const reducer = (state = initialState, action) =>
       case REMOVE_POST_COMMENT_SUCCESS:
         draft.removePostCommentLoading = false;
         draft.removePostCommentDone = true;
-        draft.schoolBoardPostComments = draft.schoolBoardPostComments.filter(
-          (v) => v.id !== action.data.id
-        );
+        // 댓글 삭제 및 isDeleted 속성 설정
+        draft.schoolBoardPostComments = draft.schoolBoardPostComments.map((comment) => {
+          if (comment.id === action.data) {
+            // 해당 댓글을 찾았으면 isDeleted를 true로 설정
+            return {
+              ...comment,
+              isDeleted: true,
+            };
+          }
+          return comment;
+        });
         break;
       case REMOVE_POST_COMMENT_FAILURE:
         draft.removePostCommentLoading = false;
         draft.removePostCommentError = action.error;
-        break;
-      case ADD_POST_COMMENT_REPLY_REQUEST:
-        draft.addPostCommentReplyLoading = true;
-        draft.addPostCommentReplyDone = false;
-        draft.addPostCommentReplyError = null;
-        break;
-      case ADD_POST_COMMENT_REPLY_SUCCESS: {
-        draft.addPostCommentReplyLoading = false;
-        draft.addPostCommentReplyDone = true;
-        break;
-      }
-      case ADD_POST_COMMENT_REPLY_FAILURE:
-        draft.addPostCommentReplyLoading = false;
-        draft.addPostCommentReplyError = action.error;
         break;
       case LOAD_WROTE_POSTS_REQUEST:
         draft.loadWrotePostsLoading = true;

@@ -48,6 +48,9 @@ import {
   LOAD_WROTE_POSTS_SUCCESS,
   LOAD_WROTE_POSTS_FAILURE,
   SET_IMAGES_REQUEST,
+  ADD_POST_COMMENT_REPLY_SUCCESS,
+  ADD_POST_COMMENT_REPLY_FAILURE,
+  ADD_POST_COMMENT_REPLY_REQUEST,
 } from "../constants/actionTypes";
 import { REMOVE_POST_OF_ME } from "../constants/actionTypes";
 
@@ -373,6 +376,7 @@ function* loadWrotePosts(action) {
 
 function removePostCommentAPI(data) {
   // 게시물 댓글 삭제
+
   return axios.put(`/comment/delete`, data);
 }
 
@@ -402,16 +406,30 @@ function* updatePostComment(action) {
     const result = yield call(updatePostCommentAPI, action.data);
     yield put({
       type: UPDATE_POST_COMMENT_SUCCESS,
-      data: result.data,
-    });
-    yield put({
-      type: LOAD_POST_COMMENTS_REQUEST,
-      data: { boardId: action.data.boardId },
+      data: result.data.data,
     });
   } catch (err) {
     console.error(err);
     yield put({
       type: UPDATE_POST_COMMENT_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+function addPostReplyAPI(data) {
+  return axios.post("/comment", data);
+}
+function* addPostReply(action) {
+  try {
+    const result = yield call(addPostReplyAPI, action.data);
+    yield put({
+      type: ADD_POST_COMMENT_REPLY_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: ADD_POST_COMMENT_REPLY_FAILURE,
       error: err.response.data,
     });
   }
@@ -477,6 +495,10 @@ function* watchUpdatePostComment() {
 function* watchRemovePostComment() {
   yield takeLatest(REMOVE_POST_COMMENT_REQUEST, removePostComment);
 }
+
+function* watchAddPostReply() {
+  yield takeLatest(ADD_POST_COMMENT_REPLY_REQUEST, addPostReply);
+}
 function* watchLoadWrotePosts() {
   yield takeLatest(LOAD_WROTE_POSTS_REQUEST, loadWrotePosts);
 }
@@ -498,6 +520,7 @@ export default function* postSaga() {
     fork(watchLoadPostComments),
     fork(watchUpdatePostComment),
     fork(watchRemovePostComment),
+    fork(watchAddPostReply),
     fork(watchLoadWrotePosts),
   ]);
 }
