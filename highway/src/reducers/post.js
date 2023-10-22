@@ -269,10 +269,10 @@ const reducer = (state = initialState, action) =>
         draft.addPostCommentReplyLoading = false;
         draft.addPostCommentReplyDone = true;
         draft.schoolBoardPostComments = draft.schoolBoardPostComments.map((comment) => {
-          if (comment.id === action.data.parentId) {
+          if (comment.id === action.data.data.parentId) {
             return {
               ...comment,
-              children: [...comment.children, action.data],
+              children: [...comment.children, action.data.data],
             };
           }
           return comment;
@@ -336,17 +336,19 @@ const reducer = (state = initialState, action) =>
       case REMOVE_POST_COMMENT_SUCCESS:
         draft.removePostCommentLoading = false;
         draft.removePostCommentDone = true;
-        // 댓글 삭제 및 isDeleted 속성 설정
-        draft.schoolBoardPostComments = draft.schoolBoardPostComments.map((comment) => {
-          if (comment.id === action.data) {
-            // 해당 댓글을 찾았으면 isDeleted를 true로 설정
-            return {
-              ...comment,
-              isDeleted: true,
-            };
-          }
-          return comment;
-        });
+
+        const commentIdToDelete = action.data; // 삭제할 댓글 또는 대댓글의 ID
+
+        const recursiveUpdate = (comments) =>
+          comments.map((comment) => ({
+            ...comment,
+            ...(comment.id === commentIdToDelete && { isDeleted: true }),
+            ...(comment.children && {
+              children: recursiveUpdate(comment.children),
+            }),
+          }));
+
+        draft.schoolBoardPostComments = recursiveUpdate(draft.schoolBoardPostComments);
         break;
       case REMOVE_POST_COMMENT_FAILURE:
         draft.removePostCommentLoading = false;
