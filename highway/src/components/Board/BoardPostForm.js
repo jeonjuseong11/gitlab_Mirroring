@@ -145,7 +145,7 @@ const BoardPostForm = () => {
       {addPostError && (
         <Modal
           title="게시글 작성 실패"
-          visible={isModalVisible}
+          open={isModalVisible}
           onOk={handleModalClose}
           onCancel={handleModalClose}
           footer={[

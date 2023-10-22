@@ -93,8 +93,8 @@ const SchoolBoardDetail = () => {
     schoolBoardPost?.userNo === me?.userNo && setCanEditOrDelete(true);
   }, [me, schoolBoardPost]);
   return (
-    <Row gutter={[16, 16]} justify="center" style={{ paddingTop: "1rem" }}>
-      <Col xs={23} md={15} style={{ textAlign: "left", padding: "1rem" }}>
+    <Row gutter={[16, 16]} justify="center" style={{ marginTop: "1rem" }}>
+      <Col xs={23} md={15} style={{ textAlign: "left" }}>
         {loadPostLoading ? (
           <div
             style={{
@@ -105,7 +105,7 @@ const SchoolBoardDetail = () => {
               display: "flex",
             }}
           >
-            <Spin tip="Loading" size="large" />
+            <Spin size="large" />
           </div>
         ) : (
           <>
@@ -171,7 +171,7 @@ const SchoolBoardDetail = () => {
                 </ImagePreview>
               ))}
             </ImagePreviewWrapper>
-            <Modal visible={imageModalVisible} onCancel={closeImageModal} footer={null} centered>
+            <Modal open={imageModalVisible} onCancel={closeImageModal} footer={null} centered>
               <div
                 style={{
                   marginTop: "1.5rem",
@@ -250,7 +250,7 @@ const SchoolBoardDetail = () => {
             </Modal>
             <Modal
               title={confirmAction === "edit" ? "수정 확인" : "삭제 확인"}
-              visible={isConfirmModalVisible}
+              open={isConfirmModalVisible}
               onOk={handleOkConfirm}
               onCancel={handleCancelConfirm}
               centered={true}

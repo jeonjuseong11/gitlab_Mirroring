@@ -17,8 +17,9 @@ import ImageUpload from "../ImageUpload";
 const FeedbackPostForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { addPostLoading, addPostError, imagePaths, schoolBoardPost } =
-    useSelector((state) => state.post); // Redux Saga 상태 추가
+  const { addPostLoading, addPostError, imagePaths, schoolBoardPost } = useSelector(
+    (state) => state.post
+  ); // Redux Saga 상태 추가
   const [form] = Form.useForm();
   const { me } = useSelector((state) => state.user);
   const accessToken = localStorage.getItem("ACCESSTOKEN");
@@ -76,9 +77,7 @@ const FeedbackPostForm = () => {
   useEffect(() => {
     console.log(schoolBoardPost);
     if (schoolBoardPost) {
-      navigate(
-        `/schoolboard/${schoolBoardPost.board.category}/${schoolBoardPost.board.id}`
-      );
+      navigate(`/schoolboard/${schoolBoardPost.board.category}/${schoolBoardPost.board.id}`);
     }
   }, [schoolBoardPost]);
   useEffect(() => {
@@ -93,16 +92,10 @@ const FeedbackPostForm = () => {
     <Row gutter={[16, 16]} justify="center">
       <BoardDetailPostFormCol xs={24} md={15}>
         <Form form={form} onFinish={onFinish}>
-          <Form.Item
-            name="category"
-            rules={[{ required: true, message: "내용을 입력해주세요" }]}
-          >
+          <Form.Item name="category" rules={[{ required: true, message: "내용을 입력해주세요" }]}>
             <BoardDetailPostSelect placeholder="문의 종류" options={options} />
           </Form.Item>
-          <Form.Item
-            name="title"
-            rules={[{ required: true, message: "내용을 입력해주세요" }]}
-          >
+          <Form.Item name="title" rules={[{ required: true, message: "내용을 입력해주세요" }]}>
             <Input className="custom-input" placeholder="제목을 입력해주세요" />
           </Form.Item>
           <CustomQuillWrapper
@@ -121,12 +114,7 @@ const FeedbackPostForm = () => {
                 toolbar: [
                   [{ header: [1, 2, 3, 4, 5, 6] }, { font: [] }],
                   ["bold", "italic", "underline", "strike", "blockquote"],
-                  [
-                    { list: "ordered" },
-                    { list: "bullet" },
-                    { indent: "-1" },
-                    { indent: "+1" },
-                  ],
+                  [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }],
                   ["link", "video", "image"],
                   [{ direction: "rtl" }],
                   [{ color: [] }, { background: [] }],
@@ -140,11 +128,7 @@ const FeedbackPostForm = () => {
             />
           </CustomQuillWrapper>
           <Form.Item>
-            <BoardDetailPostButton
-              type="primary"
-              htmlType="submit"
-              loading={addPostLoading}
-            >
+            <BoardDetailPostButton type="primary" htmlType="submit" loading={addPostLoading}>
               완료 <EditOutlined />
             </BoardDetailPostButton>
           </Form.Item>
@@ -153,7 +137,7 @@ const FeedbackPostForm = () => {
       {addPostError && (
         <Modal
           title="문의 작성 실패"
-          visible={isModalVisible}
+          open={isModalVisible}
           onOk={handleModalClose}
           onCancel={handleModalClose}
           footer={[

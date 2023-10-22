@@ -31,8 +31,6 @@ const Header = () => {
   const navigate = useNavigate();
   const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false);
 
-  console.log(me);
-
   // const userInfo = localStorage.getItem("USERINFO");
   const onLogOut = () => {
     info("로그아웃");
@@ -149,10 +147,7 @@ const Header = () => {
           icon={<CommentOutlined />}
           tooltip={<div>서비스에 대한 생각을 남겨주세요</div>}
         /> */}
-        <FloatButton
-          icon={<QuestionCircleOutlined />}
-          tooltip={<div>버그 리포트 및 문의</div>}
-        />
+        <FloatButton icon={<QuestionCircleOutlined />} tooltip={<div>버그 리포트 및 문의</div>} />
         {me?.userRole === 1 ? (
           <FloatButton
             onClick={() => {
@@ -167,7 +162,7 @@ const Header = () => {
       </FloatButton.Group>
       <Modal
         title="로그아웃 확인"
-        visible={isModalVisible}
+        open={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
         okButtonProps={{

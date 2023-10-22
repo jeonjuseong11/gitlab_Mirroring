@@ -102,23 +102,13 @@ const ImageUpload = ({ imageList }) => {
         )}
       </Upload>
 
-      <Modal visible={modalVisible} onCancel={handleCloseModal} onOk={handleCloseModal} centered>
+      <Modal open={modalVisible} onCancel={handleCloseModal} onOk={handleCloseModal} centered>
         <p>이미지 파일은 10MB 이하만 업로드 가능합니다.</p>
       </Modal>
-      <Modal
-        visible={sizeModalVisible}
-        onCancel={handleCloseModal}
-        onOk={handleCloseModal}
-        centered
-      >
+      <Modal open={sizeModalVisible} onCancel={handleCloseModal} onOk={handleCloseModal} centered>
         <p>이미지 파일만 올릴 수 있습니다</p>
       </Modal>
-      <Modal
-        visible={previewVisible}
-        onCancel={() => setPreviewVisible(false)}
-        centered
-        footer={null}
-      >
+      <Modal open={previewVisible} onCancel={() => setPreviewVisible(false)} centered footer={null}>
         <img alt="Preview" src={previewImage} style={{ width: "100%" }} />
       </Modal>
     </>

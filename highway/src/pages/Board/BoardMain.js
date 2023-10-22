@@ -278,7 +278,6 @@ const BoardMain = () => {
                     onMouseEnter={() => setHoveredItem(index)}
                     onMouseLeave={() => setHoveredItem(null)}
                     isHovered={hoveredItem === index}
-                    style={{ paddingTop: "16px" }}
                   >
                     <span style={{ color: "gray" }}>{changeCategory(item?.board?.category)}</span>
                     <List.Item.Meta
