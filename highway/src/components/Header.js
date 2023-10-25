@@ -147,7 +147,13 @@ const Header = () => {
           icon={<CommentOutlined />}
           tooltip={<div>서비스에 대한 생각을 남겨주세요</div>}
         /> */}
-        <FloatButton icon={<QuestionCircleOutlined />} tooltip={<div>버그 리포트 및 문의</div>} />
+        <FloatButton
+          icon={<QuestionCircleOutlined />}
+          tooltip={<div>버그 리포트 및 문의</div>}
+          onClick={() => {
+            navigate(`/feedback/post`);
+          }}
+        />
         {me?.userRole === 1 ? (
           <FloatButton
             onClick={() => {
