@@ -1,11 +1,5 @@
 import { produce } from "immer";
 import {
-  ADD_SAVED_SCHOOL_FAILURE,
-  ADD_SAVED_SCHOOL_REQUEST,
-  ADD_SAVED_SCHOOL_SUCCESS,
-  ADD_SCHOOL_REVIEW_FAILURE,
-  ADD_SCHOOL_REVIEW_REQUEST,
-  ADD_SCHOOL_REVIEW_SUCCESS,
   LOAD_SAVED_SCHOOL_FAILURE,
   LOAD_SAVED_SCHOOL_REQUEST,
   LOAD_SAVED_SCHOOL_SUCCESS,
@@ -18,6 +12,18 @@ import {
   LOAD_SCHOOL_REVIEWS_FAILURE,
   LOAD_SCHOOL_REVIEWS_REQUEST,
   LOAD_SCHOOL_REVIEWS_SUCCESS,
+  ADD_SCHOOL_REVIEW_FAILURE,
+  ADD_SCHOOL_REVIEW_REQUEST,
+  ADD_SCHOOL_REVIEW_SUCCESS,
+  REMOVE_SCHOOL_REVIEW_REQUEST,
+  REMOVE_SCHOOL_REVIEW_SUCCESS,
+  REMOVE_SCHOOL_REVIEW_FAILURE,
+  UPDATE_SCHOOL_REVIEW_REQUEST,
+  UPDATE_SCHOOL_REVIEW_SUCCESS,
+  UPDATE_SCHOOL_REVIEW_FAILURE,
+  ADD_SAVED_SCHOOL_FAILURE,
+  ADD_SAVED_SCHOOL_REQUEST,
+  ADD_SAVED_SCHOOL_SUCCESS,
   REMOVE_SAVED_SCHOOL_FAILURE,
   REMOVE_SAVED_SCHOOL_REQUEST,
   REMOVE_SAVED_SCHOOL_SUCCESS,
@@ -38,7 +44,13 @@ export const initialState = {
   addSchoolReviewLoading: false, //리뷰 등록
   addSchoolReviewDone: false,
   addSchoolReviewError: null,
-  loadSavedSchoolLoading: false, //찜한 학교들 addloadSavedSchoolDone: false,
+  removeSchoolReviewLoading: false, //리뷰 삭제
+  removeSchoolReviewDone: false,
+  removeSchoolReviewError: null,
+  updateSchoolReviewError: null, //리뷰 수정
+  updateSchoolReviewLoading: false,
+  updateSchoolReviewDone: false,
+  loadSavedSchoolLoading: false, //찜한 학교들
   loadSavedSchoolError: false,
   loadSavedSchoolDone: false,
   addSavedSchoolLoading: false, //학교 찜하기
@@ -102,6 +114,38 @@ const reducer = (state = initialState, action) =>
         draft.addSchoolReviewLoading = false;
         draft.addSchoolReviewError = action.error;
         break;
+      case REMOVE_SCHOOL_REVIEW_REQUEST:
+        draft.removeSchoolReviewLoading = true;
+        draft.removeSchoolReviewDone = false;
+        draft.removeSchoolReviewError = null;
+        break;
+      case REMOVE_SCHOOL_REVIEW_SUCCESS:
+        draft.schoolReviews = draft.schoolReviews.map((review) => {
+          return review.id === action.data ? { ...review, deleted: true } : review;
+        });
+        draft.removeSchoolReviewLoading = false;
+        draft.removeSchoolReviewDone = true;
+        break;
+      case REMOVE_SCHOOL_REVIEW_FAILURE:
+        draft.removeSchoolReviewLoading = false;
+        draft.removeSchoolReviewError = action.error;
+        break;
+      case UPDATE_SCHOOL_REVIEW_REQUEST:
+        draft.updateSchoolReviewLoading = true;
+        draft.updateSchoolReviewDone = false;
+        draft.updateSchoolReviewError = null;
+        break;
+      case UPDATE_SCHOOL_REVIEW_SUCCESS:
+        draft.schoolReviews = draft.schoolReviews.map((review) =>
+          review.id === action.data.id ? action.data : review
+        );
+        draft.updateSchoolReviewLoading = false;
+        draft.updateSchoolReviewDone = true;
+        break;
+      case UPDATE_SCHOOL_REVIEW_FAILURE:
+        draft.updateSchoolReviewLoading = false;
+        draft.updateSchoolReviewError = action.error;
+        break;
       case LOAD_SCHOOL_REVIEWS_REQUEST:
         draft.loadSchoolReviewsLoading = true;
         draft.loadSchoolReviewsDone = false;
@@ -109,7 +153,6 @@ const reducer = (state = initialState, action) =>
         break;
       case LOAD_SCHOOL_REVIEWS_SUCCESS:
         draft.schoolReviews = action.data;
-
         draft.loadSchoolReviewsLoading = false;
         draft.loadSchoolReviewsDone = true;
         break;
@@ -148,9 +191,7 @@ const reducer = (state = initialState, action) =>
         break;
       case REMOVE_SAVED_SCHOOL_REQUEST:
         draft.removeSavedSchoolLoading = true;
-        draft.followList = draft.followList.filter(
-          (v) => v.heartId !== action.data.heartId
-        );
+        draft.followList = draft.followList.filter((v) => v.heartId !== action.data.heartId);
 
         draft.removeSavedSchoolDone = false;
         draft.removeSavedSchoolError = null;

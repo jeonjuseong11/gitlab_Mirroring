@@ -169,11 +169,7 @@ function* addSchoolReview(action) {
     const result = yield call(addSchoolReviewAPI, action.data);
     yield put({
       type: ADD_SCHOOL_REVIEW_SUCCESS,
-      data: result.data,
-    });
-    yield put({
-      type: LOAD_SCHOOL_REVIEWS_REQUEST,
-      data: { schoolId: action.data.schoolId },
+      data: result.data.data,
     });
   } catch (err) {
     console.error(err);
@@ -193,11 +189,7 @@ function* removeSchoolReview(action) {
     const result = yield call(removeSchoolReviewAPI, action.data);
     yield put({
       type: REMOVE_SCHOOL_REVIEW_SUCCESS,
-      data: result.data,
-    });
-    yield put({
-      type: LOAD_SCHOOL_REVIEWS_REQUEST,
-      data: { schoolId: action.data.schoolId },
+      data: result.data.data,
     });
   } catch (err) {
     console.error(err);
@@ -219,12 +211,12 @@ function* updateSchoolReview(action) {
     const result = yield call(updateSchoolReviewAPI, action.data);
     yield put({
       type: UPDATE_SCHOOL_REVIEW_SUCCESS,
-      data: result.data,
+      data: result.data.data,
     });
-    yield put({
-      type: LOAD_SCHOOL_REVIEWS_REQUEST,
-      data: { schoolId: action.data.schoolId },
-    });
+    // yield put({
+    //   type: LOAD_SCHOOL_REVIEWS_REQUEST,
+    //   data: { schoolId: action.data.schoolId },
+    // });
   } catch (err) {
     console.error(err);
     yield put({

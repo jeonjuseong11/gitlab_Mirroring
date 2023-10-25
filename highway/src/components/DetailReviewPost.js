@@ -3,10 +3,7 @@ import { Form, Rate, Button, message } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  ADD_SCHOOL_REVIEW_REQUEST,
-  UPDATE_SCHOOL_REVIEW_REQUEST,
-} from "../constants/actionTypes";
+import { ADD_SCHOOL_REVIEW_REQUEST, UPDATE_SCHOOL_REVIEW_REQUEST } from "../constants/actionTypes";
 import { notYourSchool } from "../utils/Message";
 import {
   FormItem,
@@ -19,13 +16,7 @@ import {
   ReviewWriteForm,
 } from "../styles/ReviewPostStyle";
 
-const DetailReviewForm = ({
-  setWrite,
-  review,
-  editing,
-  setEditing,
-  setEditContent,
-}) => {
+const DetailReviewForm = ({ setWrite, review, editing, setEditing, setEditContent }) => {
   const { schoolId } = useParams();
   const { me } = useSelector((state) => state.user);
   const getUserRoleText = (userRole) => {
@@ -41,8 +32,7 @@ const DetailReviewForm = ({
       return "";
     }
   };
-  // console.log(review);
-  // Form instance with form hook
+
   const [form] = Form.useForm();
 
   const [trafficMessage, setTrafficMessage] = useState("평가해주세요.");
@@ -101,7 +91,7 @@ const DetailReviewForm = ({
             data: {
               id: review.id,
               author: me.userId,
-              tags: me.userRole, //원래는 tag였는데 학생인지 교사인지를 보기 위해 역할로 변경
+              tags: me.userRole,
               content: values.content,
               trafficRate: values.trafficRate,
               facilityRate: values.facilityRate,
@@ -109,6 +99,7 @@ const DetailReviewForm = ({
               educationRate: values.educationRate,
               employmentRate: values.employmentRate,
               schoolId: schoolId,
+              deleted: false,
             },
           });
           setEditing(false);
@@ -126,6 +117,7 @@ const DetailReviewForm = ({
               educationRate: values.educationRate,
               employmentRate: values.employmentRate,
               schoolId: schoolId,
+              deleted: false,
             },
           });
         }
@@ -142,7 +134,6 @@ const DetailReviewForm = ({
     if (review) {
       form.setFieldsValue({
         content: review.content,
-        // secretContent: review.secretContent, 못다한 이야기
         trafficRate: review.trafficRate,
         facilityRate: review.facilityRate,
         cafeteriaRate: review.cafeteriaRate,
@@ -168,14 +159,6 @@ const DetailReviewForm = ({
           maxLength={100}
         />
       </Form.Item>
-      {/* <FormItemP>못다한 이야기</FormItemP> 못다한 이야기
-      <Form.Item rules={[{ required: true }]} name="secretContent">
-        <TextArea
-          style={{ resize: "none", width: "100%" }}
-          placeholder="100자 이내로 입력해주세요."
-          maxLength={100}
-        />
-      </Form.Item> */}
       <FormItemWrapper>
         <FormItemP>교통</FormItemP>
         <Form.Item name="trafficRate" rules={[{ required: true }]} style={{}}>
@@ -193,27 +176,21 @@ const DetailReviewForm = ({
       <FormItemWrapper>
         <FormItemP>급식</FormItemP>
         <FormItem name="cafeteriaRate" rules={[{ required: true }]}>
-          <Rate
-            onChange={(value) => handleRateChange("cafeteriaRate", value)}
-          />
+          <Rate onChange={(value) => handleRateChange("cafeteriaRate", value)} />
         </FormItem>
         <MessageWrapper>{cafeteriaMessage}</MessageWrapper>
       </FormItemWrapper>
       <FormItemWrapper>
         <FormItemP>교육</FormItemP>
         <FormItem name="educationRate" rules={[{ required: true }]}>
-          <Rate
-            onChange={(value) => handleRateChange("educationRate", value)}
-          />
+          <Rate onChange={(value) => handleRateChange("educationRate", value)} />
         </FormItem>
         <MessageWrapper>{educationMessage}</MessageWrapper>
       </FormItemWrapper>
       <FormItemWrapper>
         <FormItemP>취업</FormItemP>
         <FormItem name="employmentRate" rules={[{ required: true }]}>
-          <Rate
-            onChange={(value) => handleRateChange("employmentRate", value)}
-          />
+          <Rate onChange={(value) => handleRateChange("employmentRate", value)} />
         </FormItem>
         <MessageWrapper>{employmentMessage}</MessageWrapper>
       </FormItemWrapper>
