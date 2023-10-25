@@ -9,22 +9,28 @@ import {
   UPDATE_FEEDBACK_FAILURE,
   UPDATE_FEEDBACK_REQUEST,
   UPDATE_FEEDBACK_SUCCESS,
-  REMOVE_FEEDBACK_FAILURE,
-  REMOVE_FEEDBACK_REQUEST,
+  LOAD_FEEDBACK_LIST_REQUEST,
+  LOAD_FEEDBACK_LIST_SUCCESS,
+  LOAD_FEEDBACK_LIST_FAILURE,
   REMOVE_FEEDBACK_SUCCESS,
+  REMOVE_FEEDBACK_REQUEST,
+  REMOVE_FEEDBACK_FAILURE,
 } from "../constants/actionTypes";
 import { error, success } from "../utils/Message";
 
 export const initialState = {
-  feedbacks: [],
-  feedbackPosts: [],
-  feedbackLoadLoading: false, // 피드백 리스트 정보
+  feedbackList: [], // 피드백 리스트
+  feedback: [], // 피드백 단일
+  feedbackListLoadLoading: false, // 피드백 리스트
+  feedbackListLoadDone: false,
+  feedbackListLoadError: null,
+  feedbackLoadLoading: false, // 단일 피드백
   feedbackLoadDone: false,
   feedbackLoadError: null,
   feedbackPostLoading: false, // 피드백 작성
   feedbackPostDone: false,
   feedbackPostError: null,
-  feedbackUpdateLoading: false, // 피드백 수정
+  feedbackUpdateLoading: false, // 피드백 수정/답변
   feedbackUpdateDone: false,
   feedbackUpdateError: null,
   feedbackRemoveLoading: false, // 피드백 삭제
@@ -35,6 +41,21 @@ export const initialState = {
 const reducer = (state = initialState, action) =>
   produce(state, (draft) => {
     switch (action.type) {
+      case LOAD_FEEDBACK_LIST_REQUEST:
+        draft.feedbackListLoadLoading = true;
+        draft.feedbackListLoadError = null;
+        draft.feedbackListLoadDone = false;
+        break;
+      case LOAD_FEEDBACK_LIST_SUCCESS:
+        draft.feedbackListLoadLoading = false;
+        draft.feedbackList = action.data;
+        draft.feedbackListLoadDone = true;
+        break;
+      case LOAD_FEEDBACK_LIST_FAILURE:
+        draft.feedbackListLoadLoading = false;
+        draft.feedbackListLoadError = action.error;
+        error("피드백 리스트를 불러오지 못했습니다");
+        break;
       case LOAD_FEEDBACK_REQUEST:
         draft.feedbackLoadLoading = true;
         draft.feedbackLoadError = null;
@@ -42,7 +63,7 @@ const reducer = (state = initialState, action) =>
         break;
       case LOAD_FEEDBACK_SUCCESS:
         draft.feedbackLoadLoading = false;
-        draft.feedbacks = action.data;
+        draft.feedback = action.data;
         draft.feedbackLoadDone = true;
         break;
       case LOAD_FEEDBACK_FAILURE:
@@ -87,9 +108,6 @@ const reducer = (state = initialState, action) =>
       case REMOVE_FEEDBACK_SUCCESS:
         draft.feedbackRemoveLoading = false;
         draft.feedbackRemoveDone = true;
-        draft.mainPosts = draft.feedbackPosts.filter(
-          (v) => v.id !== action.data.PostId
-        );
         break;
       case REMOVE_FEEDBACK_FAILURE:
         draft.feedbackRemoveLoading = false;
