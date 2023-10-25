@@ -1,7 +1,10 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Form, Input, Row, Modal } from "antd";
 import { EditOutlined } from "@ant-design/icons";
-import { ADD_POST_REQUEST } from "../../constants/actionTypes"; // Redux Saga 액션 타입 추가
+import {
+  ADD_POST_REQUEST,
+  POST_FEEDBACK_REQUEST,
+} from "../../constants/actionTypes"; // Redux Saga 액션 타입 추가
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import "react-quill/dist/quill.snow.css";
@@ -12,13 +15,13 @@ import {
   BoardDetailPostButton,
   CustomQuillWrapper,
 } from "../../styles/BoardDetailPostFormStyle";
-import ImageUpload from "../ImageUpload";
+import axios from "axios";
 
 const FeedbackPostForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { addPostLoading, addPostError, imagePaths, schoolBoardPost } = useSelector(
-    (state) => state.post
+  const { feedbackPostLoading, feedbackPostError } = useSelector(
+    (state) => state.feedback
   ); // Redux Saga 상태 추가
   const [form] = Form.useForm();
   const { me } = useSelector((state) => state.user);
@@ -39,47 +42,21 @@ const FeedbackPostForm = () => {
     setIsModalVisible(false);
   };
 
-  const boardPost = useCallback(
-    (values) => {
-      const schoolId = values.category === "10" ? 0 : me?.schoolId;
-      dispatch({
-        type: ADD_POST_REQUEST,
-        data: {
-          title: values.title,
-          content: content,
-          category: values.category,
-          schoolId: schoolId,
-          imageList: imagePaths.map((i) => i.imageUrl[0]),
-        },
-        callback: (postId) => {
-          // 게시글 작성 후 상세 페이지로 이동
-          navigate(`/schoolboard/${values.category}/${postId}`);
-
-          // 게시글 작성 후 schoolBoardPost 상태를 초기화 (또는 null로 설정)
-          // dispatch({ type: "INITIALIZE_SCHOOL_BOARD_POST" });
-        },
-        errorCallback: () => {
-          // 게시글 작성 실패 시 모달 표시
-          setIsModalVisible(true);
-        },
-      });
-    },
-    [me?.schoolId, content, imagePaths, dispatch, navigate]
-  );
-
   const onFinish = (values) => {
-    boardPost(values);
+    dispatch({
+      type: POST_FEEDBACK_REQUEST,
+      data: {
+        title: values.title,
+        content: content,
+        category: values.category,
+      },
+    }).then(navigate(`/feedback`));
   };
 
   const handleChange = (value) => {
     setContent(value);
   };
-  useEffect(() => {
-    console.log(schoolBoardPost);
-    if (schoolBoardPost) {
-      navigate(`/schoolboard/${schoolBoardPost.board.category}/${schoolBoardPost.board.id}`);
-    }
-  }, [schoolBoardPost]);
+
   useEffect(() => {
     const newOptions = [
       { value: 0, label: "문의" },
@@ -92,10 +69,16 @@ const FeedbackPostForm = () => {
     <Row gutter={[16, 16]} justify="center">
       <BoardDetailPostFormCol xs={24} md={15}>
         <Form form={form} onFinish={onFinish}>
-          <Form.Item name="category" rules={[{ required: true, message: "내용을 입력해주세요" }]}>
+          <Form.Item
+            name="category"
+            rules={[{ required: true, message: "내용을 입력해주세요" }]}
+          >
             <BoardDetailPostSelect placeholder="문의 종류" options={options} />
           </Form.Item>
-          <Form.Item name="title" rules={[{ required: true, message: "내용을 입력해주세요" }]}>
+          <Form.Item
+            name="title"
+            rules={[{ required: true, message: "내용을 입력해주세요" }]}
+          >
             <Input className="custom-input" placeholder="제목을 입력해주세요" />
           </Form.Item>
           <CustomQuillWrapper
@@ -114,7 +97,12 @@ const FeedbackPostForm = () => {
                 toolbar: [
                   [{ header: [1, 2, 3, 4, 5, 6] }, { font: [] }],
                   ["bold", "italic", "underline", "strike", "blockquote"],
-                  [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }],
+                  [
+                    { list: "ordered" },
+                    { list: "bullet" },
+                    { indent: "-1" },
+                    { indent: "+1" },
+                  ],
                   ["link", "video", "image"],
                   [{ direction: "rtl" }],
                   [{ color: [] }, { background: [] }],
@@ -128,13 +116,17 @@ const FeedbackPostForm = () => {
             />
           </CustomQuillWrapper>
           <Form.Item>
-            <BoardDetailPostButton type="primary" htmlType="submit" loading={addPostLoading}>
+            <BoardDetailPostButton
+              type="primary"
+              htmlType="submit"
+              loading={feedbackPostLoading}
+            >
               완료 <EditOutlined />
             </BoardDetailPostButton>
           </Form.Item>
         </Form>
       </BoardDetailPostFormCol>
-      {addPostError && (
+      {feedbackPostError && (
         <Modal
           title="문의 작성 실패"
           open={isModalVisible}
