@@ -1,6 +1,5 @@
 import { Avatar, List, Rate } from "antd";
 import styled from "styled-components";
-
 export const DetailReviewsWrapper = styled.div`
   text-align: left;
   font-size: 0.5rem;
@@ -12,34 +11,41 @@ export const DetailReviewsWrapper = styled.div`
   flex-direction: column;
   gap: 4px;
 `;
+
 export const AverageReviewWrapper = styled.div`
   width: 65%;
   text-align: left;
   display: flex;
   margin-left: 5rem;
 `;
+
 export const AverageReviewP = styled.p`
   margin-left: 1rem;
   padding-top: 4px;
 `;
+
 export const DetailReviewP = styled.p`
   margin: 0;
   color: black;
   width: 100%;
   box-sizing: border-box;
 `;
+
 export const DetailReviewAvatarWrapper = styled.div`
   display: flex;
   align-items: center;
   height: 2rem;
 `;
+
 export const DetailReviewAvatar = styled(Avatar)`
   margin-top: 2rem;
 `;
+
 export const DetailReviewUserTagsWrapper = styled.div`
   width: 15rem;
   margin-left: 1.5rem;
 `;
+
 export const DetailReviewContentWrapper = styled.div`
   color: black;
   word-break: break-all;
@@ -50,12 +56,14 @@ export const DetailReviewContentWrapper = styled.div`
   margin-left: 1.5rem;
   margin-top: 0.5rem;
 `;
+
 export const DetailReviewRate = styled(Rate)`
   line-height: 0.4rem;
   align-items: center;
   font-size: 0.7rem;
   display: flex;
 `;
+
 export const ReviewButtonWrapper = styled(List.Item)`
   float: right;
 `;
