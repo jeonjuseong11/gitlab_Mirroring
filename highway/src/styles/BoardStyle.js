@@ -8,12 +8,11 @@ export const BoardSearchInput = styled(Input)`
   margin-top: 2rem;
 `;
 
-export const StyledBreadcrumbWrapper = styled.div`
-  borderbottom: 1px solid #f2f2f2;
-`;
+export const StyledBreadcrumbWrapper = styled.div``;
 
 export const PostHeader = styled.div`
-  borderbottom: 1px solid #f2f2f2;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #f2f2f2;
 `;
 
 export const PostTitle = styled.h2``;
@@ -21,20 +20,21 @@ export const PostTitle = styled.h2``;
 export const StyledAvatar = styled(Avatar)`
   margin-top: -1.2rem;
   margin-right: 1rem;
-  backgroundcolor: #d2d2d2;
+  background-color: #d2d2d2;
 `;
 
 export const AuthorInfo = styled.div`
-  marginleft: 1rem;
+  margin-left: 1rem;
   display: inline-block;
 `;
 
 export const AuthorName = styled.span`
-  fontweight: 600;
+  font-weight: 600;
+  font-size: 1rem;
 `;
 
 export const PostDate = styled.span`
-  fontsize: 0.5rem;
+  font-size: 0.8rem;
 `;
 
 export const EditDeleteIcon = styled(EllipsisOutlined)`
@@ -53,25 +53,25 @@ export const ImagePreviewWrapper = styled.div`
 
 export const ImagePreview = styled.div`
   border: 1px solid #c2c2c2;
-  borderradius: 5px;
+  border-radius: 5px;
   width: 6rem;
   height: 6rem;
-  marginright: 0.5rem;
+  margin-right: 0.5rem;
   display: flex;
-  justifycontent: center;
-  alignitems: center;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   transition: 0.3s ease;
 
   &:hover {
-    bordercolor: #aaa;
+    border-color: #aaa;
     transform: scale(1.15);
   }
 `;
 
 export const StyledImage = styled.img`
-  maxwidth: 5rem;
-  maxheight: 5rem;
+  max-width: 5rem;
+  max-height: 5rem;
 `;
 
 export const StyledModal = styled(Modal)`
@@ -79,14 +79,11 @@ export const StyledModal = styled(Modal)`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    minheight: 45vh;
-    backgroundcolor: #f2f2f2;
+    min-height: 45vh;
+    background-color: #f2f2f2;
   }
 `;
-export const StyledLeftIcon = styled(LeftOutlined)`
-  // 여기에 스타일 추가
-`;
 
-export const StyledRightIcon = styled(RightOutlined)`
-  // 여기에 스타일 추가
-`;
+export const StyledLeftIcon = styled(LeftOutlined)``;
+
+export const StyledRightIcon = styled(RightOutlined)``;

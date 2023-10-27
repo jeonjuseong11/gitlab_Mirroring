@@ -89,7 +89,10 @@ const SignUp = () => {
     // console.log({ ...values, role: parseInt(role) });
     dispatch({
       type: SIGNUP_REQUEST,
-      data: { ...values, role: parseInt(role) },
+      data: {
+        ...values,
+        role: parseInt(role),
+      },
     });
     info("회원가입 성공! 로그인창으로 이동합니다");
     navigate("/login");

@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Form, Input, Row, Modal } from "antd";
 import { EditOutlined } from "@ant-design/icons";
-import { ADD_POST_REQUEST } from "../../constants/actionTypes"; // Redux Saga 액션 타입 추가
+import { ADD_POST_REQUEST } from "../../constants/actionTypes";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import "react-quill/dist/quill.snow.css";
@@ -19,14 +19,14 @@ const BoardPostForm = () => {
   const navigate = useNavigate();
   const { addPostLoading, addPostError, imagePaths, schoolBoardPost } = useSelector(
     (state) => state.post
-  ); // Redux Saga 상태 추가
+  );
   const [form] = Form.useForm();
   const { me } = useSelector((state) => state.user);
   const accessToken = localStorage.getItem("ACCESSTOKEN");
   const [content, setContent] = useState("");
   const [isEditorFocused, setIsEditorFocused] = useState(false);
   const [options, setOptions] = useState([]);
-  const [isModalVisible, setIsModalVisible] = useState(false); // 모달 표시 여부
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
     if (!accessToken) {
@@ -34,7 +34,6 @@ const BoardPostForm = () => {
     }
   }, [navigate, accessToken]);
 
-  // 모달 닫기 핸들러
   const handleModalClose = () => {
     setIsModalVisible(false);
   };
@@ -52,14 +51,9 @@ const BoardPostForm = () => {
           imageList: imagePaths.map((i) => i.imageUrl[0]),
         },
         callback: (postId) => {
-          // 게시글 작성 후 상세 페이지로 이동
           navigate(`/schoolboard/${values.category}/${postId}`);
-
-          // 게시글 작성 후 schoolBoardPost 상태를 초기화 (또는 null로 설정)
-          // dispatch({ type: "INITIALIZE_SCHOOL_BOARD_POST" });
         },
         errorCallback: () => {
-          // 게시글 작성 실패 시 모달 표시
           setIsModalVisible(true);
         },
       });
@@ -74,12 +68,13 @@ const BoardPostForm = () => {
   const handleChange = (value) => {
     setContent(value);
   };
+
   useEffect(() => {
-    console.log(schoolBoardPost);
     if (schoolBoardPost) {
       navigate(`/schoolboard/${schoolBoardPost.board.category}/${schoolBoardPost.board.id}`);
     }
   }, [schoolBoardPost]);
+
   useEffect(() => {
     if (me?.tag) {
       const newOptions = [
@@ -132,7 +127,7 @@ const BoardPostForm = () => {
               }}
             />
           </CustomQuillWrapper>
-          <Form.Item name="imageList">
+          <Form.Item name="imageList" style={{ marginBottom: "12px" }}>
             <ImageUpload />
           </Form.Item>
           <Form.Item>

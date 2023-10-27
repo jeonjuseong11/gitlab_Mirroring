@@ -15,9 +15,8 @@ import {
   LikePostWrapper,
   ProfileTitle,
   SchoolWrapper,
-  WrotePost,
+  WrotePostsList,
 } from "../../styles/ProfileStyle";
-import { RightOutlined } from "@ant-design/icons";
 
 const ProfileRecentRecord = () => {
   const { followList } = useSelector((state) => state.school);
@@ -122,7 +121,7 @@ const ProfileRecentRecord = () => {
         </Col>
       ) : (
         <Col xs={{ span: 24, offset: 0 }} md={{ span: 11, offset: 4 }}>
-          <WrotePost>
+          <WrotePostsList>
             <ProfileTitle>
               내가 작성한 게시글
               <Radio.Group defaultValue="wrote" style={{ float: "right" }}>
@@ -164,7 +163,7 @@ const ProfileRecentRecord = () => {
               )}
               ref={listRef}
             />
-          </WrotePost>
+          </WrotePostsList>
         </Col>
       )}
     </>
