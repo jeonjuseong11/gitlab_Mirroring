@@ -30,13 +30,12 @@ export const BoardDetailPostButton = styled(Button)`
 
   @media (min-width: 768px) {
     width: 10rem;
-    margin-right: 1rem;
     float: right;
   }
 `;
 
 export const CustomQuillWrapper = styled(Form.Item)`
-  position: relative; /* 부모 컨테이너 내에서 자식 컴포넌트의 위치 조정을 위해 필요 */
+  position: relative;
   .ql-container {
     border-color: ${(props) => (props.isFocused ? "#a8a8fe !important" : "#f2f2f2 !important")};
     border-radius: 0 0 10px 10px;

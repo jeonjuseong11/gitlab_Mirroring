@@ -93,7 +93,7 @@ const ToggleComment = () => {
     <>
       <ToggleGoodAndCommentBtn />
       <>
-        <Col xs={23}>
+        <Col xs={23} md={24}>
           <Input.TextArea
             style={{ padding: "1rem", resize: "none" }}
             maxLength="100"

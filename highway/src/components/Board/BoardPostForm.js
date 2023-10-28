@@ -89,70 +89,72 @@ const BoardPostForm = () => {
   }, [me]);
 
   return (
-    <Row gutter={[16, 16]} justify="center">
-      <BoardDetailPostFormCol xs={24} md={15}>
-        <Form form={form} onFinish={onFinish}>
-          <Form.Item name="category" rules={[{ required: true, message: "내용을 입력해주세요" }]}>
-            <BoardDetailPostSelect placeholder="게시판 종류" options={options} />
-          </Form.Item>
-          <Form.Item name="title" rules={[{ required: true, message: "내용을 입력해주세요" }]}>
-            <Input className="custom-input" placeholder="제목을 입력해주세요" />
-          </Form.Item>
-          <CustomQuillWrapper
-            isFocused={isEditorFocused}
-            name="content"
-            rules={[{ required: true, message: "내용을 입력해주세요" }]}
+    <div style={{ maxWidth: "65rem", margin: " 0 auto" }}>
+      <Row gutter={[16, 16]} justify="center">
+        <BoardDetailPostFormCol xs={23} md={24}>
+          <Form form={form} onFinish={onFinish}>
+            <Form.Item name="category" rules={[{ required: true, message: "내용을 입력해주세요" }]}>
+              <BoardDetailPostSelect placeholder="게시판 종류" options={options} />
+            </Form.Item>
+            <Form.Item name="title" rules={[{ required: true, message: "내용을 입력해주세요" }]}>
+              <Input className="custom-input" placeholder="제목을 입력해주세요" />
+            </Form.Item>
+            <CustomQuillWrapper
+              isFocused={isEditorFocused}
+              name="content"
+              rules={[{ required: true, message: "내용을 입력해주세요" }]}
+            >
+              <BoardDetailPostReactQuill
+                placeholder="글의 내용을 입력해주세요"
+                value={content}
+                onChange={handleChange}
+                theme="snow"
+                onFocus={() => setIsEditorFocused(true)}
+                onBlur={() => setIsEditorFocused(false)}
+                modules={{
+                  toolbar: [
+                    [{ header: [1, 2, 3, 4, 5, 6] }, { font: [] }],
+                    ["bold", "italic", "underline", "strike", "blockquote"],
+                    [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }],
+                    ["link", "video", "image"],
+                    [{ direction: "rtl" }],
+                    [{ color: [] }, { background: [] }],
+                    [{ align: [] }],
+                    ["clean"],
+                  ],
+                  clipboard: {
+                    matchVisual: false,
+                  },
+                }}
+              />
+            </CustomQuillWrapper>
+            <Form.Item name="imageList" style={{ marginBottom: "12px" }}>
+              <ImageUpload />
+            </Form.Item>
+            <Form.Item>
+              <BoardDetailPostButton type="primary" htmlType="submit" loading={addPostLoading}>
+                완료 <EditOutlined />
+              </BoardDetailPostButton>
+            </Form.Item>
+          </Form>
+        </BoardDetailPostFormCol>
+        {addPostError && (
+          <Modal
+            title="게시글 작성 실패"
+            open={isModalVisible}
+            onOk={handleModalClose}
+            onCancel={handleModalClose}
+            footer={[
+              <BoardDetailPostButton key="close" onClick={handleModalClose}>
+                닫기
+              </BoardDetailPostButton>,
+            ]}
           >
-            <BoardDetailPostReactQuill
-              placeholder="글의 내용을 입력해주세요"
-              value={content}
-              onChange={handleChange}
-              theme="snow"
-              onFocus={() => setIsEditorFocused(true)}
-              onBlur={() => setIsEditorFocused(false)}
-              modules={{
-                toolbar: [
-                  [{ header: [1, 2, 3, 4, 5, 6] }, { font: [] }],
-                  ["bold", "italic", "underline", "strike", "blockquote"],
-                  [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }],
-                  ["link", "video", "image"],
-                  [{ direction: "rtl" }],
-                  [{ color: [] }, { background: [] }],
-                  [{ align: [] }],
-                  ["clean"],
-                ],
-                clipboard: {
-                  matchVisual: false,
-                },
-              }}
-            />
-          </CustomQuillWrapper>
-          <Form.Item name="imageList" style={{ marginBottom: "12px" }}>
-            <ImageUpload />
-          </Form.Item>
-          <Form.Item>
-            <BoardDetailPostButton type="primary" htmlType="submit" loading={addPostLoading}>
-              완료 <EditOutlined />
-            </BoardDetailPostButton>
-          </Form.Item>
-        </Form>
-      </BoardDetailPostFormCol>
-      {addPostError && (
-        <Modal
-          title="게시글 작성 실패"
-          open={isModalVisible}
-          onOk={handleModalClose}
-          onCancel={handleModalClose}
-          footer={[
-            <BoardDetailPostButton key="close" onClick={handleModalClose}>
-              닫기
-            </BoardDetailPostButton>,
-          ]}
-        >
-          게시글 작성에 실패했습니다. 다시 시도해주세요.
-        </Modal>
-      )}
-    </Row>
+            게시글 작성에 실패했습니다. 다시 시도해주세요.
+          </Modal>
+        )}
+      </Row>
+    </div>
   );
 };
 

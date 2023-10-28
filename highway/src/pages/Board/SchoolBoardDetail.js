@@ -95,7 +95,7 @@ const SchoolBoardDetail = () => {
   return (
     <div style={{ maxWidth: "65rem", width: " 100%", margin: " 0 auto" }}>
       <Row gutter={[16, 16]} justify="center" style={{ marginTop: "1rem" }}>
-        <Col xs={23} style={{ textAlign: "left" }}>
+        <Col xs={23} md={24} style={{ textAlign: "left" }}>
           {loadPostLoading ? (
             <div
               style={{
