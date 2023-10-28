@@ -201,8 +201,14 @@ const SchoolDetail = () => {
             </SchoolLogo>
           )}
         </SchoolImg>
-        <Row gutter={[16, 16]} justify="center">
-          <Col xs={22} md={15}>
+        <Row justify="center" gutter={[16, 16]} style={{ margin: "0 auto" }}>
+          <Col
+            style={{
+              maxWidth: "65rem",
+              width: "100%",
+              padding: "10px",
+            }}
+          >
             <SchoolInfo>
               {isFollowed ? (
                 <Button

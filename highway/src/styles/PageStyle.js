@@ -7,8 +7,12 @@ export const Wrapper = styled.div`
 `;
 export const SubWrapper = styled.div`
   text-align: center;
-  width: 100%;
+  width: 100vw;
   margin: 0 auto;
+  background-color: rgb(242, 242, 242);
+  display: flex;
+  flex-direction: colum;
+  justify-content: center;
 `;
 export const NoDecoLink = styled(Link)`
   text-decoration: none;

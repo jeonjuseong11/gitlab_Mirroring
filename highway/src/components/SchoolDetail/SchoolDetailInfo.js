@@ -43,8 +43,8 @@ const SchoolDetailInfo = ({ rateAverages, roundedTotalRate, reviewCount }) => {
 
   return (
     <SubPageWrapper>
-      <Row justify="center" gutter={[16, 16]} style={{ marginBottom: "1rem" }}>
-        <Col xs={22} md={6}>
+      <Row justify="center" gutter={[16, 16]} style={{ margin: "0 auto", textAlign: "center" }}>
+        <Col xs={23} md={9} style={{ width: "100%" }}>
           <QuestionWrapper style={{ textAlign: "left", padding: "2rem" }}>
             <h3 style={{ margin: "0" }}>학교 정보</h3>
             <h4>주소</h4>
@@ -52,25 +52,18 @@ const SchoolDetailInfo = ({ rateAverages, roundedTotalRate, reviewCount }) => {
             <h4>연락처</h4>
             <p style={{ margin: "0" }}>{singleSchool?.sch?.phoneNumber}</p>
             {singleSchool?.sch?.adminPhone == -1 ? null : (
-              <p style={{ margin: "0" }}>
-                {singleSchool?.sch?.adminPhone}(행정실)
-              </p>
+              <p style={{ margin: "0" }}>{singleSchool?.sch?.adminPhone}(행정실)</p>
             )}
             {singleSchool?.sch?.officePhone == -1 ? null : (
-              <p style={{ margin: "0" }}>
-                {singleSchool?.sch?.officePhone}(교무실)
-              </p>
+              <p style={{ margin: "0" }}>{singleSchool?.sch?.officePhone}(교무실)</p>
             )}
             <h4>홈페이지</h4>
-            <a
-              style={{ color: "black", textDecoration: "none" }}
-              href={singleSchool?.sch?.website}
-            >
+            <a style={{ color: "black", textDecoration: "none" }} href={singleSchool?.sch?.website}>
               {singleSchool?.sch?.website}
             </a>
           </QuestionWrapper>
         </Col>
-        <Col xs={22} md={9}>
+        <Col xs={23} md={15} style={{ width: "100%" }}>
           <QuestionWrapper style={{ padding: "2rem", textAlign: "left" }}>
             <p
               style={{
@@ -103,9 +96,7 @@ const SchoolDetailInfo = ({ rateAverages, roundedTotalRate, reviewCount }) => {
                 onOk={hideModal}
                 onCancel={hideModal}
                 width={400}
-              >
-                :(
-              </Modal>
+              ></Modal>
             )}
             <h3 style={{ margin: "0", marginBottom: "0.5rem" }}>학과소개</h3>
             <Tabs

@@ -1,45 +1,59 @@
 import styled from "styled-components";
 
+const mobile = `(max-width: 768px)`;
+const tablet = `(min-width: 769px)`;
+
 export const SubPageWrapper = styled.div`
+  max-width: 65rem;
   background-color: #f2f2f2;
-  padding-top: 1rem;
-  padding-bottom: 2rem;
+  padding: 1rem 0;
+  width: 100%;
 `;
+
 export const StarRateWrapper = styled.div`
   background-color: white;
   border-radius: 10px;
-  height: 11rem;
-  margin-bottom: 1rem;
   padding: 2rem;
+  margin-bottom: 1rem;
   text-align: left;
   display: flex;
   justify-content: space-between;
 `;
+
 export const OneLineReviewWrapper = styled.div`
   background-color: white;
   border-radius: 10px;
   padding: 1rem;
 `;
+
 export const ReviewDetailWrapper = styled.div`
   padding: 2rem;
   background-color: white;
   border-radius: 10px;
 `;
+
 export const SchoolDetailWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
 export const SchoolImg = styled.div`
   background-color: #f2f2f2;
   align-items: center;
   height: 10rem;
   text-align: center;
 `;
+
 export const SchoolInfo = styled.div`
   text-align: left;
   padding-bottom: 1rem;
   margin-top: 2rem;
+
+  @media ${mobile} {
+    margin-top: 2rem;
+  }
 `;
+
 export const SchoolLogo = styled.div`
   background-color: white;
   display: inline-block;
@@ -50,16 +64,34 @@ export const SchoolLogo = styled.div`
   border-radius: 5px;
   position: relative;
   top: 6rem;
-  right: 26vw;
+  left: -25rem;
+
+  @media ${mobile} {
+    left: -10vw;
+  }
+  @media ${mobile} {
+    left: -7rem;
+  }
 `;
 
 export const QuestionWrapper = styled.div`
   background-color: white;
   border-radius: 10px;
-  height: 17rem;
+  height: auto;
+  padding: 1rem;
+
+  @media ${tablet} {
+    height: 17rem;
+  }
 `;
+
 export const FrequentAsked = styled.div`
   background: white;
   border-radius: 10px;
-  height: 20rem;
+  height: auto;
+  padding: 1rem;
+
+  @media ${tablet} {
+    height: 20rem;
+  }
 `;
