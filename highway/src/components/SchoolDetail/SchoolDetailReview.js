@@ -1,21 +1,8 @@
 import React from "react";
 import { Col, Rate, Row } from "antd";
-import { StarRateWrapper } from "./SchoolDetailStyle";
+import { ResponsiveRate, ResponsiveRow, StarRateWrapper } from "./SchoolDetailStyle";
 import ReviewDetail from "../ReviewDetail";
-import styled from "styled-components";
 
-const ResponsiveRow = styled(Row)`
-  justify-content: start;
-
-  @media (max-width: 768px) {
-    justify-content: center;
-  }
-`;
-const ResponsiveRate = styled(Rate)`
-  @media (min-width: 769px) {
-    font-size: 200%;
-  }
-`;
 const SchoolDetailReview = ({ reviewCount, rateAverages, roundedTotalRate }) => {
   return (
     <ResponsiveRow

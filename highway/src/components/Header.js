@@ -72,59 +72,60 @@ const Header = () => {
 
   return (
     <>
-      <Row justify="center" gutter={[16, 16]} style={{ display: "flex" }}>
-        <Col xs={6} md={6} style={{ textAlign: "left" }}>
+      <Row justify="center" gutter={[16, 16]} style={{ margin: "0 auto" }}>
+        <Col
+          style={{
+            textAlign: "left",
+            padding: "10px",
+            maxWidth: "65rem",
+            width: "100%",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
           <Title to="/">
             <img
               src={window.innerWidth <= 900 ? imgUrl.small : imgUrl.large}
               alt="Logo"
               style={{
-                width: "100%",
-                maxWidth: "10rem",
-                minWidth: "7rem",
+                width: "auto",
+                height: "40px",
                 marginTop: ".5rem",
               }}
             />
           </Title>
-        </Col>
-        <Col
-          xs={16}
-          md={9}
-          style={{
-            display: "flex",
-            justifyContent: "right",
-            alignItems: "center",
-            textAlign: "right",
-          }}
-        >
           {me !== null ? (
-            <>
-              <Button
-                onClick={handleProfileClick}
-                type="link"
-                style={{
-                  color: "black",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  display: "flex",
-                }}
-              >
+            <div
+              style={{
+                alignItems: "center",
+                display: "inline-block",
+                height: "40px",
+              }}
+            >
+              <Button onClick={handleProfileClick} type="link">
                 <Avatar size={28}>{me?.userName[0]}</Avatar>
                 <span style={{ marginLeft: "0.2rem" }}>{me?.userName}</span>
               </Button>
               <Button onClick={showLogoutModal} danger>
                 로그아웃
               </Button>
-            </>
+            </div>
           ) : (
-            <>
+            <div
+              style={{
+                alignItems: "center",
+                display: "flex",
+                height: "40px",
+              }}
+            >
               <Link to="/login" style={{ marginRight: "1rem", color: "black" }}>
                 로그인
               </Link>
               <Link to="/signup" style={{ color: "black" }}>
                 회원가입
               </Link>
-            </>
+            </div>
           )}
         </Col>
       </Row>

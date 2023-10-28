@@ -1,3 +1,4 @@
+import { Rate, Row } from "antd";
 import styled from "styled-components";
 
 const mobile = `(max-width: 768px)`;
@@ -93,5 +94,17 @@ export const FrequentAsked = styled.div`
 
   @media ${tablet} {
     height: 20rem;
+  }
+`;
+export const ResponsiveRow = styled(Row)`
+  justify-content: start;
+
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
+`;
+export const ResponsiveRate = styled(Rate)`
+  @media (min-width: 769px) {
+    font-size: 200%;
   }
 `;
