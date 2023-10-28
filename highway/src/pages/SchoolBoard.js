@@ -4,6 +4,8 @@ import { EditOutlined } from "@ant-design/icons";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { needLoginError } from "../utils/Message";
+import { SubPageWrapper } from "../components/SchoolDetail/SchoolDetailStyle";
+import { SubWrapper } from "../styles/PageStyle";
 
 const SchoolBoard = () => {
   const { category } = useParams();
@@ -31,9 +33,9 @@ const SchoolBoard = () => {
   // }, [me]);
 
   return (
-    <div>
+    <div style={{ maxWidth: "65rem", width: " 100%", margin: " 0 auto" }}>
       <Row gutter={[16, 16]} justify="center" style={{ paddingTop: "1rem" }}>
-        <Col xs={24} md={15}>
+        <Col xs={24}>
           <div
             style={{
               display: "flex",
@@ -42,7 +44,6 @@ const SchoolBoard = () => {
             }}
           >
             <h1 style={{ margin: "0", marginLeft: "1rem" }}>{title}</h1>
-            {/* <Link to="/schoolboard/post"> */}
             <Button
               onClick={() => {
                 if (me === null) {
@@ -67,7 +68,7 @@ const SchoolBoard = () => {
           </div>
         </Col>
       </Row>
-      <Row gutter={[16, 16]} justify="center" style={{ paddingTop: "1rem" }}>
+      <Row justify="center" gutter={[16, 16]} style={{ textAlign: "center" }}>
         <Outlet />
       </Row>
     </div>

@@ -251,7 +251,7 @@ const CommentList = () => {
   const sortedComments = [...schoolBoardPostComments].sort((a, b) => b.id - a.id);
 
   return (
-    <Col xs={{ span: 24, offset: 0 }} md={{ span: 15 }} style={{ marginBottom: "3rem" }}>
+    <Col xs={{ span: 23, offset: 0 }} style={{ marginBottom: "3rem" }}>
       {sortedComments.length !== 0 && !sortedComments.isDeleted ? (
         <List
           itemLayout="vertical"

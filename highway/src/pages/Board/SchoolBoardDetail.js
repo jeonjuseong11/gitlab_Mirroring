@@ -93,184 +93,187 @@ const SchoolBoardDetail = () => {
     schoolBoardPost?.userNo === me?.userNo && setCanEditOrDelete(true);
   }, [me, schoolBoardPost]);
   return (
-    <Row gutter={[16, 16]} justify="center" style={{ marginTop: "1rem" }}>
-      <Col xs={23} md={15} style={{ textAlign: "left" }}>
-        {loadPostLoading ? (
-          <div
-            style={{
-              textAlign: "center",
-              height: "10rem",
-              justifyContent: "center",
-              alignItems: "center",
-              display: "flex",
-            }}
-          >
-            <Spin size="large" />
-          </div>
-        ) : (
-          <>
-            <StyledBreadcrumbWrapper>
-              <Breadcrumb
-                items={[
-                  {
-                    title: <a href={`/schoolboard/0`}>커뮤니티</a>,
-                  },
-                  {
-                    title: (
-                      <>
-                        <a href={`/schoolboard/${category}`}>
-                          {changeCategory(schoolBoardPost?.board.category)}
-                        </a>
-                      </>
-                    ),
-                  },
-                ]}
-              />
-            </StyledBreadcrumbWrapper>
-            <PostHeader>
-              <PostTitle>{schoolBoardPost?.board?.title}</PostTitle>
-              <StyledAvatar size={32}>{schoolBoardPost?.userName[0]}</StyledAvatar>
-              <AuthorInfo>
-                <AuthorName>{schoolBoardPost?.userName}</AuthorName>
-                <br />
-                <PostDate>{formatDate(schoolBoardPost?.board?.modifiedDate)}</PostDate>
-              </AuthorInfo>
-              {canEditOrDelete && (
-                <Dropdown
-                  placement="bottomLeft"
-                  overlay={
-                    <Menu>
-                      <Menu.Item
-                        onClick={() => showConfirmModal("edit")} // 액션 타입을 전달하여 모달을 띄웁니다.
-                      >
-                        수정하기
-                      </Menu.Item>
-                      <Menu.Item
-                        danger
-                        onClick={() => showConfirmModal("delete")} // 액션 타입을 전달하여 모달을 띄웁니다.
-                      >
-                        삭제하기
-                      </Menu.Item>
-                    </Menu>
-                  }
-                  trigger={["hover"]}
-                >
-                  <EllipsisOutlined style={{ float: "right" }} />
-                </Dropdown>
-              )}
-            </PostHeader>
-            <PostContent
-              dangerouslySetInnerHTML={{
-                __html: schoolBoardPost?.board?.content,
+    <div style={{ maxWidth: "65rem", width: " 100%", margin: " 0 auto" }}>
+      <Row gutter={[16, 16]} justify="center" style={{ marginTop: "1rem" }}>
+        <Col xs={23} style={{ textAlign: "left" }}>
+          {loadPostLoading ? (
+            <div
+              style={{
+                textAlign: "center",
+                height: "10rem",
+                justifyContent: "center",
+                alignItems: "center",
+                display: "flex",
               }}
-            />
-            <ImagePreviewWrapper>
-              {schoolBoardPost?.imageUrls?.map((imageUrl, index) => (
-                <ImagePreview onClick={() => openImageModal(index)}>
-                  <StyledImage key={index} src={imageUrl} alt={`게시글 이미지 - ${index}`} />
-                </ImagePreview>
-              ))}
-            </ImagePreviewWrapper>
-            <Modal open={imageModalVisible} onCancel={closeImageModal} footer={null} centered>
-              <div
-                style={{
-                  marginTop: "1.5rem",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  minHeight: "45vh",
-                  backgroundColor: "#f2f2f2",
-                }}
-              >
-                <LeftOutlined
-                  style={{
-                    fontSize: "24px",
-                    color: clickedImageIndex === 0 || clickedImageIndex === 0 ? "#ccc" : "#8282ff",
-                    cursor: clickedImageIndex === 0 ? "not-allowed" : "pointer", // disable 상태일 때 커서를 not-allowed로 변경
-                    transition: "color 0.3s ease",
-                    transform: clickedImageIndex === 0 ? "scale(1)" : "scale(1.15)", // disable 상태와 hover 효과에 따른 스케일 조정
-                  }}
-                  onClick={() => {
-                    if (clickedImageIndex > 0) {
-                      setClickedImageIndex(clickedImageIndex - 1);
-                    }
-                  }}
-                  disabled={clickedImageIndex === 0}
-                  onMouseOver={(e) => {
-                    if (clickedImageIndex !== 0) {
-                      e.currentTarget.style.transform = "scale(1.15)";
-                    }
-                  }}
-                  onMouseOut={(e) => {
-                    if (clickedImageIndex !== 0) {
-                      e.currentTarget.style.transform = "scale(1)";
-                    }
-                  }}
-                />
-                <img
-                  src={schoolBoardPost?.imageUrls[clickedImageIndex]}
-                  alt={`게시글 이미지 - ${clickedImageIndex}`}
-                  style={{ maxWidth: "100%", maxHeight: "100%", height: "20vh" }}
-                />
-                <RightOutlined
-                  style={{
-                    fontSize: "24px",
-                    color:
-                      clickedImageIndex === schoolBoardPost?.imageUrls?.length - 1
-                        ? "#ccc"
-                        : "#8282ff",
-                    cursor:
-                      clickedImageIndex === schoolBoardPost?.imageUrls?.length - 1
-                        ? "not-allowed"
-                        : "pointer", // disable 상태일 때 커서를 not-allowed로 변경
-                    transition: "color 0.3s ease",
-                    transform:
-                      clickedImageIndex === schoolBoardPost?.imageUrls?.length - 1
-                        ? "scale(1)"
-                        : "scale(1.15)", // disable 상태와 hover 효과에 따른 스케일 조정
-                  }}
-                  onClick={() => {
-                    if (clickedImageIndex < schoolBoardPost?.imageUrls?.length - 1) {
-                      setClickedImageIndex(clickedImageIndex + 1);
-                    }
-                  }}
-                  disabled={clickedImageIndex === schoolBoardPost?.imageUrls?.length - 1}
-                  onMouseOver={(e) => {
-                    if (clickedImageIndex !== schoolBoardPost?.imageUrls?.length - 1) {
-                      e.currentTarget.style.transform = "scale(1.15)";
-                    }
-                  }}
-                  onMouseOut={(e) => {
-                    if (clickedImageIndex !== schoolBoardPost?.imageUrls?.length - 1) {
-                      e.currentTarget.style.transform = "scale(1)";
-                    }
-                  }}
-                />
-              </div>
-            </Modal>
-            <Modal
-              title={confirmAction === "edit" ? "수정 확인" : "삭제 확인"}
-              open={isConfirmModalVisible}
-              onOk={handleOkConfirm}
-              onCancel={handleCancelConfirm}
-              centered={true}
-              okButtonProps={{
-                danger: confirmAction === "delete",
-                style: confirmAction === "delete" ? { backgroundColor: "red" } : {},
-              }}
-              // okButtonProps를 사용하여 삭제 동작일 때 '확인' 버튼을 빨간색으로 만듭니다.
             >
-              <p>
-                {confirmAction === "edit"
-                  ? "정말로 이 게시글을 수정하시겠습니까?"
-                  : "정말로 이 게시글을 삭제하시겠습니까?"}
-              </p>
-            </Modal>
-          </>
-        )}
-      </Col>
-      <ToggleComment />
-    </Row>
+              <Spin size="large" />
+            </div>
+          ) : (
+            <>
+              <StyledBreadcrumbWrapper>
+                <Breadcrumb
+                  items={[
+                    {
+                      title: <a href={`/schoolboard/0`}>커뮤니티</a>,
+                    },
+                    {
+                      title: (
+                        <>
+                          <a href={`/schoolboard/${category}`}>
+                            {changeCategory(schoolBoardPost?.board.category)}
+                          </a>
+                        </>
+                      ),
+                    },
+                  ]}
+                />
+              </StyledBreadcrumbWrapper>
+              <PostHeader>
+                <PostTitle>{schoolBoardPost?.board?.title}</PostTitle>
+                <StyledAvatar size={32}>{schoolBoardPost?.userName[0]}</StyledAvatar>
+                <AuthorInfo>
+                  <AuthorName>{schoolBoardPost?.userName}</AuthorName>
+                  <br />
+                  <PostDate>{formatDate(schoolBoardPost?.board?.modifiedDate)}</PostDate>
+                </AuthorInfo>
+                {canEditOrDelete && (
+                  <Dropdown
+                    placement="bottomLeft"
+                    overlay={
+                      <Menu>
+                        <Menu.Item
+                          onClick={() => showConfirmModal("edit")} // 액션 타입을 전달하여 모달을 띄웁니다.
+                        >
+                          수정하기
+                        </Menu.Item>
+                        <Menu.Item
+                          danger
+                          onClick={() => showConfirmModal("delete")} // 액션 타입을 전달하여 모달을 띄웁니다.
+                        >
+                          삭제하기
+                        </Menu.Item>
+                      </Menu>
+                    }
+                    trigger={["hover"]}
+                  >
+                    <EllipsisOutlined style={{ float: "right" }} />
+                  </Dropdown>
+                )}
+              </PostHeader>
+              <PostContent
+                dangerouslySetInnerHTML={{
+                  __html: schoolBoardPost?.board?.content,
+                }}
+              />
+              <ImagePreviewWrapper>
+                {schoolBoardPost?.imageUrls?.map((imageUrl, index) => (
+                  <ImagePreview onClick={() => openImageModal(index)}>
+                    <StyledImage key={index} src={imageUrl} alt={`게시글 이미지 - ${index}`} />
+                  </ImagePreview>
+                ))}
+              </ImagePreviewWrapper>
+              <Modal open={imageModalVisible} onCancel={closeImageModal} footer={null} centered>
+                <div
+                  style={{
+                    marginTop: "1.5rem",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    minHeight: "45vh",
+                    backgroundColor: "#f2f2f2",
+                  }}
+                >
+                  <LeftOutlined
+                    style={{
+                      fontSize: "24px",
+                      color:
+                        clickedImageIndex === 0 || clickedImageIndex === 0 ? "#ccc" : "#8282ff",
+                      cursor: clickedImageIndex === 0 ? "not-allowed" : "pointer", // disable 상태일 때 커서를 not-allowed로 변경
+                      transition: "color 0.3s ease",
+                      transform: clickedImageIndex === 0 ? "scale(1)" : "scale(1.15)", // disable 상태와 hover 효과에 따른 스케일 조정
+                    }}
+                    onClick={() => {
+                      if (clickedImageIndex > 0) {
+                        setClickedImageIndex(clickedImageIndex - 1);
+                      }
+                    }}
+                    disabled={clickedImageIndex === 0}
+                    onMouseOver={(e) => {
+                      if (clickedImageIndex !== 0) {
+                        e.currentTarget.style.transform = "scale(1.15)";
+                      }
+                    }}
+                    onMouseOut={(e) => {
+                      if (clickedImageIndex !== 0) {
+                        e.currentTarget.style.transform = "scale(1)";
+                      }
+                    }}
+                  />
+                  <img
+                    src={schoolBoardPost?.imageUrls[clickedImageIndex]}
+                    alt={`게시글 이미지 - ${clickedImageIndex}`}
+                    style={{ maxWidth: "100%", maxHeight: "100%", height: "20vh" }}
+                  />
+                  <RightOutlined
+                    style={{
+                      fontSize: "24px",
+                      color:
+                        clickedImageIndex === schoolBoardPost?.imageUrls?.length - 1
+                          ? "#ccc"
+                          : "#8282ff",
+                      cursor:
+                        clickedImageIndex === schoolBoardPost?.imageUrls?.length - 1
+                          ? "not-allowed"
+                          : "pointer", // disable 상태일 때 커서를 not-allowed로 변경
+                      transition: "color 0.3s ease",
+                      transform:
+                        clickedImageIndex === schoolBoardPost?.imageUrls?.length - 1
+                          ? "scale(1)"
+                          : "scale(1.15)", // disable 상태와 hover 효과에 따른 스케일 조정
+                    }}
+                    onClick={() => {
+                      if (clickedImageIndex < schoolBoardPost?.imageUrls?.length - 1) {
+                        setClickedImageIndex(clickedImageIndex + 1);
+                      }
+                    }}
+                    disabled={clickedImageIndex === schoolBoardPost?.imageUrls?.length - 1}
+                    onMouseOver={(e) => {
+                      if (clickedImageIndex !== schoolBoardPost?.imageUrls?.length - 1) {
+                        e.currentTarget.style.transform = "scale(1.15)";
+                      }
+                    }}
+                    onMouseOut={(e) => {
+                      if (clickedImageIndex !== schoolBoardPost?.imageUrls?.length - 1) {
+                        e.currentTarget.style.transform = "scale(1)";
+                      }
+                    }}
+                  />
+                </div>
+              </Modal>
+              <Modal
+                title={confirmAction === "edit" ? "수정 확인" : "삭제 확인"}
+                open={isConfirmModalVisible}
+                onOk={handleOkConfirm}
+                onCancel={handleCancelConfirm}
+                centered={true}
+                okButtonProps={{
+                  danger: confirmAction === "delete",
+                  style: confirmAction === "delete" ? { backgroundColor: "red" } : {},
+                }}
+                // okButtonProps를 사용하여 삭제 동작일 때 '확인' 버튼을 빨간색으로 만듭니다.
+              >
+                <p>
+                  {confirmAction === "edit"
+                    ? "정말로 이 게시글을 수정하시겠습니까?"
+                    : "정말로 이 게시글을 삭제하시겠습니까?"}
+                </p>
+              </Modal>
+            </>
+          )}
+        </Col>
+        <ToggleComment />
+      </Row>
+    </div>
   );
 };
 

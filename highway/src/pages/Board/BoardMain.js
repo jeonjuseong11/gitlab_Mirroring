@@ -223,11 +223,11 @@ const BoardMain = () => {
   ];
   return (
     <>
-      <Col xs={24} md={4}>
+      <Col xs={23} md={7} style={{ width: "100%", marginTop: "1rem" }}>
         <CustomMenu className="custom-menu" selectedKeys={location.pathname} items={menuItems} />
         <CommunityInfo>커뮤니티는 학교별 태그에 따라 생겨요</CommunityInfo>
       </Col>
-      <Col xs={24} md={11}>
+      <Col xs={24} md={17} style={{ width: "100%", marginTop: "1rem" }}>
         <SearchInput
           placeholder="궁금한 내용을 찾아보세요"
           onChange={(e) => setSearchText(e.target.value)}
