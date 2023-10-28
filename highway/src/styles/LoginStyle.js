@@ -2,48 +2,51 @@ import styled from "styled-components";
 import { Input, Button, Form } from "antd";
 import { Link } from "react-router-dom";
 
+const BaseInput = styled(Input)`
+  width: 100%;
+  font-weight: 700;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  background-color: #f2f2f2;
+  border: none;
+`;
+
 export const LoginWrapper = styled.div`
   margin: 0 auto;
   width: 100%;
+  height: 100%;
+  align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  background-color: #f2f2f2;
-  min-height: 90vh;
+  background-color: #f7f7f9;
 `;
 
 export const LoginForm = styled(Form)`
-  margin-top: 2rem;
+  margin-top: auto;
   text-align: left;
-  width: 90%;
-  max-width: 400px;
+  width: 25%;
+  min-width: 15rem;
   padding: 2rem;
   border-radius: 10px;
   background-color: white;
-  margin-bottom: 2rem;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: auto;
 `;
 
 export const LoginFormTitle = styled.h1`
   text-align: center;
 `;
 
-export const LoginInput = styled(Input)`
-  width: 100%;
-  height: 2.5rem;
-  font-weight: 700;
-  background-color: #f2f2f2;
-  border-radius: 10px;
-  border: none;
+export const LoginInput = styled(BaseInput)`
+  height: 3rem;
 `;
 
 export const LoginBtn = styled(Button)`
   width: 100%;
-  height: 2.5rem;
+  height: 3rem;
   background-color: #8282ff;
   font-weight: 700;
-  border: none;
 `;
 
 export const LoginMenu = styled.p`

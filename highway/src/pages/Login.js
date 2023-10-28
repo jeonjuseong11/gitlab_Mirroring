@@ -28,11 +28,9 @@ const Login = () => {
       type: LOGIN_REQUEST,
       data: values,
     });
-    // console.log("로그인 값: ", values);
   };
 
   useEffect(() => {
-    // console.log(me);
     if (access) {
       navigate("/");
     }
@@ -66,10 +64,7 @@ const Login = () => {
             }),
           ]}
         >
-          <LoginInput
-            prefix={<UserOutlined className="site-form-item-icon" />}
-            placeholder="아이디 또는 이메일"
-          />
+          <LoginInput prefix={<UserOutlined />} placeholder="아이디 또는 이메일" />
         </Form.Item>
         <Form.Item
           name="userPw"
@@ -86,19 +81,9 @@ const Login = () => {
             }),
           ]}
         >
-          <LoginInput
-            prefix={<LockOutlined className="site-form-item-icon" />}
-            type="password"
-            placeholder="Password"
-          />
+          <LoginInput prefix={<LockOutlined />} type="password" placeholder="Password" />
         </Form.Item>
-        {/* <Form.Item
-          name="remember"
-          valuePropName="checked"
-          style={{ textAlign: "left", fontSize: "0.75rem" }}
-        >
-          <Checkbox>로그인 상태 유지</Checkbox>
-        </Form.Item> */}
+
         <Form.Item shouldUpdate>
           {({ getFieldsError, getFieldValue }) => (
             <LoginBtn
