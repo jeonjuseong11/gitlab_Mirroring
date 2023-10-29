@@ -213,7 +213,7 @@ const SchoolDetail = () => {
               {isFollowed ? (
                 <Button
                   type="primary"
-                  style={{ float: "right", height: "2.5rem" }}
+                  style={{ float: "right", height: "2.5rem", marginTop: "1rem" }}
                   onClick={removeSavedSchool}
                   loading={addSavedSchoolLoading}
                 >
@@ -223,7 +223,7 @@ const SchoolDetail = () => {
                 <Button
                   type="primary"
                   ghost
-                  style={{ float: "right", height: "2.5rem" }}
+                  style={{ float: "right", height: "2.5rem", marginTop: "1rem" }}
                   onClick={addSavedSchool}
                   loading={removeSaveSchoolLoading}
                 >

@@ -34,7 +34,7 @@ const UserProfile = () => {
   return (
     <ProfileWrapper>
       <ProfileRow gutter={[16, 16]} justify="center">
-        <Col xs={24} md={4}>
+        <Col xs={23} md={8}>
           <ProfileUserWrapper>
             <Avatar size={100} icon={<UserOutlined />} />
             <ProfileUserName>

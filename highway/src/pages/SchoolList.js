@@ -13,11 +13,11 @@ const SchoolList = ({ schools }) => {
         itemLayout="horizontal"
         dataSource={schools}
         pagination={{
-          onChange: (page) => {
-            console.log(page);
-          },
-          pageSize: 5,
           align: "center",
+          onChange: (page) => {},
+          pageSize: 5,
+          hideOnSinglePage: schools.length <= 5,
+          total: schools.length,
         }}
         grid={{ gutter: 16, xs: 2, sm: 3, md: 1, lg: 2, xl: 3, xxl: 3 }}
         renderItem={(item) => (

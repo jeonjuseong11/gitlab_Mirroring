@@ -2,12 +2,18 @@ import { List, Row } from "antd";
 import styled from "styled-components";
 
 export const ProfileWrapper = styled.div`
+  height: 100%;
+  width: 100vw;
   background-color: #f2f2f2;
-  height: 90vh;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  padding-top: 1rem;
 `;
 
 export const ProfileRow = styled(Row)`
-  padding-top: 1rem;
+  max-width: 65rem;
+  width: 100%;
 `;
 
 export const ProfileTable = styled.table`
@@ -20,6 +26,8 @@ export const ProfileUserWrapper = styled.div`
   background-color: white;
   border-radius: 10px;
   min-height: 17.4rem;
+  height: 100%;
+  box-sizing: border-box;
 `;
 
 export const ProfileUserName = styled.h2`
@@ -42,7 +50,9 @@ export const SchoolWrapper = styled.div`
   border-radius: 10px;
   text-align: left;
   padding: 2rem;
-  min-height: 15rem;
+  min-height: 12rem;
+  height: 100%;
+  box-sizing: border-box;
 `;
 
 export const LikePostWrapper = styled.div`
@@ -58,6 +68,7 @@ export const LikePostList = styled(List)`
 `;
 
 export const ProfileTitle = styled.h3`
+  line-height: 2rem;
   font-size: 18px;
   margin: 0;
 `;
