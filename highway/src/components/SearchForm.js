@@ -109,7 +109,7 @@ const SearchForm = ({ setFilterValue, filterValue }) => {
                 key={item.value}
                 onClick={() => handleButtonClick(item.value)}
                 shape="square"
-                isActive={item.value === activeButton}
+                active={item.value === activeButton ? item.value : ""}
               >
                 <span style={{ marginBottom: ".5rem", marginTop: ".5rem" }}>{item.icon}</span>
                 {item.content}

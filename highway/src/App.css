@@ -23,14 +23,13 @@
 :where(.css-dev-only-do-not-override-1mb9uag).ant-list-split .ant-list-item {
   border-block-end: 0;
 }
-/* :where(.css-dev-only-do-not-override-1mb9uag).ant-list-split .ant-list-header {
-  border-block-end: 0;
-} */
+
 .custom-list .ant-list-item {
   padding: 0;
 }
 .ant-list-grid .ant-col > .ant-list-item {
   margin-block-end: 0;
+  padding-top: 1rem;
 }
 .ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
   padding-top: 0.3rem;
@@ -121,4 +120,7 @@ blockquote {
   opacity: 0;
   transform: translateY(-20px);
   transition: opacity 500ms, transform 500ms;
+}
+.blurred {
+  filter: blur(4px);
 }
