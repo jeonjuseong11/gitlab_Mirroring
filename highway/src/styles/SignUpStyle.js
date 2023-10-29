@@ -38,7 +38,8 @@ export const SignUpForm = styled(Form)`
   width: 80%;
   min-width: 30rem;
   border: 1px solid #efefef;
-  padding: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   padding-left: 3rem;
   padding-right: 3rem;
   border-radius: 1.25rem;

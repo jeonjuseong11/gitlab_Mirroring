@@ -32,7 +32,11 @@ const TopMenu = () => {
     <div style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
       <Header />
       <MenuWrapper>
-        <Row justify="center" gutter={[16, 16]} style={{ margin: "0 auto" }}>
+        <Row
+          justify="center"
+          gutter={[16, 16]}
+          style={{ marginTop: "0", marginBottom: "0", marginLeft: "auto", marginRight: "auto" }}
+        >
           <Col style={{ maxWidth: "65rem", width: "100%" }}>
             <Menu
               style={{

@@ -7,14 +7,17 @@ const tablet = `(min-width: 769px)`;
 export const SubPageWrapper = styled.div`
   max-width: 65rem;
   background-color: #f2f2f2;
-  padding: 1rem 0;
+  padding-top: 1rem;
   width: 100%;
 `;
 
 export const StarRateWrapper = styled.div`
   background-color: white;
   border-radius: 10px;
-  padding: 2rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
   margin-bottom: 1rem;
   text-align: left;
   display: flex;
@@ -24,11 +27,17 @@ export const StarRateWrapper = styled.div`
 export const OneLineReviewWrapper = styled.div`
   background-color: white;
   border-radius: 10px;
-  padding: 1rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
 `;
 
 export const ReviewDetailWrapper = styled.div`
-  padding: 2rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
   background-color: white;
   border-radius: 10px;
 `;
@@ -79,7 +88,10 @@ export const QuestionWrapper = styled.div`
   background-color: white;
   border-radius: 10px;
   height: auto;
-  padding: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 
   @media ${tablet} {
     height: 17rem;
@@ -90,7 +102,10 @@ export const FrequentAsked = styled.div`
   background: white;
   border-radius: 10px;
   height: auto;
-  padding: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 
   @media ${tablet} {
     height: 20rem;

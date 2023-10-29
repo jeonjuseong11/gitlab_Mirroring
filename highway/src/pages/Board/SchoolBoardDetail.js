@@ -93,7 +93,16 @@ const SchoolBoardDetail = () => {
     schoolBoardPost?.userNo === me?.userNo && setCanEditOrDelete(true);
   }, [me, schoolBoardPost]);
   return (
-    <div style={{ maxWidth: "65rem", width: " 100%", margin: " 0 auto" }}>
+    <div
+      style={{
+        maxWidth: "65rem",
+        width: "100%",
+        marginTop: "0",
+        marginBottom: "0",
+        marginLeft: "auto",
+        marginRight: "auto",
+      }}
+    >
       <Row gutter={[16, 16]} justify="center" style={{ marginTop: "1rem" }}>
         <Col xs={23} md={24} style={{ textAlign: "left" }}>
           {loadPostLoading ? (

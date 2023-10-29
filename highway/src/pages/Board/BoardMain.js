@@ -38,6 +38,7 @@ const StyledListItem = styled(List.Item)`
   align-items: center;
   background: ${(props) => (props.isHovered ? "#f5f5f5" : "transparent")};
   transition: background 0.3s;
+  padding-top: 1rem;
 `;
 
 const StyledItemDescription = styled.div`
@@ -241,7 +242,7 @@ const BoardMain = () => {
         <div style={{ textAlign: "left", marginBottom: "1rem" }}>
           <StyledButton
             type="text"
-            active={sortOrder === "latest"}
+            active={sortOrder === "latest" ? "latest" : ""}
             onClick={() => handleSortOrder("latest")}
           >
             최신순

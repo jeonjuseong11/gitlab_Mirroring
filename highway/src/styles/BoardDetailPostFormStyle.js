@@ -12,7 +12,10 @@ const responsiveButtonStyles = css`
 export const BoardDetailPostFormCol = styled(Col)`
   text-align: left;
   margin-top: 1rem;
-  padding: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 `;
 
 export const BoardDetailPostSelect = styled(Select)`

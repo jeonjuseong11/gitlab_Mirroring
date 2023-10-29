@@ -43,19 +43,33 @@ const SchoolDetailInfo = ({ rateAverages, roundedTotalRate, reviewCount }) => {
 
   return (
     <SubPageWrapper>
-      <Row justify="center" gutter={[16, 16]} style={{ margin: "0 auto", textAlign: "center" }}>
+      <Row
+        justify="center"
+        gutter={[16, 16]}
+        style={{
+          marginTop: "0",
+          marginBottom: "0",
+          marginLeft: "auto",
+          marginRight: "auto",
+          textAlign: "center",
+        }}
+      >
         <Col xs={23} md={9} style={{ width: "100%" }}>
-          <QuestionWrapper style={{ textAlign: "left", padding: "2rem" }}>
-            <h3 style={{ margin: "0" }}>학교 정보</h3>
+          <QuestionWrapper style={{ textAlign: "left" }}>
+            <h3 style={{ marginTop: "0", marginBottom: "0" }}>학교 정보</h3>
             <h4>주소</h4>
             <p>{singleSchool?.sch?.streetAddress}</p>
             <h4>연락처</h4>
-            <p style={{ margin: "0" }}>{singleSchool?.sch?.phoneNumber}</p>
+            <p style={{ marginTop: "0", marginBottom: "0" }}>{singleSchool?.sch?.phoneNumber}</p>
             {singleSchool?.sch?.adminPhone == -1 ? null : (
-              <p style={{ margin: "0" }}>{singleSchool?.sch?.adminPhone}(행정실)</p>
+              <p style={{ marginTop: "0", marginBottom: "0" }}>
+                {singleSchool?.sch?.adminPhone}(행정실)
+              </p>
             )}
             {singleSchool?.sch?.officePhone == -1 ? null : (
-              <p style={{ margin: "0" }}>{singleSchool?.sch?.officePhone}(교무실)</p>
+              <p style={{ marginTop: "0", marginBottom: "0" }}>
+                {singleSchool?.sch?.officePhone}(교무실)
+              </p>
             )}
             <h4>홈페이지</h4>
             <a style={{ color: "black", textDecoration: "none" }} href={singleSchool?.sch?.website}>
@@ -64,13 +78,14 @@ const SchoolDetailInfo = ({ rateAverages, roundedTotalRate, reviewCount }) => {
           </QuestionWrapper>
         </Col>
         <Col xs={23} md={15} style={{ width: "100%" }}>
-          <QuestionWrapper style={{ padding: "2rem", textAlign: "left" }}>
+          <QuestionWrapper style={{ textAlign: "left" }}>
             <p
               style={{
                 float: "right",
                 height: "18px",
                 fontSize: "8px",
-                margin: "0px",
+                marginTop: "0",
+                marginBottom: "0",
                 cursor: "pointer",
               }}
               type="text"
@@ -79,7 +94,7 @@ const SchoolDetailInfo = ({ rateAverages, roundedTotalRate, reviewCount }) => {
               <SearchOutlined />
               자세히 보기
             </p>
-            {schoolCurris.length != undefined ? (
+            {schoolCurris.length !== undefined ? (
               <Modal
                 title="세부과목"
                 open={open}
@@ -98,7 +113,7 @@ const SchoolDetailInfo = ({ rateAverages, roundedTotalRate, reviewCount }) => {
                 width={400}
               ></Modal>
             )}
-            <h3 style={{ margin: "0", marginBottom: "0.5rem" }}>학과소개</h3>
+            <h3 style={{ marginTop: "0", marginBottom: "0.5rem" }}>학과소개</h3>
             <Tabs
               activeKey={activeTab}
               onChange={onChange}

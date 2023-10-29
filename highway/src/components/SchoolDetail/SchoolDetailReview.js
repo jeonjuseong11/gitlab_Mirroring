@@ -8,12 +8,21 @@ const SchoolDetailReview = ({ reviewCount, rateAverages, roundedTotalRate }) => 
     <ResponsiveRow
       justify="center"
       gutter={[16, 16]}
-      style={{ margin: "0 auto", textAlign: "center", paddingTop: "1rem" }}
+      style={{
+        marginTop: "0",
+        marginBottom: "0",
+        marginLeft: "auto",
+        marginRight: "auto",
+        textAlign: "center",
+        paddingTop: "1rem",
+      }}
     >
       <Col xs={23} md={17}>
         <StarRateWrapper>
           <div>
-            <p style={{ margin: "0", fontSize: "100%" }}>전체 리뷰 통계 ({reviewCount})</p>
+            <p style={{ marginTop: "0", marginBottom: "0", fontSize: "100%" }}>
+              전체 리뷰 통계 ({reviewCount})
+            </p>
             {reviewCount === 0 ? (
               <p style={{ fontSize: "100%" }}>리뷰가 없습니다.</p>
             ) : (
@@ -45,19 +54,19 @@ const SchoolDetailReview = ({ reviewCount, rateAverages, roundedTotalRate }) => 
               gap: "5px",
             }}
           >
-            <h4 style={{ margin: "0", fontWeight: "500" }}>교통</h4>
+            <h4 style={{ marginTop: "0", marginBottom: "0", fontWeight: "500" }}>교통</h4>
             <ResponsiveRate disabled allowHalf value={rateAverages.traffic} />
 
-            <h4 style={{ margin: "0", fontWeight: "500" }}>시설만족도</h4>
+            <h4 style={{ marginTop: "0", marginBottom: "0", fontWeight: "500" }}>시설만족도</h4>
             <ResponsiveRate disabled allowHalf value={rateAverages.facility} />
 
-            <h4 style={{ margin: "0", fontWeight: "500" }}>급식</h4>
+            <h4 style={{ marginTop: "0", marginBottom: "0", fontWeight: "500" }}>급식</h4>
             <ResponsiveRate disabled allowHalf value={rateAverages.cafeteria} />
 
-            <h4 style={{ margin: "0", fontWeight: "500" }}>수업만족도</h4>
+            <h4 style={{ marginTop: "0", marginBottom: "0", fontWeight: "500" }}>수업만족도</h4>
             <ResponsiveRate disabled allowHalf value={rateAverages.education} />
 
-            <h4 style={{ margin: "0", fontWeight: "500" }}>취업</h4>
+            <h4 style={{ marginTop: "0", marginBottom: "0", fontWeight: "500" }}>취업</h4>
             <ResponsiveRate disabled allowHalf value={rateAverages.employment} />
           </div>
         </StarRateWrapper>

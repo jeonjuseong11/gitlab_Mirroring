@@ -72,11 +72,18 @@ const Header = () => {
 
   return (
     <>
-      <Row justify="center" gutter={[16, 16]} style={{ margin: "0 auto" }}>
+      <Row
+        justify="center"
+        gutter={[16, 16]}
+        style={{ marginTop: "0", marginRight: "auto", marginBottom: "0", marginLeft: "auto" }}
+      >
         <Col
           style={{
             textAlign: "left",
-            padding: "10px",
+            paddingLeft: "10px",
+            paddingRight: "10px",
+            paddingBottom: "10px",
+            paddingTop: "10px",
             maxWidth: "65rem",
             width: "100%",
             display: "flex",

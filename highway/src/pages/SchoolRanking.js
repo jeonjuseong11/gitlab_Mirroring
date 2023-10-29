@@ -127,9 +127,18 @@ const SchoolRanking = () => {
   };
 
   return (
-    <>
+    <div
+      style={{
+        maxWidth: "65rem",
+        width: " 100%",
+        marginTop: "0",
+        marginBottom: "0",
+        marginLeft: "auto",
+        marginRight: "auto",
+      }}
+    >
       <Row gutter={[16, 16]} justify="center">
-        <Col xs={24} md={15}>
+        <Col xs={23} md={24}>
           <div
             style={{
               backgroundColor: "#f2f2f2",
@@ -142,30 +151,34 @@ const SchoolRanking = () => {
             <p>새로운 특성화고 랭킹 서비스</p>
           </div>
         </Col>
-        <Col xs={24} md={15}>
+        <Col xs={23} md={24}>
           <RankSelector setFilterValue={handleFilterValueChange} />
         </Col>
       </Row>
       <Row gutter={[16, 16]} justify="center" style={{ textAlign: "left", marginTop: "1rem" }}>
-        <Col xs={24} md={10}>
+        <Col xs={23} md={15}>
           <StyledTable
             style={{ minWidth: "14rem" }}
             columns={columns}
             dataSource={filterValue === "" ? rankData : filteredData}
-            pagination={{
-              pageSize: 10,
-              position: ["bottomCenter"],
-            }}
+            pagination={
+              (filterValue === "" ? rankData.length : filteredData.length) > 10
+                ? {
+                    pageSize: 10,
+                    position: ["bottomCenter"],
+                  }
+                : false
+            }
             rowClassName={rowClassName}
             rowKey={(record) => record.rank}
             bordered={false}
           />
         </Col>
-        <Col xs={24} md={5}>
+        <Col xs={23} md={9}>
           {selectedSchool && <RankSchoolCard selectedSchool={selectedSchool} />}
         </Col>
       </Row>
-    </>
+    </div>
   );
 };
 

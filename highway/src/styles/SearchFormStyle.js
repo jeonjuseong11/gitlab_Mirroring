@@ -44,8 +44,8 @@ export const SearchButton = styled(Button)`
   flex-direction: column;
   align-items: center;
   font-size: 1rem;
-  color: ${({ isActive }) => (isActive ? "#ffffff" : "")};
-  background-color: ${({ isActive }) => (isActive ? "#8282ff" : "")};
+  color: ${({ active }) => (active ? "#ffffff" : "")};
+  background-color: ${({ active }) => (active ? "#8282ff" : "")};
   @media (max-width: 330px) {
     padding-top: 0rem;
     height: 4rem;

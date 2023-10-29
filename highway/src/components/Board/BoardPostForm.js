@@ -89,7 +89,15 @@ const BoardPostForm = () => {
   }, [me]);
 
   return (
-    <div style={{ maxWidth: "65rem", margin: " 0 auto" }}>
+    <div
+      style={{
+        maxWidth: "65rem",
+        marginTop: "0",
+        marginBottom: "0",
+        marginLeft: "auto",
+        marginRight: "auto",
+      }}
+    >
       <Row gutter={[16, 16]} justify="center">
         <BoardDetailPostFormCol xs={23} md={24}>
           <Form form={form} onFinish={onFinish}>

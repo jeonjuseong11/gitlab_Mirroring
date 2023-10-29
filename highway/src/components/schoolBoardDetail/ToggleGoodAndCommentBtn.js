@@ -13,7 +13,7 @@ const ToggleGoodAndCommentBtn = () => {
     useSelector((state) => state.post);
   useEffect(() => {
     const isLikedByUser = Likers.some((liker) => {
-      return liker.uid === me.userId;
+      return liker?.uid === me?.userId;
     });
 
     setGood(isLikedByUser);
@@ -31,12 +31,12 @@ const ToggleGoodAndCommentBtn = () => {
     setGood(true);
   };
   const unlikePost = () => {
-    const userLiker = Likers.find((liker) => liker.uid === me.userId);
+    const userLiker = Likers.find((liker) => liker?.uid === me?.userId);
     if (!userLiker) return; // 현재 사용자가 좋아요 목록에 없으면 함수 종료
 
     dispatch({
       type: UNLIKE_POST_REQUEST,
-      data: { boardId: postId, heartId: userLiker.heartId },
+      data: { boardId: postId, heartId: userLiker?.heartId },
     });
     setGood(false);
   };
@@ -57,7 +57,7 @@ const ToggleGoodAndCommentBtn = () => {
           </Button>
         )}
         <Button style={{ marginLeft: "1rem" }} type="text" icon={<MessageOutlined />}>
-          댓글 {filteredComments.length}
+          댓글 {filteredComments?.length}
         </Button>
         <Button style={{ float: "right" }} onClick={handleButtonClick}>
           목록

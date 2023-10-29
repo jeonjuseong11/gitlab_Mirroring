@@ -17,7 +17,6 @@ export const SideBarDiv = styled.div`
 // PromotionHome
 export const PromotionHomeUl = styled.ul`
   list-style: none;
-  padding: 0px;
 `;
 // PromotionHomeItem
 export const PromotionHomeItemButton = styled(Button)`
@@ -29,7 +28,6 @@ export const PromotionHomeItemImageDiv = styled.div`
   height: 18rem;
   border-radius: 10px;
   background: #f2f2f2;
-  padding: 0px;
 `;
 // PromotionNews
 export const PromotionNewsListItem = styled(List.Item)`

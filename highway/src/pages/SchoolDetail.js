@@ -25,7 +25,7 @@ import { needLoginError } from "../utils/Message";
 const SchoolDetail = () => {
   const { schoolId } = useParams();
   const accessToken = localStorage.getItem("ACCESSTOKEN");
-  const me = useSelector((state) => state.user);
+
   const [averageRating, setAverageRating] = useState(0);
   const [reviewCount, setReviewCount] = useState(0);
   const [rateAverages, setRateAverages] = useState({
@@ -49,11 +49,13 @@ const SchoolDetail = () => {
     const followedSchool = followList.find((followed) => followed.schoolId === parseInt(schoolId));
     setIsFollowed(!!followedSchool);
   }, [followList]);
+
   useEffect(() => {
-    if (!me) {
+    if (!accessToken) {
       setIsFollowed(false);
     }
-  }, [me]);
+  }, [accessToken]);
+
   const loadSchoolReviews = () => {
     axios.defaults.headers.common["ACCESS_TOKEN"] = accessToken;
     dispatch({
@@ -77,8 +79,9 @@ const SchoolDetail = () => {
       type: LOAD_SAVED_SCHOOL_REQUEST,
     });
   };
+
   const addSavedSchool = () => {
-    if (me) {
+    if (accessToken) {
       dispatch({
         type: ADD_SAVED_SCHOOL_REQUEST,
         data: { schoolId: parseInt(schoolId) },
@@ -88,7 +91,7 @@ const SchoolDetail = () => {
     }
   };
   const removeSavedSchool = () => {
-    if (me) {
+    if (accessToken) {
       dispatch({
         type: REMOVE_SAVED_SCHOOL_REQUEST,
         data: { heartId: heartId, schoolId: parseInt(schoolId) },
@@ -104,7 +107,7 @@ const SchoolDetail = () => {
     const followedSchool = followList.find((followed) => followed.schoolId === parseInt(schoolId)); //기존에 찜하기 했나 확인
     setHeartId(followedSchool ? followedSchool.heartId : null);
     // console.log(followList);
-    if (me) {
+    if (accessToken) {
       if (followList.find((followed) => followed.schoolId === parseInt(schoolId))) {
         setIsFollowed(true);
       } else {
@@ -113,7 +116,7 @@ const SchoolDetail = () => {
     } else {
       setIsFollowed(false);
     }
-  }, [followList, heartId, schoolId, isFollowed, me]);
+  }, [followList, heartId, schoolId, isFollowed, accessToken]);
 
   useEffect(() => {
     loadSchoolInfo();
@@ -201,12 +204,19 @@ const SchoolDetail = () => {
             </SchoolLogo>
           )}
         </SchoolImg>
-        <Row justify="center" gutter={[16, 16]} style={{ margin: "0 auto" }}>
+        <Row
+          justify="center"
+          gutter={[16, 16]}
+          style={{ marginTop: "0", marginLeft: "auto", marginRight: "auto", marginTop: "0" }}
+        >
           <Col
             style={{
               maxWidth: "65rem",
               width: "100%",
-              padding: "10px",
+              paddingTop: "10px",
+              paddingBottom: "10px",
+              paddingLeft: "10px",
+              paddingRight: "10px",
             }}
           >
             <SchoolInfo>

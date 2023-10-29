@@ -44,7 +44,10 @@ export const EditDeleteIcon = styled(EllipsisOutlined)`
 
 export const PostContent = styled.div`
   height: 20rem;
-  padding: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
 `;
 
 export const ImagePreviewWrapper = styled.div`
