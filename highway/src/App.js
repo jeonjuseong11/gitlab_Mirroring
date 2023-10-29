@@ -113,10 +113,14 @@ function App() {
     const isBoardDetailPage = /^\/schoolboard\/\d+$/.test(location.pathname);
     const isNotAllowedPage = /^\/schoolboard\/\d+\/\d+$/.test(location.pathname);
 
-    if (isBoardDetailPage && !isNotAllowedPage) {
+    const isLoggedIn = !!access; // 이 부분은 프로젝트의 로그인 상태 관리 방식에 따라 조정
+
+    if (isBoardDetailPage && !isNotAllowedPage && !isLoggedIn) {
       setShowModal(true);
+    } else {
+      setShowModal(false);
     }
-  }, [location.pathname]);
+  }, [location.pathname, access]);
 
   const handleModalOk = () => {
     setShowModal(false);

@@ -222,6 +222,9 @@ const BoardMain = () => {
         }))
       : []),
   ];
+  if (!me) {
+    return "";
+  }
   return (
     <>
       <Col xs={23} md={7} style={{ width: "100%", marginTop: "1rem" }}>
