@@ -23,9 +23,9 @@ const loadFeedbackListAPI = () => {
   return axios.get(`/feedback/list`);
 };
 
-function* loadFeedBackList() {
+function* loadFeedBackList(action) {
   try {
-    const result = yield call(loadFeedbackListAPI);
+    const result = yield call(loadFeedbackListAPI, action.data);
     yield put({
       type: LOAD_FEEDBACK_LIST_SUCCESS,
       data: result.data.data,
@@ -42,17 +42,18 @@ function* loadFeedBackList() {
 
 // 단일 feedback load
 const loadFeedbackAPI = (data) => {
-  return axios.get(`/feedback/${data.id}`);
+  return axios.get(`/feedback/${data.id}`, data);
 };
 
-function* loadFeedBack() {
+function* loadFeedBack(action) {
   try {
-    const result = yield call(loadFeedbackAPI);
+    const result = yield call(loadFeedbackAPI, action.data);
     yield put({
       type: LOAD_FEEDBACK_SUCCESS,
       data: result.data.data,
     });
   } catch (e) {
+    console.log(e);
     yield put({
       type: LOAD_FEEDBACK_FAILURE,
       data: e.response.data,
@@ -64,7 +65,6 @@ function* loadFeedBack() {
 
 // feedback 작성
 const postFeedbackAPI = (data) => {
-  console.log(data);
   return axios.post(`/feedback`, data);
 };
 
@@ -114,7 +114,7 @@ function* updateFeedback(action) {
 
 // 피드백 삭제
 function removeFeedbackAPI(data) {
-  return axios.delete(`feedback/${data.id}`);
+  return axios.delete(`feedback/${data.id}`, data);
 }
 
 function* removeFeedback(action) {
