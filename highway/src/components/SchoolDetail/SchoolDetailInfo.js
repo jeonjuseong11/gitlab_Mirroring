@@ -57,9 +57,9 @@ const SchoolDetailInfo = ({ rateAverages, roundedTotalRate, reviewCount }) => {
         <Col xs={23} md={9} style={{ width: "100%" }}>
           <QuestionWrapper style={{ textAlign: "left" }}>
             <h3 style={{ marginTop: "0", marginBottom: "0" }}>학교 정보</h3>
-            <h4>주소</h4>
-            <p>{singleSchool?.sch?.streetAddress}</p>
-            <h4>연락처</h4>
+            <h4 style={{ marginBottom: "0.3rem" }}>주소</h4>
+            <p style={{ marginTop: "0", marginBottom: "0" }}>{singleSchool?.sch?.streetAddress}</p>
+            <h4 style={{ marginBottom: "0.3rem" }}>연락처</h4>
             <p style={{ marginTop: "0", marginBottom: "0" }}>{singleSchool?.sch?.phoneNumber}</p>
             {singleSchool?.sch?.adminPhone == -1 ? null : (
               <p style={{ marginTop: "0", marginBottom: "0" }}>
@@ -71,7 +71,7 @@ const SchoolDetailInfo = ({ rateAverages, roundedTotalRate, reviewCount }) => {
                 {singleSchool?.sch?.officePhone}(교무실)
               </p>
             )}
-            <h4>홈페이지</h4>
+            <h4 style={{ marginBottom: "0.3rem" }}>홈페이지</h4>
             <a style={{ color: "black", textDecoration: "none" }} href={singleSchool?.sch?.website}>
               {singleSchool?.sch?.website}
             </a>
