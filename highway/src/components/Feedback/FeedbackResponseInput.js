@@ -22,7 +22,7 @@ const FeedbackResponseInput = ({ feedback }) => {
       alert("빈칸이 있습니다.");
       return;
     }
-    if (me.role === 0) {
+    if (me.userRole === 0) {
       dispatch({
         type: UPDATE_FEEDBACK_REQUEST,
         data: {
