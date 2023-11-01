@@ -80,6 +80,7 @@ const FeedbackDetail = () => {
       },
     });
     console.log(me);
+    console.log(feedback);
   }, []);
   return (
     <div
@@ -112,14 +113,16 @@ const FeedbackDetail = () => {
                 <Breadcrumb
                   items={[
                     {
-                      title: <a href={`/schoolboard/0`}>문의 종류</a>,
+                      title: <>문의 종류</>,
                     },
                     {
                       title: (
                         <>
-                          <a href={`/schoolboard/${id}`}>
-                            {changeCategory(feedback?.category)}
-                          </a>
+                          {feedback?.category === 0 ? (
+                            <>문의</>
+                          ) : (
+                            <>사용자 의견</>
+                          )}
                         </>
                       ),
                     },
@@ -163,7 +166,6 @@ const FeedbackDetail = () => {
                   __html: feedback?.content,
                 }}
               />
-
               <Modal
                 title={confirmAction === "edit" ? "수정 확인" : "삭제 확인"}
                 open={isConfirmModalVisible}
@@ -188,8 +190,12 @@ const FeedbackDetail = () => {
             </>
           )}
         </Col>
-        {me?.role !== 0 ? <FeedbackResponseInput feedback={feedback} /> : <></>}
-        {feedback.response ? <>{feedback.response}</> : <></>}
+        {me?.userRole == 0 ? (
+          <FeedbackResponseInput feedback={feedback} />
+        ) : (
+          <></>
+        )}
+        {feedback?.response ? <>{feedback?.response}</> : <></>}
       </Row>
     </div>
   );
