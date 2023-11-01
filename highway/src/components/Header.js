@@ -75,7 +75,12 @@ const Header = () => {
       <Row
         justify="center"
         gutter={[16, 16]}
-        style={{ marginTop: "0", marginRight: "auto", marginBottom: "0", marginLeft: "auto" }}
+        style={{
+          marginTop: "0",
+          marginRight: "auto",
+          marginBottom: "0",
+          marginLeft: "auto",
+        }}
       >
         <Col
           style={{
@@ -162,17 +167,13 @@ const Header = () => {
             navigate(`/feedback/post`);
           }}
         />
-        {me?.userRole === 1 ? (
-          <FloatButton
-            onClick={() => {
-              navigate(`/feedback`);
-            }}
-            icon={<UnorderedListOutlined />}
-            tooltip={<div>문의 리스트</div>}
-          />
-        ) : (
-          <></>
-        )}
+        <FloatButton
+          onClick={() => {
+            navigate(`/feedback`);
+          }}
+          icon={<UnorderedListOutlined />}
+          tooltip={<div>문의 리스트</div>}
+        />
       </FloatButton.Group>
       <Modal
         title="로그아웃 확인"
