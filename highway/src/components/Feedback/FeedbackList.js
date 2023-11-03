@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { LOAD_FEEDBACK_LIST_REQUEST } from "../../constants/actionTypes";
-import { ListCol } from "../../styles/\bFeedbackStyle";
+import { ListCol } from "../../styles/FeedbackStyle";
 
 const FeedbackList = () => {
   const { feedbackList } = useSelector((state) => state.feedback);
