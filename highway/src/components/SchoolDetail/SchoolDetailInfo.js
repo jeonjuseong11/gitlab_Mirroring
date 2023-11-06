@@ -58,9 +58,13 @@ const SchoolDetailInfo = ({ rateAverages, roundedTotalRate, reviewCount }) => {
           <QuestionWrapper style={{ textAlign: "left" }}>
             <h3 style={{ marginTop: "0", marginBottom: "0" }}>학교 정보</h3>
             <h4 style={{ marginBottom: "0.3rem" }}>주소</h4>
-            <p style={{ marginTop: "0", marginBottom: "0" }}>{singleSchool?.sch?.streetAddress}</p>
+            <p style={{ marginTop: "0", marginBottom: "0" }}>
+              {singleSchool?.sch?.streetAddress}
+            </p>
             <h4 style={{ marginBottom: "0.3rem" }}>연락처</h4>
-            <p style={{ marginTop: "0", marginBottom: "0" }}>{singleSchool?.sch?.phoneNumber}</p>
+            <p style={{ marginTop: "0", marginBottom: "0" }}>
+              {singleSchool?.sch?.phoneNumber}
+            </p>
             {singleSchool?.sch?.adminPhone == -1 ? null : (
               <p style={{ marginTop: "0", marginBottom: "0" }}>
                 {singleSchool?.sch?.adminPhone}(행정실)
@@ -72,7 +76,10 @@ const SchoolDetailInfo = ({ rateAverages, roundedTotalRate, reviewCount }) => {
               </p>
             )}
             <h4 style={{ marginBottom: "0.3rem" }}>홈페이지</h4>
-            <a style={{ color: "black", textDecoration: "none" }} href={singleSchool?.sch?.website}>
+            <a
+              style={{ color: "black", textDecoration: "none" }}
+              href={singleSchool?.sch?.website}
+            >
               {singleSchool?.sch?.website}
             </a>
           </QuestionWrapper>
@@ -94,7 +101,7 @@ const SchoolDetailInfo = ({ rateAverages, roundedTotalRate, reviewCount }) => {
               <SearchOutlined />
               자세히 보기
             </p>
-            {schoolCurris.length !== undefined ? (
+            {Object.keys(schoolCurris).length !== undefined ? (
               <Modal
                 title="세부과목"
                 open={open}

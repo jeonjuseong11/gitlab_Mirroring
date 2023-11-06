@@ -43,6 +43,7 @@ const DescDept = () => {
   // 학과, 학년
   const schoolCurriDepartArrGrades =
     schoolCurriDepartArr[0].schoolCurriDepart?.[testDepart];
+
   // 학과, 학년 Map
   const schoolCurriDepartArrGradeMap = schoolCurriDepartArrGrades?.map(
     (item) => {
@@ -100,15 +101,11 @@ const DescDept = () => {
   //   }
   // });
 
-  const loadSchoolCurris = () => {
+  useEffect(() => {
     dispatch({
       type: LOAD_SCHOOL_CURRIS_REQUEST,
-      data: { id: schoolId },
+      data: { id: parseInt(schoolId) + 1 },
     });
-  };
-
-  useEffect(() => {
-    loadSchoolCurris();
   }, []);
 
   return (
