@@ -103,7 +103,6 @@ const SchoolDetailInfo = ({ rateAverages, roundedTotalRate, reviewCount }) => {
             </p>
             {Object.keys(schoolCurris).length !== undefined ? (
               <Modal
-                title="세부과목"
                 open={open}
                 onOk={hideModal}
                 onCancel={hideModal}

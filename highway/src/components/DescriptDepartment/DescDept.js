@@ -5,6 +5,11 @@ import { Select, Space } from "antd";
 import { descCurri } from "../../utils/Curri";
 import { TestSchoolCurriDiv } from "../../styles/DescCurriStyled";
 import { useParams } from "react-router-dom";
+import { test } from "../../utils/CurriData";
+
+const imgUrl = {
+  large: `/assets/OnlyLogo.png`,
+};
 
 const DescDept = () => {
   const { schoolCurris } = useSelector((state) => state.school);
@@ -17,9 +22,9 @@ const DescDept = () => {
   const testDescDesign = schoolCurris?.testDepart;
 
   // schoolCurris의 key값을 저장
-  const schoolCurriDepart = Object.keys(schoolCurris);
+  const schoolCurriDepart = Object.keys(test.data);
   // schoolCurris의 value값을 저장
-  const schoolCurriDepartValues = Object.values(schoolCurris);
+  const schoolCurriDepartValues = Object.values(test.data);
   // schoolCurris의 key와 value로 새로운 배열로 저장
   const schoolCurriDepartArr = [{ schoolCurriDepart: schoolCurriDepartValues }];
   const schoolCurriDepartArrMap = schoolCurriDepartArr.map((item) => {
@@ -110,7 +115,23 @@ const DescDept = () => {
 
   return (
     <div>
-      <h3>학교 커리큘럼</h3>
+      <ul
+        style={{ listStyle: "none", alignItems: "center", marginLeft: "-25px" }}
+      >
+        <li style={{ float: "left" }}>
+          <img src={imgUrl.large} alt="Logo" />
+        </li>
+        <li
+          style={{
+            fontSize: "25px",
+            width: "190px",
+            marginLeft: "60px",
+            paddingTop: "0px",
+          }}
+        >
+          <h3>세부 커리큘럼</h3>
+        </li>
+      </ul>
       <Space wrap>
         <Select
           style={{
