@@ -1,4 +1,4 @@
-import { Button, Col, Modal, Row, Tabs } from "antd";
+import { Button, Col, ConfigProvider, Modal, Row, Tabs } from "antd";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -7,6 +7,7 @@ import SchoolDetailReview from "./SchoolDetailReview";
 import { QuestionWrapper, SubPageWrapper } from "./SchoolDetailStyle";
 import DescDept from "../DescriptDepartment/DescDept";
 import { SearchOutlined } from "@ant-design/icons";
+import { CurriModal } from "../../styles/DescCurriStyled";
 
 const SchoolDetailInfo = ({ rateAverages, roundedTotalRate, reviewCount }) => {
   const { singleSchool } = useSelector((state) => state.school);
@@ -102,14 +103,14 @@ const SchoolDetailInfo = ({ rateAverages, roundedTotalRate, reviewCount }) => {
               자세히 보기
             </p>
             {Object.keys(schoolCurris).length !== undefined ? (
-              <Modal
+              <CurriModal
                 open={open}
                 onOk={hideModal}
                 onCancel={hideModal}
                 width={1000}
               >
                 <DescDept />
-              </Modal>
+              </CurriModal>
             ) : (
               <Modal
                 title="아직 데이터가 준비되있지 않아요."
