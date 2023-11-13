@@ -8,6 +8,7 @@ import {
   RecommendSideImg,
   RecommendMainImg,
   RecommnedSideWrapper,
+  RecommendMainImg2,
 } from "../../styles/PromotionStyle";
 const RecommendList2 = ({ type, infoData }) => {
   // const random = Math.floor(Math.random() * infoData.length);
@@ -21,10 +22,7 @@ const RecommendList2 = ({ type, infoData }) => {
         <Link to={`${type}/${randomOne}`}>
           {/* <RecommnedListCol xs={23} md={23} src={`${infoData[random].src}`} /> */}
           <Col xs={23} md={23}>
-            <img
-              style={{ width: "100%", marginTop: "2rem", marginLeft: "1rem" }}
-              src={videosItems[randomOne].image}
-            />
+            <RecommendMainImg2 src={videosItems[randomOne].image} />
           </Col>
         </Link>
       </Col>

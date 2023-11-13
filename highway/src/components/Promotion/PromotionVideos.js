@@ -4,13 +4,17 @@ import { Button, Col, List, Row } from "antd";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { DownOutlined } from "@ant-design/icons";
 import {
+  LeftSide,
   MoreVideosButton,
   PromotionVideoIframe,
+  PromotionVideosCol,
   PromotionVideosDiv,
   PromotionVideosImage,
+  PromotionVideosList,
   PromotionVideosListItem,
   PromotionVideosTitle,
   PromotionVideosWriter,
+  RightSideBar,
 } from "../../styles/PromotionStyle";
 
 const PromotionVideos = () => {
@@ -44,8 +48,8 @@ const PromotionVideos = () => {
   return (
     <>
       <Row justify="center">
-        <Col xs={24} md={10}>
-          <List
+        <PromotionVideosCol md={10} xs={24}>
+          <PromotionVideosList
             itemLayout="horizontal"
             dataSource={videoList}
             renderItem={(item) => {
@@ -119,20 +123,9 @@ const PromotionVideos = () => {
               }
             }}
           />
-        </Col>
+        </PromotionVideosCol>
         <Col xs={23} md={5} justify="center">
-          <div
-            style={{
-              width: "20rem",
-              height: "30rem",
-              backgroundColor: "#f2f2f2",
-              marginTop: "2rem",
-              marginLeft: "1.5rem",
-              borderRadius: "10px",
-            }}
-          >
-            우측사이드
-          </div>
+          <RightSideBar />
         </Col>
       </Row>
       <Row>

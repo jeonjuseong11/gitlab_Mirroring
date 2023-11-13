@@ -1,4 +1,4 @@
-import { Modal } from "antd";
+import { Dropdown, Modal } from "antd";
 import styled from "styled-components";
 
 export const TestSchoolCurriDiv = styled.div`
@@ -14,6 +14,7 @@ export const TestSchoolCurriDiv = styled.div`
   }
   .courseWrapper {
     background-color: rgb(230, 230, 230);
+    width: 83%;
     border-radius: 10px;
     margin-left: -40px;
   }
@@ -27,6 +28,8 @@ export const TestSchoolCurriDiv = styled.div`
   }
   .gradeWrapper {
     background-color: rgb(230, 230, 230);
+    width: 83%;
+    margin-left: 6%;
     border-radius: 10px;
     margin-top: 0px;
     padding-top: 0.5px;
@@ -70,3 +73,5 @@ export const CurriModal = styled(Modal)`
     transform: scale(1.5);
   }
 `;
+
+export const CurriModalDropdown = styled(Dropdown)``;

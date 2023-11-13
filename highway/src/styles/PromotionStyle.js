@@ -112,12 +112,29 @@ export const PromotionVideoItemDiv = styled.div`
   background: #f2f2f2;
 `;
 // PromotionVideos
+export const PromotionVideosCol = styled(Col)`
+  background-color: red;
+`;
+
+export const PromotionVideosList = styled(List)`
+  width: 100%;
+
+  @media screen and (max-width: 768px) {
+    margin-left: 0.5rem;
+  }
+`;
+
 export const PromotionVideosListItem = styled(List.Item)`
-  width: 80%;
+  width: 720px;
   padding: 2rem;
   margin-left: 0.7rem;
-  border-bottom: 1px solid #f2f2f21 @media screen and (max-width: 768px) {
-    width: 10%;
+  border-bottom: 1px solid #f2f2f21;
+  @media screen and (max-width: 1709px) {
+    width: 100%;
+  }
+  @media screen and (max-width: 768px) {
+    margin-left: 0.7rem;
+    width: 100%;
   }
 `;
 export const PromotionVideosImage = styled.img`
@@ -131,7 +148,6 @@ export const PromotionVideosImage = styled.img`
     filter: brightness(0%);
   }
   @media screen and (max-width: 768px) {
-    margin-left: 2rem;
   }
 `;
 export const PromotionVideoIframe = styled.iframe`
@@ -143,17 +159,16 @@ export const PromotionVideoIframe = styled.iframe`
     filter: brightness(100%);
   }
   @media screen and (max-width: 768px) {
-    margin-left: 2rem;
   }
 `;
 export const PromotionVideosDiv = styled.div`
+  width: 626px;
   text-align: left;
   margin-left: 2rem;
   &:hover {
     text-decoration-line: underline;
   }
   @media screen and (max-width: 768px) {
-    margin-left: 0rem;
   }
 `;
 export const PromotionVideosTitle = styled.h2`
@@ -211,6 +226,22 @@ export const RecommendMainImg = styled.img`
     height: 100%;
   }
 `;
+export const RecommendMainImg2 = styled.img`
+  width: 724px;
+  margin-top: 2rem;
+  margin-left: -15rem;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+  &:hover {
+    transform: scale(1.05);
+    text-decoration-line: underline;
+  }
+  @media screen and (max-width: 768px) {
+    margin-left: 0.5rem;
+    width: 100%;
+    height: 100%;
+  }
+`;
 export const RecommendSideImg = styled.img`
   width: 18rem;
   height: 10rem;
@@ -250,5 +281,18 @@ list-style: none;
 text-align: left;
   @media screen and (max-width: 548px) {
     margin-left: 1rem;
+  }
+`;
+
+// RightSideBar
+export const RightSideBar = styled.div`
+  width: 20rem;
+  height: 30rem;
+  background-color: #f2f2f2;
+  margin-top: 2rem;
+  margin-left: 1.5rem;
+  border-radius: 10px;
+  @media screen and (max-width: 1709px) {
+    width: 0%;
   }
 `;
